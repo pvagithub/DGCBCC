@@ -1,0 +1,90 @@
+﻿<div>
+    <p style="font-size: 22px;padding-top: 10px">
+        Số biên nhận 77320150101545, cấp giấy CN ĐKKD hộ kinh doanh, ngày nộp 01/12/2015 ngày hẹn trả 20/01/2016. Ông/Bà Trần Quang Khải, địa đăng ký số 239 Cộng Hòa, phường 12, quận Tân Bình, Tp. HCM. <span class="text_bold" style="color: #c00000; "> Đã trả kết quả</span>
+    </p>
+</div>
+
+<div id="quiz">
+    <h1 class="center title_quiz">{{quiz.name}}</h1>
+    <h4 class="center sub_title_quiz">{{quiz.description}}</h4>
+    <hr/>
+    <div ng-show="mode=='quiz'">
+        <div ng-repeat="question in filteredQuestions">
+
+            <div class="question">
+
+                <h2>{{currentPage}}. {{question.Name}}</h2>
+                <div class="options">
+
+                    <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 2" class="ng-scope_textarea">
+
+                        <label for="{{option.Id}}">
+                            <textarea class="keyboardInput" id="{{option.Id}}" ng-model="option.Selected" ng-change="onSelect(question, option);"/>
+                            {{option.Name}}
+                        </label>
+                    </div>
+
+                    <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="ng-scope_content ">
+
+                        <label for="{{option.Id}}">
+                            <input id="{{option.Id}}" type="checkbox" ng-model="option.Selected" ng-change="onSelect(question, option);"/>
+                            {{option.Name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="quizNav ">
+            <div>
+                <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(1);">Đầu</button>-->
+                <button class="btn btn-default btn_spa " ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Quay lại</button>
+                <button class="btn btn-primary btn_spa" ng-click="goTo(currentPage + 1);">Kế tiếp</button>
+                <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(totalItems);">Cuối</button>-->
+            </div>
+            <div class="" ng-show="mode!='result'">
+
+                <button id="btton_review" class="btn btn-warning btn_spa" ng-click="mode = 'review'">Xem lại</button>
+                <button class="btn btn-danger btn_spa" ng-click="onSubmit();">Hoàn thành</button>
+            </div>
+            <br/>
+            <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+        </div>
+    </div>
+    <div class="review" ng-show="mode=='review'">
+        <div ng-repeat="question in questions">
+            <div ng-if="question.QuestionTypeId == 1" ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Đã thực hiện'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
+
+            <div ng-if="question.QuestionTypeId == 2" ng-click="goTo($index + 1)" class="{{ isTypping($index) == 'Đã thực hiện'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isTypping($index) }}</div>
+        </div>
+    </div>
+    <div class="result" ng-show="mode=='result'">
+        <h4 class="alert alert-info text-center">Cảm ơn bạn đã thực hiện bài đánh giá</h4>
+
+        <a href="/">Trở về trang chủ</a>
+        <a href="~/danhgia">Tiếp tục đánh giá hồ sơ khác</a>
+
+        <!--<h2>Bài đánh giá của bạn</h2>
+        <div ng-repeat="question in questions">
+            <div class="result-question">
+                <h3>{{$index + 1}}. {{question.Name}}</h3>
+                <div class="options">
+                    <div ng-repeat="Option in question.Options" ng-if="question.QuestionTypeId == 1">
+                        <label for="{{Option.Id}}" ng-click="onSelect(Option);" class="result-correct">
+                            <input id="{{Option.Id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected"/>
+                            {{Option.Name}}
+                        </label>
+                    </div>
+
+                    <div ng-repeat="Option in question.Options" ng-if="question.QuestionTypeId == 2" class="ng-scope_textarea">
+                        <label for="{{Option.Id}}">
+                            <textarea id="{{Option.Id}}" ng-model="Option.Selected" disabled="disabled"/>
+                            {{Option.Name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <hr/>
+</div>

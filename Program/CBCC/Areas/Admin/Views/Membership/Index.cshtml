@@ -1,0 +1,123 @@
+﻿@using WebMVC.Entities
+@using WebMVC.Entities;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.Membership>
+@{
+    ViewBag.Title = "Danh sách user";
+    var dsRole = (List<UsersInRole>)ViewBag.DanhSachRole;
+    int pageNumber = (int)ViewBag.Page;
+}
+
+<h3>Danh sách user</h3>
+
+@using (Html.BeginForm())
+{
+    <p class="pull-right">
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+<table class="table table-hover">
+    <tr>
+        <th>STT</th>
+        <th>Tên user</th>
+        <th>Email</th>
+        <th>Role</th>
+
+        <th>Comment</th>
+        <th>
+            <a href='/Admin/Membership/Create'
+               class="pull-right btn btn-info btn-add">Thêm mới</a>
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        <tr>
+
+            <td>@(pageNumber + i + 1)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @{
+        var lstLuaChon = dsRole.Where(x => x.UserId == item.UserId).ToList().OrderBy(x => x.Role.RoleName);
+
+                }
+                <ul style="overflow: auto; max-height: 100px;">
+                    @foreach (var luachon in lstLuaChon)
+                    {
+                        <li>
+                            @luachon.Role.RoleName
+                        </li>
+                    }
+                </ul>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+
+            <td>
+                <div class="pull-right">
+                    <a href='/Admin/Membership/Edit/@item.UserId' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href='/Admin/Membership/Delete/@item.UserId' class="btn btn-danger btn-delete" title="Xóa"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- modal -->
+<div class="modal fade"
+     id="myModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+    </div>
+</div>
+<!-- scripts -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.btn-add, .btn-update, .btn-delete').click(function (e) {
+
+                /*
+                * hủy liên kết
+                *
+                * việc này quan trọng
+                * nếu không hủy liên kết, modal sẽ không được load đúng cách
+                * vì action sẽ trả về 1 trang html trống với partialview
+                *
+                * cách tương tự return false; cách này thực hiện ở cuối method
+                */
+                e.preventDefault();
+
+                console.log('aa');
+                var $modal = $('#myModal');
+                var $modalDialog = $('.modal-dialog');
+                var href = $(this).prop('href');
+
+                // không cho phép tắt modal khi click bên ngoài modal
+                var option = { backdrop: 'static' };
+
+                // kiểm tra (logic, điều kiện...)
+
+                // load modal
+                $modalDialog.load(href, function () {
+                    $modal.modal(option, 'show');
+                });
+
+                return false;
+            });
+
+        }); // document ready
+    </script>
+}

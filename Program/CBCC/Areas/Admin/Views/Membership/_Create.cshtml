@@ -1,0 +1,140 @@
+﻿@using WebMVC.Entities
+@using System.Collections.Generic;
+@using System.Web.Helpers;
+@model CBCC.Models.UsersInRolesModel
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Content/js/bootstrap-multiselect.js"></script>
+<link href="~/Areas/Admin/Content/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Create", "Membership", FormMethod.Post, htmlAttributes: new { @class = "form-add" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.UserId)
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            Tạo mới user
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Tên user</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control required" id="Username" name="Username" placeholder="Tên user..." />
+                        @Html.ValidationMessageFor(m => m.Username)
+                        <span id="adminForm_Username_validator"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Mật khẩu</label>
+                    <div class="col-xs-8 heightrow" >
+                        <input type="password" class="form-control required" id="Password" name="Password" placeholder="Mật khẩu..." />
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd" >Xác nhận mật khẩu</label>
+                    <div class="col-xs-8">
+                        <input type="password" class="form-control required" id="txtConfirmPassword" name="txtConfirmPassword" placeholder="Xác nhận mật khẩu..." />
+                        <span id="adminForm_ConfirmPassword_validator"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Email</label>
+                    <div class="col-xs-8 heightrow">
+                        <input type="email" class="form-control required" id="Email" name="Email" placeholder="Email..." />
+                        <span id="adminForm_Email_validator"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd" >Comment</label>
+                    <div class="col-xs-8" >
+                        <input type="text" class="form-control required" id="Comment" name="Comment" placeholder="Comment..." />
+                        @Html.ValidationMessageFor(m => m.Comment)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Role</label>
+                    <div class="col-xs-8 lstMullti heightrow">
+                        <select class="" id="ListRoleId_Create" name="ListRoleId" multiple="multiple">
+                            @foreach (var item in Model.ListDanhSachRole)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
+            <button type="submit" class="btn btn-primary" id="submitButton">Lưu</button>
+        </div>
+    </div>
+}
+<!-- Initialize the plugin: -->
+<script type="text/javascript">
+    $().ready(function () {
+        $('#ListRoleId_Create').multiselect({
+            enableClickableOptGroups: true,
+            numberDisplayed: 4,
+            includeSelectAllOption: true,
+            selectAllText: 'Tất cả',
+            enableFiltering: true
+        });
+        $("#submitButton").click(function () {
+            if ($("#Password").val() != $("#txtConfirmPassword").val()) {
+                $("#adminForm_ConfirmPassword_validator").text("Vui lòng gõ mật khẩu giống như trên");
+                $("#adminForm_ConfirmPassword_validator").addClass("clsConfirm");
+                return false;
+            }
+            if ($("#adminForm_Username_validator").text().length > 0) {
+                return false;
+            }
+            
+        });
+        $("#txtConfirmPassword").blur(function () {
+            if ($("#Password").val() == $("#txtConfirmPassword").val()) {
+                $("#adminForm_ConfirmPassword_validator").text("");
+                $("#adminForm_ConfirmPassword_validator").removeClass("clsConfirm");
+            }
+        });
+        $("#Username").blur(function () {
+            $.getJSON('/Admin/Membership/IsExistUser?id=0&userName=' + $("#Username").val(), function (data) {
+                if (data.toString() == "true") {
+                    $("#adminForm_Username_validator").text("Tên user bị trùng. Vui lòng chọn tên mới!");
+                    $("#adminForm_Username_validator").addClass("clsConfirm");
+                }
+                else {
+                    $("#adminForm_Username_validator").text("");
+                    $("#adminForm_Username_validator").removeClass("clsConfirm");
+                }
+            })
+        });
+        $("#Email").validate({
+            rules: {
+                field: {
+                    required: true,
+                    email: true,
+                }
+            }
+        });
+    });
+</script>

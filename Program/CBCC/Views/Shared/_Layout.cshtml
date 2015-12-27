@@ -1,0 +1,86 @@
+﻿@using System.Configuration
+
+<!DOCTYPE html>
+<html ng-app="quizApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @*<link href="~/Content/font-awesome.css" rel="stylesheet" />
+        <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/datepicker.css" rel="stylesheet" />*@
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/hightcharts")
+
+ 
+
+
+    <base href="/" />
+</head>
+<body>
+    <div class="se-pre-con"></div>
+
+    <div id="wrapper">
+        @Html.Partial("_Header")
+        <div class=" container-fluid body-content">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @*<script src="~/Scripts/jquery.dotdotdot.js"></script>
+
+        <script src="~/Scripts/highcharts.js"></script>
+        <script src="~/Scripts/highcharts-3d.js"></script>
+        <script src="~/Scripts/drilldown.js"></script>
+        <script src="~/Scripts/exporting.js"></script>
+        <script src="~/Scripts/jquery.metisMenu.js"></script>
+        <script src="~/Scripts/app_scripts.js"></script>
+        <script src="~/Scripts/jquery.dataTables.js"></script>
+        <script src="~/Scripts/dataTables.bootstrap.js"></script>
+        <script src="~/Scripts/bootstrap-datepicker.js"></script>
+        <script src="~/Scripts/app_scripts.js"></script>
+
+        <script src="~/Scripts/bootbox.js"></script>
+        <script src="/SPA/scripts/angular.min.js"></script>
+        <script src="/SPA/scripts/angular.min.js"></script>
+        <script src="/SPA/scripts/angular-ui/angular-ui-router.js"></script>
+        <script src="/SPA/scripts/angular-route.min.js"></script>
+        <script src="/SPA/scripts/angular-resource.min.js"></script>
+        <script src="/SPA/scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+        <script src="/SPA/js/app.js"></script>
+        <script src="/SPA/js/helperService.js"></script>
+        <script src="/SPA/js/quizCtrl.js"></script>*@
+
+   
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+
+        $(document).ready(function () {
+            $('.backhistory').click(function () {
+                parent.history.back();
+                return false;
+            });
+        });
+
+        $(".content_ques").dotdotdot({
+            //	configuration goes here
+        });
+
+        //$(window).load(function () {
+        //    // Animate loader off screen
+        //    $(".se-pre-con").fadeOut("slow");;
+        //});
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.Role>
+
+
+@{
+    ViewBag.Title = "List Role";
+}
+
+<h2> Danh sách Roles </h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên Roles</th>
+            <th>Mô tả</th>
+            <th>
+                <a href='/Admin/Role/Create'
+                   class="pull-right btn btn-info btn-add">Thêm mới</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+                <tr>
+                    <td>@item.RoleName</td>
+                    <td>
+                        @item.Description
+                    </td>
+
+                    <td>
+                        <div class="pull-right">
+                            <a href='/Admin/Role/Edit/@item.RoleId' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href='/Admin/Role/Delete/@item.RoleId' class="btn btn-danger btn-delete" title="Xóa"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    <!-- modal -->
+    <div class="modal fade"
+         id="myModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+    <!-- scripts -->
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+
+                $('.btn-add, .btn-update, .btn-delete').click(function (e) {
+
+                    /*
+                    * hủy liên kết
+                    *
+                    * việc này quan trọng
+                    * nếu không hủy liên kết, modal sẽ không được load đúng cách
+                    * vì action sẽ trả về 1 trang html trống với partialview
+                    *
+                    * cách tương tự return false; cách này thực hiện ở cuối method
+                    */
+                    e.preventDefault();
+
+                    console.log('aa');
+                    var $modal = $('#myModal');
+                    var $modalDialog = $('.modal-dialog');
+                    var href = $(this).prop('href');
+
+                    // không cho phép tắt modal khi click bên ngoài modal
+                    var option = { backdrop: 'static' };
+
+                    // kiểm tra (logic, điều kiện...)
+
+                    // load modal
+                    $modalDialog.load(href, function () {
+                        $modal.modal(option, 'show');
+                    });
+
+                    return false;
+                });
+
+            }); // document ready
+        </script>
+    }

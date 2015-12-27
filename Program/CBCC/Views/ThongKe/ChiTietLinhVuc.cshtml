@@ -1,0 +1,293 @@
+﻿@using WebMVC.Entities
+@model LinhVuc
+
+@{
+    ViewBag.Title = "ChiTietDonVi";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Thống kê đơn vị @Model.TenLinhVuc</h2>
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                1.TIẾP CẬN DỊCH VỤ
+            </div>
+            <div class="panel-body">
+                <div id="highcharts_1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                2.THỦ TỤC HÀNH CHÍNH
+            </div>
+            <div class="panel-body">
+
+                <div id="highcharts_2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                3.SỰ PHỤC VỤ CỦA CÔNG CHỨC
+            </div>
+            <div class="panel-body">
+
+                <div id="highcharts_3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                4.KẾT QUẢ GIẢI QUYẾT CÔNG VIỆC
+            </div>
+            <div class="panel-body">
+
+                <div id="highcharts_4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                5.ĐÁNH GIÁ TỶ LỆ HÀI LÒNG ĐỐI VỚI TOÀN BỘ QUÁ TRÌNH GIẢI QUYẾT THỦ TỤC HÀNH CHÍNH
+            </div>
+            <div class="panel-body">
+
+                <div id="highcharts_5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(function () {
+            $('#highcharts_1').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Thống kê tháng 8 - 2015'
+                },
+                xAxis: {
+                    categories: ['Nguồn thông tin và sự thuận tiện trong việc tìm hiểu thông tin về dịch vụ hành chính', 'Mức độ đáp ứng yêu cầu của tổ chức, người dân về thông tin dịch vụ được cung cấp', 'Mức độ đáp ứng yêu cầu về cơ sở vật chất, trang thiết bị phục vụ tổ chức, người dân tại cơ quan cung cấp dịch vụ hành chính']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Số phần trăm (%)'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br />',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Không hài lòng',
+                    data: [5, 3, 4]
+                }, {
+                    name: 'Tạm chấp nhận',
+                    data: [2, 2, 3]
+                }, {
+                    name: 'Rất hài lòng',
+                    data: [3, 4, 4]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#highcharts_2').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Thống kê tháng 8 - 2015'
+                },
+                xAxis: {
+                    categories: ['Việc công khai, minh bạch thủ tục hành chính, biểu mẫu hành chính', 'Sự đơn giản, dễ hiểu trong các quy định về hồ sơ của thủ tục hành chính', 'Sự thuận tiện trong thực hiện quy trình giải quyết thủ tục hành chính']
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Số phần trăm (%)'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br />',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                series: [{
+                    name: 'Không hài lòng',
+                    data: [5, 1, 4]
+                }, {
+                    name: 'Tạm chấp nhận',
+                    data: [6, 2, 3]
+                }, {
+                    name: 'Rất hài lòng',
+                    data: [78, 34, 40]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#highcharts_3').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Thống kê tháng 8 - 2015'
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Thái độ phục vụ của công chức', 'Năng lực giải quyết công việc của công chức']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Số phần trăm (%)'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br />',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                series: [{
+                    name: 'Không hài lòng',
+                    data: [5, 1]
+                }, {
+                    name: 'Tạm chấp nhận',
+                    data: [54, 54]
+                }, {
+                    name: 'Rất hài lòng',
+                    data: [78, 34]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#highcharts_4').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                title: {
+                    text: 'Thống kê tháng 8 - 2015'
+                },
+                xAxis: {
+                    categories: ['Số lần liên hệ để hoàn tất thủ tục giao dịch', 'Thời gian giải quyết công việc', 'Kết quả tổ chức, người dân nhận được từ cơ quan hành chính Nhà nước', 'Việc tiếp nhận và xử lý phản ánh, kiến nghị của tổ chức và người dân về kết quả giải quyết công việc của cơ quan hành chính Nhà nước', 'Chi phí tổ chức, người dân phải trả để giải quyết công việc']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Số phần trăm (%)'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br />',
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'percent'
+                    }
+                },
+                series: [{
+                    name: 'Không hài lòng',
+                    data: [5, 1, 4, 0, 1]
+                }, {
+                    name: 'Tạm chấp nhận',
+                    data: [54, 54, 85, 25, 52]
+                }, {
+                    name: 'Rất hài lòng',
+                    data: [78, 34, 90, 100, 50]
+                }]
+            });
+        });
+
+        $('#highcharts_5').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Thống kê tháng 8 năm 2015'
+            },
+            tooltip: {
+                pointFormat: '  <b>{point.percentage:.1f}%</b>'
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+
+                colorByPoint: true,
+                data: [{
+                    name: "Không hài lòng",
+                    y: 10
+                }, {
+                    name: "Tạm chấp nhận",
+                    y: 20,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: "Hài lòng",
+                    y: 70
+                }]
+            }]
+        });
+    </script>
+}

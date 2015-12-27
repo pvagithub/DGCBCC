@@ -1,0 +1,197 @@
+﻿@using CBCC.Models;
+@{
+    ViewBag.Title = "Thống kê kết quả đánh giá";
+    var filter = (FilterModel)ViewData["filter"];
+}
+
+
+@using WebMVC.Entities;
+
+@Html.Partial("_Partial_Fillter", @filter)
+
+<div class="col-lg-12">
+    <span class="  input-group-btn center">
+        <button title="" data-placement="top" data-toggle="tooltip" class="btn btn-primary" type="button" id="Timkiem" style="width:100px; margin-right:10px;border-radius:4px">Chọn</button>
+        <button title="" data-placement="top" data-toggle="tooltip" class="btn btn-primary" type="button" id="excel" style="width: 100px; border-radius: 4px; margin-right: 10px">Xuất Excel</button>
+        <button title="" class=" backhistory btn btn-primary" type="button" style="width:100px; border-radius:4px"> Trở về</button>
+    </span>
+</div>
+
+<div id="tk_result">
+</div>
+
+@section scripts{
+    <script>
+        $('#excel').click(function () {
+            var namID, quyID, thangID, tuanID = 0;
+            var tuNgay, denNgay;
+            namID = $('#NamThongKe').val();
+            quyID = $('#QuyThongKe').val();
+            thangID = $('#ThangThongKe').val();
+            tuanID = $('#TuanThongKe').val();
+            var tuNgay = $('#datepicker_tuNgay').val();
+            var denNgay = $('#datepicker_denNgay').val();
+            window.location = '/ThongKe/ExportToExcel?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID + '&tuanID=' + tuanID + '&tuNgay=' + tuNgay + '&denNgay=' + denNgay;
+        });
+        $('#Timkiem').click(function () {
+
+
+
+
+            var namID, quyID, thangID, tuanID = 0;
+
+            namID = $('#NamThongKe').val();
+            quyID = $('#QuyThongKe').val();
+            thangID = $('#ThangThongKe').val();
+            tuanID = $('#TuanThongKe').val();
+
+            var tuNgay = $('#datepicker_tuNgay').val();
+
+            var denNgay = $('#datepicker_denNgay').val();
+
+            var checkDate_result = true;
+            if (tuNgay != "" & denNgay != "") {
+                checkDate_result = false;
+                checkDate_result = CheckDate(tuNgay, denNgay);
+
+
+            }
+
+            if (checkDate_result == true) {
+
+                $(".se-pre-con").fadeIn("slow");
+
+
+                $.ajax(
+                  {
+                      cache: false,
+                      async: true,
+                      type: "POST",
+                      url: '/ThongKe/ThongKeDonVi?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID + '&tuanID=' + tuanID + '&tuNgay=' + tuNgay + '&denNgay=' + denNgay,
+                      data: $(this).serialize(),
+                      success: function (data) {
+
+                          $('#tk_result').empty();
+                          $('#tk_result').html(data);
+
+
+
+                      },
+                      complete: function () {
+                          $(".se-pre-con").fadeOut("slow");
+
+                      }
+                  });
+            }
+
+        });
+
+        function CheckDate(tuNgay, denNgay) {
+            $('#datepicker_tuNgay_error').html("");
+            $('#datepicker_denNgay_error').html("");
+            $('#datepicker_error').html("");
+            var dateNow = $('#DateTimeNow').val();
+
+            tuNgay = JSONDate_MMDDYYYY(tuNgay);
+            denNgay = JSONDate_MMDDYYYY(denNgay);
+            dateNow = JSONDate_MMDDYYYY(dateNow);
+
+
+            var result = true;
+
+
+            if (isDate(tuNgay)) {
+                $('#datepicker_tuNgay_error').html("");
+
+            }
+            else {
+                $('#datepicker_tuNgay_error').html("Ngày không hợp lệ");
+                result = false;
+            }
+
+
+
+
+            if (Date.parse(tuNgay) <= Date.parse(dateNow)) {
+                $('#datepicker_tuNgay_error').html("");
+
+            }
+            else {
+                $('#datepicker_tuNgay_error').html("Ngày không được lớn hơn ngày hiện tại")
+                result = false;
+            }
+
+            if (isDate(denNgay)) {
+                $('#datepicker_denNgay_error').html("");
+
+            }
+            else {
+                $('#datepicker_denNgay_error').html("Ngày không hợp lệ");
+                result = false;
+            }
+
+
+            if (Date.parse(denNgay) <= Date.parse(dateNow)) {
+                $('#datepicker_denNgay_error').html("")
+
+            }
+            else {
+                $('#datepicker_denNgay_error').html("Ngày không được lớn hơn ngày hiện tại");
+                result = false;
+            }
+
+            if (result) {
+
+                if ((Date.parse(tuNgay) > Date.parse(denNgay)) || ((Date.parse(denNgay) - Date.parse(tuNgay)) / (1000 * 60 * 60 * 24) > 90)) {
+                    $('#datepicker_error').html("Ngày bắt đầu phải nhỏ hơn ngày kết thúc và trong khoảng 90 ngày");
+                    result = false;
+                }
+                else {
+                    $('#datepicker_error').html("");
+
+                }
+
+            }
+
+            return result;
+        }
+
+        function isDate(txtDate) {
+            var currVal = txtDate;
+            if (currVal == '')
+                return false;
+
+            var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/; //Declare Regex
+            var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+            if (dtArray == null)
+                return false;
+
+            //Checks for mm/dd/yyyy format.
+            dtDay = dtArray[3];
+            dtMonth = dtArray[1];
+            dtYear = dtArray[5];
+
+            if (dtMonth < 1 || dtMonth > 12)
+                return false;
+            else if (dtDay < 1 || dtDay > 31)
+                return false;
+            else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+                return false;
+            else if (dtMonth == 2) {
+                var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+                if (dtDay > 29 || (dtDay == 29 && !isleap))
+                    return false;
+            }
+            return true;
+        }
+
+
+        function JSONDate_MMDDYYYY(dateStr) {
+            var dt1 = dateStr.substring(0, 2);
+            var mon1 = dateStr.substring(3, 5);
+            var yr1 = dateStr.substring(6, 10);
+            return mon1 + "/" + dt1 + "/" + yr1;
+        }
+    </script>
+}

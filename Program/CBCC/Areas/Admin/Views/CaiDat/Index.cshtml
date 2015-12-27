@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Cập nhật các thông tin cài đặt";
+}
+<div class="row">
+    <div class="col-lg-12">
+
+     
+        <div class="loading" id="loading" style="display:none">Loading&#8230;</div>
+       
+        <h3>Cập nhật các thông tin cài đặt</h3>
+        <div class="list-group">
+            <a href="#" id="updateDanhGia" class="list-group-item">Cập nhật thông tin đánh giá</a>
+        </div>
+
+       <div class="list-group">
+        <a href="#" id="ClearDataBase" class="list-group-item">Clear Database</a>
+    </div>
+
+   @* <div class="list-group">
+        <a href="#" id="GendataDanhGia" class="list-group-item">Gendata DanhGia</a>
+    </div>*@
+
+        <div class="list-group">
+            <a href="#" id="GenHoSo" class="list-group-item">Gendata HoSo</a>
+        </div>
+
+        
+        <div class="list-group">
+            <a href="#" id="GenDataTest" class="list-group-item">GenDataTest</a>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        $(document).ready(function () {
+
+            $("#updateDanhGia").click(function () {
+
+                $('#updateDanhGia').attr('disabled', 'disabled');
+                $.post("@Url.Action("CapNhatDanhGia", "CaiDat")", function (data) {
+
+                    if (data.result) {
+                        bootbox.alert("Cập nhật thành công", function () {
+
+                        });
+                    }
+                    else {
+                        bootbox.alert("Cập nhật lỗi", function () {
+                        });
+
+                    }
+
+                    $('#updateDanhGia').removeAttr('disabled');
+                });
+
+            });
+
+            $("#GendataDanhGia").click(function () {
+
+                $('#GendataDanhGia').attr('disabled', 'disabled');
+                $('#loading').show();
+                $.post("@Url.Action("GendataDanhGia", "GenData")", function (data) {
+
+                    if (data.result) {
+                        bootbox.alert("Cập nhật thành công", function () {
+
+                        });
+                    }
+                    else {
+                        bootbox.alert("Cập nhật lỗi", function () {
+                        });
+
+                    }
+
+                    $('#GendataDanhGia').removeAttr('disabled');
+                    $('#loading').hide();
+
+                });
+
+            });
+
+            $("#GenHoSo").click(function () {
+
+                $('#GenHoSo').attr('disabled', 'disabled');
+                $('#loading').show();
+                $.post("@Url.Action("GenHoSo", "GenData")", function (data) {
+
+                    if (data.result) {
+                        bootbox.alert("Cập nhật thành công", function () {
+
+                        });
+                    }
+                    else {
+                        bootbox.alert("Cập nhật lỗi", function () {
+                        });
+
+                    }
+
+                    $('#GenHoSo').removeAttr('disabled');
+                    $('#loading').hide();
+
+                });
+
+            });
+
+            $("#ClearDataBase").click(function () {
+
+                $('#ClearDataBase').attr('disabled', 'disabled');
+                $('#loading').show();
+                $.post("@Url.Action("ClearDataBase", "GenData")", function (data) {
+
+                    if (data.result) {
+                        bootbox.alert("Cập nhật thành công", function () {
+
+                        });
+                    }
+                    else {
+                        bootbox.alert("Cập nhật lỗi", function () {
+                        });
+
+                    }
+
+                    $('#ClearDataBase').removeAttr('disabled');
+                    $('#loading').hide();
+
+                });
+
+            });
+
+
+            $("#GenDataTest").click(function () {
+
+                $('#GenDataTest').attr('disabled', 'disabled');
+                $('#loading').show();
+                $.post("@Url.Action("GenDataTest", "GenData")", function (data) {
+
+                    if (data.result) {
+                        bootbox.alert("Cập nhật thành công", function () {
+
+                        });
+                    }
+                    else {
+                        bootbox.alert("Cập nhật lỗi", function () {
+                        });
+
+                    }
+
+                    $('#GenDataTest').removeAttr('disabled');
+                    $('#loading').hide();
+
+                });
+
+            });
+
+        });
+    </script>
+}

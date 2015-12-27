@@ -1,0 +1,53 @@
+﻿  <!-- sidebar -->
+<div class="column col-lg-2 col-sm-3 col-xs-1 sidebar-offcanvas" id="sidebar">
+
+    <ul class="nav">
+        <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+    </ul>
+
+    <ul class="nav hidden-xs " id="lg-menu">
+
+        <li><a class="menu_item" href="~/"><i class="fa fa-home fa-2x"></i> Trang chủ</a></li>
+
+        <li><a class="menu_item" href="~/danhgia"><i class="fa fa-edit fa-2x"></i> Đánh giá công chức</a></li>
+        <li>
+            <a class="menu_item" href="#">
+                <i class="fa fa-bar-chart-o fa-2x"></i> Kết quả đánh giá
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level collapse">
+                <li>
+                    <a class="menu_item" href="~/Thongke/ThongKeTheoDonVi"><i class="fa fa-bars fa"></i>Theo đơn vị</a>
+                </li>
+
+                <li>
+                    <a class="menu_item" href="~/Thongke/ThongKeTheoLinhVuc">
+                        <i class="fa fa-bars fa"></i>  Theo lĩnh vực
+                        @*<span class="fa arrow"></span>*@
+                    </a>
+                    @*<ul class="nav nav-third-level collapse">
+                            <li>
+                                <a class="menu_item" href="#">Đất đai</a>
+                            </li>
+                            <li>
+                                <a class="menu_item" href="#">Xây dựng</a>
+                            </li>
+                            <li>
+                                <a class="menu_item" href="#">Y tế</a>
+                            </li>
+                        </ul>*@
+                </li>
+            </ul>
+        </li>
+        <li><a class="menu_item" href="~/huongdan"><i class="fa fa-info-circle fa-2x"></i> Hướng dẫn</a></li>
+    </ul>
+
+    <!-- tiny only nav-->
+    <ul class="nav visible-xs" id="xs-menu">
+        <li><a href="~/" class="text-center menu_item"><i class="fa fa-home"></i></a></li>
+        <li><a href="~/danhgia" class="text-center menu_item"><i class="fa fa-edit"></i></a></li>
+        <li><a href="~/thongke" class="text-center menu_item"><i class="fa fa-bar-chart-o"></i></a></li>
+        <li><a href="~/huongdan" class="text-center menu_item"><i class="fa fa-info-circle"></i></a></li>
+    </ul>
+</div>
+<!-- /sidebar -->

@@ -1,0 +1,179 @@
+﻿@using WebMVC.Entities;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.TieuChi>
+
+@{
+    ViewBag.Title = "Danh sách tiêu chí";
+    var dsCauTraLoi = (List<TieuChiCauTraLoi>)ViewBag.DanhSacCauTraLoi;
+    int pagenum = (int)ViewBag.Page;
+}
+<h3>
+    Danh sách các tiêu chí đánh giá
+</h3>
+
+@using (Html.BeginForm())
+{
+    <p class="pull-right">
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>STT</th>
+        <th style="width: 300px;">Tên tiêu chí</th>
+        <th>Các lựa chọn</th>
+        <th>Nhóm tiêu chí</th>
+        <th>Tên vắn tắt</th>
+        <th>Trạng thái</th>
+        <th>
+            <a href='/Admin/TieuChi/Create'
+               class="pull-right btn btn-info btn-add">Thêm mới</a>
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        <tr>
+
+            <td>@(pagenum + i + 1)</td>
+            <td >
+                <div style="overflow: auto; max-height: 100px;">
+                    @Html.DisplayFor(modelItem => item.TenTieuChi)
+
+
+                </div>
+            </td>
+
+            <td>
+                @{
+             var lstLuaChon = dsCauTraLoi.Where(x => x.TieuChiID.Value == item.ID).ToList().OrderByDescending(x => x.CauTraLoi.GiaTri);
+
+                }
+                <ul style="overflow: auto; max-height: 100px;">
+                    @foreach (var luachon in lstLuaChon)
+                    {
+                        <li>
+                            @luachon.CauTraLoi.TenCauTraLoi
+                        </li>
+                    }
+                </ul>
+            </td>
+
+            <td style="overflow: hidden; max-width: 100px;">
+                @if (item.NhomTieuChi != null)
+                {
+                    @item.NhomTieuChi.TenNhomTieuChi
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenVanTat, item.TenVanTat)
+            </td>
+            <td align="center">
+                @{
+        if (item.Active != null && item.Active.Value)
+        {
+            <input type="checkbox" checked="checked" disabled="disabled" />
+        }
+        else
+        {
+            <input type="checkbox" disabled="disabled" />
+        }
+                }
+            </td>
+
+            <td>
+                <div class="pull-right">
+                    <a href='/Admin/TieuChi/Edit/@item.ID' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href='/Admin/TieuChi/Delete/@item.ID' class="btn btn-success btn-delete" title="Cập nhật trạng thái"><i class="glyphicon glyphicon-check"></i></a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    <h5>Cập nhật các thông tin cài đặt</h5>
+    <div class="list-group">
+        <a href="#" id="updateDanhGia" class="list-group-item">Cập nhật thông tin đánh giá</a>
+    </div>
+
+    <!-- modal -->
+    <div class="modal fade"
+         id="myModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog " style="width:800px">
+        </div>
+    </div>
+    <!-- scripts -->
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+
+                $('.btn-add, .btn-update, .btn-delete').click(function (e) {
+
+                    /*
+                    * hủy liên kết
+                    *
+                    * việc này quan trọng
+                    * nếu không hủy liên kết, modal sẽ không được load đúng cách
+                    * vì action sẽ trả về 1 trang html trống với partialview
+                    *
+                    * cách tương tự return false; cách này thực hiện ở cuối method
+                    */
+                    e.preventDefault();
+
+                    console.log('aa');
+                    var $modal = $('#myModal');
+                    var $modalDialog = $('.modal-dialog');
+                    var href = $(this).prop('href');
+
+                    // không cho phép tắt modal khi click bên ngoài modal
+                    var option = { backdrop: 'static' };
+
+                    // kiểm tra (logic, điều kiện...)
+
+                    // load modal
+                    $modalDialog.load(href, function () {
+                        $modal.modal(option, 'show');
+                    });
+
+                    return false;
+                });
+
+                $("#updateDanhGia").click(function () {
+
+                    $('#updateDanhGia').attr('disabled', 'disabled');
+                    $.post("@Url.Action("CapNhatDanhGia", "CaiDat")", function (data) {
+
+                        if (data.result) {
+
+                            bootbox.alert("Cập nhật thành công", function () {
+
+                            });
+                        }
+                        else {
+
+                            bootbox.alert("Cập nhật lỗi.", function () {
+
+                            });
+
+                        }
+
+                        $('#updateDanhGia').removeAttr('disabled');
+                    });
+
+                });
+
+            }); // document ready
+        </script>
+    }

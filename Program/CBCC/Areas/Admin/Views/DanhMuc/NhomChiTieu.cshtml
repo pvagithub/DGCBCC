@@ -1,0 +1,62 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.Role>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Danh sách nhóm chỉ tiêu";
+}
+
+<h2>List role </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", FormMethod.Get)
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+<table class="table table-hover">
+    <tr>
+
+        <th>
+            @Html.ActionLink("RoleName", "Index", new { sortOrder = ViewBag.RoleNameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th>
+            @Html.ActionLink("Description", "Index", new { sortOrder = ViewBag.DescriptionSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoleId })
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

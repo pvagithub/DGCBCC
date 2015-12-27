@@ -1,0 +1,173 @@
+﻿@using DotNet.Highcharts
+@{
+    ViewBag.Title = "Đánh giá công chức tiếp nhận và giải quyết hồ sơ";
+    var pieChart = (Highcharts)ViewBag.PieChart;
+    var basicChartNam = (Highcharts)ViewBag.BasicBarNam;
+    var basicChartQuy = (Highcharts)ViewBag.BasicBarQuy;
+    var basicChartThang = (Highcharts)ViewBag.BasicBarThang;
+    int quarter = 1;
+}
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+<div class="panel-heading text-left" style="background-color: #e2f0d9; color:black !important ">
+    Nhằm nâng cao chất lượng phục vụ và giải quyết thủ tục hành chính ngày càng tốt hơn, ngày 01/01/2016 UBND Thành Phố đã triển khai <strong> HỆ THỐNG ĐÁNH GIÁ CHẤT LƯỢNG GIẢI QUYẾT THỦ TỤC HÀNH CHÍNH</strong> cho tất cả 24 Quận – Huyện và 18 Sở Ban Ngành trên địa bàn Thành phố Hồ Chí Minh
+</div>
+<div class="row Partial_GioiThieu">
+    <div class="panel-heading" style="color: black !important; font-size: 20px">
+        KẾT QUẢ NĂM 2015 TOÀN THÀNH PHỐ HỒ CHÍ MINH
+    </div>
+    <div class="h4" style="padding-left: 3%">
+        - Có tổng <span style="color: #c00000; font-weight: bold"> 128.459</span> hồ sơ được tiếp nhận và xử lý tại các đơn vị
+    </div>
+    <div class="h4" style="padding-left: 3%">
+        - Có tổng <span style="color: #c00000; font-weight: bold">5.904</span> hồ sơ được đánh giá, tỷ lệ <span style="color: #c00000; font-weight: bold"> 5%</span>
+    </div>
+    <div class="h4" style="padding-left: 3%">
+        - Các chi số tỷ lệ kết quả đánh giá:
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    @pieChart
+                </div>
+            </div>
+            @*<div class="panel panel-primary" style="text-align:center">
+                    <span style="color:#333333;font-size:18px;fill:#333333;width:870px;">Tỷ lệ ý kiến chung về thủ tục hành chính các đơn vị.</span>
+                    <div class="panel-body">
+                        <ul id="myTab" class="nav nav-tabs">
+                            <li class="active"><a href="#year" data-toggle="tab">Năm @DateTime.Now.Year</a></li>
+                            <li class="">
+                                <a href="#quarter" data-toggle="tab">
+                                    Quý
+                                    @{
+                                        int month = DateTime.Now.Month;
+                                        if (month >= 1 && month <= 3) { quarter = 1; }
+                                        if (month >= 4 && month <= 6) { quarter = 2; }
+                                        if (month >= 7 && month <= 9) { quarter = 3; }
+                                        if (month >= 10 && month <= 12) { quarter = 4; }
+                                    }
+                                    @quarter - @DateTime.Now.Year
+                                </a>
+                            </li>
+                            <li class=""><a href="#month" data-toggle="tab">Tháng @DateTime.Now.Month - @DateTime.Now.Year</a></li>
+                        </ul>
+
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade active in" id="year">
+                                @basicChartNam
+                            </div>
+                            <div class="tab-pane fade" id="quarter">
+                                @basicChartQuy
+                            </div>
+                            <div class="tab-pane fade" id="month">
+                                @basicChartThang
+                            </div>
+                        </div>
+
+                    </div>
+                </div>*@
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12" style="background-color: #2e75b6">
+            <div class="panel panel-primary" style="background-color: #2e75b6">
+                <div class="panel-body" style="background-color: #2e75b6">
+                    <span style="text-decoration: underline; font-weight: bold; font-size: 22px; color: white"> Kết quả đánh giá tháng 12:</span>
+                    <br/>
+                    <br />
+                    <a href="#" style="font-size: 22px; color: white">
+                        <i class="glyphicon glyphicon-leaf"></i>    Quận 1 có kết quả đánh giá hài lòng cao nhất trên toàn Tp.HCM
+                    </a><br />
+                    <a href="#" style="font-size: 22px; color: white">
+                        <i class="glyphicon glyphicon-leaf"></i> Lĩnh vực đất đai có kết quả đánh giá hài lòng thấp nhất
+                    </a><br />
+                    <a href="#" style="font-size: 22px; color: white">
+                        <i class="glyphicon glyphicon-leaf"></i> Thủ tục cấp giấy CN nhà đất có số lượng đánh giá nhiều nhất
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*@section scripts{
+        <script>
+            $(function () {
+                $('#container2').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Tỉ lệ ý kiến chung về thủ tục hành chính các đơn vị.'
+                    },
+                    subtitle: {
+                        text: 'Thống kê tháng 8-2015'
+                    },
+                    xAxis: {
+                        categories: ['Sở Nội vụ', 'Sở Tư pháp', 'Sở Ngoại vụ', 'Sở Kế hoạch và Đầu tư ', 'Sở Tài chính ', 'Sở Công thương'],
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Phần trăm (%)',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ' %'
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+
+                    howInLegend: false,
+
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+
+                        name: 'Bình thường',
+                        data: [10, 5, 1, 5, 10, 10]
+
+                    }, {
+
+                        name: 'Không hài lòng',
+                        data: [10, 5, 4, 3, 10, 0]
+                    }, {
+
+                        name: 'Hài lòng',
+                        data: [95, 93, 90, 90, 80, 80]
+                    }]
+                });
+            });
+        </script>
+    }*@

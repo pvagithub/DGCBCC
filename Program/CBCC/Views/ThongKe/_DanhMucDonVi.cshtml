@@ -1,0 +1,75 @@
+﻿@using WebMVC.Entities;
+
+@using WebMVC.Framework;
+
+@using System.Configuration;
+@model List<DonVi>
+@{
+    ViewBag.Title = "DanhMucDonVi";
+    var menuList = Model;
+    var capMenu = 0;
+}
+
+<h2>DanhMucDonVi</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Categories
+    </div>
+    <div class="panel-body">
+
+        <ul class="nav nav-pills nav-stacked menu_cate_blog">
+
+            @foreach (var mp in menuList.Where(p => p.ParentDonViID == 0))
+            {
+                capMenu = 0;
+                <li>
+                    <a href="#">@mp.TenDonVi</a>
+
+                    @if (menuList.Count(p => p.ParentDonViID == mp.DonViID) > 0)
+                    {
+                        capMenu++;
+                        @:<ul>
+                    }
+
+                    @RenderMenuItem(menuList, mp, capMenu)
+
+                    @if (menuList.Count(p => p.ParentDonViID == mp.DonViID) > 0)
+                    {
+                        capMenu++;
+                        @:
+                    </ul>
+                    }
+                </li>
+            }
+        </ul>
+
+        @helper RenderMenuItem(List<DonVi> menuList, DonVi mi, int capMenu)
+{
+    foreach (var cp in menuList.Where(p => p.ParentDonViID == mi.DonViID))
+    {
+
+        @:<li class="capMenu_@capMenu">
+            <a class="menu_cate_blog" href="#">@cp.TenDonVi</a>
+
+        if (menuList.Count(p => p.ParentDonViID == cp.DonViID) > 0)
+        {
+            capMenu++;
+            @:<ul>
+        }
+
+        @RenderMenuItem(menuList, cp, capMenu)
+        if (menuList.Count(p => p.ParentDonViID == cp.DonViID) > 0)
+        {
+            @:
+        </ul>
+        }
+        else
+        {
+            @:
+        </li>
+        }
+    }
+}
+    </div>
+</div>

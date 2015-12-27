@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Đánh giá công chức tiếp nhận và giải quyết hồ sơ";
+}
+<input type="hidden" id="idHoSo" />
+<div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
+    <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
+
+        <h2 class="text-center"></h2>
+
+        <div class="input-group">
+            <label></label>
+
+            <input id="soBienNhan" class="form-control" name="soBienNhan" type="text" placeholder="Nhập số biên nhận">
+
+            <span class="form-group input-group-btn">
+                <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
+            </span>
+        </div>
+        <div class="comment">
+            (Nhập số biên nhận để tiến hành đánh giá)
+        </div>
+
+        <div class="article-body">
+            <h1> Hướng dẫn đánh giá</h1>
+            <p>Quý vị có thể đánh giá sự hài lòng về thủ tục hành hành chính trực tiếp từ website.</p>
+            <p>Vui lòng tham khảo thông tin chi tiết về từng bước đánh giá như sau:&nbsp;</p>
+            <p><strong>1. Nhập số biên nhận</strong></p>
+
+            <p>a. Gõ số biên nhận vào thanh tìm kiếm</p>
+            <p>b. Chọn botton đánh giá</p>
+            <p>c. Chương trình kiểm tra số biên nhận </p>
+
+            <p><strong>2. Đánh giá</strong></p>
+            <p>Khi đã kiểm tra số biên nhận và tìm kiếm thông tin số biên nhận thành công</p>
+            <p>a. Kiểm tra thông tin hồ sơ: đã được đánh giá hay chưa .&nbsp;</p>
+            <p>b. Nếu đã đã được đánh giá quý vị có thể xem lại bài đánh giá .&nbsp;</p>
+            <p>c. Nếu hồ sơ chưa được đánh giá chương trình sẽ mở ra màn hình các câu hỏi khảo sát ý kiến của quý vị.</p>
+            <p>d. Tiến hành đánh giá.</p>
+
+            <p><strong>3.&nbsp;Kiểm tra và kết thúc bài đánh giá</strong></p>
+            <p>Sau khi hoàn thành tất cả các câu khảo sát chọn "Kết thúc".&nbsp;</p>
+            <p>a. Nếu chưa hoàn tất các câu khảo sát chương trình mở bảng review các câu quý vị chưa hoàn thành.</p>
+            <p>b. Tất cả đã hoàn tất nhấn "Kết thúc" thông tin lưu lại.</p>
+        </div>
+    </div>
+
+    <br />
+</div>
+
+<div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
+    <div class="main">
+        <div ui-view></div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $('#danhgia').click(function () {
+
+            // Validate input số bien nhận
+
+            // If sai
+            if ($('#soBienNhan').val().length < 5) {
+
+                bootbox.alert("Số biên nhận không hợp lệ", function () {
+                })
+            }
+            else {
+                //Get thông tin ho sơ
+
+                $.getJSON('/DanhGia/HoSoGetBySoBienNhan_DanhGia?soBienNhan=' + $('#soBienNhan').val(), function (data) {
+
+                    // Neu hoso không tồn tại
+                    if (data.IsExist == false) {
+                        bootbox.alert("Hồ sơ chưa kết thúc.", function () {
+                        })
+                    }
+                        // Neu hoso  tồn tại
+                    else {
+                        if (data.DaDuocDanhGia == true) {
+                            bootbox.alert("Hồ sơ đã được đánh giá", function () {
+
+                            })
+                        }
+                        else {
+                            // Lưu thông tin hồ sơ
+
+                            $('#idHoSo').val(data.HoSo.ID);
+
+                            // Ẩn màn hình nhập số biên nhận
+                            $('#input_SoBienNhan_content').toggle('hide', function () {
+                            });
+
+                            bootbox.dialog({
+                                title: "Thông tin hồ sơ",
+                                message:
+                                '<div class="row">  ' +
+                                     '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
+
+                                                '<div>' +
+                                                    '<p class="info_user_per">' +
+                                                        '<b>Số biên nhận hồ sơ: </b>' + JSONtostring(data.HoSo.SoBienNhan) + '<br />' +
+                                                        '<b> Ngày tiếp nhận: </b>' + JSONDate(data.HoSo.NgayNhan) + '<br />' +
+                                                        '<b> Ngày hẹn trả: </b>' + JSONDate(data.HoSo.NgayHenTra) + '<br />' +
+                                                        '<b> Địa chỉ: </b>' + JSONtostring(data.HoSo.DiaChi) + '<br />' +
+                                                     '</p>' +
+                                                '</div>' +
+
+                                     '</div>' +
+
+                                    '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
+                                        '<div>' +
+                                            '<p class="info_user_per">' +
+
+                                                '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
+
+                                                '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
+                                                '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
+                                                '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.NguoiNop) + '<br />' +
+                                                '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
+
+                                            '</p>' +
+                                          '</div>' +
+                                    '</div>' +
+                             '</div>',
+
+                                buttons: {
+                                    success: {
+                                        label: "Bắt đầu đánh giá",
+                                        className: "btn-success",
+                                        callback: function () {
+
+                                            // Load màn hình đánh giá
+                                            $('#danhgia_Content').delay(100).toggle('slow', function () {
+
+                                            });
+
+                                        }
+                                    }
+                                }
+                            }
+                         );
+
+                        }
+                    }
+                })
+
+            }
+
+        });
+        function JSONDate(dateStr) {
+            if (dateStr != null && dateStr.length > 0) {
+                var m, day;
+                jsonDate = dateStr;
+                var d = new Date(parseInt(jsonDate.substr(6)));
+                m = d.getMonth() + 1;
+                if (m < 10)
+                    m = '0' + m
+                if (d.getDate() < 10)
+                    day = '0' + d.getDate()
+                else
+                    day = d.getDate();
+                return (day + '/' + m + '/' + d.getFullYear())
+            }
+            else
+                return "";
+        }
+        function JSONtostring(s) {
+            if (s != null && s.length > 0) {
+                return s;
+            }
+            else
+                return "";
+        }
+    </script>
+}

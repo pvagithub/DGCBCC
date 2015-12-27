@@ -1,0 +1,358 @@
+﻿@using WebMVC.Entities
+
+@model List<WebMVC.Entities.LinhVuc>
+@{
+
+    var DonVi = ViewBag.DonVi as DonVi;
+
+    var DanhSachCauHoi = ViewBag.DanhSachCauHoi as List<TieuChi>;
+    var CauHoiVaDapAn = ViewBag.CauHoiVaDapAn as List<TieuChiCauTraLoi>;
+
+    ViewBag.Title = "Thống kê " + DonVi.TenDonVi;
+}
+
+<div class="col-lg-12">
+    <h2>Thống kê đơn vị @DonVi.TenDonVi</h2>
+</div>
+<div class="input-group col-md-8 col-md-offset-2" style="padding-bottom: 10px;">
+    <div class="row">
+        <div class="col-md-2">
+            <p class="pull-right">Năm</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_theoNam" type="text" placeholder="Chọn tháng trong năm" class="form-control">
+        </div>
+
+        <div class="col-md-2 ">
+            <p class="pull-right">Quý</p>
+        </div>
+        <div class="col-md-4">
+            <select class="selectpicker" style="width:100%">
+                <option>Chọn quý trong năm</option>
+                <option value="1">Quý 1</option>
+                <option value="2">Quý 2</option>
+                <option value="3">Quý 3</option>
+                <option value="4">Quý 4</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="pull-right">Tháng</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_theoThang" type="text" placeholder="Chọn tháng trong năm" class="form-control">
+        </div>
+
+        <div class="col-md-2 ">
+            <p class="pull-right">Tuần</p>
+        </div>
+        <div class="col-md-4">
+            <select class="selectpicker" style="width:100%">
+                <option>Chọn tuần trong năm</option>
+                <option value="1">Tuần 1</option>
+                <option value="1">Tuần 2</option>
+                <option value="1">Tuần 3</option>
+                <option value="1">Tuần 4</option>
+                <option value="1">Tuần 5</option>
+                <option value="1">Tuần 6</option>
+                <option value="1">Tuần 7</option>
+                <option value="1">Tuần 8</option>
+                <option value="1">Tuần 9</option>
+                <option value="1">Tuần 10</option>
+                <option value="1">Tuần 11</option>
+                <option value="1">Tuần 12</option>
+                <option value="1">Tuần 13</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <p class="pull-right">Từ ngày</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_tuNgay" type="text" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+
+        <div class="col-md-2 ">
+            <p class="pull-right">Đến ngày</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_denNgay" type="text" placeholder="Chọn ngày kết thúc" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <span class="form-group input-group-btn center">
+        <button title="" data-placement="top" data-toggle="tooltip" class="btn btn-primary" type="button" id="danhgia" style="width:100px; margin-right:10px;border-radius:4px">Chọn</button>
+        <button title="" data-placement="top" data-toggle="tooltip" class="btn btn-primary" type="button" id="excel" style="width:100px; border-radius:4px">Xuất Excel</button>
+    </span>
+</div>
+
+<table id="example" class="display table table-striped table-bordered table-hover  " cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="header_tabjs">Tên đơn vị</th>
+
+            @foreach (var cauhoi in DanhSachCauHoi)
+            {
+                <th class="header_tabjs">
+                    <p class="content_ques" data-original-title="999" data-container="body"
+                       data-toggle="tooltip" data-placement="bottom" title="@cauhoi.TenTieuChi">
+                        @cauhoi.TenTieuChi
+                    </p>
+                </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var linhvuc in Model)
+        {
+            @*<tr class="gradeA" href='~/ThongKe/ChiTietDonVi/?TenDonVi=@donvi.NameAlias' data-toggle="tooltip" data-placement="top" title="Nhấn chuột để xem chi tiết đơn vị @donvi.TenDonVi">
+                <td class="left tieuchi donvi">@donvi.TenDonVi</td>*@
+
+            <tr class="gradeA" href='~/ThongKe/LinhVucDonVi/?donViId=@DonVi.DonViID&linhVucId=@linhvuc.LinhVucID'>
+                <td class="left tieuchi donvi">@linhvuc.TenLinhVuc</td>
+
+                @foreach (var cauhoi in DanhSachCauHoi)
+                {
+
+                    var lstOption = CauHoiVaDapAn.Where(x => x.TieuChi.ID == cauhoi.ID).ToList();
+                    if (lstOption != null && lstOption.Count > 0)
+                    {
+
+                        Random rnd = new Random();
+                        int r1, r2, r3, r4 = 0;
+                        <td class="left tieuchi">
+                            @if (lstOption.Count == 2)
+                            {
+                                r1 = rnd.Next(1, 60);
+                                r2 = 100 - r1;
+                                <p class="left tieuchi">
+                                    @lstOption[0].CauTraLoi.TenCauTraLoi:
+                                    <span class="pull-right"> @r1 %</span>
+                                </p>
+                                <p class="left tieuchi">@lstOption[1].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r2 %</span> </p>
+
+                            }
+
+                            @if (lstOption.Count == 3)
+                            {
+
+                                r1 = rnd.Next(1, 30);
+                                r2 = rnd.Next(1, 50);
+                                r3 = 100 - r1 - r2;
+                                <p class="left tieuchi">@lstOption[0].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r1 %</span> </p>
+                                <p class="left tieuchi">@lstOption[1].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r2 %</span> </p>
+                                <p class="left tieuchi">@lstOption[2].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r3 %</span> </p>
+
+                            }
+
+                            @if (lstOption.Count == 4)
+                            {
+                                r1 = rnd.Next(1, 30);
+                                r2 = rnd.Next(1, 50);
+                                r3 = rnd.Next(1, 40);
+                                r4 = 100 - r1 - r2 - r3;
+
+                                <p class="left tieuchi">@lstOption[0].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r1 %</span> </p>
+                                <p class="left tieuchi">@lstOption[1].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r2 %</span> </p>
+                                <p class="left tieuchi">@lstOption[2].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r3 %</span> </p>
+                                <p class="left tieuchi">@lstOption[3].CauTraLoi.TenCauTraLoi:<span class="pull-right"> @r4 %</span> </p>
+
+                            }
+                        </td>
+                    }
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="back_content">
+    <button class="backhistory btn btn-primary" style="width:100px; margin: 0px auto;"> Trở về</button>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(document).ready(function () {
+
+                $('#example').DataTable({
+                    "scrollX": true,
+                    "scrollY": 400
+
+                });
+
+            });
+
+            $('.gradeA').dblclick(function () {
+
+                window.location = $(this).attr('href');
+                return false;
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
+
+            $('#datepicker_theoNam').datepicker({
+                format: " yyyy", // Notice the Extra space at the beginning
+                viewMode: "years",
+                minViewMode: "years"
+            });
+
+            $('#datepicker_theoThang').datepicker({
+                format: "mm/yyyy", // Notice the Extra space at the beginning
+                viewMode: "months",
+                minViewMode: "months"
+            });
+
+            var dp_now = new Date();
+            var dp_yesterday = new Date(dp_now.getFullYear(), dp_now.getMonth(), dp_now.getDate() - 1);
+            $('#datepicker_tuNgay').datepicker({
+                format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+                startDate: dp_yesterday,
+            });
+
+            //$('#datepicker_denNgay').datepicker({
+            //    format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+            //    setStartDate: $('#datepicker_tuNgay').val()
+            //});
+
+            $('#datepicker_denNgay').datepicker(
+                {
+                    setStartDate: '2015-08-1'
+
+                }
+
+                );
+
+        });
+
+        $(function () {
+            $('#container0').highcharts({
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: 'Tỉ lệ ý kiến chung về thủ tục hành chính'
+                },
+                subtitle: {
+                    text: 'Từ tháng 1 đến tháng 8 năm 2015'
+                },
+                exporting: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 6', 'Tháng 6', 'Tháng 7'],
+                    tickmarkPlacement: 'on',
+                    title: {
+                        enabled: false
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Phần trăm (%)'
+                    }
+                },
+                howInLegend: false,
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} lượt đánh giá)<br />',
+                    shared: true
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'percent',
+                        lineColor: '#ffffff',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#ffffff'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Bình thường',
+                    data: [163, 203, 276, 408, 547, 729, 628]
+                }, {
+                    name: 'Không hài lòng',
+                    data: [106, 107, 111, 133, 221, 767, 1766]
+                }, {
+                    name: 'Hài lòng',
+
+                    data: [502, 635, 809, 947, 1402, 3634, 5268]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Tỉ lệ ý kiến chung về thủ tục hành chính các đơn vị.'
+                },
+                subtitle: {
+                    text: 'Thống kê tháng 8-2015'
+                },
+                xAxis: {
+                    categories: ['Nông nghiệp và Phát triển nông thôn', 'Giáo dục và đào tạo', 'Xây dựng', 'Y tế ', 'ThanhTra ', 'Tư pháp'],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Phần trăm (%)',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' %'
+                },
+                exporting: {
+                    enabled: false
+                },
+
+                howInLegend: false,
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+
+                credits: {
+                    enabled: false
+                },
+                series: [{
+
+                    name: 'Bình thường',
+                    data: [10, 5, 1, 5, 10, 10]
+
+                }, {
+
+                    name: 'Không hài lòng',
+                    data: [10, 5, 4, 3, 10, 0]
+                }, {
+
+                    name: 'Hài lòng',
+                    data: [80, 90, 95, 93, 80, 90]
+                }]
+            });
+        });
+    </script>
+}

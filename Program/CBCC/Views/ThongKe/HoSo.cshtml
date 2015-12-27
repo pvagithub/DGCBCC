@@ -1,0 +1,172 @@
+﻿@using WebMVC.Entities
+@{
+    ViewBag.Title = "Thông tin hồ sơ - Số biên nhận";
+    var hs = (HoSo)ViewBag.HoSo;
+    var qtxl = (List<QuaTrinhXuLy>)ViewBag.QTXL;
+    var KetQua = (List<KetQuaDanhGiaByDanhGiaID_Result>)ViewBag.KetQua;
+    var XuLy = (List<ThongTinNguoiXuLy>)ViewBag.XuLy;
+    ThongTinNguoiXuLy nxl = new ThongTinNguoiXuLy();
+}
+
+<div class="row Partial_GioiThieu">
+    <h2 class="text-center title_h2">
+        Thông tin hồ sơ
+    </h2>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        <div class="col-sm-6">
+            @*<img class="avata_cccb" src="~/Images/AvataCBCC/cbcc.png" />*@
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="col-sm-6">
+            <div>
+                <p class="info_user_per">
+                    <b>Số biên nhận hồ sơ: </b>  @hs.SoBienNhan<br />
+                    <b> Ngày tiếp nhận: </b>@((hs.NgayNhan != null) ? hs.NgayNhan.Value.ToString("dd/MM/yyyy") : "") <br />
+                    <b> Ngày hẹn trả: </b>@((hs.NgayHenTra != null) ? hs.NgayHenTra.Value.ToString("dd/MM/yyyy") : "")<br />
+                    <b> Địa chỉ: </b>@hs.DiaChi<br />
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        <div>
+            <p class="info_user_per">
+
+                <b> Lĩnh vực: </b>  @hs.TenLinhVuc<br />
+                <b> Số ngày giải quyết: </b>  @hs.SoNgayGiaiQuyet<br />
+                <b> Họ tên người nộp: </b>  @hs.NguoiNop<br />
+                <b> Điện thoại: </b>  @hs.DienThoai<br />
+            </p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2 class="title_h2">Chi tiết quá trình xử lý hồ sơ</h2>
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Người xử lý</th>
+                <th>Ngày nhận</th>
+                <th>Thời hạn xử lý</th>
+                <th>Ngày xử lý</th>
+                <th>Tình trạng xử lý</th>
+                <th>Kết quả xử lý</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < qtxl.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>
+                        <span class="canbo" data-original-title="999" data-container="body"
+                              data-toggle="modal" data-target="#myModal@(i+1)" title="Nhấn vào đây để xem chi tiết thông tin cán bộ">
+                            @qtxl[i].NguoiXuLy
+                        </span>
+                        <!-- Popup Thong tin can bo -->
+                        <div class="modal fade" id="myModal@(i+1)" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Thông tin cán bộ</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class='row'>
+                                            <div class='col-sm-4'>
+                                                <img src='/Images/AvataCBCC/cbcc-icon.png' class='avata_cccb'>
+                                                <div class='clearfix'></div>
+                                            </div>
+                                            <div class='col-sm-8'>
+                                                <div>
+                                                    <p class='info_user_per'>
+                                                        @{
+                if (XuLy.Count > 0)
+                {
+                    nxl = XuLy.Where(x => x.ID == @qtxl[i].NguoiXuLyID).FirstOrDefault();
+                }
+                                                        }
+                                                        <div class="row">
+                                                            <div class="col-xs-4"><b>Họ tên:</b></div>
+                                                            <div class="col-xs-8">@((nxl != null) ? nxl.HoTen : "")</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-4"><b> Ngày sinh: </b></div>
+                                                            <div class="col-xs-8">@((nxl != null && nxl.NgaySinh != null) ? nxl.NgaySinh.Value.ToString("dd/MM/yyyy") : "")</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-4"><b> Chức vụ:</b></div>
+                                                            <div class="col-xs-8">@((nxl != null) ? nxl.ChucVu : "")</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-4"><b> Đơn vị:</b></div>
+                                                            <div class="col-xs-8">@((nxl != null) ? @hs.TenDonVi : "")</div>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End Thong tin can bo -->
+                    </td>
+                    <td>@((qtxl[i].NgayNhan != null) ? qtxl[i].NgayNhan.Value.ToString("dd/MM/yyyy") : "")</td>
+                    <td>@qtxl[i].ThoiHanXuLy</td>
+                    <td>@((qtxl[i].NgayXuLy != null) ? qtxl[i].NgayXuLy.Value.ToString("dd/MM/yyyy") : "")</td>
+                    <td>@qtxl[i].TinhTrang</td>
+                    <td>@qtxl[i].KetQua</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+    <h2 class="title_h2">Bảng thông tin chi tiết đánh giá</h2>
+
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tiêu chí</th>
+                <th>Kết quả</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < KetQua.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@KetQua[i].TenTieuChi</td>
+                    <td>@KetQua[i].TenCauTraLoi</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="back_content">
+    <button class="backhistory btn btn-primary" style="margin: 0px auto;"> Trở về</button>
+</div>
+
+@section scripts{
+    <script>
+        $("[data-toggle=tooltip]").tooltip();
+    </script>
+}

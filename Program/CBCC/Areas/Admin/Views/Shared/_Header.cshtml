@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="~/">Trang chủ</a>
+        <a class="navbar-brand" href="~/Admin">Trang Admin</a>
+    </div>
+    <!-- /.navbar-header -->
+    @if (Request.IsAuthenticated)
+    {
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    @User.Identity.GetUserName() <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+
+                    <li>
+                        <a href='~/Admin/Membership/Profile'>Cài đặt</a> 
+                    <li class="divider"></li>
+
+                    <li><a href="~/Account/LogOff">Đăng xuất</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Quản lý người dùng<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="~/Admin/Role"><i class="fa fa-key fa-fw"></i> Quyền </a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/Membership"><i class="fa fa-user fa-fw"></i>Người dùng</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-paragraph"></i> Danh mục <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="~/Admin/NhomTieuChi"><i class="fa fa-key fa-list"></i> Nhóm tiêu chí</a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/TieuChi"><i class="fa fa-user fa-list"></i>Tiêu chí</a>
+                        </li>
+
+                        <li>
+                            <a href="~/Admin/CauTraLoi"><i class="fa fa-user fa-list"></i>Câu trả lời</a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/DonVi"><i class="fa fa-user fa-list"></i>Đơn vị</a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/LinhVuc"><i class="fa fa-user fa-list"></i>Lĩnh vực</a>
+                        </li>
+                        <li>
+                            <a href="~/Admin/ThuTuc"><i class="fa fa-user fa-list"></i>Thủ tục</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="~/Admin/CaiDat"><i class="fa fa-cogs"></i> Cài đặt<span class="fa arrow"></span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+ 

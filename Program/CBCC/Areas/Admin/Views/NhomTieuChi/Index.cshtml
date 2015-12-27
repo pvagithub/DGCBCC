@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Danh sách nhóm tiêu chí đánh giá";
+    string trangthai = "";
+}
+
+@using WebMVC.Entities
+@model List<NhomTieuChi>
+<br />
+
+<h2>   Danh sách nhóm tiêu chí đánh giá</h2>
+<!-- table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên nhóm tiêu chí</th>
+            <th>Trạng thái</th>
+            <th>
+                <a href='/Admin/NhomTieuChi/Create'
+                   class="pull-right btn btn-info btn-add">Thêm mới</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@item.TenNhomTieuChi</td>
+                    <td align="center">
+                        @{
+                if (item.Active != null && item.Active.Value)
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+                        }
+                    </td>
+                    <td>
+                        <div class="pull-right">
+                            <a href='/Admin/NhomTieuChi/Edit/@item.ID' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href='/Admin/NhomTieuChi/Delete/@item.ID' class="btn btn-success btn-delete" title="Cập nhật trạng thái"><i class="glyphicon glyphicon-check"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<!-- modal -->
+<div class="modal fade"
+     id="myModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+    </div>
+</div>
+<!-- scripts -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.btn-add, .btn-update, .btn-delete').click(function (e) {
+
+                /*
+                * hủy liên kết
+                *
+                * việc này quan trọng
+                * nếu không hủy liên kết, modal sẽ không được load đúng cách
+                * vì action sẽ trả về 1 trang html trống với partialview
+                *
+                * cách tương tự return false; cách này thực hiện ở cuối method
+                */
+                e.preventDefault();
+
+                console.log('aa');
+                var $modal = $('#myModal');
+                var $modalDialog = $('.modal-dialog');
+                var href = $(this).prop('href');
+
+                // không cho phép tắt modal khi click bên ngoài modal
+                var option = { backdrop: 'static' };
+
+                // kiểm tra (logic, điều kiện...)
+
+                // load modal
+                $modalDialog.load(href, function () {
+                    $modal.modal(option, 'show');
+                });
+
+                return false;
+            });
+
+        }); // document ready
+    </script>
+}

@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Theo đơn vị";
+}
+@using WebMVC.Entities;
+
+@model List<WebMVC.Entities.DonVi>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- Advanced Tables -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="margin_top0 margin_bottom0"> Bảng thống kê đánh giá sự hài lòng của một đơn vị</h2>
+            </div>
+            <div class="panel-body">
+                <div class="input-group col-md-6 col-md-offset-3" style="padding-bottom: 10px;">
+
+                    <input id="datepicker_theoThang" type="text" placeholder="Chọn tháng trong năm" class="form-control">
+                    <span class="form-group input-group-btn">
+                        <button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default" type="button" id="danhgia">Chọn</button>
+                    </span>
+                </div>
+
+                <br class="clearfix" />
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th class="header_tab">Số TT</th>
+                                <th class="header_tab">Tên đơn vị</th>
+                                <th class="header_tab">(1)</th>
+                                <th class="header_tab">(2)</th>
+                                <th class="header_tab">(3)</th>
+                                <th class="header_tab">(4)</th>
+                                <th class="header_tab">(5)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var num = 1;
+                                Random rnd = new Random();
+
+                            }
+                            @foreach (var item in Model)
+                            {
+                                int r1 = rnd.Next(1, 30);
+                                int r11 = rnd.Next(1, 30) - r1;
+                                int r111 = 100 - r1 - r11;
+
+                                int r2 = rnd.Next(1, 30);
+                                int r22 = rnd.Next(1, 30) - r2;
+                                int r222 = 100 - r2 - r22;
+
+                                int r3 = rnd.Next(1, 30);
+                                int r33 = rnd.Next(1, 30) - r3;
+                                int r333 = 100 - r3 - r33;
+
+                                int r4 = rnd.Next(1, 30);
+                                int r44 = rnd.Next(1, 30) - r4;
+                                int r444 = 100 - r4 - r44;
+
+                                int r5 = rnd.Next(1, 30);
+                                int r55 = rnd.Next(1, 30) - r5;
+                                int r555 = 100 - r5 - r55;
+
+                                <tr class="gradeA" href='~/ThongKe/ChiTietDonVi/?TenDonVi=@item.NameAlias' data-toggle="tooltip" data-placement="top" title="Nhấn chuột để xem chi tiết đơn vị @item.TenDonVi">
+
+                                    <td>@num</td>
+                                    <td>
+                                        <a href='~/ThongKe/ChiTietDonVi?TenDonVi=@item.NameAlias' style="color: #0887CB; font-size:14px">
+                                            @item.TenDonVi
+                                        </a>
+                                    </td>
+
+                                    <td class="center tieuchi">Không hài lòng:<span class="red"> @r1</span> % <br /> Tạm chấp nhận: <span class="gray"> @r11  </span> %<br /> Hài lòng: <span class="green"> @r111 </span> % </td>
+                                    <td class="center tieuchi">Không hài lòng:<span class="red"> @r2</span> % <br /> Tạm chấp nhận: <span class="gray"> @r22  </span> %<br /> Hài lòng: <span class="green"> @r222 </span> % </td>
+                                    <td class="center tieuchi">Không hài lòng:<span class="red"> @r3</span> % <br /> Tạm chấp nhận: <span class="gray"> @r33  </span> %<br /> Hài lòng: <span class="green"> @r333 </span> % </td>
+                                    <td class="center tieuchi">Không hài lòng:<span class="red"> @r4</span> % <br /> Tạm chấp nhận: <span class="gray"> @r44  </span> %<br /> Hài lòng: <span class="green"> @r444 </span> % </td>
+                                    <td class="center tieuchi">Không hài lòng:<span class="red"> @r5</span> % <br /> Tạm chấp nhận: <span class="gray"> @r55  </span> %<br /> Hài lòng: <span class="green"> @r555 </span> % </td>
+
+                                    @{num++;}
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ghichu">
+            * Ghi chú : nhóm tiêu chí
+            <p> (1) TIẾP CẬN DỊCH VỤ</p>
+            <p> (2) THỦ TỤC HÀNH CHÍNH</p>
+            <p> (3) SỰ PHỤC VỤ CỦA CÔNG CHỨC</p>
+            <p> (4) KẾT QUẢ GIẢI QUYẾT CÔNG VIỆC</p>
+            <p> (5) TỶ LỆ HÀI LÒNG ĐỐI VỚI TOÀN BỘ QUÁ TRÌNH GIẢI QUYẾT THỦ TỤC HÀNH CHÍNH</p>
+        </div>
+        <!--End Advanced Tables -->
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+            $('table tr .gradeA').click(function () {
+                window.location = $(this).attr('href');
+                return false;
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#datepicker_theoNam').datepicker({
+                format: " yyyy", // Notice the Extra space at the beginning
+                viewMode: "years",
+                minViewMode: "years"
+            });
+
+            $('#datepicker_theoThang').datepicker({
+                format: "mm/yyyy", // Notice the Extra space at the beginning
+                viewMode: "months",
+                minViewMode: "months"
+            });
+
+            var dp_now = new Date();
+            var dp_yesterday = new Date(dp_now.getFullYear(), dp_now.getMonth(), dp_now.getDate() - 1);
+            $('#datepicker_tuNgay').datepicker({
+                format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+                startDate: dp_yesterday,
+            });
+
+            //$('#datepicker_denNgay').datepicker({
+            //    format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+            //    setStartDate: $('#datepicker_tuNgay').val()
+            //});
+
+            $('#datepicker_denNgay').datepicker(
+                {
+                    setStartDate: '2015-08-1'
+
+                }
+
+                );
+
+        });
+    </script>
+}

@@ -1,0 +1,145 @@
+﻿@using WebMVC.Entities
+@using System.Collections.Generic;
+@using System.Web.Helpers;
+@model CBCC.Models.UsersInRolesModel
+
+@{
+    ViewBag.Title = "Profile";
+
+}
+
+<style>
+    .clsConfirm {
+        color: red;
+        font-size: 14px;
+    }
+
+    .clsOdd {
+        margin-top: 7px;
+    }
+
+    .clsEven {
+        margin-top: 15px;
+    }
+
+    .heightrow {
+        margin: 10px 0;
+    }
+</style>
+@using (Html.BeginForm("Profile", "Membership", FormMethod.Post, htmlAttributes: new { @class = "form-add" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.UserId)
+
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsOdd">Tên user</label>
+            <div class="col-xs-8">
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control required", placeholder = "Tên user", id = "Username" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsEven">Mật khẩu</label>
+            <div class="col-xs-8 heightrow">
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control required", placeholder = "Mật khẩu...", id = "Password", type = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsOdd">Xác nhận mật khẩu</label>
+            <div class="col-xs-8">
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control required", placeholder = "Xác nhận mật khẩu...", id = "txtConfirmPassword", type = "Password" })
+                <span id="adminForm_ConfirmPassword_validator"></span>
+            </div>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsEven">Email</label>
+            <div class="col-xs-8 heightrow">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control required", id = "Email", placeholder = "Email...", type = "email" })
+            </div>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsOdd">Comment</label>
+            <div class="col-xs-8">
+                @Html.TextBoxFor(m => m.Comment, new { @class = "form-control required", id = "Comment", placeholder = "Comment..." })
+                @Html.ValidationMessageFor(m => m.Comment)
+            </div>
+        </div>
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsEven">Role</label>
+            <div class="col-xs-8 lstMullti heightrow">
+                <select class="" id="ListRoleId_Create" name="ListRoleId" multiple="multiple">
+                    @foreach (var item in Model.ListDanhSachRole)
+                    {
+                        if (Model.ListRoleId.Contains(int.Parse(item.Value)))
+                        {
+                            <option value="@item.Value" selected>@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <br />
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label col-xs-4 float_left text-right clsEven">&nbsp;</label>
+            <div class="col-xs-8 ">
+                <input type="submit" value="Lưu" class="btn btn-primary" id="submitButton" />
+            </div>
+        </div>
+    </form>
+
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/Content/js/bootstrap-multiselect.js"></script>
+    <link href="~/Areas/Admin/Content/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+        $().ready(function () {
+            $('#ListRoleId_Create').multiselect({
+                enableClickableOptGroups: true,
+                numberDisplayed: 4,
+                includeSelectAllOption: true,
+                selectAllText: 'Tất cả',
+                enableFiltering: true
+            });
+            $("#submitButton").click(function () {
+                if ($("#Password").val() != $("#txtConfirmPassword").val()) {
+                    $("#adminForm_ConfirmPassword_validator").text("Vui lòng gõ mật khẩu giống như trên");
+                    $("#adminForm_ConfirmPassword_validator").addClass("clsConfirm");
+                    return false;
+                }
+            });
+            $("#Email").validate({
+                rules: {
+                    field: {
+                        required: true,
+                        email: true,
+                    }
+                }
+            });
+        });
+    </script>
+}

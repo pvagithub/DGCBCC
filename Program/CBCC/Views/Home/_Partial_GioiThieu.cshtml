@@ -1,0 +1,147 @@
+﻿<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="row">
+
+                <div class="titlecate_content">
+                    <div class="col-md-9">
+                        <h2 class="titlecate">
+                            <i class="fa fa-check"></i>
+
+                            Một số hình ảnh quá trình đánh giá
+                        </h2>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- Controls -->
+                        <div class="controls pull-right">
+                            <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example-generic"
+                               data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example-generic"
+                                                        data-slide="next"></a>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div id="carousel-example-generic" class="carousel slide  " data-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+
+                                        <img src="~/Images/HoatDong/1.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Images/HoatDong/2.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Images/HoatDong/3.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Images/HoatDong/4.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Images/HoatDong/5.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="~/Images/HoatDong/6.jpg" class="img-responsive" alt="a" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row">
+        <div class="col-md-12">
+
+            <div class="titlecate_content">
+                <h2 class="titlecate">
+                    <i class="fa fa-check"></i>
+                    Phần mềm đánh giá sự hài lòng của tổ chức và người dân
+                </h2>
+            </div>
+
+            <p>
+                -	Đánh giá của người dân về thái độ, tinh thần phục vụ, tính đúng hạn trong giải quyết hồ sơ của cán bộ công chức toàn thành phố;
+            </p>
+            <p>
+                -	Thống kê, báo cáo, phân tích kết quả đánh giá của người dân đối với cán bộ, với cơ quan nhà nước cho từng cấp;
+            </p>
+
+            <p>
+                -	Công khai số liệu ý kiến đánh giá người dân trên Một cửa điện tử của thành phố;
+            </p>
+
+            <p>
+
+                -	Triển khai hệ thống theo mô hình tập trung, dữ liệu được kết nối, chia sẻ qua đường truyền mạng Metronet và được cài đặt tại trung tâm tích hợp dữ liệu thành phố;
+            </p>
+            <p>
+                -	Liên thông với các hồ sơ đã và đang xử lý của các đơn vị trên địa bàn thành phố;
+            </p>
+            <p>
+                -	Đảm bảo an toàn thông tin: phân quyền theo từng đơn vị và số liệu kết quả đánh giá được phân theo từng đơn vị và toàn thành phố.
+            </p>
+        </div>
+    </div>*@
+
+@section scripts{
+    <script>
+
+        $('#myCarousel').carousel({
+            interval: 50000
+        });
+
+        $('.carousel .item').each(function () {
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            if (next.next().length > 0) {
+
+                next.next().children(':first-child').clone().appendTo($(this)).addClass('rightest');
+
+            }
+            else {
+                $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+
+            }
+        });
+    </script>
+}

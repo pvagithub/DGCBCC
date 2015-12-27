@@ -1,0 +1,122 @@
+﻿@using CBCC.Models;
+@{
+    var filter = (FilterModel)ViewData["filter"];
+}
+
+<link href="~/Scripts/StickyTableHeaders/css/component.css" rel="stylesheet" />
+<link href="~/Scripts/StickyTableHeaders/css/demo.css" rel="stylesheet" />
+<link href="~/Scripts/StickyTableHeaders/css/normalize.css" rel="stylesheet" />
+<script src="~/Scripts/StickyTableHeaders/js/jquery.ba-throttle-debounce.min.js"></script>
+<script src="~/Scripts/StickyTableHeaders/js/jquery.stickyheader.js"></script>
+
+@if (Model == null || Model.Count <= 0)
+{
+    <div class="warning">Chưa có dữ liệu</div>
+}
+else
+{
+
+    <table class="overflow-y col-lg-12 content_tk  table table-hover   table-bordered">
+
+        <thead>
+            <tr>
+
+                <th class="col_cauhoi fix_left">
+                    <div class="text_main_col  col_cauhoi fix_left fix_left_1">Tiêu chí</div>
+                </th>
+                @{
+    string[] lsttieuChi = Model[0].KeQuaDanhGia.Split(';');
+
+    for (int i = 1; i < lsttieuChi.Length; i++)
+    {
+
+        string[] cauhoi = lsttieuChi[i].Split('☺');
+
+        <th>
+            <div class="col_cauhoi">
+
+                <div class="row col_tieuchi">
+                    @cauhoi[0]
+                </div>
+            </div>
+        </th>
+
+    }
+
+                }
+            </tr>
+
+            <tr>
+
+                <th class="col_cauhoi fix_left">
+                    <div class="text_main_col col_cauhoi fix_left fix_left_1">ĐV - Câu TL</div>
+                </th>
+                @{
+
+    for (int i = 1; i < lsttieuChi.Length; i++)
+    {
+
+        string[] cauhoi = lsttieuChi[i].Split('☺');
+
+        <th>
+
+            @for (int y = 1; y < cauhoi.Length; y++)
+            {
+                string[] cautraloi = cauhoi[y].Split(new[] { "__" }, StringSplitOptions.None);
+                for (int z = 0; z < cautraloi.Length; z++)
+                {
+                    var width = 100 / (cautraloi.Length - 1);
+                    <div class="item_table item_table_header" style="width:@width%">@cautraloi[z].Split('_')[0]</div>
+                }
+            }
+        </th>
+    }}
+            </tr>
+        </thead>
+        <tbody>
+            @for (int e = 0; e < Model.Count; e++)
+            {
+
+                <tr>
+                    <th class="col_cauhoi fix_left">
+                        <div class="text_main_col">
+                            <a href="/ThongKe/DanhSachHoSo?id=@filter.DonViID&linhVucID=@filter.LinhVucID&thuTucID=@Model[e].ThuTucID">
+                                @Model[e].TenThuTuc
+                            </a>
+                        </div>
+                    </th>
+                    @{
+                var item = Model[e].KeQuaDanhGia;
+
+                string[] tieuChi1 = item.Split(';');
+
+                for (int i = 1; i < tieuChi1.Length; i++)
+                {
+
+                    string[] cauhoi = tieuChi1[i].Split('☺');
+
+                    <td>
+
+                        @{
+                    string[] cautraloi = cauhoi[1].Split(new[] { "__" }, StringSplitOptions.None);
+
+                    for (int z = 1; z < cautraloi.Length; z++)
+                    {
+                        var text = cautraloi[z].ToString();
+                        var index_char = text.Split('_')[0];
+                        var width = 100 / (cautraloi.Length - 1);
+
+                        <div class="item_table" style="width:@width%">@text.Replace(index_char + "_", "")</div>
+                    }
+                        }
+                    </td>
+
+                }
+                    }
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+}

@@ -1,0 +1,68 @@
+﻿
+@using WebMVC.Entities;
+@using System.Collections.Generic;
+@using System.Web.Helpers;
+@model CBCC.Models.ThuTucModel
+
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Content/js/bootstrap-multiselect.js"></script>
+<link href="~/Areas/Admin/Content/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "ThuTuc", FormMethod.Post, htmlAttributes: new { @class = "form-add" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ThuTucID)
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            Tạo mới lĩnh vực
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Mã thủ tục</label>
+                    <div class="col-xs-8">
+                        @Html.TextBoxFor(m => m.MaThuTuc, new { @class = "form-control required", id = "MaThuTuc", placeholder = "Mã thủ tục..." })
+                        @Html.ValidationMessageFor(m => m.MaThuTuc)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Tên thủ tục</label>
+                    <div class="col-xs-8 heightrow">
+                        @Html.TextAreaFor(m => m.TenThucTuc, new { @class = "form-control required", id = "TenThucTuc", placeholder = "Tên thủ tục..." })
+                        @Html.ValidationMessageFor(m => m.TenThucTuc)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Mô tả</label>
+                    <div class="col-xs-8 heightrow">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", id = "Description", placeholder = "Mô tả..." })
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Lĩnh vực</label>
+                    <div class="col-xs-8">
+                        @Html.DropDownListFor(m => m.LinhVucID, Model.ListLinhVuc)
+                    </div>
+                </div>
+            </form>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
+            <button type="submit" class="btn btn-primary" id="submitButton">Lưu</button>
+        </div>
+    </div>
+}

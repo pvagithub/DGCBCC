@@ -1,0 +1,316 @@
+﻿@using CBCC.Models;
+@{
+    var filter = (FilterModel)Model;
+}
+
+<div class="col-lg-12">
+
+    @{
+        switch (CBCC.Helpers.LocationHelper.GetAction(ViewContext))
+        {
+            case "index":
+                <text><h2 class="center">Tiêu chí thống kê kế quả đánh giá theo đơn vị </h2></text>
+
+                break;
+
+            case "linhvuc":
+            <text><h2 class="center">Tiêu chí thống kê kế quả đánh giá theo lĩnh vực </h2></text>
+
+                break;
+            case "thutuc":
+            <text><h2 class="center">Tiêu chí thống kê kế quả đánh giá theo thủ tục </h2></text>
+
+                break;
+            default:
+                break;
+        }
+    }
+</div>
+<input type="hidden" value="@DateTime.Now.ToString("dd/MM/yyyy")" id="DateTimeNow" />
+<div class="input-group col-md-8 col-md-offset-2" style="padding-bottom: 10px;">
+
+    <div class="">
+        <label class=" col-md-2  text-right">Năm:</label>
+        <div class="col-md-4">
+            <select class=" form-control  " id="NamThongKe" name="NamThongKe"> </select>
+        </div>
+    </div>
+
+    <div class="">
+        <label class="text-right col-md-2">Quý :</label>
+        <div class="col-md-4">
+
+            <select class="  form-control  " id="QuyThongKe" name="QuyThongKe"> </select>
+        </div>
+    </div>
+
+    <div class=" ">
+        <label class="text-right col-md-2">Tháng :</label>
+        <div class="col-md-4">
+
+            <select class=" form-control  " id="ThangThongKe" name="ThangThongKe"> </select>
+        </div>
+    </div>
+
+    <div class=" ">
+        <label class="text-right col-md-2">Tuần :</label>
+        <div class="col-md-4">
+
+            <select class=" form-control  " id="TuanThongKe" name="TuanThongKe"> </select>
+        </div>
+    </div>
+
+    <div class=" ">
+        <div class="col-md-2" style="padding-left: 0px;">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_tuNgay" type="text" placeholder="Chọn ngày bắt đầu" class="form-control">
+            <p id="datepicker_tuNgay_error" class="text_error"></p>
+        </div>
+    </div>
+
+    <div class=" ">
+        <div class="col-md-2" style="padding-left: 0px;">
+            <p class="text-right">Ngày kết thúc:</p>
+        </div>
+        <div class="col-md-4">
+            <input id="datepicker_denNgay" type="text" placeholder="Chọn ngày kết thúc" class="form-control">
+            <p id="datepicker_denNgay_error" class="text_error"></p>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-12">
+            <p id="datepicker_error" class="text_error"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function ($) {
+        $('#datepicker_tuNgay').val("@(( filter != null && filter.tuNgay != null) ? filter.tuNgay : "")");
+        $('#datepicker_denNgay').val("@((filter != null && filter.denNgay != null) ? filter.denNgay : "")");
+        $.getJSON('/Common/LoadTimKiemThongKe', function (data) {
+            var nam;
+            $.each(data, function (i, namThongKe) {
+                nam += "<option value='" + namThongKe.Value + "'>" + namThongKe.Text + "</option>";
+            });
+            $('#NamThongKe').html(nam);
+
+            // select selected from url value
+            var namID = @((filter != null && filter.namID != null) ? filter.namID : 0);
+            var quyID = @((filter != null && filter.quyID != null) ? filter.quyID : 0);
+            var thangID = @((filter != null && filter.thangID != null) ? filter.thangID : 0);
+            var tuanID = @((filter != null && filter.tuanID != null) ? filter.tuanID : 0);
+            $('#NamThongKe').val(namID).attr("selected", "selected");
+            if(namID>0)
+            {
+                $.getJSON('/Common/NamThongKe_Change?namId=' + $('#NamThongKe').val(), function (data) {
+
+                    var thang;
+
+                    $.each(data.thang, function (i, thangThongKe) {
+                        thang += "<option value='" + thangThongKe.Value + "'>" + thangThongKe.Text + "</option>";
+                    });
+                    $('#ThangThongKe').html(thang);
+                    var quy;
+
+                    $.each(data.quy, function (i, quyThongKe) {
+                        quy += "<option value='" + quyThongKe.Value + "'>" + quyThongKe.Text + "</option>";
+                    });
+                    $('#QuyThongKe').html(quy);
+                    $('#QuyThongKe').val(quyID).attr("selected", "selected");
+                    if(quyID>0){
+                        $.getJSON('/Common/Tuan_BaoCao_getList?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID, function (data) {
+
+                            var tuan2;
+                            $.each(data, function (i, tuanThongKe) {
+                                tuan2 += "<option value='" + tuanThongKe.Value + "'>" + tuanThongKe.Text + "</option>";
+                            });
+                            $('#TuanThongKe').html(tuan2);
+                            $('#TuanThongKe').val(tuanID).attr("selected", "selected");
+                        });
+
+                        $("#ThangThongKe option").each(function () {
+
+                            if ($(this).val() != 0) {
+                                $(this).css("display", "none");
+
+                            }
+                            if (quyID == 1) {
+                                if ($(this).val() <= 3) {
+                                    $(this).css("display", "block");
+                                }
+                            }
+
+                            if (quyID == 2) {
+                                if ($(this).val() <= 6 && $(this).val() > 3) {
+                                    $(this).css("display", "block");
+                                }
+                            }
+
+                            if (quyID == 3) {
+                                if ($(this).val() <= 9 && $(this).val() > 6) {
+                                    $(this).css("display", "block");
+                                }
+                            }
+
+                            if (quyID == 4) {
+                                if ($(this).val() <= 12 && $(this).val() > 9) {
+                                    $(this).css("display", "block");
+                                }
+                            }
+
+                        });
+                        $('#ThangThongKe').val(thangID).attr("selected", "selected");
+                    }
+                });
+
+                $.getJSON('/Common/Tuan_BaoCao_getList?namID=' + namID + '&quyID=0&thangID=0', function (data) {
+
+                    var tuan;
+                    $.each(data, function (i, tuanThongKe) {
+                        tuan += "<option value='" + tuanThongKe.Value + "'>" + tuanThongKe.Text + "</option>";
+                    });
+                    $('#TuanThongKe').html(tuan);
+
+                });
+            }
+        });
+    });
+
+    $('#NamThongKe').change(function () {
+        var namID = 0;
+        namID = $('#NamThongKe').val();
+        var quyID = 0;
+        var thangID = 0;
+
+        $.getJSON('/Common/NamThongKe_Change?namId=' + $('#NamThongKe').val(), function (data) {
+
+            var items;
+
+            $.each(data.thang, function (i, thangThongKe) {
+                items += "<option value='" + thangThongKe.Value + "'>" + thangThongKe.Text + "</option>";
+            });
+            $('#ThangThongKe').html(items);
+
+            var items1;
+
+            $.each(data.quy, function (i, quyThongKe) {
+                items1 += "<option value='" + quyThongKe.Value + "'>" + quyThongKe.Text + "</option>";
+            });
+            $('#QuyThongKe').html(items1);
+
+        });
+
+        $.getJSON('/Common/Tuan_BaoCao_getList?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID, function (data) {
+
+            var items;
+            $.each(data, function (i, tuanThongKe) {
+                items += "<option value='" + tuanThongKe.Value + "'>" + tuanThongKe.Text + "</option>";
+            });
+            $('#TuanThongKe').html(items);
+
+        });
+
+    });
+
+    $('#QuyThongKe').change(function () {
+
+        var namID = $('#NamThongKe').val();
+        var quyID = $('#QuyThongKe').val();
+        var thangID = 0;
+
+        $.getJSON('/Common/Tuan_BaoCao_getList?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID, function (data) {
+
+            var items;
+            $.each(data, function (i, tuanThongKe) {
+                items += "<option value='" + tuanThongKe.Value + "'>" + tuanThongKe.Text + "</option>";
+            });
+            $('#TuanThongKe').html(items);
+
+        });
+
+        $('#ThangThongKe').val("0"); // Set reset tháng khi thay đổi quý
+
+        if(quyID == 0 )
+        {
+            $("#ThangThongKe option").each(function () {
+
+                $(this).css("display", "block");
+
+            });
+        }
+        else
+        {
+            $("#ThangThongKe option").each(function () {
+
+                if ($(this).val() != 0) {
+                    $(this).css("display", "none");
+
+                }
+                if (quyID == 1) {
+                    if ($(this).val() <= 3) {
+                        $(this).css("display", "block");
+                    }
+                }
+
+                if (quyID == 2) {
+                    if ($(this).val() <= 6 && $(this).val() > 3) {
+                        $(this).css("display", "block");
+                    }
+                }
+
+                if (quyID == 3) {
+                    if ($(this).val() <= 9 && $(this).val() > 6) {
+                        $(this).css("display", "block");
+                    }
+                }
+
+                if (quyID == 4) {
+                    if ($(this).val() <= 12 && $(this).val() > 9) {
+                        $(this).css("display", "block");
+                    }
+                }
+
+            });
+        }
+
+    });
+
+    $('#ThangThongKe').change(function () {
+        var namID, quyID, thangID = 0;
+
+        namID = $('#NamThongKe').val();
+        quyID = $('#QuyThongKe').val();
+        thangID = $('#ThangThongKe').val();
+
+        $.getJSON('/Common/Tuan_BaoCao_getList?' + 'namID=' + namID + '&quyID=' + quyID + '&thangID=' + thangID, function (data) {
+
+            var items;
+
+            $.each(data, function (i, tuanThongKe) {
+                items += "<option value='" + tuanThongKe.Value + "'>" + tuanThongKe.Text + "</option>";
+            });
+            $('#TuanThongKe').html(items);
+
+        });
+
+    });
+
+    $('#datepicker_tuNgay').datepicker({
+        format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+
+    });
+
+    $('#datepicker_denNgay').datepicker(
+    {
+        format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+    });
+    $('#DateTimeNow').datepicker(
+   {
+       format: "dd/mm/yyyy", // Notice the Extra space at the beginning
+   });
+</script>

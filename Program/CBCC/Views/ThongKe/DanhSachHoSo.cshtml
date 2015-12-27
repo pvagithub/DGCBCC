@@ -1,0 +1,55 @@
+﻿@using WebMVC.Entities
+@using System
+@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.HoSo>
+@{
+    int pageNumber = (int)ViewBag.Page;
+    ViewBag.Title = "Thống kê đánh giá theo thủ tục " + @Model[0].TenThuTuc + " - " + @Model[0].TenLinhVuc + " - " + @Model[0].TenDonVi;
+}
+<style>
+    .pagination {
+       
+        float: right;
+      
+    }
+</style>
+<div class="col-lg-12">
+    <h2>Thống kê đánh giá theo thủ tục <br></h2>
+    <p class="pull-left"> @Model[0].TenThuTuc -  @Model[0].TenLinhVuc -  @Model[0].TenDonVi </p>
+    <br />
+</div>
+
+<table id="example" class="display table table-striped table-bordered table-hover  " cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="header_tabjs">Số biên nhận</th>
+            <th class="header_tabjs">Người nộp hồ sơ</th>
+            <th class="header_tabjs">Cán bộ tiếp nhận</th>
+            <th class="header_tabjs">Ngày tiếp nhận</th>
+            <th class="header_tabjs">Ngày hẹn trả</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var hoso in Model)
+        {
+            <tr class="gradeA">
+                <td class="left blue tieuchi_auto donvi" style="width:auto !important; cursor:pointer"><a href='/ThongKe/HoSo/@hoso.SoBienNhan' class="canbo">@hoso.SoBienNhan</a> </td>
+                <td class="left tieuchi_auto ">@hoso.NguoiNop</td>
+                <td class="left tieuchi_auto ">  @hoso.NguoiTiepNhan </td>
+                <td class="left tieuchi_auto ">@((hoso.NgayNhan != null) ? hoso.NgayNhan.Value.ToString("dd/MM/yyyy") : "") </td>
+                <td class="left tieuchi_auto ">@((hoso.NgayHenTra != null) ? hoso.NgayHenTra.Value.ToString("dd/MM/yyyy") : "")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("DanhSachHoSo",
+    new { page, id = ViewBag.DonViID, linhVucID = ViewBag.LinhVucID, thuTucID = ViewBag.ThuTucID }))
+
+
+<div class="col-lg-12">
+    <span class="  input-group-btn center">
+      
+        <button title="" class=" backhistory btn btn-primary" type="button" style="width:100px; border-radius:4px"> Trở về</button>
+    </span>
+</div>

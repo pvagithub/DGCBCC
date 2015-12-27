@@ -1,0 +1,40 @@
+﻿@using WebMVC.Entities
+@using System.Collections.Generic;
+@using System.Web.Helpers;
+@model WebMVC.Entities.NhomTieuChi
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Edit", "NhomTieuChi", FormMethod.Post, htmlAttributes: new { @class = "form-add" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ID)
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            Cập nhật nhóm tiêu chí
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="control-label col-xs-4 text-right">Tên nhóm tiêu chí</label>
+                <div class="col-xs-8">
+
+                    @Html.TextBoxFor(x => x.TenNhomTieuChi, new { @class = "form-control required", @placeholder = "Nhập tên nhóm tiêu chí...", id = "TenNhomTieuChi" })
+                    @Html.ValidationMessageFor(m => m.TenNhomTieuChi)
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+        </div>
+    </div>
+
+}  

@@ -1,0 +1,119 @@
+﻿@using WebMVC.Entities;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.ThuTuc>
+@{
+    ViewBag.Title = "Danh sách thủ tục";
+    int pageNumber = (int)ViewBag.Page;
+}
+
+<h3>Danh sách thủ tục</h3>
+
+@using (Html.BeginForm())
+{
+    <p class="pull-right">
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+<table class="table table-hover">
+    <tr>
+        <th>STT</th>
+        <th>Mã thủ tục</th>
+        <th>Tên thủ tục</th>
+        <th>Mô tả</th>
+        <th>Trạng thái</th>
+        <th>
+            <a href='/Admin/ThuTuc/Create'
+               class="pull-right btn btn-info btn-add">Thêm mới</a>
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        <tr>
+
+            <td>@(pageNumber + i + 1)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaThuTuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThucTuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @{
+        if (item.Active != null && item.Active.Value)
+        {
+            <input type="checkbox" checked="checked" disabled="disabled" />
+        }
+        else
+        {
+            <input type="checkbox" disabled="disabled" />
+        }
+                }
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a href='/Admin/ThuTuc/Edit/@item.ThuTucID' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href='/Admin/ThuTuc/Delete/@item.ThuTucID' class="btn btn-success btn-delete" title="Cập nhật trạng thái"><i class="glyphicon glyphicon-check"></i></a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <!-- modal -->
+    <div class="modal fade"
+         id="myModal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+    <!-- scripts -->
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+
+                $('.btn-add, .btn-update, .btn-delete').click(function (e) {
+
+                    /*
+                    * hủy liên kết
+                    *
+                    * việc này quan trọng
+                    * nếu không hủy liên kết, modal sẽ không được load đúng cách
+                    * vì action sẽ trả về 1 trang html trống với partialview
+                    *
+                    * cách tương tự return false; cách này thực hiện ở cuối method
+                    */
+                    e.preventDefault();
+
+                    console.log('aa');
+                    var $modal = $('#myModal');
+                    var $modalDialog = $('.modal-dialog');
+                    var href = $(this).prop('href');
+
+                    // không cho phép tắt modal khi click bên ngoài modal
+                    var option = { backdrop: 'static' };
+
+                    // kiểm tra (logic, điều kiện...)
+
+                    // load modal
+                    $modalDialog.load(href, function () {
+                        $modal.modal(option, 'show');
+                    });
+
+                    return false;
+                });
+
+            }); // document ready
+        </script>
+    }

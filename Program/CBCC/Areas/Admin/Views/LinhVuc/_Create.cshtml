@@ -1,0 +1,89 @@
+﻿@using WebMVC.Entities;
+@using System.Collections.Generic;
+@using System.Web.Helpers;
+@model CBCC.Models.LinhVucModel
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Content/js/bootstrap-multiselect.js"></script>
+<link href="~/Areas/Admin/Content/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Create", "LinhVuc", FormMethod.Post, htmlAttributes: new { @class = "form-add" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.LinhVucID)
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            Tạo mới lĩnh vực
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Mã lĩnh vực</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control required" id="MaLinhVuc" name="MaLinhVuc" placeholder="Mã lĩnh vực..." />
+                        @Html.ValidationMessageFor(m => m.MaLinhVuc)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Tên lĩnh vực</label>
+                    <div class="col-xs-8 heightrow">
+                        <input type="text" class="form-control required" id="TenLinhVuc" name="TenLinhVuc" placeholder="Tên lĩnh vực..." />
+                        @Html.ValidationMessageFor(m => m.TenLinhVuc)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Mô tả</label>
+                    <div class="col-xs-8 heightrow">
+                        <input type="text" class="form-control  " id="MoTa" name="MoTa" placeholder="Mô tả..." />
+                        @Html.ValidationMessageFor(m => m.MoTa)
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Đơn vị</label>
+                    <div class="col-xs-8 lstMullti">
+
+                        <select class="" id="ListDonViID_Create" name="ListDonViID" multiple="multiple">
+
+                            @foreach (var item in Model.ListDonVi)
+                            {
+
+                                <option value="@item.Value">@item.Text</option>
+
+                            }
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Trở về</button>
+            <button type="submit" class="btn btn-primary" id="submitButton">Lưu</button>
+        </div>
+    </div>
+}
+<!-- Initialize the plugin: -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#ListDonViID_Create').multiselect({
+            enableClickableOptGroups: true,
+            numberDisplayed: 4,
+            includeSelectAllOption: true,
+            selectAllText: 'Tất cả',
+            enableFiltering: true
+        });
+    });
+</script>
