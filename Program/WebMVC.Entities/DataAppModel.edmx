@@ -1,0 +1,2580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCauTraLoi" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GiaTri" Type="int" />
+          <Property Name="TenVanTat" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoID" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoBienNhan" Type="nvarchar" MaxLength="100" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="250" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="PhongBan" Type="nvarchar" MaxLength="250" />
+          <Property Name="NgayDanhGia" Type="datetime" />
+          <Property Name="DanhGiaTrucTiep" Type="bit" />
+        </EntityType>
+        <EntityType Name="DonVi">
+          <Key>
+            <PropertyRef Name="DonViID" />
+          </Key>
+          <Property Name="DonViID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaDonVi" Type="nvarchar" MaxLength="10" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="ParentDonViID" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="LoaiDonVi" Type="bit" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="HoSo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoBienNhan" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="100" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="NguoiNop" Type="nvarchar" MaxLength="100" />
+          <Property Name="NguoiTiepNhan" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayNhan" Type="datetime" />
+          <Property Name="NgayHenTra" Type="datetime" />
+          <Property Name="SoNgayGiaiQuyet" Type="int" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TenToChuc" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="DaDanhGia" Type="bit" />
+          <Property Name="DanhGiaID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="InputTypeTieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="KetQuaDanhGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DanhGiaID" Type="bigint" />
+          <Property Name="TieuChiID" Type="int" />
+          <Property Name="CauTraLoiID" Type="int" />
+          <Property Name="TypeInput" Type="int" />
+          <Property Name="CauTraLoiText" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LinhVuc">
+          <Key>
+            <PropertyRef Name="LinhVucID" />
+          </Key>
+          <Property Name="LinhVucID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaLinhVuc" Type="nvarchar" MaxLength="10" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="LinhVucDonVi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordFormat" Type="int" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="IsLockedOut" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" />
+          <Property Name="LastLockoutDate" Type="datetime" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Nam_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nam" Type="int" />
+          <Property Name="NgayDauNam" Type="datetime" />
+          <Property Name="NgayCuoiNam" Type="datetime" />
+          <Property Name="CreatedUserID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastUpdUserID" Type="int" />
+          <Property Name="LastUpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NhomTieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNhomTieuChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="MaNhomTieuChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="QuaTrinhXuLy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoID" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="NguoiXuLyID" Type="int" />
+          <Property Name="NguoiXuLy" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayNhan" Type="datetime" />
+          <Property Name="ThoiHanXuLy" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayXuLy" Type="datetime" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
+          <Property Name="KetQua" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Quy_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="Quy" Type="int" />
+          <Property Name="NgayDauQuy" Type="datetime" />
+          <Property Name="NgayCuoiQuy" Type="datetime" />
+          <Property Name="CreatedUserID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastUpdUserID" Type="int" />
+          <Property Name="LastUpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="KeySetting" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Thang_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuyID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="Thang" Type="int" />
+          <Property Name="NgayDauThang" Type="datetime" />
+          <Property Name="NgayCuoiThang" Type="datetime" />
+          <Property Name="CreatedUserID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastUpdUserID" Type="int" />
+          <Property Name="LastUpdDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ThongKeTongHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="HaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ThongTinNguoiXuLy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoID" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhongBan" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ThuTuc">
+          <Key>
+            <PropertyRef Name="ThuTucID" />
+          </Key>
+          <Property Name="ThuTucID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenThucTuc" Type="nvarchar" MaxLength="2000" />
+          <Property Name="MaThuTuc" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="TieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTieuChi" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NhomTieuChiID" Type="int" />
+          <Property Name="TenVanTat" Type="nvarchar" MaxLength="200" />
+          <Property Name="TypeInput" Type="int" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="TieuChiCauTraLoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuChiID" Type="int" />
+          <Property Name="CauTraLoiID" Type="int" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" Nullable="false" />
+          <Property Name="QuiID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="TuanID" Type="int" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" Nullable="false" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="QuyID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" Nullable="false" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="TuanID" Type="int" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="QuyID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="LinhVucID" Type="int" />
+          <Property Name="TenLinhVuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThuTucID" Type="int" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="500" />
+          <Property Name="TuanID" Type="int" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="KeQuaDanhGia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="HaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="QuyID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="HaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="HaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViID" Type="int" />
+          <Property Name="TuanID" Type="int" />
+          <Property Name="ThangID" Type="int" />
+          <Property Name="NamID" Type="int" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="500" />
+          <Property Name="HaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tuan_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Quarter" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="WeekOfYear" Type="int" />
+          <Property Name="StartOfWeek" Type="datetime" />
+          <Property Name="EndOfWeek" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <Association Name="FK_ChiTieu_NhomChiTieu">
+          <End Role="NhomTieuChi" Type="Self.NhomTieuChi" Multiplicity="0..1" />
+          <End Role="TieuChi" Type="Self.TieuChi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomTieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChi">
+              <PropertyRef Name="NhomTieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KetQuaDanhGia_CauTraLoi">
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="0..1" />
+          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauTraLoi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="CauTraLoiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KetQuaDanhGia_DanhGia">
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="0..1" />
+          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanhGia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="DanhGiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KetQuaDanhGia_TieuChi">
+          <End Role="TieuChi" Type="Self.TieuChi" Multiplicity="0..1" />
+          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="TieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LinhVucDonVi_DonVi">
+          <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1" />
+          <End Role="LinhVucDonVi" Type="Self.LinhVucDonVi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonVi">
+              <PropertyRef Name="DonViID" />
+            </Principal>
+            <Dependent Role="LinhVucDonVi">
+              <PropertyRef Name="DonViID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LinhVucDonVi_LinhVuc">
+          <End Role="LinhVuc" Type="Self.LinhVuc" Multiplicity="0..1" />
+          <End Role="LinhVucDonVi" Type="Self.LinhVucDonVi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVuc">
+              <PropertyRef Name="LinhVucID" />
+            </Principal>
+            <Dependent Role="LinhVucDonVi">
+              <PropertyRef Name="LinhVucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_ThuTuc">
+          <End Role="LinhVuc" Type="Self.LinhVuc" Multiplicity="0..1" />
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVuc">
+              <PropertyRef Name="LinhVucID" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="LinhVucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TieuChiCauTraLoi_TieuChi">
+          <End Role="TieuChi" Type="Self.TieuChi" Multiplicity="0..1" />
+          <End Role="TieuChiCauTraLoi" Type="Self.TieuChiCauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChiCauTraLoi">
+              <PropertyRef Name="TieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TieuChiCauTraLoi_TieuChiCauTraLoi">
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="0..1" />
+          <End Role="TieuChiCauTraLoi" Type="Self.TieuChiCauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauTraLoi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChiCauTraLoi">
+              <PropertyRef Name="CauTraLoiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Memberships">
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="0..1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GenTuanThongKeTheoNam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GenTuanThongKeTheoNam_bak" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetThongKeToanTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetThongKeToanTP_DonVi_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetThongKeToanTP_DonVi_Quy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetThongKeToanTP_DonVi_Thang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Insert_ThongKeTongHop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="HaiLong" Type="decimal" Mode="In" />
+          <Parameter Name="KhongHaiLong" Type="decimal" Mode="In" />
+          <Parameter Name="BinhThuong" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="InsertName_BaoCao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nam" Type="int" Mode="In" />
+          <Parameter Name="NgayDauNam" Type="datetime" Mode="In" />
+          <Parameter Name="NgayCuoiNam" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedUserID" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="LastUpdUserID" Type="int" Mode="In" />
+          <Parameter Name="LastUpdDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertQuy_BaoCao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NamID" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="NgayDauQuy" Type="datetime" Mode="In" />
+          <Parameter Name="NgayCuoiQuy" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedUserID" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="LastUpdUserID" Type="int" Mode="In" />
+          <Parameter Name="LastUpdDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertThang_BaoCao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QuyID" Type="int" Mode="In" />
+          <Parameter Name="NamID" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="NgayDauThang" Type="datetime" Mode="In" />
+          <Parameter Name="NgayCuoiThang" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedUserID" Type="int" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="LastUpdUserID" Type="int" Mode="In" />
+          <Parameter Name="LastUpdDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertTuan_BaoCao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quarter" Type="int" Mode="In" />
+          <Parameter Name="Month" Type="int" Mode="In" />
+          <Parameter Name="WeekOfYear" Type="int" Mode="In" />
+          <Parameter Name="StartOfWeek" Type="datetime" Mode="In" />
+          <Parameter Name="EndOfWeek" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="KetQuaDanhGiaByDanhGiaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DanhGiaID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ThongKeDonVi_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeDonVi_Quy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeDonVi_Thang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeDonVi_Tuan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Tuan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeDonVi_TuNgay_DenNgay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeLinhVuc_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeLinhVuc_Quy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeLinhVuc_Thang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeLinhVuc_Tuan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Tuan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeLinhVuc_TuNgay_DenNgay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeThuTuc_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="LinhVucID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeThuTuc_Quy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="LinhVucID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeThuTuc_Thang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="LinhVucID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeThuTuc_Tuan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="LinhVucID" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Tuan" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeThuTuc_TuNgay_DenNgay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="LinhVucID" Type="int" Mode="In" />
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_Quy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Quy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_Thang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_Tuan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Tuan" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="CauTraLoi" EntityType="Self.CauTraLoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoSo" EntityType="Self.HoSo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InputTypeTieuChi" EntityType="Self.InputTypeTieuChi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KetQuaDanhGia" EntityType="Self.KetQuaDanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVuc" EntityType="Self.LinhVuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVucDonVi" EntityType="Self.LinhVucDonVi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nam_BaoCao" EntityType="Self.Nam_BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhomTieuChi" EntityType="Self.NhomTieuChi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuaTrinhXuLy" EntityType="Self.QuaTrinhXuLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quy_BaoCao" EntityType="Self.Quy_BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thang_BaoCao" EntityType="Self.Thang_BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongKeTongHop" EntityType="Self.ThongKeTongHop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongTinNguoiXuLy" EntityType="Self.ThongTinNguoiXuLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThuTuc" EntityType="Self.ThuTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TieuChi" EntityType="Self.TieuChi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TieuChiCauTraLoi" EntityType="Self.TieuChiCauTraLoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_DonVi_Nam" EntityType="Self.TK_DonVi_Nam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_DonVi_Quy" EntityType="Self.TK_DonVi_Quy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_DonVi_Thang" EntityType="Self.TK_DonVi_Thang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_DonVi_Tuan" EntityType="Self.TK_DonVi_Tuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_LinhVuc_Nam" EntityType="Self.TK_LinhVuc_Nam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_LinhVuc_Quy" EntityType="Self.TK_LinhVuc_Quy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_LinhVuc_Thang" EntityType="Self.TK_LinhVuc_Thang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_LinhVuc_Tuan" EntityType="Self.TK_LinhVuc_Tuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_ThuTuc_Nam" EntityType="Self.TK_ThuTuc_Nam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_ThuTuc_Quy" EntityType="Self.TK_ThuTuc_Quy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_ThuTuc_Thang" EntityType="Self.TK_ThuTuc_Thang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_ThuTuc_Tuan" EntityType="Self.TK_ThuTuc_Tuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_TongHop_Nam" EntityType="Self.TK_TongHop_Nam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_TongHop_Quy" EntityType="Self.TK_TongHop_Quy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_TongHop_Thang" EntityType="Self.TK_TongHop_Thang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TK_TongHop_Tuan" EntityType="Self.TK_TongHop_Tuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tuan_BaoCao" EntityType="Self.Tuan_BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChiTieu_NhomChiTieu" Association="Self.FK_ChiTieu_NhomChiTieu">
+            <End Role="NhomTieuChi" EntitySet="NhomTieuChi" />
+            <End Role="TieuChi" EntitySet="TieuChi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KetQuaDanhGia_CauTraLoi" Association="Self.FK_KetQuaDanhGia_CauTraLoi">
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KetQuaDanhGia_DanhGia" Association="Self.FK_KetQuaDanhGia_DanhGia">
+            <End Role="DanhGia" EntitySet="DanhGia" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KetQuaDanhGia_TieuChi" Association="Self.FK_KetQuaDanhGia_TieuChi">
+            <End Role="TieuChi" EntitySet="TieuChi" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LinhVucDonVi_DonVi" Association="Self.FK_LinhVucDonVi_DonVi">
+            <End Role="DonVi" EntitySet="DonVi" />
+            <End Role="LinhVucDonVi" EntitySet="LinhVucDonVi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LinhVucDonVi_LinhVuc" Association="Self.FK_LinhVucDonVi_LinhVuc">
+            <End Role="LinhVuc" EntitySet="LinhVuc" />
+            <End Role="LinhVucDonVi" EntitySet="LinhVucDonVi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_ThuTuc" Association="Self.FK_ThuTuc_ThuTuc">
+            <End Role="LinhVuc" EntitySet="LinhVuc" />
+            <End Role="ThuTuc" EntitySet="ThuTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TieuChiCauTraLoi_TieuChi" Association="Self.FK_TieuChiCauTraLoi_TieuChi">
+            <End Role="TieuChi" EntitySet="TieuChi" />
+            <End Role="TieuChiCauTraLoi" EntitySet="TieuChiCauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TieuChiCauTraLoi_TieuChiCauTraLoi" Association="Self.FK_TieuChiCauTraLoi_TieuChiCauTraLoi">
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+            <End Role="TieuChiCauTraLoi" EntitySet="TieuChiCauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Memberships" Association="Self.FK_UsersInRoles_Memberships">
+            <End Role="Memberships" EntitySet="Memberships" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Roles" Association="Self.FK_UsersInRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataModelEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GenTuanThongKeTheoNam">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetThongKeToanTP" ReturnType="Collection(DataModel.GetThongKeToanTP_Result)">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetThongKeToanTP_DonVi_Nam" ReturnType="Collection(DataModel.GetThongKeToanTP_DonVi_Nam_Result)">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetThongKeToanTP_DonVi_Thang" ReturnType="Collection(DataModel.GetThongKeToanTP_DonVi_Thang_Result)">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetThongKeToanTP_DonVi_Quy" ReturnType="Collection(DataModel.GetThongKeToanTP_DonVi_Quy_Result)">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeDonVi_TuNgay_DenNgay">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeLinhVuc_TuNgay_DenNgay">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeThuTuc_TuNgay_DenNgay">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="LinhVucID" Mode="In" Type="Int32" />
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GenTuanThongKeTheoNam_bak">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_ThongKeTongHop">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="HaiLong" Mode="In" Type="Decimal" />
+            <Parameter Name="KhongHaiLong" Mode="In" Type="Decimal" />
+            <Parameter Name="BinhThuong" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="InsertName_BaoCao">
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+            <Parameter Name="NgayDauNam" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayCuoiNam" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedUserID" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LastUpdUserID" Mode="In" Type="Int32" />
+            <Parameter Name="LastUpdDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertQuy_BaoCao">
+            <Parameter Name="NamID" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="NgayDauQuy" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayCuoiQuy" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedUserID" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LastUpdUserID" Mode="In" Type="Int32" />
+            <Parameter Name="LastUpdDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertThang_BaoCao">
+            <Parameter Name="QuyID" Mode="In" Type="Int32" />
+            <Parameter Name="NamID" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="NgayDauThang" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayCuoiThang" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedUserID" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LastUpdUserID" Mode="In" Type="Int32" />
+            <Parameter Name="LastUpdDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTuan_BaoCao">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quarter" Mode="In" Type="Int32" />
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="WeekOfYear" Mode="In" Type="Int32" />
+            <Parameter Name="StartOfWeek" Mode="In" Type="DateTime" />
+            <Parameter Name="EndOfWeek" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DataModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DataModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="ThongKeDonVi_Nam">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeDonVi_Quy">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeDonVi_Thang">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeDonVi_Tuan">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Tuan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeLinhVuc_Nam">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeLinhVuc_Quy">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeLinhVuc_Thang">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeLinhVuc_Tuan">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Tuan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeThuTuc_Nam">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="LinhVucID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeThuTuc_Quy">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="LinhVucID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeThuTuc_Thang">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="LinhVucID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeThuTuc_Tuan">
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="LinhVucID" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Tuan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_Nam">
+          <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_Quy">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Quy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_Thang">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_Tuan">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Tuan" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CauTraLois" EntityType="DataModel.CauTraLoi" />
+          <EntitySet Name="DanhGias" EntityType="DataModel.DanhGia" />
+          <EntitySet Name="DonVis" EntityType="DataModel.DonVi" />
+          <EntitySet Name="HoSoes" EntityType="DataModel.HoSo" />
+          <EntitySet Name="InputTypeTieuChis" EntityType="DataModel.InputTypeTieuChi" />
+          <EntitySet Name="KetQuaDanhGias" EntityType="DataModel.KetQuaDanhGia" />
+          <EntitySet Name="LinhVucs" EntityType="DataModel.LinhVuc" />
+          <EntitySet Name="LinhVucDonVis" EntityType="DataModel.LinhVucDonVi" />
+          <EntitySet Name="Memberships" EntityType="DataModel.Membership" />
+          <EntitySet Name="Nam_BaoCao" EntityType="DataModel.Nam_BaoCao" />
+          <EntitySet Name="NhomTieuChis" EntityType="DataModel.NhomTieuChi" />
+          <EntitySet Name="QuaTrinhXuLies" EntityType="DataModel.QuaTrinhXuLy" />
+          <EntitySet Name="Quy_BaoCao" EntityType="DataModel.Quy_BaoCao" />
+          <EntitySet Name="Roles" EntityType="DataModel.Role" />
+          <EntitySet Name="Settings" EntityType="DataModel.Setting" />
+          <EntitySet Name="Thang_BaoCao" EntityType="DataModel.Thang_BaoCao" />
+          <EntitySet Name="ThongKeTongHops" EntityType="DataModel.ThongKeTongHop" />
+          <EntitySet Name="ThongTinNguoiXuLies" EntityType="DataModel.ThongTinNguoiXuLy" />
+          <EntitySet Name="ThuTucs" EntityType="DataModel.ThuTuc" />
+          <EntitySet Name="TieuChis" EntityType="DataModel.TieuChi" />
+          <EntitySet Name="TieuChiCauTraLois" EntityType="DataModel.TieuChiCauTraLoi" />
+          <EntitySet Name="TK_DonVi_Nam" EntityType="DataModel.TK_DonVi_Nam" />
+          <EntitySet Name="TK_DonVi_Quy" EntityType="DataModel.TK_DonVi_Quy" />
+          <EntitySet Name="TK_DonVi_Thang" EntityType="DataModel.TK_DonVi_Thang" />
+          <EntitySet Name="TK_DonVi_Tuan" EntityType="DataModel.TK_DonVi_Tuan" />
+          <EntitySet Name="TK_LinhVuc_Nam" EntityType="DataModel.TK_LinhVuc_Nam" />
+          <EntitySet Name="TK_LinhVuc_Quy" EntityType="DataModel.TK_LinhVuc_Quy" />
+          <EntitySet Name="TK_LinhVuc_Thang" EntityType="DataModel.TK_LinhVuc_Thang" />
+          <EntitySet Name="TK_LinhVuc_Tuan" EntityType="DataModel.TK_LinhVuc_Tuan" />
+          <EntitySet Name="TK_ThuTuc_Nam" EntityType="DataModel.TK_ThuTuc_Nam" />
+          <EntitySet Name="TK_ThuTuc_Quy" EntityType="DataModel.TK_ThuTuc_Quy" />
+          <EntitySet Name="TK_ThuTuc_Thang" EntityType="DataModel.TK_ThuTuc_Thang" />
+          <EntitySet Name="TK_ThuTuc_Tuan" EntityType="DataModel.TK_ThuTuc_Tuan" />
+          <EntitySet Name="TK_TongHop_Nam" EntityType="DataModel.TK_TongHop_Nam" />
+          <EntitySet Name="TK_TongHop_Quy" EntityType="DataModel.TK_TongHop_Quy" />
+          <EntitySet Name="TK_TongHop_Thang" EntityType="DataModel.TK_TongHop_Thang" />
+          <EntitySet Name="TK_TongHop_Tuan" EntityType="DataModel.TK_TongHop_Tuan" />
+          <EntitySet Name="Tuan_BaoCao" EntityType="DataModel.Tuan_BaoCao" />
+          <EntitySet Name="UsersInRoles" EntityType="DataModel.UsersInRole" />
+          <AssociationSet Name="FK_KetQuaDanhGia_CauTraLoi" Association="DataModel.FK_KetQuaDanhGia_CauTraLoi">
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TieuChiCauTraLoi_TieuChiCauTraLoi" Association="DataModel.FK_TieuChiCauTraLoi_TieuChiCauTraLoi">
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+            <End Role="TieuChiCauTraLoi" EntitySet="TieuChiCauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KetQuaDanhGia_DanhGia" Association="DataModel.FK_KetQuaDanhGia_DanhGia">
+            <End Role="DanhGia" EntitySet="DanhGias" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LinhVucDonVi_DonVi" Association="DataModel.FK_LinhVucDonVi_DonVi">
+            <End Role="DonVi" EntitySet="DonVis" />
+            <End Role="LinhVucDonVi" EntitySet="LinhVucDonVis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KetQuaDanhGia_TieuChi" Association="DataModel.FK_KetQuaDanhGia_TieuChi">
+            <End Role="TieuChi" EntitySet="TieuChis" />
+            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LinhVucDonVi_LinhVuc" Association="DataModel.FK_LinhVucDonVi_LinhVuc">
+            <End Role="LinhVuc" EntitySet="LinhVucs" />
+            <End Role="LinhVucDonVi" EntitySet="LinhVucDonVis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_ThuTuc" Association="DataModel.FK_ThuTuc_ThuTuc">
+            <End Role="LinhVuc" EntitySet="LinhVucs" />
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Memberships" Association="DataModel.FK_UsersInRoles_Memberships">
+            <End Role="Membership" EntitySet="Memberships" />
+            <End Role="UsersInRole" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTieu_NhomChiTieu" Association="DataModel.FK_ChiTieu_NhomChiTieu">
+            <End Role="NhomTieuChi" EntitySet="NhomTieuChis" />
+            <End Role="TieuChi" EntitySet="TieuChis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Roles" Association="DataModel.FK_UsersInRoles_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UsersInRole" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TieuChiCauTraLoi_TieuChi" Association="DataModel.FK_TieuChiCauTraLoi_TieuChi">
+            <End Role="TieuChi" EntitySet="TieuChis" />
+            <End Role="TieuChiCauTraLoi" EntitySet="TieuChiCauTraLois" />
+          </AssociationSet>
+          <FunctionImport Name="KetQuaDanhGiaByDanhGiaID" ReturnType="Collection(DataModel.KetQuaDanhGiaByDanhGiaID_Result)">
+          <Parameter Name="DanhGiaID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="GetThongKeToanTP_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="NamID" Nullable="true" />
+          <Property Type="Decimal" Name="HaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="KhongHaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BinhThuong" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetThongKeToanTP_DonVi_Nam_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DonViID" Nullable="true" />
+          <Property Type="Int32" Name="NamID" Nullable="true" />
+          <Property Type="String" Name="TenDonVi" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="HaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="KhongHaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BinhThuong" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetThongKeToanTP_DonVi_Thang_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DonViID" Nullable="true" />
+          <Property Type="Int32" Name="NamID" Nullable="true" />
+          <Property Type="String" Name="TenDonVi" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="HaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="KhongHaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BinhThuong" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="GetThongKeToanTP_DonVi_Quy_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DonViID" Nullable="true" />
+          <Property Type="Int32" Name="NamID" Nullable="true" />
+          <Property Type="String" Name="TenDonVi" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="HaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="KhongHaiLong" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BinhThuong" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCauTraLoi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="Int32" />
+          <Property Name="TenVanTat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_CauTraLoi" FromRole="CauTraLoi" ToRole="KetQuaDanhGia" />
+          <NavigationProperty Name="TieuChiCauTraLois" Relationship="DataModel.FK_TieuChiCauTraLoi_TieuChiCauTraLoi" FromRole="CauTraLoi" ToRole="TieuChiCauTraLoi" />
+        </EntityType>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoBienNhan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDanhGia" Type="DateTime" Precision="3" />
+          <Property Name="DanhGiaTrucTiep" Type="Boolean" />
+          <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_DanhGia" FromRole="DanhGia" ToRole="KetQuaDanhGia" />
+        </EntityType>
+        <EntityType Name="DonVi">
+          <Key>
+            <PropertyRef Name="DonViID" />
+          </Key>
+          <Property Name="DonViID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaDonVi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TenDonVi" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentDonViID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="LoaiDonVi" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="LinhVucDonVis" Relationship="DataModel.FK_LinhVucDonVi_DonVi" FromRole="DonVi" ToRole="LinhVucDonVi" />
+        </EntityType>
+        <EntityType Name="HoSo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoBienNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiNop" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiTiepNhan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="3" />
+          <Property Name="NgayHenTra" Type="DateTime" Precision="3" />
+          <Property Name="SoNgayGiaiQuyet" Type="Int32" />
+          <Property Name="DiaChi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TenToChuc" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DaDanhGia" Type="Boolean" />
+          <Property Name="DanhGiaID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="InputTypeTieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KetQuaDanhGia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DanhGiaID" Type="Int64" />
+          <Property Name="TieuChiID" Type="Int32" />
+          <Property Name="CauTraLoiID" Type="Int32" />
+          <Property Name="TypeInput" Type="Int32" />
+          <Property Name="CauTraLoiText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CauTraLoi" Relationship="DataModel.FK_KetQuaDanhGia_CauTraLoi" FromRole="KetQuaDanhGia" ToRole="CauTraLoi" />
+          <NavigationProperty Name="DanhGia" Relationship="DataModel.FK_KetQuaDanhGia_DanhGia" FromRole="KetQuaDanhGia" ToRole="DanhGia" />
+          <NavigationProperty Name="TieuChi" Relationship="DataModel.FK_KetQuaDanhGia_TieuChi" FromRole="KetQuaDanhGia" ToRole="TieuChi" />
+        </EntityType>
+        <EntityType Name="LinhVuc">
+          <Key>
+            <PropertyRef Name="LinhVucID" />
+          </Key>
+          <Property Name="LinhVucID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLinhVuc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="LinhVucDonVis" Relationship="DataModel.FK_LinhVucDonVi_LinhVuc" FromRole="LinhVuc" ToRole="LinhVucDonVi" />
+          <NavigationProperty Name="ThuTucs" Relationship="DataModel.FK_ThuTuc_ThuTuc" FromRole="LinhVuc" ToRole="ThuTuc" />
+        </EntityType>
+        <EntityType Name="LinhVucDonVi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="DonVi" Relationship="DataModel.FK_LinhVucDonVi_DonVi" FromRole="LinhVucDonVi" ToRole="DonVi" />
+          <NavigationProperty Name="LinhVuc" Relationship="DataModel.FK_LinhVucDonVi_LinhVuc" FromRole="LinhVucDonVi" ToRole="LinhVuc" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationId" Type="Guid" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordFormat" Type="Int32" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="IsLockedOut" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UsersInRoles" Relationship="DataModel.FK_UsersInRoles_Memberships" FromRole="Membership" ToRole="UsersInRole" />
+        </EntityType>
+        <EntityType Name="Nam_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nam" Type="Int32" />
+          <Property Name="NgayDauNam" Type="DateTime" Precision="3" />
+          <Property Name="NgayCuoiNam" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUserID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUserID" Type="Int32" />
+          <Property Name="LastUpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="NhomTieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNhomTieuChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhomTieuChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="TieuChis" Relationship="DataModel.FK_ChiTieu_NhomChiTieu" FromRole="NhomTieuChi" ToRole="TieuChi" />
+        </EntityType>
+        <EntityType Name="QuaTrinhXuLy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="NguoiXuLyID" Type="Int32" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="3" />
+          <Property Name="ThoiHanXuLy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayXuLy" Type="DateTime" Precision="3" />
+          <Property Name="TinhTrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KetQua" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiXuLy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Quy_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="Quy" Type="Int32" />
+          <Property Name="NgayDauQuy" Type="DateTime" Precision="3" />
+          <Property Name="NgayCuoiQuy" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUserID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUserID" Type="Int32" />
+          <Property Name="LastUpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Guid" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="UsersInRoles" Relationship="DataModel.FK_UsersInRoles_Roles" FromRole="Role" ToRole="UsersInRole" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KeySetting" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Thang_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuyID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="Thang" Type="Int32" />
+          <Property Name="NgayDauThang" Type="DateTime" Precision="3" />
+          <Property Name="NgayCuoiThang" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUserID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUserID" Type="Int32" />
+          <Property Name="LastUpdDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ThongKeTongHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="HaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ThongTinNguoiXuLy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ThuTuc">
+          <Key>
+            <PropertyRef Name="ThuTucID" />
+          </Key>
+          <Property Name="ThuTucID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenThucTuc" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="MaThuTuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="LinhVuc" Relationship="DataModel.FK_ThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="LinhVuc" />
+        </EntityType>
+        <EntityType Name="TieuChi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTieuChi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NhomTieuChiID" Type="Int32" />
+          <Property Name="TenVanTat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TypeInput" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_TieuChi" FromRole="TieuChi" ToRole="KetQuaDanhGia" />
+          <NavigationProperty Name="NhomTieuChi" Relationship="DataModel.FK_ChiTieu_NhomChiTieu" FromRole="TieuChi" ToRole="NhomTieuChi" />
+          <NavigationProperty Name="TieuChiCauTraLois" Relationship="DataModel.FK_TieuChiCauTraLoi_TieuChi" FromRole="TieuChi" ToRole="TieuChiCauTraLoi" />
+        </EntityType>
+        <EntityType Name="TieuChiCauTraLoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuChiID" Type="Int32" />
+          <Property Name="CauTraLoiID" Type="Int32" />
+          <NavigationProperty Name="CauTraLoi" Relationship="DataModel.FK_TieuChiCauTraLoi_TieuChiCauTraLoi" FromRole="TieuChiCauTraLoi" ToRole="CauTraLoi" />
+          <NavigationProperty Name="TieuChi" Relationship="DataModel.FK_TieuChiCauTraLoi_TieuChi" FromRole="TieuChiCauTraLoi" ToRole="TieuChi" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" Nullable="false" />
+          <Property Name="QuiID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_DonVi_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TuanID" Type="Int32" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" Nullable="false" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="QuyID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" Nullable="false" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_LinhVuc_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TuanID" Type="Int32" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="QuyID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_ThuTuc_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LinhVucID" Type="Int32" />
+          <Property Name="TenLinhVuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTucID" Type="Int32" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TuanID" Type="Int32" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="KeQuaDanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Nam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Quy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="QuyID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Thang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TK_TongHop_Tuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViID" Type="Int32" />
+          <Property Name="TuanID" Type="Int32" />
+          <Property Name="ThangID" Type="Int32" />
+          <Property Name="NamID" Type="Int32" />
+          <Property Name="TenDonVi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KhongHaiLong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BinhThuong" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tuan_BaoCao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Quarter" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="WeekOfYear" Type="Int32" />
+          <Property Name="StartOfWeek" Type="DateTime" Precision="3" />
+          <Property Name="EndOfWeek" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UsersInRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Membership" Relationship="DataModel.FK_UsersInRoles_Memberships" FromRole="UsersInRole" ToRole="Membership" />
+          <NavigationProperty Name="Role" Relationship="DataModel.FK_UsersInRoles_Roles" FromRole="UsersInRole" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_KetQuaDanhGia_CauTraLoi">
+          <End Type="DataModel.CauTraLoi" Role="CauTraLoi" Multiplicity="0..1" />
+          <End Type="DataModel.KetQuaDanhGia" Role="KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauTraLoi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="CauTraLoiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TieuChiCauTraLoi_TieuChiCauTraLoi">
+          <End Type="DataModel.CauTraLoi" Role="CauTraLoi" Multiplicity="0..1" />
+          <End Type="DataModel.TieuChiCauTraLoi" Role="TieuChiCauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauTraLoi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChiCauTraLoi">
+              <PropertyRef Name="CauTraLoiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KetQuaDanhGia_DanhGia">
+          <End Type="DataModel.DanhGia" Role="DanhGia" Multiplicity="0..1" />
+          <End Type="DataModel.KetQuaDanhGia" Role="KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanhGia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="DanhGiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LinhVucDonVi_DonVi">
+          <End Type="DataModel.DonVi" Role="DonVi" Multiplicity="0..1" />
+          <End Type="DataModel.LinhVucDonVi" Role="LinhVucDonVi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonVi">
+              <PropertyRef Name="DonViID" />
+            </Principal>
+            <Dependent Role="LinhVucDonVi">
+              <PropertyRef Name="DonViID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KetQuaDanhGia_TieuChi">
+          <End Type="DataModel.TieuChi" Role="TieuChi" Multiplicity="0..1" />
+          <End Type="DataModel.KetQuaDanhGia" Role="KetQuaDanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KetQuaDanhGia">
+              <PropertyRef Name="TieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LinhVucDonVi_LinhVuc">
+          <End Type="DataModel.LinhVuc" Role="LinhVuc" Multiplicity="0..1" />
+          <End Type="DataModel.LinhVucDonVi" Role="LinhVucDonVi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVuc">
+              <PropertyRef Name="LinhVucID" />
+            </Principal>
+            <Dependent Role="LinhVucDonVi">
+              <PropertyRef Name="LinhVucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_ThuTuc">
+          <End Type="DataModel.LinhVuc" Role="LinhVuc" Multiplicity="0..1" />
+          <End Type="DataModel.ThuTuc" Role="ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVuc">
+              <PropertyRef Name="LinhVucID" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="LinhVucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Memberships">
+          <End Type="DataModel.Membership" Role="Membership" Multiplicity="0..1" />
+          <End Type="DataModel.UsersInRole" Role="UsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membership">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTieu_NhomChiTieu">
+          <End Type="DataModel.NhomTieuChi" Role="NhomTieuChi" Multiplicity="0..1" />
+          <End Type="DataModel.TieuChi" Role="TieuChi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomTieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChi">
+              <PropertyRef Name="NhomTieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Roles">
+          <End Type="DataModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="DataModel.UsersInRole" Role="UsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersInRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TieuChiCauTraLoi_TieuChi">
+          <End Type="DataModel.TieuChi" Role="TieuChi" Multiplicity="0..1" />
+          <End Type="DataModel.TieuChiCauTraLoi" Role="TieuChiCauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TieuChi">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TieuChiCauTraLoi">
+              <PropertyRef Name="TieuChiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="KetQuaDanhGiaByDanhGiaID_Result">
+          <Property Type="String" Name="TenTieuChi" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="TenCauTraLoi" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelEntities">
+          <FunctionImportMapping FunctionImportName="GenTuanThongKeTheoNam" FunctionName="DataModel.Store.GenTuanThongKeTheoNam" />
+          <FunctionImportMapping FunctionImportName="GetThongKeToanTP" FunctionName="DataModel.Store.GetThongKeToanTP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.GetThongKeToanTP_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetThongKeToanTP_DonVi_Nam" FunctionName="DataModel.Store.GetThongKeToanTP_DonVi_Nam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.GetThongKeToanTP_DonVi_Nam_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetThongKeToanTP_DonVi_Thang" FunctionName="DataModel.Store.GetThongKeToanTP_DonVi_Thang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.GetThongKeToanTP_DonVi_Thang_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetThongKeToanTP_DonVi_Quy" FunctionName="DataModel.Store.GetThongKeToanTP_DonVi_Quy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.GetThongKeToanTP_DonVi_Quy_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ThongKeDonVi_TuNgay_DenNgay" FunctionName="DataModel.Store.ThongKeDonVi_TuNgay_DenNgay" />
+          <FunctionImportMapping FunctionImportName="ThongKeLinhVuc_TuNgay_DenNgay" FunctionName="DataModel.Store.ThongKeLinhVuc_TuNgay_DenNgay" />
+          <FunctionImportMapping FunctionImportName="ThongKeThuTuc_TuNgay_DenNgay" FunctionName="DataModel.Store.ThongKeThuTuc_TuNgay_DenNgay" />
+          <FunctionImportMapping FunctionImportName="GenTuanThongKeTheoNam_bak" FunctionName="DataModel.Store.GenTuanThongKeTheoNam_bak" />
+          <FunctionImportMapping FunctionImportName="Insert_ThongKeTongHop" FunctionName="DataModel.Store.Insert_ThongKeTongHop" />
+          <FunctionImportMapping FunctionImportName="InsertName_BaoCao" FunctionName="DataModel.Store.InsertName_BaoCao" />
+          <FunctionImportMapping FunctionImportName="InsertQuy_BaoCao" FunctionName="DataModel.Store.InsertQuy_BaoCao" />
+          <FunctionImportMapping FunctionImportName="InsertThang_BaoCao" FunctionName="DataModel.Store.InsertThang_BaoCao" />
+          <FunctionImportMapping FunctionImportName="InsertTuan_BaoCao" FunctionName="DataModel.Store.InsertTuan_BaoCao" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DataModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DataModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DataModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DataModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DataModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DataModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DataModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ThongKeDonVi_Nam" FunctionName="DataModel.Store.ThongKeDonVi_Nam" />
+          <FunctionImportMapping FunctionImportName="ThongKeDonVi_Quy" FunctionName="DataModel.Store.ThongKeDonVi_Quy" />
+          <FunctionImportMapping FunctionImportName="ThongKeDonVi_Thang" FunctionName="DataModel.Store.ThongKeDonVi_Thang" />
+          <FunctionImportMapping FunctionImportName="ThongKeDonVi_Tuan" FunctionName="DataModel.Store.ThongKeDonVi_Tuan" />
+          <FunctionImportMapping FunctionImportName="ThongKeLinhVuc_Nam" FunctionName="DataModel.Store.ThongKeLinhVuc_Nam" />
+          <FunctionImportMapping FunctionImportName="ThongKeLinhVuc_Quy" FunctionName="DataModel.Store.ThongKeLinhVuc_Quy" />
+          <FunctionImportMapping FunctionImportName="ThongKeLinhVuc_Thang" FunctionName="DataModel.Store.ThongKeLinhVuc_Thang" />
+          <FunctionImportMapping FunctionImportName="ThongKeLinhVuc_Tuan" FunctionName="DataModel.Store.ThongKeLinhVuc_Tuan" />
+          <FunctionImportMapping FunctionImportName="ThongKeThuTuc_Nam" FunctionName="DataModel.Store.ThongKeThuTuc_Nam" />
+          <FunctionImportMapping FunctionImportName="ThongKeThuTuc_Quy" FunctionName="DataModel.Store.ThongKeThuTuc_Quy" />
+          <FunctionImportMapping FunctionImportName="ThongKeThuTuc_Thang" FunctionName="DataModel.Store.ThongKeThuTuc_Thang" />
+          <FunctionImportMapping FunctionImportName="ThongKeThuTuc_Tuan" FunctionName="DataModel.Store.ThongKeThuTuc_Tuan" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP" FunctionName="DataModel.Store.ThongKeToanTP" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_Nam" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_Nam" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_Quy" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_Quy" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_Thang" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_Thang" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_Tuan" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_Tuan" />
+          <EntitySetMapping Name="CauTraLois">
+            <EntityTypeMapping TypeName="DataModel.CauTraLoi">
+              <MappingFragment StoreEntitySet="CauTraLoi">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="TenVanTat" ColumnName="TenVanTat" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="TenCauTraLoi" ColumnName="TenCauTraLoi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhGias">
+            <EntityTypeMapping TypeName="DataModel.DanhGia">
+              <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="DanhGiaTrucTiep" ColumnName="DanhGiaTrucTiep" />
+                <ScalarProperty Name="NgayDanhGia" ColumnName="NgayDanhGia" />
+                <ScalarProperty Name="PhongBan" ColumnName="PhongBan" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="SoBienNhan" ColumnName="SoBienNhan" />
+                <ScalarProperty Name="HoSoID" ColumnName="HoSoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonVis">
+            <EntityTypeMapping TypeName="DataModel.DonVi">
+              <MappingFragment StoreEntitySet="DonVi">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LoaiDonVi" ColumnName="LoaiDonVi" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ParentDonViID" ColumnName="ParentDonViID" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoSoes">
+            <EntityTypeMapping TypeName="DataModel.HoSo">
+              <MappingFragment StoreEntitySet="HoSo">
+                <ScalarProperty Name="DanhGiaID" ColumnName="DanhGiaID" />
+                <ScalarProperty Name="DaDanhGia" ColumnName="DaDanhGia" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="TenToChuc" ColumnName="TenToChuc" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SoNgayGiaiQuyet" ColumnName="SoNgayGiaiQuyet" />
+                <ScalarProperty Name="NgayHenTra" ColumnName="NgayHenTra" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="NguoiTiepNhan" ColumnName="NguoiTiepNhan" />
+                <ScalarProperty Name="NguoiNop" ColumnName="NguoiNop" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="SoBienNhan" ColumnName="SoBienNhan" />
+                <ScalarProperty Name="HoSoID" ColumnName="HoSoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InputTypeTieuChis">
+            <EntityTypeMapping TypeName="DataModel.InputTypeTieuChi">
+              <MappingFragment StoreEntitySet="InputTypeTieuChi">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KetQuaDanhGias">
+            <EntityTypeMapping TypeName="DataModel.KetQuaDanhGia">
+              <MappingFragment StoreEntitySet="KetQuaDanhGia">
+                <ScalarProperty Name="CauTraLoiText" ColumnName="CauTraLoiText" />
+                <ScalarProperty Name="TypeInput" ColumnName="TypeInput" />
+                <ScalarProperty Name="CauTraLoiID" ColumnName="CauTraLoiID" />
+                <ScalarProperty Name="TieuChiID" ColumnName="TieuChiID" />
+                <ScalarProperty Name="DanhGiaID" ColumnName="DanhGiaID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucs">
+            <EntityTypeMapping TypeName="DataModel.LinhVuc">
+              <MappingFragment StoreEntitySet="LinhVuc">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="MaLinhVuc" ColumnName="MaLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucDonVis">
+            <EntityTypeMapping TypeName="DataModel.LinhVucDonVi">
+              <MappingFragment StoreEntitySet="LinhVucDonVi">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="DataModel.Membership">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nam_BaoCao">
+            <EntityTypeMapping TypeName="DataModel.Nam_BaoCao">
+              <MappingFragment StoreEntitySet="Nam_BaoCao">
+                <ScalarProperty Name="LastUpdDate" ColumnName="LastUpdDate" />
+                <ScalarProperty Name="LastUpdUserID" ColumnName="LastUpdUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="NgayCuoiNam" ColumnName="NgayCuoiNam" />
+                <ScalarProperty Name="NgayDauNam" ColumnName="NgayDauNam" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhomTieuChis">
+            <EntityTypeMapping TypeName="DataModel.NhomTieuChi">
+              <MappingFragment StoreEntitySet="NhomTieuChi">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="MaNhomTieuChi" ColumnName="MaNhomTieuChi" />
+                <ScalarProperty Name="TenNhomTieuChi" ColumnName="TenNhomTieuChi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuaTrinhXuLies">
+            <EntityTypeMapping TypeName="DataModel.QuaTrinhXuLy">
+              <MappingFragment StoreEntitySet="QuaTrinhXuLy">
+                <ScalarProperty Name="NguoiXuLy" ColumnName="NguoiXuLy" />
+                <ScalarProperty Name="KetQua" ColumnName="KetQua" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="NgayXuLy" ColumnName="NgayXuLy" />
+                <ScalarProperty Name="ThoiHanXuLy" ColumnName="ThoiHanXuLy" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="NguoiXuLyID" ColumnName="NguoiXuLyID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="HoSoID" ColumnName="HoSoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quy_BaoCao">
+            <EntityTypeMapping TypeName="DataModel.Quy_BaoCao">
+              <MappingFragment StoreEntitySet="Quy_BaoCao">
+                <ScalarProperty Name="LastUpdDate" ColumnName="LastUpdDate" />
+                <ScalarProperty Name="LastUpdUserID" ColumnName="LastUpdUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="NgayCuoiQuy" ColumnName="NgayCuoiQuy" />
+                <ScalarProperty Name="NgayDauQuy" ColumnName="NgayDauQuy" />
+                <ScalarProperty Name="Quy" ColumnName="Quy" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DataModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="DataModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="KeySetting" ColumnName="KeySetting" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thang_BaoCao">
+            <EntityTypeMapping TypeName="DataModel.Thang_BaoCao">
+              <MappingFragment StoreEntitySet="Thang_BaoCao">
+                <ScalarProperty Name="LastUpdDate" ColumnName="LastUpdDate" />
+                <ScalarProperty Name="LastUpdUserID" ColumnName="LastUpdUserID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+                <ScalarProperty Name="NgayCuoiThang" ColumnName="NgayCuoiThang" />
+                <ScalarProperty Name="NgayDauThang" ColumnName="NgayDauThang" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="QuyID" ColumnName="QuyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongKeTongHops">
+            <EntityTypeMapping TypeName="DataModel.ThongKeTongHop">
+              <MappingFragment StoreEntitySet="ThongKeTongHop">
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongTinNguoiXuLies">
+            <EntityTypeMapping TypeName="DataModel.ThongTinNguoiXuLy">
+              <MappingFragment StoreEntitySet="ThongTinNguoiXuLy">
+                <ScalarProperty Name="PhongBan" ColumnName="PhongBan" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="HoSoID" ColumnName="HoSoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThuTucs">
+            <EntityTypeMapping TypeName="DataModel.ThuTuc">
+              <MappingFragment StoreEntitySet="ThuTuc">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaThuTuc" ColumnName="MaThuTuc" />
+                <ScalarProperty Name="TenThucTuc" ColumnName="TenThucTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TieuChis">
+            <EntityTypeMapping TypeName="DataModel.TieuChi">
+              <MappingFragment StoreEntitySet="TieuChi">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="TypeInput" ColumnName="TypeInput" />
+                <ScalarProperty Name="TenVanTat" ColumnName="TenVanTat" />
+                <ScalarProperty Name="NhomTieuChiID" ColumnName="NhomTieuChiID" />
+                <ScalarProperty Name="TenTieuChi" ColumnName="TenTieuChi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TieuChiCauTraLois">
+            <EntityTypeMapping TypeName="DataModel.TieuChiCauTraLoi">
+              <MappingFragment StoreEntitySet="TieuChiCauTraLoi">
+                <ScalarProperty Name="CauTraLoiID" ColumnName="CauTraLoiID" />
+                <ScalarProperty Name="TieuChiID" ColumnName="TieuChiID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_DonVi_Nam">
+            <EntityTypeMapping TypeName="DataModel.TK_DonVi_Nam">
+              <MappingFragment StoreEntitySet="TK_DonVi_Nam">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_DonVi_Quy">
+            <EntityTypeMapping TypeName="DataModel.TK_DonVi_Quy">
+              <MappingFragment StoreEntitySet="TK_DonVi_Quy">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="QuiID" ColumnName="QuiID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_DonVi_Thang">
+            <EntityTypeMapping TypeName="DataModel.TK_DonVi_Thang">
+              <MappingFragment StoreEntitySet="TK_DonVi_Thang">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_DonVi_Tuan">
+            <EntityTypeMapping TypeName="DataModel.TK_DonVi_Tuan">
+              <MappingFragment StoreEntitySet="TK_DonVi_Tuan">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TuanID" ColumnName="TuanID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_LinhVuc_Nam">
+            <EntityTypeMapping TypeName="DataModel.TK_LinhVuc_Nam">
+              <MappingFragment StoreEntitySet="TK_LinhVuc_Nam">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_LinhVuc_Quy">
+            <EntityTypeMapping TypeName="DataModel.TK_LinhVuc_Quy">
+              <MappingFragment StoreEntitySet="TK_LinhVuc_Quy">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="QuyID" ColumnName="QuyID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_LinhVuc_Thang">
+            <EntityTypeMapping TypeName="DataModel.TK_LinhVuc_Thang">
+              <MappingFragment StoreEntitySet="TK_LinhVuc_Thang">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_LinhVuc_Tuan">
+            <EntityTypeMapping TypeName="DataModel.TK_LinhVuc_Tuan">
+              <MappingFragment StoreEntitySet="TK_LinhVuc_Tuan">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TuanID" ColumnName="TuanID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_ThuTuc_Nam">
+            <EntityTypeMapping TypeName="DataModel.TK_ThuTuc_Nam">
+              <MappingFragment StoreEntitySet="TK_ThuTuc_Nam">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_ThuTuc_Quy">
+            <EntityTypeMapping TypeName="DataModel.TK_ThuTuc_Quy">
+              <MappingFragment StoreEntitySet="TK_ThuTuc_Quy">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="QuyID" ColumnName="QuyID" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_ThuTuc_Thang">
+            <EntityTypeMapping TypeName="DataModel.TK_ThuTuc_Thang">
+              <MappingFragment StoreEntitySet="TK_ThuTuc_Thang">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_ThuTuc_Tuan">
+            <EntityTypeMapping TypeName="DataModel.TK_ThuTuc_Tuan">
+              <MappingFragment StoreEntitySet="TK_ThuTuc_Tuan">
+                <ScalarProperty Name="KeQuaDanhGia" ColumnName="KeQuaDanhGia" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TuanID" ColumnName="TuanID" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="ThuTucID" ColumnName="ThuTucID" />
+                <ScalarProperty Name="TenLinhVuc" ColumnName="TenLinhVuc" />
+                <ScalarProperty Name="LinhVucID" ColumnName="LinhVucID" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_TongHop_Nam">
+            <EntityTypeMapping TypeName="DataModel.TK_TongHop_Nam">
+              <MappingFragment StoreEntitySet="TK_TongHop_Nam">
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_TongHop_Quy">
+            <EntityTypeMapping TypeName="DataModel.TK_TongHop_Quy">
+              <MappingFragment StoreEntitySet="TK_TongHop_Quy">
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="QuyID" ColumnName="QuyID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_TongHop_Thang">
+            <EntityTypeMapping TypeName="DataModel.TK_TongHop_Thang">
+              <MappingFragment StoreEntitySet="TK_TongHop_Thang">
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TK_TongHop_Tuan">
+            <EntityTypeMapping TypeName="DataModel.TK_TongHop_Tuan">
+              <MappingFragment StoreEntitySet="TK_TongHop_Tuan">
+                <ScalarProperty Name="BinhThuong" ColumnName="BinhThuong" />
+                <ScalarProperty Name="KhongHaiLong" ColumnName="KhongHaiLong" />
+                <ScalarProperty Name="HaiLong" ColumnName="HaiLong" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="NamID" ColumnName="NamID" />
+                <ScalarProperty Name="ThangID" ColumnName="ThangID" />
+                <ScalarProperty Name="TuanID" ColumnName="TuanID" />
+                <ScalarProperty Name="DonViID" ColumnName="DonViID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuan_BaoCao">
+            <EntityTypeMapping TypeName="DataModel.Tuan_BaoCao">
+              <MappingFragment StoreEntitySet="Tuan_BaoCao">
+                <ScalarProperty Name="EndOfWeek" ColumnName="EndOfWeek" />
+                <ScalarProperty Name="StartOfWeek" ColumnName="StartOfWeek" />
+                <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersInRoles">
+            <EntityTypeMapping TypeName="DataModel.UsersInRole">
+              <MappingFragment StoreEntitySet="UsersInRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="KetQuaDanhGiaByDanhGiaID" FunctionName="DataModel.Store.KetQuaDanhGiaByDanhGiaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.KetQuaDanhGiaByDanhGiaID_Result">
+                <ScalarProperty Name="TenTieuChi" ColumnName="TenTieuChi" />
+                <ScalarProperty Name="TenCauTraLoi" ColumnName="TenCauTraLoi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

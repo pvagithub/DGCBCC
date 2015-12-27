@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="31606c7ebb714b53a52836884e016661" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="DataModel.CauTraLoi" Width="1.5" PointX="6" PointY="12.375" />
+        <EntityTypeShape EntityType="DataModel.DanhGia" Width="1.5" PointX="6" PointY="8.125" />
+        <EntityTypeShape EntityType="DataModel.DonVi" Width="1.5" PointX="10.75" PointY="16.5" />
+        <EntityTypeShape EntityType="DataModel.HoSo" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataModel.InputTypeTieuChi" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataModel.KetQuaDanhGia" Width="1.5" PointX="8.25" PointY="2.5" />
+        <EntityTypeShape EntityType="DataModel.LinhVuc" Width="1.5" PointX="10.75" PointY="12.625" />
+        <EntityTypeShape EntityType="DataModel.LinhVucDonVi" Width="1.5" PointX="13" PointY="11.875" />
+        <EntityTypeShape EntityType="DataModel.Membership" Width="1.5" PointX="8.75" PointY="10.5" />
+        <EntityTypeShape EntityType="DataModel.Nam_BaoCao" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DataModel.NhomTieuChi" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="DataModel.QuaTrinhXuLy" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.Quy_BaoCao" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.Role" Width="1.5" PointX="8.75" PointY="6.875" />
+        <EntityTypeShape EntityType="DataModel.Setting" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="DataModel.Thang_BaoCao" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="DataModel.ThongKeTongHop" Width="1.5" PointX="13.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.ThongTinNguoiXuLy" Width="1.5" PointX="13.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DataModel.ThuTuc" Width="1.5" PointX="13" PointY="15.5" />
+        <EntityTypeShape EntityType="DataModel.TieuChi" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="DataModel.TieuChiCauTraLoi" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="DataModel.TK_DonVi_Nam" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.TK_DonVi_Quy" Width="1.5" PointX="15.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataModel.TK_DonVi_Thang" Width="1.5" PointX="4.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DataModel.TK_DonVi_Tuan" Width="1.5" PointX="15.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataModel.TK_LinhVuc_Nam" Width="1.5" PointX="15.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DataModel.TK_LinhVuc_Quy" Width="1.5" PointX="15.75" PointY="14.75" />
+        <EntityTypeShape EntityType="DataModel.TK_LinhVuc_Thang" Width="1.5" PointX="6.75" PointY="16.75" />
+        <EntityTypeShape EntityType="DataModel.TK_LinhVuc_Tuan" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.TK_ThuTuc_Nam" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="DataModel.TK_ThuTuc_Quy" Width="1.5" PointX="17.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.TK_ThuTuc_Thang" Width="1.5" PointX="17.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DataModel.TK_ThuTuc_Tuan" Width="1.5" PointX="17.75" PointY="12.75" />
+        <EntityTypeShape EntityType="DataModel.TK_TongHop_Nam" Width="1.5" PointX="17.75" PointY="16.75" />
+        <EntityTypeShape EntityType="DataModel.TK_TongHop_Quy" Width="1.5" PointX="2.75" PointY="18.75" />
+        <EntityTypeShape EntityType="DataModel.TK_TongHop_Thang" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.TK_TongHop_Tuan" Width="1.5" PointX="19.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.Tuan_BaoCao" Width="1.5" PointX="19.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DataModel.UsersInRole" Width="1.5" PointX="11" PointY="7" />
+        <AssociationConnector Association="DataModel.FK_KetQuaDanhGia_CauTraLoi" />
+        <AssociationConnector Association="DataModel.FK_TieuChiCauTraLoi_TieuChiCauTraLoi" />
+        <AssociationConnector Association="DataModel.FK_KetQuaDanhGia_DanhGia" />
+        <AssociationConnector Association="DataModel.FK_LinhVucDonVi_DonVi" />
+        <AssociationConnector Association="DataModel.FK_KetQuaDanhGia_TieuChi" />
+        <AssociationConnector Association="DataModel.FK_LinhVucDonVi_LinhVuc" />
+        <AssociationConnector Association="DataModel.FK_ThuTuc_ThuTuc" />
+        <AssociationConnector Association="DataModel.FK_UsersInRoles_Memberships" />
+        <AssociationConnector Association="DataModel.FK_ChiTieu_NhomChiTieu" />
+        <AssociationConnector Association="DataModel.FK_UsersInRoles_Roles" />
+        <AssociationConnector Association="DataModel.FK_TieuChiCauTraLoi_TieuChi" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
