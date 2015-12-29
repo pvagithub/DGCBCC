@@ -70,6 +70,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,6 +123,9 @@
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebControlCaptcha">
+      <HintPath>..\libarary\WebControlCaptcha.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -188,6 +192,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\Captcha.ashx.cs">
+      <DependentUpon>Captcha.ashx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -229,6 +236,11 @@
     <Compile Include="Models\KQDanhGiaModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SearchService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -712,6 +724,7 @@
     <Content Include="Images\IconWeb\sort_both.png" />
     <Content Include="Images\IconWeb\sort_desc.png" />
     <Content Include="Images\IconWeb\logo.png" />
+    <Content Include="Images\IconWeb\swap-arrows-refresh.jpg" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\jquery.dotdotdot.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -735,6 +748,20 @@
     <Content Include="Scripts\vki\keyboard.css" />
     <Content Include="Scripts\vki\keyboard.js" />
     <Content Include="Scripts\vki\keyboard.png" />
+    <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <Content Include="Service References\SearchService\CBCC.SearchService.SearchFilesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SearchService\CBCC.SearchService.SelectRegionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\SearchService\search.disco" />
+    <None Include="Service References\SearchService\configuration91.svcinfo" />
+    <None Include="Service References\SearchService\configuration.svcinfo" />
+    <None Include="Service References\SearchService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SPA\data\csharp.js" />
     <Content Include="SPA\index.html" />
     <Content Include="SPA\js\app.js" />
@@ -1130,6 +1157,7 @@
     <Content Include="Areas\Admin\Views\ThuTuc\_Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ThuTuc\_Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Membership\Profile.cshtml" />
+    <Content Include="Ajax\Captcha.ashx" />
     <None Include="Properties\PublishProfiles\CBCC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\data.js" />
@@ -1240,6 +1268,19 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Scripts\vki\readme.md" />
+    <None Include="Service References\SearchService\search.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SearchService\search1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SearchService\search2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SearchService\search3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SearchService\SearchService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebMVC.Bussiness\WebMVC.Bussiness.csproj">
@@ -1268,6 +1309,12 @@
     <Folder Include="Areas\Admin\Views\GenData\" />
     <Folder Include="Areas\Admin\Views\ThuTucModels\" />
     <Folder Include="Views\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SearchService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
