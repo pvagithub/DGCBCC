@@ -1,5 +1,7 @@
 ﻿using CBCC.Models;
+using CBCC.SearchService;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using WebMVC.Bussiness;
@@ -16,12 +18,55 @@ namespace CBCC.Controllers
 
         public JsonResult HoSoGetBySoBienNhan_DanhGia(string soBienNhan)
         {
-            bool daDuocDanhGia = true;
+            HoSo hoSo = null;
+            if (null != Session["CAPTCHA"])
+            {
+                var randText = Session["CAPTCHA"].ToString();
+                if (!string.IsNullOrEmpty(randText) && randText.Equals(soBienNhan))
+                {
+                    //handle with code
+                    return Json(new {isCaptchaValid=true }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { IsExist =false,HoSo = hoSo,DaDuocDanhGia=true}, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                bool daDuocDanhGia = true;
 
-            var hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia);
-            bool isExist = hoSo != null ? true : false;
+                hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia);
+                bool isExist = hoSo != null ? true : false;
+                if (!isExist)
+                {
+                    DataSet dsInfo = new DataSet();
 
-            return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
+                    // Service lấy thông tin hồ sơ    
+                    WebSearchClient clientweb = new WebSearchClient("websearch");
+
+                    //Service lấy thông tin tình trạng 
+                    VoiceSearchClient clientvoice = new VoiceSearchClient("voicesearch");
+
+                    Dictionary<object, object> datas = new Dictionary<object, object>();
+                    datas["SoBienNhan"] = soBienNhan;
+                    dsInfo = clientweb.WebSearch(datas);
+
+                    if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
+                    {
+                        hoSo = new HoSo()
+                        {
+                            SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
+                            TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
+                            DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
+                            //NgayNhan =  dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),
+                            //NgayHenTra = dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),
+                        };
+                        //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
+
+                    }
+
+                    string matinhtrang = clientvoice.VoiceSearch(datas);
+                }
+                return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
