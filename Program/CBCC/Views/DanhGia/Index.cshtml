@@ -23,7 +23,16 @@
         <div class="comment">
             (Nhập số biên nhận để tiến hành đánh giá)
         </div>
-        <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important ">
+    
+        <div class="warrper_input_sbn">
+            <div class="input-group">
+                <span class="input-lg">Mã số đánh giá</span>
+                <img class="input-lg" id="captcha" alt="Security Code" style="cursor: pointer;" />
+                <img id="refresh" class="input-lg" src="~/Images/IconWeb/swap-arrows-refresh.jpg" style="cursor:pointer;" />
+            </div>
+
+        </div>
+        <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
             Trong lúc đánh giá hoặc kết thúc đánh giá, chúng tôi kính mong Ông/Bà giành chút thời gian quý báo để góp ý cho hệ thống phần mềm, các góp ý gồm: số lượng và nội dung câu hỏi, câu trả lời; thân thiện, dễ sử dụng của hệ thống, các đóng góp cần cải tiến khác.
         </div>
         @*<div class="article-body">
@@ -60,7 +69,25 @@
 @section scripts{
 
     <script>
-       
+        var Member = new function () {
+            this.ReloadCaptcha = function (u, t) {
+                var r = new Date().getTime();
+                $("#captcha").attr("src", "Ajax/Captcha.ashx?rand=" + r + (t !== undefined ? "&t=" + t : ""));
+            }
+        }
+        $(document).ready(function () {
+            initMember();
+        });
+        
+        function initMember() {
+            if (Member === undefined) {
+                setTimeout("initMember()", 100); return;
+            }
+
+            Member.ReloadCaptcha();
+            $("#captcha").click(function () { Member.ReloadCaptcha(); });
+            $("#refresh").click(function () { Member.ReloadCaptcha(); });
+        }
         // show virtual keyboard
         $('#danhgia').click(function () {
 
@@ -91,7 +118,15 @@
                         }
                         else {
                             // Lưu thông tin hồ sơ
+                            if (data.isCaptchaValid && null == data.HoSo) {
+                                $('#idHoSo').val($('#soBienNhan').val());
+                                $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
+                                });
+                                // Load màn hình đánh giá
+                                $('#danhgia_Content').delay(100).toggle('slow', function () {
 
+                                });
+                            }
                             $('#idHoSo').val(data.HoSo.ID);
 
                             // Ẩn màn hình nhập số biên nhận
