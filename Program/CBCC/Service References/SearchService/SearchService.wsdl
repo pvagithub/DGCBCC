@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SearchService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://vitech.ddns.net:8090/search?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://vitech.ddns.net:8090/search?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://vitech.ddns.net:8090/search?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://vitech.ddns.net:8090/search?xsd=xsd3" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWebSearch_WebSearch_InputMessage">
+    <wsdl:part name="parameters" element="tns:WebSearch" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_WebSearch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WebSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_DoNothing_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothing" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_DoNothing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoNothingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_ServiceManager_InputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceManager" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_ServiceManager_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceManagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SearchFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFiles" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SearchFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SelectRegions_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectRegions" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SelectRegions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectRegionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_Active_InputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_Active" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_Active_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_ActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_GetListByRegion_InputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_GetListByRegion" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_GetListByRegion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_GetListByRegionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_GetScopeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_GetScopeList" />
+  </wsdl:message>
+  <wsdl:message name="IWebSearch_SCOPE_GetScopeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SCOPE_GetScopeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SMSSearch_InputMessage">
+    <wsdl:part name="parameters" element="tns:SMSSearch" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SMSSearch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SMSSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SaveSMSIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSMSIN" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SaveSMSIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSMSINResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SaveSMSOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSMSOUT" />
+  </wsdl:message>
+  <wsdl:message name="ISMSSearch_SaveSMSOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSMSOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVoiceSearch_VoiceSearch_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoiceSearch" />
+  </wsdl:message>
+  <wsdl:message name="IVoiceSearch_VoiceSearch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoiceSearchResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWebSearch">
+    <wsdl:operation name="WebSearch">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/WebSearch" message="tns:IWebSearch_WebSearch_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/WebSearchResponse" message="tns:IWebSearch_WebSearch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/DoNothing" message="tns:IWebSearch_DoNothing_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/DoNothingResponse" message="tns:IWebSearch_DoNothing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServiceManager">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/ServiceManager" message="tns:IWebSearch_ServiceManager_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/ServiceManagerResponse" message="tns:IWebSearch_ServiceManager_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFiles">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/SearchFiles" message="tns:IWebSearch_SearchFiles_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/SearchFilesResponse" message="tns:IWebSearch_SearchFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectRegions">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/SelectRegions" message="tns:IWebSearch_SelectRegions_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/SelectRegionsResponse" message="tns:IWebSearch_SelectRegions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_Active">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/SCOPE_Active" message="tns:IWebSearch_SCOPE_Active_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/SCOPE_ActiveResponse" message="tns:IWebSearch_SCOPE_Active_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_GetListByRegion">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/SCOPE_GetListByRegion" message="tns:IWebSearch_SCOPE_GetListByRegion_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/SCOPE_GetListByRegionResponse" message="tns:IWebSearch_SCOPE_GetListByRegion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_GetScopeList">
+      <wsdl:input wsam:Action="http://tempuri.org/IWebSearch/SCOPE_GetScopeList" message="tns:IWebSearch_SCOPE_GetScopeList_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWebSearch/SCOPE_GetScopeListResponse" message="tns:IWebSearch_SCOPE_GetScopeList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ISMSSearch">
+    <wsdl:operation name="SMSSearch">
+      <wsdl:input wsam:Action="http://tempuri.org/ISMSSearch/SMSSearch" message="tns:ISMSSearch_SMSSearch_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/ISMSSearch/SMSSearchResponse" message="tns:ISMSSearch_SMSSearch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSMSIN">
+      <wsdl:input wsam:Action="http://tempuri.org/ISMSSearch/SaveSMSIN" message="tns:ISMSSearch_SaveSMSIN_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/ISMSSearch/SaveSMSINResponse" message="tns:ISMSSearch_SaveSMSIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSMSOUT">
+      <wsdl:input wsam:Action="http://tempuri.org/ISMSSearch/SaveSMSOUT" message="tns:ISMSSearch_SaveSMSOUT_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/ISMSSearch/SaveSMSOUTResponse" message="tns:ISMSSearch_SaveSMSOUT_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IVoiceSearch">
+    <wsdl:operation name="VoiceSearch">
+      <wsdl:input wsam:Action="http://tempuri.org/IVoiceSearch/VoiceSearch" message="tns:IVoiceSearch_VoiceSearch_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVoiceSearch/VoiceSearchResponse" message="tns:IVoiceSearch_VoiceSearch_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="websearch" type="tns:IWebSearch">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WebSearch">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/WebSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoNothing">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/DoNothing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceManager">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/ServiceManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFiles">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/SearchFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectRegions">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/SelectRegions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_Active">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/SCOPE_Active" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_GetListByRegion">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/SCOPE_GetListByRegion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCOPE_GetScopeList">
+      <soap:operation soapAction="http://tempuri.org/IWebSearch/SCOPE_GetScopeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="smssearch" type="tns:ISMSSearch">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SMSSearch">
+      <soap:operation soapAction="http://tempuri.org/ISMSSearch/SMSSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSMSIN">
+      <soap:operation soapAction="http://tempuri.org/ISMSSearch/SaveSMSIN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSMSOUT">
+      <soap:operation soapAction="http://tempuri.org/ISMSSearch/SaveSMSOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="voicesearch" type="tns:IVoiceSearch">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoiceSearch">
+      <soap:operation soapAction="http://tempuri.org/IVoiceSearch/VoiceSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SearchService">
+    <wsdl:port name="websearch" binding="tns:websearch">
+      <soap:address location="http://vitech.ddns.net:8089/websearch" />
+    </wsdl:port>
+    <wsdl:port name="smssearch" binding="tns:smssearch">
+      <soap:address location="http://vitech.ddns.net:8089/smssearch" />
+    </wsdl:port>
+    <wsdl:port name="voicesearch" binding="tns:voicesearch">
+      <soap:address location="http://vitech.ddns.net:8089/voicesearch" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

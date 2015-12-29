@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3bcc5e9e-ec78-4d5f-be72-fa531d427f3c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://vitech.ddns.net:8090/search" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="search.xsd" MetadataType="Schema" ID="69acbc72-e9bc-4639-9baa-5efef4574e18" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?xsd=xsd3" />
+    <MetadataFile FileName="search1.xsd" MetadataType="Schema" ID="5e8be031-6413-48b4-bf25-ed6ea0a21acd" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?xsd=xsd0" />
+    <MetadataFile FileName="SearchService.wsdl" MetadataType="Wsdl" ID="e4173579-a10f-4c01-b55a-da4d3541e35b" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?wsdl" />
+    <MetadataFile FileName="search2.xsd" MetadataType="Schema" ID="50bf0870-3021-441d-b404-0f48ca50e0c7" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?xsd=xsd1" />
+    <MetadataFile FileName="search.disco" MetadataType="Disco" ID="e30b9036-3630-4c5c-8e12-954d837234f4" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?disco" />
+    <MetadataFile FileName="search3.xsd" MetadataType="Schema" ID="c05fc161-0ee2-448c-af85-264296084aab" SourceId="1" SourceUrl="http://vitech.ddns.net:8090/search?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
