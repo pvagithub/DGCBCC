@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBCC", "CBCC\CBCC.csproj", "{1A17C45C-27BE-47F3-ADDB-4225DE21E416}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Bussiness", "WebMVC.Bussiness\WebMVC.Bussiness.csproj", "{96FE6E51-266E-416C-8821-2492A1EACAF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Framework", "WebMVC.Framework\WebMVC.Framework.csproj", "{1C1EE26E-3B3F-4A7B-B82F-C3011E904357}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5261352B-427D-4FD5-A3CC-552BA839FA94}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\GESoft\LandingPage-Mobile\LP.Web\LP.Web\bin\WebControlCaptcha.dll = ..\..\..\..\GESoft\LandingPage-Mobile\LP.Web\LP.Web\bin\WebControlCaptcha.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

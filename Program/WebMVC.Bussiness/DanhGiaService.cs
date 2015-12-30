@@ -17,23 +17,27 @@ namespace WebMVC.Bussiness
                 context.ReadUncommited();
 
                var hoSo = context.HoSoes.Find(idHoSo);
-               _Danhgia.HoSoID = hoSo.ID.ToString();
-               _Danhgia.SoBienNhan = hoSo.SoBienNhan;
-               _Danhgia.DonViID = hoSo.DonViID;
-               _Danhgia.TenDonVi = hoSo.TenDonVi;
-               _Danhgia.LinhVucID = hoSo.LinhVucID;
-               _Danhgia.TenLinhVuc = hoSo.TenLinhVuc;
-               _Danhgia.ThuTucID = hoSo.ThuTucID;
-               _Danhgia.TenThuTuc = hoSo.TenThuTuc;
-               _Danhgia.NgayDanhGia = DateTime.Now;
-               _Danhgia.DanhGiaTrucTiep = true;
+               _Danhgia.HoSoID = idHoSo.ToString();
+               if (null != hoSo)
+               {
+                   _Danhgia.HoSoID = hoSo.ID.ToString();
+                   _Danhgia.SoBienNhan = hoSo.SoBienNhan;
+                   _Danhgia.DonViID = hoSo.DonViID;
+                   _Danhgia.TenDonVi = hoSo.TenDonVi;
+                   _Danhgia.LinhVucID = hoSo.LinhVucID;
+                   _Danhgia.TenLinhVuc = hoSo.TenLinhVuc;
+                   _Danhgia.ThuTucID = hoSo.ThuTucID;
+                   _Danhgia.TenThuTuc = hoSo.TenThuTuc;
+                   _Danhgia.NgayDanhGia = DateTime.Now;
+                   _Danhgia.DanhGiaTrucTiep = true;
 
 
-                ///Lưu Thông tin danh giá
+                   ///Lưu Thông tin danh giá
+                 
+               }
                 context.DanhGias.Add(_Danhgia);
                 context.SaveChanges();
-                long idDanhGia = _Danhgia.ID;
-
+                var idDanhGia = _Danhgia.ID;
                 ///Lưu ket quả danh giá co thông ke
 
                 foreach (var item in _KetQuaDanhGia)
