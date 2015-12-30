@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Góp ý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
+    <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
+        <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
+            Xin chân thành cảm ơn Ông/Bà đã thực hiện đánh giá, kính mong Ông/Bà giành thêm chút thời gian quý báo để góp ý cho hệ thống phần mềm này, để chúng tôi hoàn thiện phục vụ Ông/Bà tốt hơn.
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12" >
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <span class="input-lg text_bold">Câu 1: Theo Ông/Bà số lượng 13 câu hỏi là</span>
+        </div>
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <label class="input-lg col-sm-3 col-lg-3"><input type="checkbox" id="11"> Chấp nhận được</label> 
+            <label class="input-lg col-sm-4 col-lg-4"><input type="checkbox" id="12"> Quá nhiều</label> 
+            <label class="input-lg col-sm-4 col-lg-4">Bao nhiêu câu hỏi là hợp lý</label> 
+            <input class="input-lg col-sm-1 col-lg-1" type="text" id="txtNum" />
+        </div>
+
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <span class="input-lg text_bold">Câu 2: Nội dung các câu hỏi</span>
+        </div>
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <label class="input-lg col-sm-3 col-lg-3"><input type="checkbox" id="21"> Chấp nhận được</label>
+            <label class="input-lg col-sm-3 col-lg-3"><input type="checkbox" id="22"> Câu từ khó hiểu</label>
+            <label class="input-lg col-sm-2 col-lg-2">Khác </label>
+            <input class="input-lg col-sm-4 col-lg-4" type="text" id="txtKhac2" />
+        </div>
+
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <span class="input-lg text_bold">Câu 3: Thân thiện, dễ sử dụng của giao diện và tính năng của phần mềm</span>
+        </div>
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+
+            <label class="input-lg col-sm-3 col-lg-3"><input type="checkbox" id="31"> Chấp nhận được</label>
+            <label class="input-lg col-sm-3 col-lg-3"><input type="checkbox" id="32"> Khó sử dụng</label>
+            <label class="input-lg col-sm-2 col-lg-2">Khác </label>
+            <input class="input-lg col-sm-4 col-lg-4" type="text" id="txtKhac3" />
+        </div>
+
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <label class="input-lg text_bold col-sm-3 col-lg-3">Các đóng góp khác </label>
+            <textarea class="input-lg col-sm-9 col-lg-9"></textarea>
+        </div>
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <label class="col-sm-4 col-lg-4"></label>
+            <input id="btnGui" type="button" class="btn btn-warning col-sm-1 col-lg-2" value="Gửi" />
+        </div>
+        
+    </div>
+   
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#btnGui").click(function () {
+            alert("test");
+        });
+    </script>
+}

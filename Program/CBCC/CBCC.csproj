@@ -223,6 +223,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DanhGiaController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GopYController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HuongDanController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -1281,6 +1282,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SearchService\SearchService.wsdl" />
+    <Content Include="Views\GopY\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebMVC.Bussiness\WebMVC.Bussiness.csproj">
