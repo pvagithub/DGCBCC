@@ -46,6 +46,15 @@
           <Property Name="LoaiDonVi" Type="bit" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <EntityType Name="GopY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCau" Type="int" Nullable="false" />
+          <Property Name="MaTL" Type="varchar" MaxLength="50" />
+          <Property Name="NoiDungTL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="HoSo">
           <Key>
             <PropertyRef Name="ID" />
@@ -165,12 +174,12 @@
           <Property Name="HoSoID" Type="nvarchar" MaxLength="50" />
           <Property Name="DonViID" Type="int" />
           <Property Name="NguoiXuLyID" Type="int" />
-          <Property Name="NguoiXuLy" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayNhan" Type="datetime" />
           <Property Name="ThoiHanXuLy" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayXuLy" Type="datetime" />
           <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
           <Property Name="KetQua" Type="nvarchar" MaxLength="50" />
+          <Property Name="NguoiXuLy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Quy_BaoCao">
           <Key>
@@ -836,6 +845,7 @@
           <EntitySet Name="CauTraLoi" EntityType="Self.CauTraLoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GopY" EntityType="Self.GopY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSo" EntityType="Self.HoSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputTypeTieuChi" EntityType="Self.InputTypeTieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KetQuaDanhGia" EntityType="Self.KetQuaDanhGia" Schema="dbo" store:Type="Tables" />
@@ -1202,6 +1212,7 @@
           <FunctionImport Name="KetQuaDanhGiaByDanhGiaID" ReturnType="Collection(DataModel.KetQuaDanhGiaByDanhGiaID_Result)">
           <Parameter Name="DanhGiaID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1903,6 +1914,15 @@
           <Property Type="String" Name="TenTieuChi" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="TenCauTraLoi" Nullable="true" MaxLength="1000" />
         </ComplexType>
+        <EntityType Name="GopY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCau" Type="Int32" Nullable="false" />
+          <Property Name="MaTL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoiDungTL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2554,6 +2574,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Gopies">
+            <EntityTypeMapping TypeName="DataModel.GopY">
+              <MappingFragment StoreEntitySet="GopY">
+                <ScalarProperty Name="NoiDungTL" ColumnName="NoiDungTL" />
+                <ScalarProperty Name="MaTL" ColumnName="MaTL" />
+                <ScalarProperty Name="IDCau" ColumnName="IDCau" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2569,7 +2599,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

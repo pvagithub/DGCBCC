@@ -90,6 +90,9 @@
     <Compile Include="GetThongKeToanTP_Result.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GopY.cs">
+      <DependentUpon>DataAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HoSo.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>

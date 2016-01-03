@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="31606c7ebb714b53a52836884e016661" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="31606c7ebb714b53a52836884e016661" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="DataModel.CauTraLoi" Width="1.5" PointX="6" PointY="12.375" />
         <EntityTypeShape EntityType="DataModel.DanhGia" Width="1.5" PointX="6" PointY="8.125" />
         <EntityTypeShape EntityType="DataModel.DonVi" Width="1.5" PointX="10.75" PointY="16.5" />
         <EntityTypeShape EntityType="DataModel.HoSo" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="DataModel.InputTypeTieuChi" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DataModel.KetQuaDanhGia" Width="1.5" PointX="8.25" PointY="2.5" />
+        <EntityTypeShape EntityType="DataModel.KetQuaDanhGia" Width="1.5" PointX="8.25" PointY="2.125" />
         <EntityTypeShape EntityType="DataModel.LinhVuc" Width="1.5" PointX="10.75" PointY="12.625" />
         <EntityTypeShape EntityType="DataModel.LinhVucDonVi" Width="1.5" PointX="13" PointY="11.875" />
         <EntityTypeShape EntityType="DataModel.Membership" Width="1.5" PointX="8.75" PointY="10.5" />
@@ -55,6 +55,7 @@
         <AssociationConnector Association="DataModel.FK_ChiTieu_NhomChiTieu" />
         <AssociationConnector Association="DataModel.FK_UsersInRoles_Roles" />
         <AssociationConnector Association="DataModel.FK_TieuChiCauTraLoi_TieuChi" />
+        <EntityTypeShape EntityType="DataModel.GopY" Width="1.5" PointX="13.375" PointY="19.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
