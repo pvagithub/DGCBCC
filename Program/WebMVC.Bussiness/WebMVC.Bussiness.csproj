@@ -55,6 +55,7 @@
     <Compile Include="Account\MyMembershipProvider.cs" />
     <Compile Include="Account\MyRepository.cs" />
     <Compile Include="Account\MyRoleProvider.cs" />
+    <Compile Include="GopYService.cs" />
     <Compile Include="HoSoService.cs" />
     <Compile Include="ThongKeService.cs" />
     <Compile Include="DanhGiaService.cs" />
