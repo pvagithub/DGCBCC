@@ -27,11 +27,7 @@ namespace CBCC.Controllers
                     //handle with code
                     return Json(new { isCaptchaValid = true }, JsonRequestBehavior.AllowGet);
                 }
-<<<<<<< .mine
-                return Json(new { IsExist = false, HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
-=======
                 return Json(new { IsExist = false, isCaptchaValid=false,HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
->>>>>>> .r29
             }
             else
             {
