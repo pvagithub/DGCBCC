@@ -68,6 +68,7 @@ namespace WebMVC.Dal
         public virtual DbSet<Tuan_BaoCao> Tuan_BaoCao { get; set; }
         public virtual DbSet<UsersInRole> UsersInRoles { get; set; }
         public virtual DbSet<GopY> Gopies { get; set; }
+        public virtual DbSet<GopYCauHoi> GopYCauHois { get; set; }
     
         public virtual int GenTuanThongKeTheoNam(Nullable<int> year)
         {
