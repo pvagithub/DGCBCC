@@ -1,8 +1,139 @@
 ﻿@{
     ViewBag.Title = "Đánh giá công chức tiếp nhận và giải quyết hồ sơ";
 }
- 
+@section styles{
+    <style type="text/css">
+        .note.note-success {
+            background-color: #c9f0f3;
+            border-color: #60d2dc;
+            color: #000;
+        }
 
+        .note {
+            margin: 0 0 20px;
+            padding: 15px 30px 15px 15px;
+            border-left: 5px solid #eee;
+            border-radius: 0 4px 4px 0;
+        }
+
+        * html div#fl813691 {
+            position: absolute;
+            overflow: hidden;
+            top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop +(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight));
+        }
+
+        #fl813691 {
+            font: 12px Arial, Helvetica, sans-serif;
+            color: #666;
+            position: fixed;
+            _position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 150px;
+            z-index: 9999;
+            padding-right: 5px;
+        }
+
+        #eb951855 {
+            width: 279px;
+        }
+
+        #cob263512 {
+            height: 150px;
+            padding-left: 7px;
+        }
+
+        #coh963846 {
+            color: #690;
+            display: block;
+            height: 30px;
+            font-size: 11px;
+            width: 272px;
+            background: #d9534f none repeat scroll 0 0;
+            line-height: 30px;
+            text-align: center;
+            padding-right: 5px;
+        }
+
+            #coh963846 a {
+                color: #690;
+                text-decoration: none;
+            }
+
+        #coc67178 {
+            float: right;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+            height: 15px;
+        }
+
+            #coc67178 li {
+                display: inline;
+            }
+
+                #coc67178 li a {
+                    background-image: url('../../Images/IconWeb/cuocsongmuonmau.info_button.gif');
+                    background-repeat: no-repeat;
+                    width: 30px;
+                    height: 0;
+                    padding-top: 15px;
+                    overflow: hidden;
+                    float: left;
+                }
+
+                    #coc67178 li a.close {
+                        background-position: 0 0;
+                    }
+
+                        #coc67178 li a.close:hover {
+                            background-position: 0 -15px;
+                        }
+
+                    #coc67178 li a.min {
+                        background-position: -30px 0;
+                    }
+
+                        #coc67178 li a.min:hover {
+                            background-position: -30px -15px;
+                        }
+
+                    #coc67178 li a.max {
+                        background-position: -60px 0;
+                    }
+
+                        #coc67178 li a.max:hover {
+                            background-position: -60px -15px;
+                        }
+
+        #co453569 {
+            display: block;
+            margin: 0;
+            padding: 0;
+            height: 181px;
+            border-width: 1px;
+            text-align: center;
+        }
+
+        #coh963846 span {
+            color: white;
+            font-size: 20px;
+        }
+
+        #co453569 textarea {
+            font-size: 15px;
+            max-width: 230px;
+            max-height: 140px;
+            height: 140px;
+            width: 230px;
+        }
+
+        #btnSendMessage {
+            font-size: 15px;
+        }
+    </style>
+}
 <input type="hidden" id="idHoSo" />
 <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
     <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
@@ -17,13 +148,13 @@
                     <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
                 </span>
             </div>
-          
+
         </div>
-     
+
         <div class="comment">
             (Nhập số biên nhận để tiến hành đánh giá)
         </div>
-    
+
         <div class="warrper_input_sbn">
             <div class="input-group">
                 <span class="input-lg">Mã số đánh giá</span>
@@ -36,24 +167,24 @@
             Trong lúc đánh giá hoặc kết thúc đánh giá, chúng tôi kính mong Ông/Bà giành chút thời gian quý báo để góp ý cho hệ thống phần mềm, các góp ý gồm: số lượng và nội dung câu hỏi, câu trả lời; thân thiện, dễ sử dụng của hệ thống, các đóng góp cần cải tiến khác.
         </div>
         @*<div class="article-body">
-            <h1> Hướng dẫn đánh giá</h1>
-            <p>Quý vị có thể đánh giá sự hài lòng về thủ tục hành hành chính trực tiếp từ website.</p>
-            <p>Vui lòng tham khảo thông tin chi tiết về từng bước đánh giá như sau:&nbsp;</p>
-            <p><strong>1. Nhập số biên nhận</strong></p>
+                <h1> Hướng dẫn đánh giá</h1>
+                <p>Quý vị có thể đánh giá sự hài lòng về thủ tục hành hành chính trực tiếp từ website.</p>
+                <p>Vui lòng tham khảo thông tin chi tiết về từng bước đánh giá như sau:&nbsp;</p>
+                <p><strong>1. Nhập số biên nhận</strong></p>
 
-            <p>a. Gõ số biên nhận vào thanh tìm kiếm</p>
-            <p>b. Chọn botton đánh giá</p>
-            <p>c. Chương trình kiểm tra số biên nhận </p>
+                <p>a. Gõ số biên nhận vào thanh tìm kiếm</p>
+                <p>b. Chọn botton đánh giá</p>
+                <p>c. Chương trình kiểm tra số biên nhận </p>
 
-            <p><strong>2. Đánh giá</strong></p>
-            
-            <p>Tiến hành đánh giá.</p>
+                <p><strong>2. Đánh giá</strong></p>
 
-            <p><strong>3.&nbsp;Kiểm tra và kết thúc bài đánh giá</strong></p>
-            <p>Sau khi hoàn thành tất cả các câu khảo sát chọn "Kết thúc".&nbsp;</p>
-            <p>a. Nếu chưa hoàn tất các câu khảo sát chương trình mở bảng review các câu quý vị chưa hoàn thành.</p>
-            <p>b. Tất cả đã hoàn tất nhấn "Kết thúc" thông tin lưu lại.</p>
-        </div>*@
+                <p>Tiến hành đánh giá.</p>
+
+                <p><strong>3.&nbsp;Kiểm tra và kết thúc bài đánh giá</strong></p>
+                <p>Sau khi hoàn thành tất cả các câu khảo sát chọn "Kết thúc".&nbsp;</p>
+                <p>a. Nếu chưa hoàn tất các câu khảo sát chương trình mở bảng review các câu quý vị chưa hoàn thành.</p>
+                <p>b. Tất cả đã hoàn tất nhấn "Kết thúc" thông tin lưu lại.</p>
+            </div>*@
     </div>
 
     <br />
@@ -65,10 +196,38 @@
     </div>
 </div>
 
- 
+<!--Start of Gop Y Script-->
+
+<div id="fl813691" style="height: 152px;" class="hide">
+    <div id="eb951855">
+        <div id="cob263512">
+            <div id="coh963846">
+                <ul id="coc67178">
+                    <li id="pf204652hide"><a class="min" href="javascript:pf204652clickhide();" title="Ẩn  đi">Ẩn</a></li>
+                    <li id="pf204652show" style="display: none;"><a class="max" href="javascript:pf204652clickshow();" title="Hiện  lại">Xem </a></li>
+                </ul>
+                <span> Góp ý cho câu hỏi </span>
+            </div>
+            <div id="co453569" style="background:#d9534f none repeat scroll 0 0">
+                <textarea rows="3" id="txtGopY"></textarea>
+                <input id="btnSendMessage" disabled="disabled" name="btnSendMessage" type="button" class="btn btn-success btn-sm" value="Gởi góp ý" />
+            </div>
+        </div>
+    </div>
+</div>
+<!--Start of Gop Y Script-->
 @section scripts{
 
     <script>
+        // show message after send feedback
+        function closenotic(message) {
+            $("#noticeInfo").html(message);
+            $('.noticeajax').removeClass("hide").addClass("show");
+            $(".noticeajax").fadeTo(5000, 500).slideUp(500, function () {
+                $(".noticeajax").alert('close');
+                $('.noticeajax').removeClass("show").addClass("hide");
+            });
+        }
         var Member = new function () {
             this.ReloadCaptcha = function (u, t) {
                 var r = new Date().getTime();
@@ -78,7 +237,7 @@
         $(document).ready(function () {
             initMember();
         });
-        
+
         function initMember() {
             if (Member === undefined) {
                 setTimeout("initMember()", 100); return;
@@ -88,6 +247,32 @@
             $("#captcha").click(function () { Member.ReloadCaptcha(); });
             $("#refresh").click(function () { Member.ReloadCaptcha(); });
         }
+        $('#txtGopY').change(function () {
+            if ($('#txtGopY').val() != '') {
+                $('#btnSendMessage').removeAttr('disabled');
+            }
+            else {
+                $('#btnSendMessage').attr('disabled', 'disabled');
+            }
+        });
+        $('#txtGopY').blur(function () {
+            if ($('#txtGopY').val() != '') {
+                $('#btnSendMessage').removeAttr('disabled');
+            }
+            else {
+                $('#btnSendMessage').attr('disabled', 'disabled');
+            }
+        });
+        // save feedback
+        $('#btnSendMessage').click(function () {
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
+            $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
+                if (data == true) {
+                    $('#txtGopY').val(''); // save feedback success, clear text
+                    closenotic("Gởi góp ý thành công.");
+                }
+            })
+        });
         // show virtual keyboard
         $('#danhgia').click(function () {
 
@@ -126,64 +311,66 @@
                                 $('#danhgia_Content').delay(100).toggle('slow', function () {
 
                                 });
+                                $('#fl813691').addClass('show').removeClass('hide');
                             }
-                            $('#idHoSo').val(data.HoSo.ID);
+                            // an so bien nhan vao #idHoSo
+                            //$('#idHoSo').val(data.HoSo.ID);
 
                             // Ẩn màn hình nhập số biên nhận
-                          
 
-                            bootbox.dialog({
-                                title: "Thông tin hồ sơ",
-                                message:
-                                '<div class="row">  ' +
-                                     '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
 
-                                                '<div>' +
-                                                    '<p class="info_user_per">' +
-                                                        '<b>Số biên nhận hồ sơ: </b>' + JSONtostring(data.HoSo.SoBienNhan) + '<br />' +
-                                                        '<b> Ngày tiếp nhận: </b>' + JSONDate(data.HoSo.NgayNhan) + '<br />' +
-                                                        '<b> Ngày hẹn trả: </b>' + JSONDate(data.HoSo.NgayHenTra) + '<br />' +
-                                                        '<b> Địa chỉ: </b>' + JSONtostring(data.HoSo.DiaChi) + '<br />' +
-                                                     '</p>' +
-                                                '</div>' +
+                            //   bootbox.dialog({
+                            //       title: "Thông tin hồ sơ",
+                            //       message:
+                            //       '<div class="row">  ' +
+                            //            '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
 
-                                     '</div>' +
+                            //                       '<div>' +
+                            //                           '<p class="info_user_per">' +
+                            //                               '<b>Số biên nhận hồ sơ: </b>' + JSONtostring(data.HoSo.SoBienNhan) + '<br />' +
+                            //                               '<b> Ngày tiếp nhận: </b>' + JSONDate(data.HoSo.NgayNhan) + '<br />' +
+                            //                               '<b> Ngày hẹn trả: </b>' + JSONDate(data.HoSo.NgayHenTra) + '<br />' +
+                            //                               '<b> Địa chỉ: </b>' + JSONtostring(data.HoSo.DiaChi) + '<br />' +
+                            //                            '</p>' +
+                            //                       '</div>' +
 
-                                    '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
-                                        '<div>' +
-                                            '<p class="info_user_per">' +
+                            //            '</div>' +
 
-                                                '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
+                            //           '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
+                            //               '<div>' +
+                            //                   '<p class="info_user_per">' +
 
-                                                '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
-                                                '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
-                                                '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.NguoiNop) + '<br />' +
-                                                '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
+                            //                       '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
 
-                                            '</p>' +
-                                          '</div>' +
-                                    '</div>' +
-                             '</div>',
+                            //                       '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
+                            //                       '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
+                            //                       '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.NguoiNop) + '<br />' +
+                            //                       '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
 
-                                buttons: {
-                                    success: {
-                                        label: "Bắt đầu đánh giá",
-                                        className: "btn-success",
-                                        callback: function () {
+                            //                   '</p>' +
+                            //                 '</div>' +
+                            //           '</div>' +
+                            //    '</div>',
 
-                                            $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
-                                            });
+                            //       buttons: {
+                            //           success: {
+                            //               label: "Bắt đầu đánh giá",
+                            //               className: "btn-success",
+                            //               callback: function () {
 
-                                            // Load màn hình đánh giá
-                                            $('#danhgia_Content').delay(100).toggle('slow', function () {
+                            //                   $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
+                            //                   });
 
-                                            });
+                            //                   // Load màn hình đánh giá
+                            //                   $('#danhgia_Content').delay(100).toggle('slow', function () {
 
-                                        }
-                                    }
-                                }
-                            }
-                         );
+                            //                   });
+
+                            //               }
+                            //           }
+                            //       }
+                            //   }
+                            //);
 
                         }
                     }
@@ -215,6 +402,46 @@
             }
             else
                 return "";
+        }
+    </script>
+    <script>
+        pf204652bottomLayer = document.getElementById('fl813691');
+        var pf204652IntervalId = 0;
+        var pf204652maxHeight = 210;//Chieu cao khung quang cao
+        var pf204652minHeight = 30;
+        var pf204652curHeight = 0;
+        function pf204652show() {
+            pf204652curHeight += 2;
+            if (pf204652curHeight > pf204652maxHeight) {
+                clearInterval(pf204652IntervalId);
+            }
+            pf204652bottomLayer.style.height = pf204652curHeight + 'px';
+        }
+        function pf204652hide() {
+            pf204652curHeight -= 3;
+            if (pf204652curHeight < pf204652minHeight) {
+                clearInterval(pf204652IntervalId);
+            }
+            pf204652bottomLayer.style.height = pf204652curHeight + 'px';
+        }
+        pf204652IntervalId = setInterval('pf204652show()', 5);
+        function pf204652clickhide() {
+            document.getElementById('pf204652hide').style.display = 'none';
+            document.getElementById('pf204652show').style.display = 'inline';
+            pf204652IntervalId = setInterval('pf204652hide()', 5);
+        }
+        function pf204652clickshow() {
+            document.getElementById('pf204652hide').style.display = 'inline';
+            document.getElementById('pf204652show').style.display = 'none';
+            pf204652IntervalId = setInterval('pf204652show()', 5);
+        }
+        function pf204652clickclose() {
+            document.body.style.marginBottom = '0px';
+            pf204652bottomLayer.style.display = 'none';
+        }
+        // hide popup feedback
+        function hidePopup() {
+            $('#fl813691').addClass('hide').removeClass('show');
         }
     </script>
 }

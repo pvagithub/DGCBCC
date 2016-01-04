@@ -25,9 +25,13 @@ namespace CBCC.Controllers
                 if (!string.IsNullOrEmpty(randText) && randText.Equals(soBienNhan))
                 {
                     //handle with code
-                    return Json(new {isCaptchaValid=true }, JsonRequestBehavior.AllowGet);
+                    return Json(new { isCaptchaValid = true }, JsonRequestBehavior.AllowGet);
                 }
+<<<<<<< .mine
+                return Json(new { IsExist = false, HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
+=======
                 return Json(new { IsExist = false, isCaptchaValid=false,HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
+>>>>>>> .r29
             }
             else
             {
@@ -108,7 +112,8 @@ namespace CBCC.Controllers
                 if (item.QuestionTypeId == 1)
                 {
                     kq.TieuChiID = item.QuestionId;
-                    kq.CauTraLoiID = int.Parse(item.Answered);
+                    if (!string.IsNullOrWhiteSpace(item.Answered))
+                        kq.CauTraLoiID = int.Parse(item.Answered);
                 }
 
                 if (item.QuestionTypeId == 2)
@@ -120,6 +125,17 @@ namespace CBCC.Controllers
 
             result = DanhGiaService.SaveKetQuaDanhGia(danhGia, lstKQDG, long.Parse(iDHoSo));
             return Json(new { result }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult InsertGopYCauHoi(string soBienNhan, long cauHoiId, string noiDungGopY)
+        {
+            var gopy = new GopYCauHoi();
+            gopy.SoBienNhan = soBienNhan;
+            gopy.CauHoiId = cauHoiId;
+            gopy.NoiDungGopY = noiDungGopY;
+            DanhGiaService.InsertGopYCauHoi(gopy);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -5,26 +5,28 @@
     // Others are work in progress.
     $scope.defaultConfig = {
         'allowBack': true,
-        'allowReview': true,
-        'autoMove': false,  // if true, it will move to next question automatically when answered.
+        'allowReview': false,
+        'autoMove': true,  // if true, it will move to next question automatically when answered.
         'duration': 0,  // indicates the time in which quiz needs to be completed. post that, quiz will be automatically submitted. 0 means unlimited.
         'pageSize': 1,
-        'requiredAll': true,  // indicates if you must answer all the questions before submitting.
+        'requiredAll': false,  // indicates if you must answer all the questions before submitting.
         'richText': false,
         'shuffleQuestions': false,
         'shuffleOptions': false,
         'showClock': true,
         'showPager': true,
-        'theme': 'none'
+        'theme': 'none',
+        'submit': false,
+        'title': true
     }
-
     $scope.goTo = function (index) {
         if (index > 0 && index <= $scope.totalItems) {
             $scope.currentPage = index;
             $scope.mode = 'quiz';
         }
+        if (index > $scope.totalItems) index = $scope.totalItems;
+        $scope.config.allowReview = (index == $scope.totalItems);
     }
-
     $scope.onSelect = function (question, option, check) {
         if (question.QuestionTypeId == 1) { //
             question.Answered = 0;
@@ -40,6 +42,7 @@
                 }
             });
         }
+        $scope.goTo($scope.currentPage + 1);
     }
 
     $scope.onSubmit = function () {
@@ -48,13 +51,14 @@
             if (q.QuestionTypeId == 1) {
                 answers.push({ 'QuizId': $scope.quiz.Id, 'QuestionId': q.Id, 'Answered': q.Answered, "QuestionTypeId": q.QuestionTypeId });
             }
-            else {
-                answers.push({ 'QuizId': $scope.quiz.Id, 'QuestionId': q.Id, 'Answered': q.Options[0].Selected, "QuestionTypeId": q.QuestionTypeId });
-            }
+            // go text
+            //else {
+            //    answers.push({ 'QuizId': $scope.quiz.Id, 'QuestionId': q.Id, 'Answered': q.Options[0].Selected, "QuestionTypeId": q.QuestionTypeId });
+            //}
         });
 
         var validate = true;
-
+        $scope.config.submit = true;
         //bootbox.confirm("Bạn có chắc chắn kết thúc đánh giá?", function (result) {
         //    if (result) {
         //        var _danhSachKQ = JSON.stringify(answers);
@@ -81,24 +85,34 @@
 
 
         var _danhSachKQ = JSON.stringify(answers);
+        var IDHoSo = ($('#idHoSo').val());
+        if ($scope.config.submit == true) {
+            $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo, answers).success(function (data, status) {
+                if (data.result == true) {
+                    $scope.mode = 'result';
+                }
+                else {
+                    //Bao loi
+                }
+            });
+        }
+        //$http.post('/DanhGia/CheckDanhGia?' + 'DanhSachKQ=' + _danhSachKQ, answers).success(function (data, status) {
+        //    if (data.result == true) {
+        //        var IDHoSo = ($('#idHoSo').val());
 
-        $http.post('/DanhGia/CheckDanhGia?' + 'DanhSachKQ=' + _danhSachKQ, answers).success(function (data, status) {
-            if (data.result == true) {
-                var IDHoSo = ($('#idHoSo').val());
-
-                $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo, answers).success(function (data, status) {
-                    if (data.result == true) {
-                        $scope.mode = 'result';
-                    }
-                    else {
-                        //Bao loi
-                    }
-                });
-            }
-            else {
-                $scope.mode = 'review';
-            }
-        });
+        //        $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo, answers).success(function (data, status) {
+        //            if (data.result == true) {
+        //                $scope.mode = 'result';
+        //            }
+        //            else {
+        //                //Bao loi
+        //            }
+        //        });
+        //    }
+        //    else {
+        //        $scope.mode = 'review';
+        //    }
+        //});
     }
 
     $scope.pageCount = function () {
@@ -128,10 +142,10 @@
     $scope.loadQuiz($scope.quizName);
 
     $scope.isAnswered = function (index) {
-        var answered = 'Chưa thực hiện';
+        var answered = 'Chưa đánh giá';
         $scope.questions[index].Options.forEach(function (element, index, array) {
             if (element.Selected == true) {
-                answered = 'Đã thực hiện';
+                answered = 'Đã đánh giá';
                 return false;
             }
         });
@@ -139,10 +153,10 @@
     };
 
     $scope.isTypping = function (index) {
-        var answered = 'Chưa thực hiện';
+        var answered = 'Chưa đánh giá';
 
         if ($scope.questions[index].Options[0].Selected != null && $scope.questions[index].Options[0].Selected.length > 0) {
-            answered = 'Đã thực hiện';
+            answered = 'Đã đánh giá';
         }
 
         return answered;
