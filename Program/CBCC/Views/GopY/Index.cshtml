@@ -62,18 +62,35 @@
             $('input:checkbox[id^="1"]:checked').each(function () {
                 $(this).removeAttr("checked");
             });
+            $('input:checkbox[id^="1"]').prop('disabled', true);
+        });
+        $("#1txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="1"]').prop('disabled', false);
+            }
         });
         $("#2txtKhac").keypress(function () {
             $('input:checkbox[id^="2"]:checked').each(function () {
                 $(this).removeAttr("checked");
             });
+            $('input:checkbox[id^="2"]').prop('disabled', true);
+        });
+        $("#2txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="2"]').prop('disabled', false);
+            }
         });
         $("#3txtKhac").keypress(function () {
             $('input:checkbox[id^="3"]:checked').each(function () {
                 $(this).removeAttr("checked");
             });
+            $('input:checkbox[id^="3"]').prop('disabled', true);
         });
-
+        $("#3txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="3"]').prop('disabled', false);
+            }
+        });
         $("#btnGui").click(function (ev) {
             ev.preventDefault();
             var formData = JSON.stringify(jQuery('#GopYForm').serializeArray()); // store json string
