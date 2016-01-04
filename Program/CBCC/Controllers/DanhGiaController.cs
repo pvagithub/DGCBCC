@@ -54,10 +54,11 @@ namespace CBCC.Controllers
                                 SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
                                 TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
                                 DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
-                                //NgayNhan =  dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),
-                                //NgayHenTra = dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),
+                                NgayNhan = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),"dd/MM/yyyy",null),
+                                NgayHenTra = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),"dd/MM/yyyy",null)
                             };
                             //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
+                            isExist = true;
 
                         }
 
