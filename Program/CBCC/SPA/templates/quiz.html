@@ -57,13 +57,13 @@
             <div ng-if="question.QuestionTypeId == 1" ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Đã đánh giá'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
         </div>
     </div>
-    <div class="result" ng-show="mode=='result'">
+    <!--<div class="result" ng-show="mode=='result'">
         <h4 class="alert alert-info text-center">Cảm ơn bạn đã thực hiện bài đánh giá</h4>
 
-        <a href="/">Trở về trang chủ</a>
-        <a href="~/danhgia">Tiếp tục đánh giá hồ sơ khác</a>
+        <a class="btn btn-primary" href="/">Trở về trang chủ</a>
+        <a class="btn btn-primary" href="~/danhgia">Tiếp tục đánh giá hồ sơ khác</a>
 
-        <!--<h2>Bài đánh giá của bạn</h2>
+        <h2>Bài đánh giá của bạn</h2>
         <div ng-repeat="question in questions">
             <div class="result-question">
                 <h3>{{$index + 1}}. {{question.Name}}</h3>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-        </div>-->
-    </div>
+        </div>
+    </div>-->
     <hr />
 </div>
