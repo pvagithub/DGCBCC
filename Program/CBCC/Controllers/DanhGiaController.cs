@@ -27,46 +27,46 @@ namespace CBCC.Controllers
                     //handle with code
                     return Json(new { isCaptchaValid = true }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { IsExist = false, isCaptchaValid=false,HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                bool daDuocDanhGia = true;
-
-                hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia);
-                bool isExist = hoSo != null ? true : false;
-                if (!isExist)
+                else
                 {
-                    DataSet dsInfo = new DataSet();
+                    bool daDuocDanhGia = true;
 
-                    // Service lấy thông tin hồ sơ    
-                    WebSearchClient clientweb = new WebSearchClient("websearch");
-
-                    //Service lấy thông tin tình trạng 
-                    VoiceSearchClient clientvoice = new VoiceSearchClient("voicesearch");
-
-                    Dictionary<object, object> datas = new Dictionary<object, object>();
-                    datas["SoBienNhan"] = soBienNhan;
-                    dsInfo = clientweb.WebSearch(datas);
-
-                    if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
+                    hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia);
+                    bool isExist = hoSo != null ? true : false;
+                    if (!isExist)
                     {
-                        hoSo = new HoSo()
+                        DataSet dsInfo = new DataSet();
+
+                        // Service lấy thông tin hồ sơ    
+                        WebSearchClient clientweb = new WebSearchClient("websearch");
+
+                        //Service lấy thông tin tình trạng 
+                        VoiceSearchClient clientvoice = new VoiceSearchClient("voicesearch");
+
+                        Dictionary<object, object> datas = new Dictionary<object, object>();
+                        datas["SoBienNhan"] = soBienNhan;
+                        dsInfo = clientweb.WebSearch(datas);
+
+                        if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
                         {
-                            SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
-                            TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
-                            DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
-                            //NgayNhan =  dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),
-                            //NgayHenTra = dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),
-                        };
-                        //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
+                            hoSo = new HoSo()
+                            {
+                                SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
+                                TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
+                                DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
+                                //NgayNhan =  dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),
+                                //NgayHenTra = dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),
+                            };
+                            //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
 
+                        }
+
+                        string matinhtrang = clientvoice.VoiceSearch(datas);
                     }
-
-                    string matinhtrang = clientvoice.VoiceSearch(datas);
+                    return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
             }
+            return Json(new { IsExist = false, isCaptchaValid = false, HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
