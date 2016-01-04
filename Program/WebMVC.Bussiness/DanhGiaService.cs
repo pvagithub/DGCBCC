@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebMVC.Dal;
+using System.Linq;
 using WebMVC.Dal.Extensions;
 using WebMVC.Entities;
 
@@ -16,25 +17,35 @@ namespace WebMVC.Bussiness
             {
                 context.ReadUncommited();
 
-               var hoSo = context.HoSoes.Find(idHoSo);
-               _Danhgia.HoSoID = idHoSo.ToString();
-               if (null != hoSo)
-               {
-                   _Danhgia.HoSoID = hoSo.ID.ToString();
-                   _Danhgia.SoBienNhan = hoSo.SoBienNhan;
-                   _Danhgia.DonViID = hoSo.DonViID;
-                   _Danhgia.TenDonVi = hoSo.TenDonVi;
-                   _Danhgia.LinhVucID = hoSo.LinhVucID;
-                   _Danhgia.TenLinhVuc = hoSo.TenLinhVuc;
-                   _Danhgia.ThuTucID = hoSo.ThuTucID;
-                   _Danhgia.TenThuTuc = hoSo.TenThuTuc;
-                   _Danhgia.NgayDanhGia = DateTime.Now;
-                   _Danhgia.DanhGiaTrucTiep = true;
-
-
-                   ///Lưu Thông tin danh giá
-                 
-               }
+                var hoSo = context.HoSoes.Find(idHoSo);
+                if (hoSo != null)
+                {
+                    _Danhgia.HoSoID = hoSo.ID.ToString();
+                    _Danhgia.SoBienNhan = hoSo.SoBienNhan;
+                    _Danhgia.DonViID = hoSo.DonViID;
+                    _Danhgia.TenDonVi = hoSo.TenDonVi;
+                    _Danhgia.LinhVucID = hoSo.LinhVucID;
+                    _Danhgia.TenLinhVuc = hoSo.TenLinhVuc;
+                    _Danhgia.ThuTucID = hoSo.ThuTucID;
+                    _Danhgia.TenThuTuc = hoSo.TenThuTuc;
+                    _Danhgia.NgayDanhGia = DateTime.Now;
+                    _Danhgia.DanhGiaTrucTiep = true;
+                }
+                // danh gia khi nhap  capcha
+                else
+                {
+                    _Danhgia.HoSoID = null;
+                    _Danhgia.SoBienNhan = idHoSo.ToString();
+                    _Danhgia.DonViID = null;
+                    _Danhgia.TenDonVi = null;
+                    _Danhgia.LinhVucID = null;
+                    _Danhgia.TenLinhVuc = null;
+                    _Danhgia.ThuTucID = null;
+                    _Danhgia.TenThuTuc = null;
+                    _Danhgia.NgayDanhGia = DateTime.Now;
+                    _Danhgia.DanhGiaTrucTiep = true;
+                }
+                
                 context.DanhGias.Add(_Danhgia);
                 context.SaveChanges();
                 var idDanhGia = _Danhgia.ID;
@@ -45,12 +56,11 @@ namespace WebMVC.Bussiness
                     item.DanhGiaID = idDanhGia;
                     context.KetQuaDanhGias.Add(item);
                 }
-
+                context.SaveChanges();
                 //Cập nhật thông tin đánh giá cho Hồ sơ
 
                 HoSo_UpdateThongTinDanhGia(idDanhGia, idHoSo);
 
-                context.SaveChanges();
 
                 return true;
             }
@@ -66,9 +76,9 @@ namespace WebMVC.Bussiness
                 if (hoSo != null)
                 {
                     hoSo.DaDanhGia = true;
-                    hoSo.DanhGiaID = danhGiaId; 
-                } 
-                context.SaveChanges();
+                    hoSo.DanhGiaID = danhGiaId;
+                    context.SaveChanges();
+                }
 
                 return true;
             }
@@ -76,5 +86,23 @@ namespace WebMVC.Bussiness
 
 
         #endregion Kết quả đánh giá
+
+        #region Them Gop Y Cau Hoi
+        public static void InsertGopYCauHoi(GopYCauHoi model)
+        {
+            using (var context = new DataModelEntities())
+            {
+                context.ReadCommited();
+                var gopy = context.GopYCauHois.FirstOrDefault(x => x.SoBienNhan == model.SoBienNhan && x.CauHoiId == model.CauHoiId);
+                if (gopy != null)
+                {
+                    gopy.NoiDungGopY = model.NoiDungGopY;
+                }
+                else
+                    context.GopYCauHois.Add(model);
+                context.SaveChanges();
+            }
+        }
+        #endregion
     }
 }
