@@ -55,6 +55,15 @@
           <Property Name="MaTL" Type="varchar" MaxLength="50" />
           <Property Name="NoiDungTL" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="GopYCauHoi">
+          <Key>
+            <PropertyRef Name="GopYCauHoiId" />
+          </Key>
+          <Property Name="GopYCauHoiId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
+          <Property Name="CauHoiId" Type="bigint" />
+          <Property Name="NoiDungGopY" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="HoSo">
           <Key>
             <PropertyRef Name="ID" />
@@ -846,6 +855,7 @@
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GopY" EntityType="Self.GopY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GopYCauHoi" EntityType="Self.GopYCauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSo" EntityType="Self.HoSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputTypeTieuChi" EntityType="Self.InputTypeTieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KetQuaDanhGia" EntityType="Self.KetQuaDanhGia" Schema="dbo" store:Type="Tables" />
@@ -1213,6 +1223,7 @@
           <Parameter Name="DanhGiaID" Mode="In" Type="Int64" />
           </FunctionImport>
           <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
+          <EntitySet Name="GopYCauHois" EntityType="DataModel.GopYCauHoi" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1923,6 +1934,15 @@
           <Property Name="MaTL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NoiDungTL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="GopYCauHoi">
+          <Key>
+            <PropertyRef Name="GopYCauHoiId" />
+          </Key>
+          <Property Name="GopYCauHoiId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoBienNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CauHoiId" Type="Int64" />
+          <Property Name="NoiDungGopY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2581,6 +2601,16 @@
                 <ScalarProperty Name="MaTL" ColumnName="MaTL" />
                 <ScalarProperty Name="IDCau" ColumnName="IDCau" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GopYCauHois">
+            <EntityTypeMapping TypeName="DataModel.GopYCauHoi">
+              <MappingFragment StoreEntitySet="GopYCauHoi">
+                <ScalarProperty Name="NoiDungGopY" ColumnName="NoiDungGopY" />
+                <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
+                <ScalarProperty Name="SoBienNhan" ColumnName="SoBienNhan" />
+                <ScalarProperty Name="GopYCauHoiId" ColumnName="GopYCauHoiId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
