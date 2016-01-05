@@ -789,7 +789,6 @@
     <Content Include="Areas\Admin\Content\bower_components\bootstrap-social\bootstrap-social.less" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap-social\bootstrap-social.scss" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap-social\bower.json" />
-    <Content Include="Areas\Admin\Content\bower_components\bootstrap-social\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
@@ -881,7 +880,6 @@
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\less\wells.less" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\LICENSE" />
     <Content Include="Areas\Admin\Content\bower_components\bootstrap\package.json" />
-    <Content Include="Areas\Admin\Content\bower_components\bootstrap\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\i18n\Afrikaans.lang" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\i18n\Albanian.lang" />
@@ -943,21 +941,14 @@
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\i18n\Vietnamese.lang" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\integration\jqueryui\dataTables.jqueryui.scss" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\make.sh" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\README.md" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables-plugins\sorting\.DS_Store" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\.gitignore" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\css\dataTables.responsive.scss" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\examples\.DS_Store" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\examples\initialisation\.DS_Store" />
     <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\make.sh" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables-responsive\Readme.md" />
     <Content Include="Areas\Admin\Content\bower_components\datatables\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\datatables\bower.json" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables\Contributing.md" />
     <Content Include="Areas\Admin\Content\bower_components\datatables\media\images\Sorting icons.psd" />
-    <Content Include="Areas\Admin\Content\bower_components\datatables\Readme.md" />
     <Content Include="Areas\Admin\Content\bower_components\flot.tooltip\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\flot.tooltip\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\flot\.bower.json" />
@@ -993,13 +984,8 @@
     <Content Include="Areas\Admin\Content\bower_components\flot\examples\axes-time-zones\tz\systemv" />
     <Content Include="Areas\Admin\Content\bower_components\flot\examples\axes-time-zones\tz\yearistype.sh" />
     <Content Include="Areas\Admin\Content\bower_components\flot\examples\axes-time-zones\tz\zone.tab" />
-    <Content Include="Areas\Admin\Content\bower_components\flot\FAQ.md" />
     <Content Include="Areas\Admin\Content\bower_components\flot\flot.jquery.json" />
-    <Content Include="Areas\Admin\Content\bower_components\flot\Makefile" />
-    <Content Include="Areas\Admin\Content\bower_components\flot\NEWS.md" />
     <Content Include="Areas\Admin\Content\bower_components\flot\package.json" />
-    <Content Include="Areas\Admin\Content\bower_components\flot\PLUGINS.md" />
-    <Content Include="Areas\Admin\Content\bower_components\flot\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\font-awesome\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\font-awesome\.gitignore" />
     <Content Include="Areas\Admin\Content\bower_components\font-awesome\.npmignore" />
@@ -1043,7 +1029,6 @@
     <Content Include="Areas\Admin\Content\bower_components\holderjs\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\holderjs\composer.json" />
     <Content Include="Areas\Admin\Content\bower_components\holderjs\package.json" />
-    <Content Include="Areas\Admin\Content\bower_components\holderjs\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\holderjs\test\.gitignore" />
     <Content Include="Areas\Admin\Content\bower_components\jquery\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\jquery\bower.json" />
@@ -1053,12 +1038,10 @@
     <Content Include="Areas\Admin\Content\bower_components\metisMenu\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\metisMenu\LICENSE" />
     <Content Include="Areas\Admin\Content\bower_components\metisMenu\package.json" />
-    <Content Include="Areas\Admin\Content\bower_components\metisMenu\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\mocha\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\mocha\bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\mocha\History.md" />
     <Content Include="Areas\Admin\Content\bower_components\mocha\LICENSE" />
-    <Content Include="Areas\Admin\Content\bower_components\mocha\Readme.md" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\.bower.json" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\.gitignore" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\.travis.yml" />
@@ -1073,7 +1056,6 @@
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\lib\morris.hover.coffee" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\lib\morris.line.coffee" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\package.json" />
-    <Content Include="Areas\Admin\Content\bower_components\morrisjs\README.md" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\spec\lib\area\area_spec.coffee" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\spec\lib\bar\bar_spec.coffee" />
     <Content Include="Areas\Admin\Content\bower_components\morrisjs\spec\lib\bar\colours.coffee" />
@@ -1095,13 +1077,11 @@
     <Content Include="Areas\Admin\Content\less\sb-admin-2.less" />
     <Content Include="Areas\Admin\Content\less\variables.less" />
     <Content Include="Areas\Admin\Content\LICENSE" />
-    <Content Include="Areas\Admin\Content\README.md" />
     <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Membership\Details.cshtml" />
     <Content Include="Content\bower.json" />
     <Content Include="Content\LICENSE" />
-    <Content Include="Content\README.md" />
     <Content Include="fonts\MYRIADPRO-BOLD.woff" />
     <Content Include="fonts\MYRIADPRO-BOLDCOND.woff" />
     <Content Include="fonts\MYRIADPRO-BOLDCONDIT.woff" />
@@ -1253,20 +1233,16 @@
     <Content Include="Views\ThongKe\_Partial_ThuTuc_Tuan.cshtml" />
     <Content Include="Views\ThongKe\_Partial_ThuTuc_TuNgay_DenNgay.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Scripts\StickyTableHeaders\.DS_Store" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.eot" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.ttf" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.woff" />
     <Content Include="Scripts\StickyTableHeaders\fonts\codropsicons\codropsicons.eot" />
     <Content Include="Scripts\StickyTableHeaders\fonts\codropsicons\codropsicons.ttf" />
     <Content Include="Scripts\StickyTableHeaders\fonts\codropsicons\codropsicons.woff" />
-    <Content Include="Scripts\StickyTableHeaders\js\.DS_Store" />
-    <Content Include="Scripts\StickyTableHeaders\README.md" />
     <Content Include="Views\ThongKe\DanhSachHoSo.cshtml" />
     <Content Include="Views\Shared\_Left_Sidebar.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Scripts\vki\readme.md" />
     <None Include="Service References\SearchService\search.xsd">
       <SubType>Designer</SubType>
     </None>
