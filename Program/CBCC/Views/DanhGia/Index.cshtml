@@ -134,45 +134,46 @@
         }
     </style>
 }
-<input type="hidden" id="idHoSo" />
-<div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
-    <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
-        <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
-            Phiên bản thử nghiệm này, hệ thống cho phép nhập <span style="font-weight:bold">Số biên nhận hồ sơ</span> hoặc <span style="font-weight:bold">mã số</span>  để thực hiện đánh giá. Chúng tôi rất mong muốn Ông/Bà nhập số biên nhận hồ sơ, nếu Ông/Bà không có số biên nhận thì hãy nhập mã số bên dưới
-        </div>
-        <h1></h1>
-        <div class="warrper_input_sbn">
-            <div class="input-group">
-                <span class="form-group input-group-btn">
-                    <input id="soBienNhan" class="form-control keyboardInput" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá">
-                    <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
-                </span>
+<form id="frmDanhGia">
+    <input type="hidden" id="idHoSo" />
+    <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
+            <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
+                Phiên bản thử nghiệm này, hệ thống cho phép nhập <span style="font-weight:bold">Số biên nhận hồ sơ</span> hoặc <span style="font-weight:bold">mã số</span>  để thực hiện đánh giá. Chúng tôi rất mong muốn Ông/Bà nhập số biên nhận hồ sơ, nếu Ông/Bà không có số biên nhận thì hãy nhập mã số bên dưới
+            </div>
+            <h1></h1>
+            <div class="warrper_input_sbn">
+                <div class="input-group">
+                    <span class="form-group input-group-btn">
+                        <input id="soBienNhan" class="form-control keyboardInput" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá">
+                        <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
+                    </span>
+                </div>
+
+            </div>
+            <div id="msg_notify" class="center red">
             </div>
 
-        </div>
-        <div id="msg_notify" class="center red">
-        </div>
-
-        <div class="comment">
-            (Nhập số biên nhận để tiến hành đánh giá)
-        </div>
-
-        <div class="warrper_input_sbn">
-            <div class="input-group">
-                <span class="input-lg">Mã số đánh giá</span>
-                <img class="input-lg" id="captcha" alt="Security Code" style="cursor: pointer;" />
-                <img id="refresh" class="input-lg" src="~/Images/IconWeb/swap-arrows-refresh.jpg" style="cursor:pointer;" />
+            <div class="comment">
+                (Nhập số biên nhận hoặc mã số bên dưới để thực hiện việc đánh giá)
             </div>
 
+            <div class="warrper_input_sbn">
+                <div class="input-group">
+                    <span class="input-lg">Mã số đánh giá</span>
+                    <img class="input-lg" id="captcha" alt="Security Code" style="cursor: pointer;" />
+                    <img id="refresh" class="input-lg" src="~/Images/IconWeb/swap-arrows-refresh.jpg" style="cursor:pointer;" />
+                </div>
+
+            </div>
+            <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
+                Trong lúc đánh giá hoặc kết thúc đánh giá, chúng tôi kính mong Ông/Bà giành chút thời gian quý báo để góp ý cho hệ thống phần mềm, các góp ý gồm: số lượng và nội dung câu hỏi, câu trả lời; thân thiện, dễ sử dụng của hệ thống, các đóng góp cần cải tiến khác.
+            </div>
         </div>
-        <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
-            Trong lúc đánh giá hoặc kết thúc đánh giá, chúng tôi kính mong Ông/Bà giành chút thời gian quý báo để góp ý cho hệ thống phần mềm, các góp ý gồm: số lượng và nội dung câu hỏi, câu trả lời; thân thiện, dễ sử dụng của hệ thống, các đóng góp cần cải tiến khác.
-        </div>
+
+        <br />
     </div>
-
-    <br />
-</div>
-
+</form>
 <div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
     <div class="main">
         <div ui-view></div>
@@ -220,6 +221,13 @@
         $(document).ready(function () {
             //$("#not_exists").hide();
             initMember();
+
+            $("form input").keypress(function (e) {
+                if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                    $('#danhgia').click();
+                    return true;
+                }
+            });
         });
 
         function initMember() {
