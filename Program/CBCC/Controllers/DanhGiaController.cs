@@ -62,7 +62,7 @@ namespace CBCC.Controllers
 
                         }
 
-                        string matinhtrang = clientvoice.VoiceSearch(datas);
+                        //string matinhtrang = clientvoice.VoiceSearch(datas);
                     }
                     return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
                 }
