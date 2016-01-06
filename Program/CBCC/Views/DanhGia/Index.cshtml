@@ -150,6 +150,8 @@
             </div>
 
         </div>
+        <div id="msg_notify" class="center red">
+        </div>
 
         <div class="comment">
             (Nhập số biên nhận để tiến hành đánh giá)
@@ -216,6 +218,7 @@
             }
         }
         $(document).ready(function () {
+            //$("#not_exists").hide();
             initMember();
         });
 
@@ -256,14 +259,15 @@
         });
         // show virtual keyboard
         $('#danhgia').click(function () {
-
+            $("#msg_notify").html("");
             // Validate input số bien nhận
 
             // If sai
             if ($('#soBienNhan').val().length < 5) {
-
-                bootbox.alert("Số biên nhận không hợp lệ", function () {
-                })
+                var htmlString = "<em>Số biên nhận/mã số không hợp lệ!</em>";
+                $("#msg_notify").html(htmlString);
+                //bootbox.alert("Số biên nhận không hợp lệ", function () {
+                //})
             }
             else {
                 //Get thông tin ho sơ
@@ -272,15 +276,19 @@
 
                     // Neu hoso không tồn tại
                     if (data.IsExist == false) {
-                        bootbox.alert("Hồ sơ chưa kết thúc.", function () {
-                        })
+                        var htmlString =  "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
+                        $("#msg_notify").html(htmlString);
+                        //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
+                        //})
                     }
                         // Neu hoso  tồn tại
                     else {
                         if (data.DaDuocDanhGia == true) {
-                            bootbox.alert("Hồ sơ đã được đánh giá", function () {
+                            var htmlString = "<em>Số biên nhận/mã số đã được đánh giá!</em>";
+                            $("#msg_notify").html(htmlString);
+                            //bootbox.alert("Hồ sơ đã được đánh giá", function () {
 
-                            })
+                            //})
                         }
                         else {
                             // Lưu thông tin hồ sơ
