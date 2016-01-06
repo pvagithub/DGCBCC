@@ -2,6 +2,19 @@
     ViewBag.Title = "Góp ý";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section styles{
+    <style type="text/css">
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+}
 <form name="GopY" id="GopYForm" class="form-add">
     <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
         <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
