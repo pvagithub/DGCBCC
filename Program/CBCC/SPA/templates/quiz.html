@@ -1,11 +1,7 @@
 ﻿
-<div class="note note-success hide noticeajax">
-    <p id="noticeInfo" style="font-size:15px; color:#31708f">
-    </p>
-</div>
 <div id="quiz">
     <div>
-        <div ng-if="config.title=(mode!='review' ? true : false)" >
+        <div ng-if="config.title=(mode!='review' ? true : false)">
             <p style="font-size: 22px;padding-top: 10px">
                 Có tất cả <strong>{{totalItems}}</strong> câu hỏi, Ông/Bà đang đánh giá câu hỏi số:
             </p>
@@ -19,9 +15,10 @@
     <h1 class="center title_quiz">{{quiz.name}}</h1>
     <h4 class="center sub_title_quiz">{{quiz.description}}</h4>
     <hr /><div class="quizNav ">
-        <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
+              <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
+              <button class="btn btn-danger btn_ketthuc" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
     </div>
-    <input id="txtQuestionId" name="txtQuestionId" value="{{currentPage}}" type="hidden" />
+    <input id="txtQuestionId" name="txtQuestionId" value="{{currentPage}}" type="text" class="hide" onchange="handle_change(this)" />
     <div ng-show="mode=='quiz'">
         <div ng-repeat="question in filteredQuestions">
             <div class="question">
@@ -29,7 +26,7 @@
                 <div class="options">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="ng-scope_content ">
                         <label for="{{option.Id}}">
-                            <input id="{{option.Id}}" type="checkbox" ng-model="option.Selected" ng-change="onSelect(question, option);" />
+                            <input id="{{option.Id}}" type="checkbox" onclick="AutoSaveGopY();" ng-model="option.Selected" ng-change="onSelect(question, option);" />
                             {{option.Name}}
                         </label>
                     </div>
@@ -44,9 +41,8 @@
                 <!--<button class="btn btn-default" ng-show="config.allowBack" ng-click="goTo(totalItems);">Cuối</button>-->
             </div>
             <div class="" ng-show="mode!='result'">
-                <button class="btn btn-default btn_spa " ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Quay lại</button>
+                <!--<button class="btn btn-default btn_spa " ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Quay lại</button>-->
                 <button id="btton_review" class="btn btn-warning btn_spa" ng-show="config.allowReview" ng-click="mode = 'review'" ng-model="config.title" ng-change="config.title=(mode=='review' ? false : true)">Xem lại</button>
-                <button class="btn btn-danger btn_spa" onclick="hidePopup();" ng-click="onSubmit();">Hoàn thành</button>
             </div>
             <br />
 
@@ -56,9 +52,9 @@
         <div ng-repeat="question in questions">
             <div ng-if="question.QuestionTypeId == 1" ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Đã đánh giá'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
         </div>
-        <div>
+        <!--<div>
             <button class="btn btn-primary btn_spa" ng-click="goTo(currentPage)">Quay lại</button>
-        </div>
+        </div>-->
     </div>
     <!--<div class="result" ng-show="mode=='result'">
         <h4 class="alert alert-info text-center">Cảm ơn bạn đã thực hiện bài đánh giá</h4>

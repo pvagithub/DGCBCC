@@ -54,8 +54,8 @@ namespace CBCC.Controllers
                                 SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
                                 TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
                                 DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
-                                NgayNhan = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(),"dd/MM/yyyy",null),
-                                NgayHenTra = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(),"dd/MM/yyyy",null)
+                                NgayNhan = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(), "dd/MM/yyyy", null),
+                                NgayHenTra = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(), "dd/MM/yyyy", null)
                             };
                             //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
                             isExist = true;
@@ -133,6 +133,15 @@ namespace CBCC.Controllers
             gopy.NoiDungGopY = noiDungGopY;
             DanhGiaService.InsertGopYCauHoi(gopy);
             return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult SelectGopYCauHoi(string soBienNhan, long cauHoiId)
+        {
+            var gopy = new GopYCauHoi();
+            gopy.SoBienNhan = soBienNhan;
+            gopy.CauHoiId = cauHoiId;
+            string result = DanhGiaService.SelectGopYCauHoi(gopy);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

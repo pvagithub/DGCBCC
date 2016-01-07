@@ -45,7 +45,7 @@ namespace WebMVC.Bussiness
                     _Danhgia.NgayDanhGia = DateTime.Now;
                     _Danhgia.DanhGiaTrucTiep = true;
                 }
-                
+
                 context.DanhGias.Add(_Danhgia);
                 context.SaveChanges();
                 var idDanhGia = _Danhgia.ID;
@@ -102,6 +102,17 @@ namespace WebMVC.Bussiness
                     context.GopYCauHois.Add(model);
                 context.SaveChanges();
             }
+        }
+        public static string SelectGopYCauHoi(GopYCauHoi model)
+        {
+            string result = string.Empty;
+            using (var context = new DataModelEntities())
+            {
+                context.ReadCommited();
+                var gopy = context.GopYCauHois.FirstOrDefault(x => x.SoBienNhan == model.SoBienNhan && x.CauHoiId == model.CauHoiId);
+                result = gopy.NoiDungGopY;
+            }
+            return result;
         }
         #endregion
     }

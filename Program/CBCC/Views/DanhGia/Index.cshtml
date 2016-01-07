@@ -3,19 +3,6 @@
 }
 @section styles{
     <style type="text/css">
-        .note.note-success {
-            background-color: #c9f0f3;
-            border-color: #60d2dc;
-            color: #000;
-        }
-
-        .note {
-            margin: 0 0 20px;
-            padding: 15px 30px 15px 15px;
-            border-left: 5px solid #eee;
-            border-radius: 0 4px 4px 0;
-        }
-
         * html div#fl813691 {
             position: absolute;
             overflow: hidden;
@@ -35,7 +22,7 @@
         }
 
         #eb951855 {
-            width: 279px;
+            width: 70%;
         }
 
         #cob263512 {
@@ -48,7 +35,7 @@
             display: block;
             height: 30px;
             font-size: 11px;
-            width: 272px;
+            width: 100%;
             background: #d9534f none repeat scroll 0 0;
             line-height: 30px;
             text-align: center;
@@ -118,19 +105,19 @@
 
         #coh963846 span {
             color: white;
-            font-size: 20px;
+            font-size: 14px;
         }
 
         #co453569 textarea {
             font-size: 15px;
-            max-width: 230px;
-            max-height: 140px;
-            height: 140px;
-            width: 230px;
+            max-width: 90%;
+            max-height: 78%;
+            height: 78%;
+            width: 90%;
         }
 
         #btnSendMessage {
-            font-size: 15px;
+            font-size: 14px;
         }
     </style>
 }
@@ -182,19 +169,19 @@
 
 <!--Start of Gop Y Script-->
 
-<div id="fl813691" style="height: 152px;" class="hide">
+<div id="fl813691" class="hide">
     <div id="eb951855">
         <div id="cob263512">
             <div id="coh963846">
                 <ul id="coc67178">
-                    <li id="pf204652hide"><a class="min" href="javascript:pf204652clickhide();" title="Ẩn  đi">Ẩn</a></li>
-                    <li id="pf204652show" style="display: none;"><a class="max" href="javascript:pf204652clickshow();" title="Hiện  lại">Xem </a></li>
+                    <li id="pf204652hide" style="display:none"><a class="min" href="javascript:pf204652clickhide();" title="Ẩn  đi">Ẩn</a></li>
+                    <li id="pf204652show"><a class="max" href="javascript:pf204652clickshow();" title="Hiện  lại">Xem </a></li>
                 </ul>
-                <span> Góp ý cho câu hỏi </span>
+                <span> Góp ý cho câu hỏi trên</span>
             </div>
             <div id="co453569" style="background:#d9534f none repeat scroll 0 0">
                 <textarea rows="3" id="txtGopY"></textarea>
-                <input id="btnSendMessage" disabled="disabled" name="btnSendMessage" type="button" class="btn btn-success btn-sm" value="Gởi góp ý" />
+                <input id="btnSendMessage" name="btnSendMessage" type="button" class="btn btn-success btn-sm" value="Gởi góp ý" />
             </div>
         </div>
     </div>
@@ -203,15 +190,7 @@
 @section scripts{
 
     <script>
-        // show message after send feedback
-        function closenotic(message) {
-            $("#noticeInfo").html(message);
-            $('.noticeajax').removeClass("hide").addClass("show");
-            $(".noticeajax").fadeTo(5000, 500).slideUp(500, function () {
-                $(".noticeajax").alert('close');
-                $('.noticeajax').removeClass("show").addClass("hide");
-            });
-        }
+
         var Member = new function () {
             this.ReloadCaptcha = function (u, t) {
                 var r = new Date().getTime();
@@ -228,6 +207,7 @@
                     return true;
                 }
             });
+                      
         });
 
         function initMember() {
@@ -239,32 +219,25 @@
             $("#captcha").click(function () { Member.ReloadCaptcha(); });
             $("#refresh").click(function () { Member.ReloadCaptcha(); });
         }
-        $('#txtGopY').change(function () {
-            if ($('#txtGopY').val() != '') {
-                $('#btnSendMessage').removeAttr('disabled');
-            }
-            else {
-                $('#btnSendMessage').attr('disabled', 'disabled');
-            }
-        });
-        $('#txtGopY').blur(function () {
-            if ($('#txtGopY').val() != '') {
-                $('#btnSendMessage').removeAttr('disabled');
-            }
-            else {
-                $('#btnSendMessage').attr('disabled', 'disabled');
-            }
-        });
         // save feedback
         $('#btnSendMessage').click(function () {
             var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
             $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
                 if (data == true) {
                     $('#txtGopY').val(''); // save feedback success, clear text
-                    closenotic("Gởi góp ý thành công.");
+                    pf204652clickhide();
                 }
             })
         });
+        function AutoSaveGopY() {
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
+            $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
+                if (data == true) {
+                    $('#txtGopY').val(''); // save feedback success, clear text
+                    pf204652clickhide();
+                }
+            })
+        };
         // show virtual keyboard
         $('#danhgia').click(function () {
             $("#msg_notify").html("");
@@ -284,7 +257,7 @@
 
                     // Neu hoso không tồn tại
                     if (data.IsExist == false) {
-                        var htmlString =  "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
+                        var htmlString = "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
                         $("#msg_notify").html(htmlString);
                         //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
                         //})
@@ -377,7 +350,6 @@
                 })
 
             }
-
         });
         function JSONDate(dateStr) {
             if (dateStr != null && dateStr.length > 0) {
@@ -403,28 +375,35 @@
             else
                 return "";
         }
+        function SelectGopYCauHoi() {
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val() };
+            $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
+                $('#txtGopY').val(data); // save feedback success, clear text
+            })
+        }
+        
     </script>
     <script>
         pf204652bottomLayer = document.getElementById('fl813691');
         var pf204652IntervalId = 0;
-        var pf204652maxHeight = 210;//Chieu cao khung quang cao
-        var pf204652minHeight = 30;
+        var pf204652maxHeight = 26;//Chieu cao khung quang cao
+        var pf204652minHeight = 26;
         var pf204652curHeight = 0;
         function pf204652show() {
             pf204652curHeight += 2;
             if (pf204652curHeight > pf204652maxHeight) {
                 clearInterval(pf204652IntervalId);
             }
-            pf204652bottomLayer.style.height = pf204652curHeight + 'px';
+            pf204652bottomLayer.style.height = '31%';
         }
         function pf204652hide() {
             pf204652curHeight -= 3;
             if (pf204652curHeight < pf204652minHeight) {
                 clearInterval(pf204652IntervalId);
             }
-            pf204652bottomLayer.style.height = pf204652curHeight + 'px';
+            pf204652bottomLayer.style.height = '4%';
         }
-        pf204652IntervalId = setInterval('pf204652show()', 5);
+        pf204652IntervalId = setInterval('pf204652hide()', 5);
         function pf204652clickhide() {
             document.getElementById('pf204652hide').style.display = 'none';
             document.getElementById('pf204652show').style.display = 'inline';
@@ -441,8 +420,18 @@
         }
         // hide popup feedback
         function hidePopup() {
-            $('#fl813691').addClass('hide').removeClass('show');
             window.location = '@Url.Action("Index", "GopY")';
+            $('#fl813691').addClass('hide').removeClass('show');
         }
     </script>
+<script>
+    function changeIt(value) {
+        document.getElementById('txtQuestionId').value = value;
+        document.getElementById('txtQuestionId').onchange();
+    }
+    function handle_change(elem) {
+        alert(elem.value);
+    }
+
+</script>
 }

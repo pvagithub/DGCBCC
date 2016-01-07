@@ -970,12 +970,21 @@ h1, .h1 {
 
     .quizNav ul {
         margin: 0;
+        vertical-align: middle;
     }
 
         .quizNav ul li {
             display: inline-block;
             list-style-type: none;
         }
+
+.btn_ketthuc {
+    font-family: tahoma;
+    font-size: 17px;
+    margin: 10px;
+    width: 137px;
+    vertical-align: inherit;
+}
 
 div.review {
     text-align: center;
@@ -1433,7 +1442,7 @@ thead {
     margin: 0px !important;
 }
 
- 
+
 @media (min-width: 768px) {
     .warrper_input_sbn {
         margin: 0 auto;
@@ -1448,20 +1457,21 @@ thead {
 }
 
 .btn_spa {
-  font-family: tahoma;
-  font-size: 19px;
-  margin:  10px;
-  padding: 15px;
-  width: 150px;
+    font-family: tahoma;
+    font-size: 19px;
+    margin: 10px;
+    padding: 15px;
+    width: 150px;
 }
+
 .pagination_spa > li > a, .pagination_spa > li > span {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  color: #337ab7;
-  float: left;
-  line-height: 1.42857;
-  margin-left: -1px;
-  padding: 8px 15px;
-  position: relative;
-  text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #337ab7;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 8px 15px;
+    position: relative;
+    text-decoration: none;
 }
