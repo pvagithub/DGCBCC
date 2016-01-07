@@ -716,7 +716,9 @@
     <Content Include="Images\HoatDong\5.jpg" />
     <Content Include="Images\HoatDong\6.jpg" />
     <Content Include="Images\HoatDong\7.jpg" />
+    <Content Include="Images\IconWeb\b1.png" />
     <Content Include="Images\IconWeb\cbcc.png" />
+    <Content Include="Images\IconWeb\cuocsongmuonmau.info_button.gif" />
     <Content Include="Images\IconWeb\ghichu1.png" />
     <Content Include="Images\IconWeb\loading.gif" />
     <Content Include="Images\IconWeb\Preloader_2.gif" />
