@@ -139,7 +139,7 @@
              $scope.$watch('currentPage + itemsPerPage', function () {
                  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                    end = begin + $scope.itemsPerPage;
-
+                 $("#currentPage").val(end);
                  $scope.filteredQuestions = $scope.questions.slice(begin, end);
              });
          });
