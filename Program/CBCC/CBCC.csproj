@@ -692,6 +692,7 @@
     <Content Include="Content\img\bootstrap-formhelpers-countries.flags.png" />
     <Content Include="Content\img\bootstrap-formhelpers-currencies.flags.png" />
     <Content Include="Content\img\bootstrap-formhelpers-googlefonts.png" />
+    <Content Include="Content\img\menu.png" />
     <Content Include="Content\index.html" />
     <Content Include="Content\keyboard\him.js" />
     <Content Include="Content\keyboard\jquery-1.4.2.min.js" />

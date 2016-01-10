@@ -4,15 +4,15 @@
 }
 
 a.menu-link:hover {
-    background-color: #0887cb !important;
+    background-color: none !important;
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: #0887cb !important;
+    background-color: none !important;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
-    background-color: #0887cb !important;
+    background-color: none !important;
 }
 
 .nav .orian-menu {
