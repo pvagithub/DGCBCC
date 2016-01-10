@@ -703,6 +703,7 @@
     <Content Include="Content\keyboard\jquery.keypad.js" />
     <Content Include="Content\keyboard\keyboard.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\dropdown-menu.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfontba72.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

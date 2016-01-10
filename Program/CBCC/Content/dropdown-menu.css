@@ -1,0 +1,36 @@
+﻿.menu-link span {
+    color: #fff;
+    font-size: 15px;
+}
+
+a.menu-link:hover {
+    background-color: #0887cb !important;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #0887cb !important;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #0887cb !important;
+}
+
+.nav .orian-menu {
+    background-color: #0887cb;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+    .nav .orian-menu li a {
+        color: white;
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+        .nav .orian-menu li a:hover, .nav .orian-menu li a:focus {
+            color: black;
+        }
+
+header .dropdown-menu {
+    top: 42px !important;
+}
