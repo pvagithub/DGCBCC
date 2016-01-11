@@ -42,11 +42,11 @@
                 }
             });
         }
-        $scope.goTo($scope.currentPage + 1);
         if ($scope.currentPage == $scope.totalItems) {
             $scope.onSubmit();
             window.location = 'GopY/Index';
         }
+        $scope.goTo($scope.currentPage + 1);
     }
 
     $scope.onSubmit = function () {
