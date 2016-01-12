@@ -140,17 +140,17 @@ namespace CBCC.Areas.Admin.Controllers
 
                     lstCauHoi.Add(cauhoi);
                 }
-                else
-                {
-                    var _QuestionType = new QuestionType { Id = 2, Name = "Multiple Choice", IsActive = true };
+                //else
+                //{
+                //    var _QuestionType = new QuestionType { Id = 2, Name = "Multiple Choice", IsActive = true };
 
-                    var _option = new Option { Id = Lst_CauHoi[i].ID, QuestionId = Lst_CauHoi[i].ID, Name = "", IsAnswer = false };
-                    lstOption.Add(_option);
+                //    var _option = new Option { Id = Lst_CauHoi[i].ID, QuestionId = Lst_CauHoi[i].ID, Name = "", IsAnswer = false };
+                //    lstOption.Add(_option);
 
-                    var cauhoi = new CauHoi { Id = Lst_CauHoi[i].ID, Name = Lst_CauHoi[i].TenTieuChi, QuestionTypeId = Lst_CauHoi[i].TypeInput.Value, Options = lstOption, QuestionType = _QuestionType };
+                //    var cauhoi = new CauHoi { Id = Lst_CauHoi[i].ID, Name = Lst_CauHoi[i].TenTieuChi, QuestionTypeId = Lst_CauHoi[i].TypeInput.Value, Options = lstOption, QuestionType = _QuestionType };
 
-                    lstCauHoi.Add(cauhoi);
-                }
+                //    lstCauHoi.Add(cauhoi);
+                //}
             }
 
             _questions.questions = lstCauHoi;

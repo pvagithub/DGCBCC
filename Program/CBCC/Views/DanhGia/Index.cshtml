@@ -186,7 +186,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="currentPage" value="0"/>
+<input type="hidden" id="currentPage" value="0" name="currentPage" />
 <!--Start of Gop Y Script-->
 @section scripts{
 
@@ -385,44 +385,55 @@
         
     </script>
     <script>
-        pf204652bottomLayer = document.getElementById('fl813691');
-        var pf204652IntervalId = 0;
-        var pf204652maxHeight = 26;//Chieu cao khung quang cao
-        var pf204652minHeight = 26;
-        var pf204652curHeight = 0;
-        function pf204652show() {
-            pf204652curHeight += 2;
-            if (pf204652curHeight > pf204652maxHeight) {
-                clearInterval(pf204652IntervalId);
-            }
-            pf204652bottomLayer.style.height = '31%';
+    pf204652bottomLayer = document.getElementById('fl813691');
+    var pf204652IntervalId = 0;
+    var pf204652maxHeight = 26;//Chieu cao khung quang cao
+    var pf204652minHeight = 26;
+    var pf204652curHeight = 0;
+    function pf204652show() {
+        pf204652curHeight += 2;
+        if (pf204652curHeight > pf204652maxHeight) {
+            clearInterval(pf204652IntervalId);
         }
-        function pf204652hide() {
-            pf204652curHeight -= 3;
-            if (pf204652curHeight < pf204652minHeight) {
-                clearInterval(pf204652IntervalId);
-            }
-            pf204652bottomLayer.style.height = '4%';
+        pf204652bottomLayer.style.height = '31%';
+    }
+    function pf204652hide() {
+        pf204652curHeight -= 3;
+        if (pf204652curHeight < pf204652minHeight) {
+            clearInterval(pf204652IntervalId);
         }
+        pf204652bottomLayer.style.height = '4%';
+    }
+    pf204652IntervalId = setInterval('pf204652hide()', 5);
+    function pf204652clickhide() {
+        document.getElementById('pf204652hide').style.display = 'none';
+        document.getElementById('pf204652show').style.display = 'inline';
         pf204652IntervalId = setInterval('pf204652hide()', 5);
-        function pf204652clickhide() {
-            document.getElementById('pf204652hide').style.display = 'none';
-            document.getElementById('pf204652show').style.display = 'inline';
-            pf204652IntervalId = setInterval('pf204652hide()', 5);
-        }
-        function pf204652clickshow() {
-            document.getElementById('pf204652hide').style.display = 'inline';
-            document.getElementById('pf204652show').style.display = 'none';
-            pf204652IntervalId = setInterval('pf204652show()', 5);
-        }
-        function pf204652clickclose() {
-            document.body.style.marginBottom = '0px';
-            pf204652bottomLayer.style.display = 'none';
-        }
-        // hide popup feedback
-        function hidePopup() {
-            window.location = '@Url.Action("Index", "GopY")';
+    }
+    function pf204652clickshow() {
+        document.getElementById('pf204652hide').style.display = 'inline';
+        document.getElementById('pf204652show').style.display = 'none';
+        pf204652IntervalId = setInterval('pf204652show()', 5);
+    }
+    function pf204652clickclose() {
+        document.body.style.marginBottom = '0px';
+        pf204652bottomLayer.style.display = 'none';
+    }
+    // hide popup feedback
+    function hidePopup() {
+        window.location = '@Url.Action("Index", "GopY")';
             $('#fl813691').addClass('hide').removeClass('show');
         }
+
+        // select feedback when choose page
+        var $currentPage = $('#currentPage');
+        function updateChange() {
+            $('#txtGopY').val('');
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $currentPage.val() };
+            $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
+                $('#txtGopY').val(data); // save feedback success, clear text
+            })
+        }
+        $currentPage.on('change', updateChange);
     </script>
 }

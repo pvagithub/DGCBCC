@@ -48,7 +48,7 @@
         }
         $scope.goTo($scope.currentPage + 1);
     }
-
+   
     $scope.onSubmit = function () {
         var answers = [];
         $scope.questions.forEach(function (q, index) {
@@ -138,12 +138,8 @@
              $scope.$watch('currentPage + itemsPerPage', function () {
                  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                    end = begin + $scope.itemsPerPage;
-                 $("#currentPage").val(end);
-                 
+                 $("#currentPage").val(end).trigger('change');
                  $scope.filteredQuestions = $scope.questions.slice(begin, end);
-             });
-             $http.post('/DanhGia/SelectGopYCauHoi?soBienNhan=' + $('#soBienNhan').val() + '&cauHoiId=' + $("#currentPage").val(), answers).success(function (data, status) {
-                 $('#txtGopY').val(data);
              });
          });
     }

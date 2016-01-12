@@ -17,7 +17,7 @@
             <div class="col-sm-1 col-xs-2" style="margin-top:7%;">
                 <ul class="nav nav-pills col-md-1">
                     <li role="presentation">
-                        <a class="dropdown-toggle menu-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" >
+                        <a class="dropdown-toggle menu-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">
                             <img src="~/Content/img/menu.png" />
                         </a>
                         <ul class="dropdown-menu orian-menu">
@@ -32,9 +32,12 @@
                             <li>
                                 <a href="@Url.Action("Index", "HuongDan")">Hướng dẫn</a>
                             </li>
-                            <li>
-                                <a href="@Url.Action("Login", "Account")" title="Đăng nhập">Đăng nhập</a>
-                            </li>
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Login", "Account")" title="Đăng nhập">Đăng nhập</a>
+                                </li>
+                            }
                             @if (Request.IsAuthenticated && User.IsInRole("Admin") == true)
                             {
                                 <li><a href="@Url.Action("Index", "Admin")">Quản trị</a></li>
