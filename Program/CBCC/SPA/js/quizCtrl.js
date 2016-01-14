@@ -47,6 +47,7 @@
             window.location = 'GopY/Index';
         }
         $scope.goTo($scope.currentPage + 1);
+        $("#currentPage").val($scope.currentPage).trigger('change');
     }
    
     $scope.onSubmit = function () {
@@ -138,8 +139,8 @@
              $scope.$watch('currentPage + itemsPerPage', function () {
                  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                    end = begin + $scope.itemsPerPage;
-                 $("#currentPage").val(end).trigger('change');
                  $scope.filteredQuestions = $scope.questions.slice(begin, end);
+                 $("#currentPage").val(end).trigger('change');
              });
          });
     }
