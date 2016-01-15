@@ -110,7 +110,8 @@ namespace WebMVC.Bussiness
             {
                 context.ReadCommited();
                 var gopy = context.GopYCauHois.FirstOrDefault(x => x.SoBienNhan == model.SoBienNhan && x.CauHoiId == model.CauHoiId);
-                result = gopy.NoiDungGopY;
+
+                result = gopy != null ? gopy.NoiDungGopY : string.Empty;
             }
             return result;
         }

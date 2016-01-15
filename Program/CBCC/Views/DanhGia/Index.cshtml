@@ -223,7 +223,7 @@
         }
         // save feedback
         $('#btnSendMessage').click(function () {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
             $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
                 if (data == true) {
                     $('#txtGopY').val(''); // save feedback success, clear text
@@ -232,7 +232,7 @@
             })
         });
         function AutoSaveGopY() {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
             $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
                 if (data == true) {
                     $('#txtGopY').val(''); // save feedback success, clear text

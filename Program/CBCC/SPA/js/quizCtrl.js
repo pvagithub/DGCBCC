@@ -47,7 +47,6 @@
             window.location = 'GopY/Index';
         }
         $scope.goTo($scope.currentPage + 1);
-        $("#currentPage").val($scope.currentPage).trigger('change');
     }
    
     $scope.onSubmit = function () {

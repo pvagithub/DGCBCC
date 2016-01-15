@@ -10,14 +10,11 @@
 namespace WebMVC.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class GopYCauHoi
+    public partial class ThongKeGopYCauHoi_Result
     {
-        public long GopYCauHoiId { get; set; }
-        public string SoBienNhan { get; set; }
-        public Nullable<long> CauHoiId { get; set; }
-        public string NoiDungGopY { get; set; }
-        public Nullable<long> TieuChiId { get; set; }
+        public int ID { get; set; }
+        public string TenTieuChi { get; set; }
+        public Nullable<int> SoLuot { get; set; }
     }
 }

@@ -401,5 +401,14 @@ namespace WebMVC.Bussiness
                 return context.ThongTinNguoiXuLies.Where(x => x.HoSoID == hoSoID).ToList();
             }
         }
+
+        public static List<ThongKeGopYCauHoi_Result> ThongKeGopYCauHoi()
+        {
+            using (var context = new DataModelEntities())
+            {
+                var result = context.Database.SqlQuery<ThongKeGopYCauHoi_Result>("ThongKeGopYCauHoi").ToList();
+                return result;
+            }
+        }
     }
 }

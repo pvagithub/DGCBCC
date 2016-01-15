@@ -18,10 +18,10 @@
               <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
               <button class="btn btn-danger btn_ketthuc" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
     </div>
-    <input id="txtQuestionId" name="txtQuestionId" value="{{currentPage}}" type="text" class="hide"/>
     <div ng-show="mode=='quiz'">
         <div ng-repeat="question in filteredQuestions">
             <div class="question">
+                <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
                 <h2>{{currentPage}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="ng-scope_content ">
