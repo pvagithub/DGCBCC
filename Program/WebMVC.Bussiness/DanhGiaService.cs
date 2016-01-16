@@ -115,6 +115,14 @@ namespace WebMVC.Bussiness
             }
             return result;
         }
+        public static List<GopYCauHoi> SelectAllGopYCauHoi()
+        {
+            using (var context = new DataModelEntities())
+            {
+                context.ReadCommited();
+                return context.GopYCauHois.ToList();
+            }
+        }
         #endregion
     }
 }

@@ -13,6 +13,10 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class ManageFeedbackController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.GopYCauHoi = DanhGiaService.SelectAllGopYCauHoi();
+        }
         [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
         //
         // GET: /Admin/CaiDat/
@@ -41,6 +45,5 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.Page = (pageNumber - 1) * pageSize;
             return View(tkgopy.ToPagedList(pageNumber, pageSize));
         }
-        
     }
 }
