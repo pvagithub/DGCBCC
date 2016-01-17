@@ -17,55 +17,60 @@
 }
 <form name="GopY" id="GopYForm" class="form-add">
     <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
-        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
-            <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
-                Xin chân thành cảm ơn Ông/Bà đã thực hiện đánh giá, kính mong Ông/Bà giành thêm chút thời gian quý báo để góp ý cho hệ thống phần mềm này, để chúng tôi hoàn thiện phục vụ Ông/Bà tốt hơn.
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
+                Xin chân thành cảm ơn Ông/Bà đã thực hiện đánh giá. Để xem lại kết quả đã đánh giá, hãy chọn vào đây
             </div>
+            </div>
+            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
+                <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
+                    Xin chân thành cảm ơn Ông/Bà đã thực hiện đánh giá, kính mong Ông/Bà giành thêm chút thời gian quý báo để góp ý cho hệ thống phần mềm này, để chúng tôi hoàn thiện phục vụ Ông/Bà tốt hơn.
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <span class="input-lg text_bold">Câu 1: Theo Ông/Bà số lượng 13 câu hỏi là</span>
+                </div>
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="11" value="ChapNhan" name="11"> Chấp nhận được</label>
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="12" value="QuaNhieu" name="12"> Quá nhiều</label>
+                    <label class="input-lg col-sm-4 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Bao nhiêu câu hỏi là hợp lý</label>
+                    <input class="input-lg col-sm-1 col-lg-1" type="number" name="1txtKhac" id="1txtKhac" />
+                </div>
+
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <span class="input-lg text_bold">Câu 2: Nội dung các câu hỏi</span>
+                </div>
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="21" name="21" value="ChapNhan"> Chấp nhận được</label>
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="22" name="22" value="KhoHieu"> Câu từ khó hiểu</label>
+                    <label class="input-lg col-sm-1 col-lg-1" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Khác </label>
+                    <input class="input-lg col-sm-4 col-lg-4" type="text" name="2txtKhac" id="2txtKhac" />
+                </div>
+
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <span class="input-lg text_bold">Câu 3: Thân thiện, dễ sử dụng của giao diện và tính năng của phần mềm</span>
+                </div>
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="31" name="31" value="ChapNhan"> Chấp nhận được</label>
+                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="32" name="32" value="KhoSD"> Khó sử dụng</label>
+                    <label class="input-lg col-sm-1 col-lg-1" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Khác </label>
+                    <input class="input-lg col-sm-4 col-lg-4" type="text" name="3txtKhac3" id="3txtKhac" />
+                </div>
+
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <label class="input-lg text_bold col-sm-3 col-lg-3">Các đóng góp khác </label>
+                    <textarea class="input-lg col-sm-9 col-lg-9" id="4gopykhac" name="4gopykhac"></textarea>
+                </div>
+                <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <label class="col-sm-6 col-lg-6"></label>
+                    <input id="btnGui" type="button" class="btn btn-warning col-sm-2 col-lg-2" value="Gửi" />
+                </div>
+
+            </div>
+
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <span class="input-lg text_bold">Câu 1: Theo Ông/Bà số lượng 13 câu hỏi là</span>
-            </div>
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="11" value="ChapNhan" name="11"> Chấp nhận được</label>
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="12" value="QuaNhieu" name="12"> Quá nhiều</label>
-                <label class="input-lg col-sm-4 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Bao nhiêu câu hỏi là hợp lý</label>
-                <input class="input-lg col-sm-1 col-lg-1" type="number" name="1txtKhac" id="1txtKhac"/>
-            </div>
-
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <span class="input-lg text_bold">Câu 2: Nội dung các câu hỏi</span>
-            </div>
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="21" name="21" value="ChapNhan"> Chấp nhận được</label>
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="22" name="22" value="KhoHieu"> Câu từ khó hiểu</label>
-                <label class="input-lg col-sm-1 col-lg-1" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Khác </label>
-                <input class="input-lg col-sm-4 col-lg-4" type="text" name="2txtKhac" id="2txtKhac" />
-            </div>
-
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <span class="input-lg text_bold">Câu 3: Thân thiện, dễ sử dụng của giao diện và tính năng của phần mềm</span>
-            </div>
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id="31" name="31" value="ChapNhan"> Chấp nhận được</label>
-                <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;"  type="checkbox" id="32" name="32" value="KhoSD"> Khó sử dụng</label>
-                <label class="input-lg col-sm-1 col-lg-1" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">Khác </label>
-                <input class="input-lg col-sm-4 col-lg-4" type="text" name="3txtKhac3" id="3txtKhac" />
-            </div>
-
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <label class="input-lg text_bold col-sm-3 col-lg-3">Các đóng góp khác </label>
-                <textarea class="input-lg col-sm-9 col-lg-9" id="4gopykhac" name="4gopykhac"></textarea>
-            </div>
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <label class="col-sm-6 col-lg-6"></label>
-                <input id="btnGui" type="button" class="btn btn-warning col-sm-2 col-lg-2" value="Gửi" />
-            </div>
-
-        </div>
-
-    </div>
 </form>
 
 
