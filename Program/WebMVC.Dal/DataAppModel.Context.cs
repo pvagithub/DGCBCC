@@ -744,10 +744,5 @@ namespace WebMVC.Dal
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<KetQuaDanhGiaByDanhGiaID_Result>("KetQuaDanhGiaByDanhGiaID", danhGiaIDParameter);
         }
-    
-        public virtual ObjectResult<ThongKeGopYCauHoi_Result> ThongKeGopYCauHoi()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYCauHoi_Result>("ThongKeGopYCauHoi");
-        }
     }
 }

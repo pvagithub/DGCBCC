@@ -145,9 +145,6 @@
     <Compile Include="Thang_BaoCao.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ThongKeGopYCauHoi_Result.cs">
-      <DependentUpon>DataAppModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ThongKeTongHop.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>

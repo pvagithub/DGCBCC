@@ -172,10 +172,10 @@
 <div id="fl813691" class="hide">
     <div id="eb951855">
         <div id="cob263512">
-            <div id="coh963846" style="cursor:pointer" onclick="javascript: toggleFeddback();">
+            <div id="coh963846">
                 <ul id="coc67178">
-                    <li id="pf204652hide" style="display:none"><a class="min" title="Ẩn  đi">Ẩn</a></li>
-                    <li id="pf204652show"><a class="max" title="Hiện  lại">Xem </a></li>
+                    <li id="pf204652hide" style="display:none"><a class="min" href="javascript:pf204652clickhide();" title="Ẩn  đi">Ẩn</a></li>
+                    <li id="pf204652show"><a class="max" href="javascript:pf204652clickshow();" title="Hiện  lại">Xem </a></li>
                 </ul>
                 <span> Góp ý cho câu hỏi trên</span>
             </div>
@@ -186,8 +186,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="currentPage" value="0" name="currentPage" />
-<input id="txttoggle" type="hidden" value="0" />
+<input type="hidden" id="currentPage" value="0"/>
 <!--Start of Gop Y Script-->
 @section scripts{
 
@@ -209,7 +208,7 @@
                     return true;
                 }
             });
-
+                      
         });
 
         function initMember() {
@@ -223,7 +222,7 @@
         }
         // save feedback
         $('#btnSendMessage').click(function () {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
             $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
                 if (data == true) {
                     $('#txtGopY').val(''); // save feedback success, clear text
@@ -232,12 +231,11 @@
             })
         });
         function AutoSaveGopY() {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
+            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val(), noiDungGopY: $('#txtGopY').val() };
             $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
                 if (data == true) {
                     $('#txtGopY').val(''); // save feedback success, clear text
                     pf204652clickhide();
-                    document.getElementById('txttoggle').value = "0";
                 }
             })
         };
@@ -285,7 +283,6 @@
 
                                 });
                                 $('#fl813691').addClass('show').removeClass('hide');
-                                $('.changeHeight').css("height", "auto");
                             } else {
                                 // an so bien nhan vao #idHoSo
                                 $('#idHoSo').val(data.HoSo.ID);
@@ -341,7 +338,6 @@
                                                 });
                                                 // show gop y cho cau hoi
                                                 $('#fl813691').addClass('show').removeClass('hide');
-                                                $('.changeHeight').css("height", "auto");
                                             }
                                         }
                                     }
@@ -386,7 +382,7 @@
                 $('#txtGopY').val(data); // save feedback success, clear text
             })
         }
-
+        
     </script>
     <script>
         pf204652bottomLayer = document.getElementById('fl813691');
@@ -400,17 +396,6 @@
                 clearInterval(pf204652IntervalId);
             }
             pf204652bottomLayer.style.height = '31%';
-        }
-        function toggleFeddback() {
-            var val = document.getElementById('txttoggle').value;
-            if (val == "0") {
-                pf204652clickshow();
-                document.getElementById('txttoggle').value = "1";
-            }
-            else {
-                pf204652clickhide();
-                document.getElementById('txttoggle').value = "0";
-            }
         }
         function pf204652hide() {
             pf204652curHeight -= 3;
@@ -439,18 +424,5 @@
             window.location = '@Url.Action("Index", "GopY")';
             $('#fl813691').addClass('hide').removeClass('show');
         }
-
-        // select feedback when choose page
-        var $currentPage = $('#currentPage');
-        function updateChange() {
-            $('#txtGopY').val('');
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $currentPage.val() };
-            $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
-                $('.changeHeight').css("height", $('#lblHeight' + $currentPage.val()).height() - 20 + "px");
-                $('#txtGopY').val(data); // save feedback success, clear text
-            })
-            // set auto height
-        }
-        $currentPage.on('change', updateChange);
     </script>
 }

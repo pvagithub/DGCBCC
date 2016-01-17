@@ -110,18 +110,9 @@ namespace WebMVC.Bussiness
             {
                 context.ReadCommited();
                 var gopy = context.GopYCauHois.FirstOrDefault(x => x.SoBienNhan == model.SoBienNhan && x.CauHoiId == model.CauHoiId);
-
-                result = gopy != null ? gopy.NoiDungGopY : string.Empty;
+                result = gopy.NoiDungGopY;
             }
             return result;
-        }
-        public static List<GopYCauHoi> SelectAllGopYCauHoi()
-        {
-            using (var context = new DataModelEntities())
-            {
-                context.ReadCommited();
-                return context.GopYCauHois.ToList();
-            }
         }
         #endregion
     }

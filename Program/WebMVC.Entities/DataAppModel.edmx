@@ -61,7 +61,6 @@
           </Key>
           <Property Name="GopYCauHoiId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
-          <Property Name="TieuChiId" Type="bigint" />
           <Property Name="CauHoiId" Type="bigint" />
           <Property Name="NoiDungGopY" Type="nvarchar(max)" />
         </EntityType>
@@ -773,7 +772,6 @@
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="ThongKeGopYCauHoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ThongKeLinhVuc_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonViID" Type="int" Mode="In" />
           <Parameter Name="Year" Type="int" Mode="In" />
@@ -1226,7 +1224,6 @@
           </FunctionImport>
           <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
           <EntitySet Name="GopYCauHois" EntityType="DataModel.GopYCauHoi" />
-          <FunctionImport Name="ThongKeGopYCauHoi" ReturnType="Collection(DataModel.ThongKeGopYCauHoi_Result)" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1945,13 +1942,7 @@
           <Property Name="SoBienNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CauHoiId" Type="Int64" />
           <Property Name="NoiDungGopY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TieuChiId" Type="Int64" />
         </EntityType>
-        <ComplexType Name="ThongKeGopYCauHoi_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="TenTieuChi" Nullable="true" MaxLength="1000" />
-          <Property Type="Int32" Name="SoLuot" Nullable="true" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2616,7 +2607,6 @@
           <EntitySetMapping Name="GopYCauHois">
             <EntityTypeMapping TypeName="DataModel.GopYCauHoi">
               <MappingFragment StoreEntitySet="GopYCauHoi">
-                <ScalarProperty Name="TieuChiId" ColumnName="TieuChiId" />
                 <ScalarProperty Name="NoiDungGopY" ColumnName="NoiDungGopY" />
                 <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
                 <ScalarProperty Name="SoBienNhan" ColumnName="SoBienNhan" />
@@ -2624,15 +2614,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ThongKeGopYCauHoi" FunctionName="DataModel.Store.ThongKeGopYCauHoi">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DataModel.ThongKeGopYCauHoi_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TenTieuChi" ColumnName="TenTieuChi" />
-                <ScalarProperty Name="SoLuot" ColumnName="SoLuot" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

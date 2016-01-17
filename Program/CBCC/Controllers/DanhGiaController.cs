@@ -125,17 +125,13 @@ namespace CBCC.Controllers
         }
 
         [HttpPost]
-        public JsonResult InsertGopYCauHoi(string soBienNhan, long cauHoiId, string noiDungGopY, long tieuChiId)
+        public JsonResult InsertGopYCauHoi(string soBienNhan, long cauHoiId, string noiDungGopY)
         {
-            if (!string.IsNullOrWhiteSpace(noiDungGopY))
-            {
-                var gopy = new GopYCauHoi();
-                gopy.SoBienNhan = soBienNhan;
-                gopy.CauHoiId = cauHoiId;
-                gopy.TieuChiId = tieuChiId;
-                gopy.NoiDungGopY = noiDungGopY;
-                DanhGiaService.InsertGopYCauHoi(gopy);
-            }
+            var gopy = new GopYCauHoi();
+            gopy.SoBienNhan = soBienNhan;
+            gopy.CauHoiId = cauHoiId;
+            gopy.NoiDungGopY = noiDungGopY;
+            DanhGiaService.InsertGopYCauHoi(gopy);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
