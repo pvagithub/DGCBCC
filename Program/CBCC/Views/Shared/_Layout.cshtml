@@ -23,7 +23,10 @@
     <div class="se-pre-con"></div>
 
     <div id="wrapper">
-        @Html.Partial("_Header")
+        @if (null == ViewBag.IsGopY || !ViewBag.IsGopY)
+        {
+            @Html.Partial("_Header")
+        }
         <div class=" container-fluid body-content">
             <div class="row">
                 @RenderBody()
