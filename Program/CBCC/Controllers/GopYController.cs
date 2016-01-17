@@ -35,6 +35,7 @@ namespace CBCC.Controllers
         // GET: GopY
         public ActionResult Index()
         {
+            ViewBag.IsGopY = true;
             return View();
         }
         [HttpPost]
