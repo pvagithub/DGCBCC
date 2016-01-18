@@ -69,9 +69,9 @@
           </Key>
           <Property Name="GopYCauHoiId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
+          <Property Name="TieuChiId" Type="bigint" />
           <Property Name="CauHoiId" Type="bigint" />
           <Property Name="NoiDungGopY" Type="nvarchar(max)" />
-          <Property Name="TieuChiId" Type="bigint" />
         </EntityType>
         <EntityType Name="GopYQuestion">
           <Key>

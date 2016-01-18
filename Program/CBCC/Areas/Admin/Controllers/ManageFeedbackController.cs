@@ -38,7 +38,7 @@ namespace CBCC.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                tkgopy = tkgopy.Where(s => s.TenTieuChi.Contains(searchString)).ToList();
+                tkgopy = tkgopy.Where(s => s.TenTieuChi.ToLower().Contains(searchString.ToLower())).ToList();
             }
             int pageSize = 10;
             int pageNumber = (page ?? 1);
