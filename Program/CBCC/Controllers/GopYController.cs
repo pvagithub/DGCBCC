@@ -1,4 +1,5 @@
 ﻿using CBCC.Models;
+using CBCC.Models.GopY;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,32 @@ namespace CBCC.Controllers
         public ActionResult Index()
         {
             ViewBag.IsGopY = true;
-            return View();
+            List<GopYHTViewModel> list = new List<GopYHTViewModel>();
+            var lsQuestions = GopYService.GetGopYQuestions();
+            var lsAnswers = GopYService.GetGopYAnswers();
+            foreach (var item in lsQuestions)
+            {
+                List<AnswerModel> lsAnwsersModel = new List<AnswerModel>();
+                var idAns = item.IDAnswers.Split(',');
+                for (int i = 0; i < idAns.Length; i++)
+                {
+                    var ans = lsAnswers.Where(p => p.ID == Convert.ToInt32(idAns[i])).FirstOrDefault();
+                    lsAnwsersModel.Add(new AnswerModel()
+                    {
+                        ID = ans.ID,
+                        Answer = ans.Answer,
+                        Type = ans.Type==1?TypeControl.Checkbox:TypeControl.Textbox
+                    });
+                }
+                GopYHTViewModel ht = new GopYHTViewModel()
+                {
+                    ID = item.ID,
+                    Question = item.Question,
+                    lsAnswers = lsAnwsersModel
+                };
+                list.Add(ht);
+            }
+            return View(list);
         }
         [HttpPost]
         public bool SaveGopY(List<JsonObject> lsdata)
