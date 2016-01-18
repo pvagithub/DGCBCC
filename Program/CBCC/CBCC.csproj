@@ -206,6 +206,7 @@
     <Compile Include="Areas\Admin\Controllers\GopYAnswersController.cs" />
     <Compile Include="Areas\Admin\Controllers\GopYQuestionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuTucController.cs" />
     <Compile Include="Areas\Admin\Controllers\TieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
