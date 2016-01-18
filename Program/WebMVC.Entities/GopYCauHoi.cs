@@ -18,5 +18,6 @@ namespace WebMVC.Entities
         public string SoBienNhan { get; set; }
         public Nullable<long> CauHoiId { get; set; }
         public string NoiDungGopY { get; set; }
+        public Nullable<long> TieuChiId { get; set; }
     }
 }
