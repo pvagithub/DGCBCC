@@ -16,6 +16,10 @@ namespace CBCC.Areas.Admin.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public System.Data.Entity.DbSet<WebMVC.Entities.GopYQuestion> GopYQuestions { get; set; }
+
+        public System.Data.Entity.DbSet<WebMVC.Entities.GopYAnswer> GopYAnswers { get; set; }
     }
 
     [Table("UserProfile")]

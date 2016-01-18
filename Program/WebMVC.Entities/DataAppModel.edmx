@@ -55,6 +55,14 @@
           <Property Name="MaTL" Type="varchar" MaxLength="50" />
           <Property Name="NoiDungTL" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="GopYAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="150" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="GopYCauHoi">
           <Key>
             <PropertyRef Name="GopYCauHoiId" />
@@ -63,6 +71,14 @@
           <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
           <Property Name="CauHoiId" Type="bigint" />
           <Property Name="NoiDungGopY" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GopYQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="250" />
+          <Property Name="IDAnswers" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="HoSo">
           <Key>
@@ -855,7 +871,9 @@
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonVi" EntityType="Self.DonVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GopY" EntityType="Self.GopY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GopYAnswer" EntityType="Self.GopYAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GopYCauHoi" EntityType="Self.GopYCauHoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GopYQuestion" EntityType="Self.GopYQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSo" EntityType="Self.HoSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InputTypeTieuChi" EntityType="Self.InputTypeTieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KetQuaDanhGia" EntityType="Self.KetQuaDanhGia" Schema="dbo" store:Type="Tables" />
@@ -1224,6 +1242,8 @@
           </FunctionImport>
           <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
           <EntitySet Name="GopYCauHois" EntityType="DataModel.GopYCauHoi" />
+          <EntitySet Name="GopYQuestions" EntityType="DataModel.GopYQuestion" />
+          <EntitySet Name="GopYAnswers" EntityType="DataModel.GopYAnswer" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1943,6 +1963,22 @@
           <Property Name="CauHoiId" Type="Int64" />
           <Property Name="NoiDungGopY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="GopYQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IDAnswers" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GopYAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Answer" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2611,6 +2647,24 @@
                 <ScalarProperty Name="CauHoiId" ColumnName="CauHoiId" />
                 <ScalarProperty Name="SoBienNhan" ColumnName="SoBienNhan" />
                 <ScalarProperty Name="GopYCauHoiId" ColumnName="GopYCauHoiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GopYQuestions">
+            <EntityTypeMapping TypeName="DataModel.GopYQuestion">
+              <MappingFragment StoreEntitySet="GopYQuestion">
+                <ScalarProperty Name="IDAnswers" ColumnName="IDAnswers" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GopYAnswers">
+            <EntityTypeMapping TypeName="DataModel.GopYAnswer">
+              <MappingFragment StoreEntitySet="GopYAnswer">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

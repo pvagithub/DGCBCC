@@ -93,7 +93,13 @@
     <Compile Include="GopY.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GopYAnswer.cs">
+      <DependentUpon>DataAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GopYCauHoi.cs">
+      <DependentUpon>DataAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GopYQuestion.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HoSo.cs">
