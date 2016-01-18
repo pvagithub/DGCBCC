@@ -214,7 +214,6 @@
     <Compile Include="Areas\Admin\Controllers\NhomTieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\MembershipController.cs" />
-    <Compile Include="Areas\Admin\Models\GopY\GopYPhanMemModel.cs" />
     <Compile Include="Areas\Admin\Models\LinhVucModel.cs" />
     <Compile Include="Areas\Admin\Models\DonViLinhVucModel.cs" />
     <Compile Include="Areas\Admin\Models\ThuTucModel.cs" />
