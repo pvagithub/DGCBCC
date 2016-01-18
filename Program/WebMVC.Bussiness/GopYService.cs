@@ -33,5 +33,13 @@ namespace WebMVC.Bussiness
                 return context.GopYAnswers.ToList();
             }
         }
+        public static List<GopY> GetGopY()
+        {
+            using (var context = new DataModelEntities())
+            {
+                context.ReadUncommited();
+                return context.Gopies.ToList();
+            }
+        }
     }
 }

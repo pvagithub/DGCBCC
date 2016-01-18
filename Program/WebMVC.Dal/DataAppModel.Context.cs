@@ -751,5 +751,10 @@ namespace WebMVC.Dal
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYCauHoi_Result>("ThongKeGopYCauHoi");
         }
+    
+        public virtual ObjectResult<ThongKeGopYPhanMem_Result> ThongKeGopYPhanMem()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYPhanMem_Result>("ThongKeGopYPhanMem");
+        }
     }
 }

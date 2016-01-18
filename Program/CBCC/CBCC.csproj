@@ -207,12 +207,14 @@
     <Compile Include="Areas\Admin\Controllers\GopYQuestionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageFeedbackController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SoftwareFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuTucController.cs" />
     <Compile Include="Areas\Admin\Controllers\TieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhomTieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\MembershipController.cs" />
+    <Compile Include="Areas\Admin\Models\GopY\GopYPhanMemModel.cs" />
     <Compile Include="Areas\Admin\Models\LinhVucModel.cs" />
     <Compile Include="Areas\Admin\Models\DonViLinhVucModel.cs" />
     <Compile Include="Areas\Admin\Models\ThuTucModel.cs" />
@@ -774,6 +776,7 @@
     <Content Include="Areas\Admin\Views\GopYAnswers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\GopYAnswers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManageFeedback\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SoftwareFeedback\Index.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />

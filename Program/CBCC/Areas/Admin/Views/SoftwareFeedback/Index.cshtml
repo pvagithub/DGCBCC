@@ -1,0 +1,72 @@
+﻿@using WebMVC.Entities
+@using WebMVC.Entities;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<WebMVC.Entities.ThongKeGopYPhanMem_Result>
+@{
+    ViewBag.Title = "Góp ý phần mềm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int pageNumber = (int)ViewBag.Page;
+}
+<h3>Thống kê góp ý phần mềm</h3>
+@using (Html.BeginForm())
+{
+    <p class="pull-right">
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+    </p>
+}
+<table class="table table-hover table-striped">
+    <tr>
+        <th>STT</th>
+        <th>Tên Tiêu Chí</th>
+        <th>Số Lượt Đánh Giá</th>
+        <th style="white-space:nowrap">Chi tiết</th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        var clr = "beige";
+        if (i % 2 == 0)
+        { clr = "aliceblue"; }
+        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr" title="Xem chi tiết">
+            <td>@(pageNumber + i + 1)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question)
+            </td>
+            <td style="text-align:center ">
+                @Html.DisplayFor(modelItem => item.SoLuot)
+            </td>
+            <td>
+                <a class="parent">Chi tiết</a>
+            </td>
+        </tr>
+        var expand = ((List<GopY>)ViewBag.GopYPhanMem).Where(x => x.IDCau == item.ID).ToList();
+        if (expand != null && expand.Any())
+        {
+            <tr class="child" style="display: none;" data-level="2">
+                <td colspan="4" style="padding-left:5%;">
+                    <div style=" overflow-y:scroll; height:200px !important">
+                        <table class="table table-striped" style="width: 90%; ">
+                            <tr>
+                                <th width="27%">Số biên nhận/ Mã số đánh giá</th>
+                                <th>Nội dung</th>
+                            </tr>
+                            @for (int j = 0; j < expand.Count(); j++)
+                            {
+                                <tr>
+                                    <td>
+                                        @expand[j].MaTL
+                                    </td>
+                                    <td>@expand[j].NoiDungTL</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+

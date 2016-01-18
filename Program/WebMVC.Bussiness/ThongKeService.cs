@@ -409,5 +409,13 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+        public static List<ThongKeGopYPhanMem_Result> ThongKeGopYPhanMem()
+        {
+            using (var context = new DataModelEntities())
+            {
+                var result = context.Database.SqlQuery<ThongKeGopYPhanMem_Result>("ThongKeGopYPhanMem").ToList();
+                return result;
+            }
+        }
     }
 }

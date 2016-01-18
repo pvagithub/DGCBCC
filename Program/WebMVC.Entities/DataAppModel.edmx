@@ -69,9 +69,9 @@
           </Key>
           <Property Name="GopYCauHoiId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
-          <Property Name="TieuChiId" Type="bigint" />
           <Property Name="CauHoiId" Type="bigint" />
           <Property Name="NoiDungGopY" Type="nvarchar(max)" />
+          <Property Name="TieuChiId" Type="bigint" />
         </EntityType>
         <EntityType Name="GopYQuestion">
           <Key>
@@ -790,6 +790,7 @@
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
         </Function>
         <Function Name="ThongKeGopYCauHoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ThongKeGopYPhanMem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ThongKeLinhVuc_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonViID" Type="int" Mode="In" />
           <Parameter Name="Year" Type="int" Mode="In" />
@@ -1247,6 +1248,7 @@
           <EntitySet Name="GopYQuestions" EntityType="DataModel.GopYQuestion" />
           <EntitySet Name="GopYAnswers" EntityType="DataModel.GopYAnswer" />
           <FunctionImport Name="ThongKeGopYCauHoi" ReturnType="Collection(DataModel.ThongKeGopYCauHoi_Result)" />
+          <FunctionImport Name="ThongKeGopYPhanMem" ReturnType="Collection(DataModel.ThongKeGopYPhanMem_Result)" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1988,6 +1990,11 @@
           <Property Type="String" Name="TenTieuChi" Nullable="true" MaxLength="1000" />
           <Property Type="Int32" Name="SoLuot" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ThongKeGopYPhanMem_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="SoLuot" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2683,6 +2690,15 @@
               <ComplexTypeMapping TypeName="DataModel.ThongKeGopYCauHoi_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenTieuChi" ColumnName="TenTieuChi" />
+                <ScalarProperty Name="SoLuot" ColumnName="SoLuot" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ThongKeGopYPhanMem" FunctionName="DataModel.Store.ThongKeGopYPhanMem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.ThongKeGopYPhanMem_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="SoLuot" ColumnName="SoLuot" />
               </ComplexTypeMapping>
             </ResultMapping>
