@@ -138,12 +138,8 @@
              $scope.$watch('currentPage + itemsPerPage', function () {
                  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                    end = begin + $scope.itemsPerPage;
-                 $("#currentPage").val(end);
-                 
                  $scope.filteredQuestions = $scope.questions.slice(begin, end);
-             });
-             $http.post('/DanhGia/SelectGopYCauHoi?soBienNhan=' + $('#soBienNhan').val() + '&cauHoiId=' + $("#currentPage").val(), answers).success(function (data, status) {
-                 $('#txtGopY').val(data);
+                 $("#currentPage").val(end).trigger('change');
              });
          });
     }
