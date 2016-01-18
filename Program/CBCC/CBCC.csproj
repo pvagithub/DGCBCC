@@ -773,6 +773,7 @@
     <Content Include="Areas\Admin\Views\GopYAnswers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\GopYAnswers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\GopYAnswers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageFeedback\Index.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />
