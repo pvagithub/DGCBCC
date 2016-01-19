@@ -74,10 +74,12 @@ namespace CBCC.Controllers
                 for (int i = 0; i < lsAnswers.Count; i++)
                 {
                     //var rs = NameOfKey.ContainsKey(lsAnswers[i].value);
+                    int n=0;
+                    bool isNumeric = int.TryParse(lsAnswers[i].value, out n);
                     var GopY = new WebMVC.Entities.GopY()
                    {
                        IDCau = i + 1,
-                       MaTL =lsAnswers[i].value,
+                       MaTL =n==0?"khac":lsAnswers[i].value,
                        NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  NameOfKey[lsAnswers[i].value] :lsAnswers[i].value
                    };
                     count += GopYService.SaveGopY(GopY);
