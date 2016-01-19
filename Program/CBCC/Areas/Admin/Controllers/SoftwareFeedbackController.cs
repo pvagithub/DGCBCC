@@ -9,12 +9,6 @@ using WebMVC.Bussiness;
 
 namespace CBCC.Areas.Admin.Controllers
 {
-    public class SoftWareViewModel
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string value { get; set; }
-    }
     public class SoftwareFeedbackController : Controller
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -25,17 +19,6 @@ namespace CBCC.Areas.Admin.Controllers
         // GET: Admin/SoftwareFeedback
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var lstAnswers = GopYService.GetGopYAnswers();
-            var lstQuestions = GopYService.GetGopYQuestions();
-            foreach (var item in lstQuestions)
-            {
-                var arrInt = item.IDAnswers.Split(',');
-                for (int i = 0; i < arrInt.Length; i++)
-                {
-                    var ans =lstAnswers.Where(p=>p.ID=======)
-                }
-            }
-
             ViewBag.CurrentSort = sortOrder;
             ViewBag.TenTieuChiSortParm = String.IsNullOrEmpty(sortOrder) ? "TenTieuChi_desc" : "";
             var tkgopy = ThongKeService.ThongKeGopYPhanMem();
