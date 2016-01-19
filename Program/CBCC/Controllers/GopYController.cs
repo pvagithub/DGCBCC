@@ -28,10 +28,10 @@ namespace CBCC.Controllers
         public GopYController()
         {
             NameOfKey = new Dictionary<string, string>();
-            NameOfKey.Add("ChapNhan", "Chấp nhận");
-            NameOfKey.Add("QuaNhieu", "Quá nhiều");
-            NameOfKey.Add("KhoHieu", "Câu từ khó hiểu");
-            NameOfKey.Add("KhoSD", "Khó sử dụng");
+            NameOfKey.Add("1", "Chấp nhận");
+            NameOfKey.Add("2", "Quá nhiều");
+            NameOfKey.Add("3", "Câu từ khó hiểu");
+            NameOfKey.Add("4", "Khó sử dụng");
         }
         // GET: GopY
         public ActionResult Index()
@@ -73,10 +73,11 @@ namespace CBCC.Controllers
             {
                 for (int i = 0; i < lsAnswers.Count; i++)
                 {
+                    //var rs = NameOfKey.ContainsKey(lsAnswers[i].value);
                     var GopY = new WebMVC.Entities.GopY()
                    {
                        IDCau = i + 1,
-                       MaTL = NameOfKey.ContainsKey(lsAnswers[i].value) ? lsAnswers[i].value : "Khac",
+                       MaTL =lsAnswers[i].value,
                        NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  NameOfKey[lsAnswers[i].value] :lsAnswers[i].value
                    };
                     count += GopYService.SaveGopY(GopY);
