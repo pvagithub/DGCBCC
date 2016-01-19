@@ -1,6 +1,6 @@
 ﻿
 <div id="quiz">
-    <div>
+    <div ng-show="config.showPager">
         <div ng-if="config.title=(mode!='review' ? true : false)">
             <p style="font-size: 22px;padding-top: 10px">
                 Có tất cả <strong>{{totalItems}}</strong> câu hỏi, Ông/Bà đang đánh giá câu hỏi số:
@@ -14,9 +14,9 @@
     </div>
     <h1 class="center title_quiz">{{quiz.name}}</h1>
     <h4 class="center sub_title_quiz">{{quiz.description}}</h4>
-    <hr /><div class="quizNav ">
+    <div class="quizNav ">
         <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
-        <button class="btn btn-danger btn_ketthuc" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
+        <button class="btn btn-danger btn_ketthuc" ng-show="config.showPager" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
     </div>
     <div ng-show="mode=='quiz'">
         <div ng-repeat="question in filteredQuestions">
@@ -41,7 +41,7 @@
             </div>
             <div class="" ng-show="mode!='result'">
                 <!--<button class="btn btn-default btn_spa " ng-show="config.allowBack" ng-click="goTo(currentPage - 1);">Quay lại</button>-->
-                <button id="btton_review" class="btn btn-warning btn_spa" ng-show="config.allowReview" ng-click="mode = 'review'" ng-model="config.title" ng-change="config.title=(mode=='review' ? false : true)">Xem lại</button>
+                <!--<button id="btton_review" class="btn btn-warning btn_spa" ng-show="config.allowReview" ng-click="review();" ng-model="config.title" ng-change="config.title=(mode=='review' ? false : true)">Xem lại</button>-->
             </div>
             <br />
         </div>
@@ -54,32 +54,34 @@
             <button class="btn btn-primary btn_spa" ng-click="goTo(currentPage)">Quay lại</button>
         </div>-->
     </div>
-    <!--<div class="result" ng-show="mode=='result'">
-        <h4 class="alert alert-info text-center">Cảm ơn bạn đã thực hiện bài đánh giá</h4>
-
-        <a class="btn btn-primary" href="/">Trở về trang chủ</a>
-        <a class="btn btn-primary" href="~/danhgia">Tiếp tục đánh giá hồ sơ khác</a>
-
-        <h2>Bài đánh giá của bạn</h2>
-        <div ng-repeat="question in questions">
-            <div class="result-question">
-                <h3>{{$index + 1}}. {{question.Name}}</h3>
-                <div class="options">
-                    <div ng-repeat="Option in question.Options" ng-if="question.QuestionTypeId == 1">
-                        <label for="{{Option.Id}}" ng-click="onSelect(Option);" class="result-correct">
-                            <input id="{{Option.Id}}" type="checkbox" disabled="disabled" ng-model="Option.Selected"/>
-                            {{Option.Name}}
-                        </label>
+    <div class="result" ng-show="mode=='result'">
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ; font-size:17px">
+                    Cảm ơn Ông/Bà đã thực hiện đánh giá. Sự góp ý của Ông/Bà sẽ góp
+                    phần nâng cao hơn nữa chất lượng dịch vụ hành chính công tại TP.
+                    HCM.
+                    <br /><br />
+                    <div>
+                        <span style="float:left">Để xem lại kết quả, xin hãy nhất nút</span>
+                        <button style="float:right;font-weight:bold; font-size:19px; width:128px;border-color:cadetblue" id="btton_review" class="btn btn-success" ng-show="config.allowReview" ng-click="review();" ng-model="config.title" ng-change="config.title=(mode=='review' ? false : true)">Xem lại</button>
                     </div>
-
-                    <div ng-repeat="Option in question.Options" ng-if="question.QuestionTypeId == 2" class="ng-scope_textarea">
-                        <label for="{{Option.Id}}">
-                            <textarea id="{{Option.Id}}" ng-model="Option.Selected" disabled="disabled"/>
-                            {{Option.Name}}
-                        </label>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="text-left" style="background-color: #f4b183; padding:10px; color:black !important ; font-size:17px">
+                    Để hoàn thiện hệ thống đánh giá và phục vụ Ông/Bà được tốt hơn,
+                    kính mong Ông/Bà cho biết thêm ý kiến về Hệ thống phần mềm đánh
+                    giá của chúng tôi.
+                    <br />
+                    Xin cảm ơn.
+                    <br /><br />
+                    <div>
+                        <span style="float:left">Xin cảm ơn.</span>
+                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" onclick="hidePopup();" ng-click="onSubmit();">Tiếp tục</button>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 </div>

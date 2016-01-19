@@ -1463,7 +1463,21 @@ thead {
     padding: 15px;
     width: 150px;
 }
-
+.btn-review {
+    font-family: tahoma;
+    font-size: 19px;
+    margin: 9px;
+    padding: 5px;
+    width: 128px;
+}
+.btn-continue {
+    font-family: tahoma;
+    font-size: 19px;
+    margin: 9px;
+    padding: 5px;
+    width: 128px;
+    background-color: #f0ad4e !important;
+}
 .pagination_spa > li > a, .pagination_spa > li > span {
     background-color: #fff;
     border: 1px solid #ddd;

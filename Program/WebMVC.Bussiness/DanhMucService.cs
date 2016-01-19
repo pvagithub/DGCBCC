@@ -392,7 +392,7 @@ namespace WebMVC.Bussiness
             {
                 context.ReadUncommited();
 
-                return context.CauTraLois.OrderByDescending(x => x.GiaTri).ThenBy(x => x.TenCauTraLoi).AsNoTracking().ToList();
+                return context.CauTraLois.OrderBy(x => x.GiaTri).ThenBy(x => x.TenCauTraLoi).AsNoTracking().ToList();
             }
         }
 

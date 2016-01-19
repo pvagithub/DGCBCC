@@ -43,10 +43,16 @@
             });
         }
         if ($scope.currentPage == $scope.totalItems) {
-            $scope.onSubmit();
-            window.location = 'GopY/Index';
+            //$scope.onSubmit();
+            //window.location = 'GopY/Index';
+            $scope.mode = 'result';
+            $scope.config.showPager = false;
         }
         $scope.goTo($scope.currentPage + 1);
+    }
+    $scope.review = function () {
+        $scope.mode = 'review';
+        $scope.config.showPager = true;
     }
 
     $scope.onSubmit = function () {
@@ -138,8 +144,8 @@
              $scope.$watch('currentPage + itemsPerPage', function () {
                  var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
                    end = begin + $scope.itemsPerPage;
+                 $("#currentPage").val(begin + $scope.itemsPerPage).trigger('change');
                  $scope.filteredQuestions = $scope.questions.slice(begin, end);
-                 $("#currentPage").val(end).trigger('change');
              });
          });
     }
