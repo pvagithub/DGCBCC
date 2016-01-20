@@ -417,5 +417,14 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+        public static List<ThongKeGopYPhanMemChiTiet_Result> ThongKeGopYPhanMemChiTiet(int idCau)
+        {
+            using (var context = new DataModelEntities())
+            {
+                var idcau = new SqlParameter("idCau", idCau);
+                var result = context.Database.SqlQuery<ThongKeGopYPhanMemChiTiet_Result>("ThongKeGopYPhanMemChiTiet @idCau", idcau).ToList();
+                return result;
+            }
+        }
     }
 }

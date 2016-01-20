@@ -41,6 +41,7 @@
                         <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
                             <label class="input-lg text_bold col-sm-3 col-lg-3">@item.Question </label>
                             <textarea class="input-lg col-sm-9 col-lg-9" id='@item.ID.ToString()gopykhac' name='@item.ID.ToString()gopykhac'></textarea>
+                            <input class="idKhac" hidden="hidden" name='h_@item.ID.ToString()' value="@item.lsAnswers[0].ID" />
                         </div>
                     }
                     else
@@ -68,6 +69,7 @@
                                     }
                                     <label class="@classNameLabel" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">@it.Answer</label>
                                     <input class="@classNameText" type="@type" name='@item.ID.ToString()txtKhac' id='@item.ID.ToString()txtKhac' />
+                                    <input class="idKhac" hidden="hidden" name='h_@item.ID.ToString()' value="@it.ID" />
                                 }
                             }
                         </div>

@@ -154,6 +154,9 @@
     <Compile Include="ThongKeGopYCauHoi_Result.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThongKeGopYPhanMemChiTiet_Result.cs">
+      <DependentUpon>DataAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ThongKeGopYPhanMem_Result.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>

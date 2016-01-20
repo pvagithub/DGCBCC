@@ -41,7 +41,7 @@
                 <a class="parent">Chi tiết</a>
             </td>
         </tr>
-        var expand = ((List<GopY>)ViewBag.GopYPhanMem).Where(x => x.IDCau == item.ID).ToList();
+        var expand = WebMVC.Bussiness.ThongKeService.ThongKeGopYPhanMemChiTiet(item.ID); //((List<GopY>)ViewBag.GopYPhanMem).Where(x => x.IDCau == item.ID).ToList();
         if (expand != null && expand.Any())
         {
             <tr class="child" style="display: none;" data-level="2">
@@ -56,9 +56,9 @@
                             {
                                 <tr>
                                     <td>
-                                        @expand[j].MaTL
+                                        @expand[j].Answer
                                     </td>
-                                    <td>@expand[j].NoiDungTL</td>
+                                    <td>@expand[j].SoLuotDanhGia</td>
                                 </tr>
                             }
                         </table>

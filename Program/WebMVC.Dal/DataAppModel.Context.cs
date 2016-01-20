@@ -756,5 +756,27 @@ namespace WebMVC.Dal
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYPhanMem_Result>("ThongKeGopYPhanMem");
         }
+    
+        public virtual int ThongKeDonVi_TuNgay_DenNgay_bak(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeDonVi_TuNgay_DenNgay_bak", tuNgayParameter, denNgayParameter);
+        }
+    
+        public virtual ObjectResult<ThongKeGopYPhanMemChiTiet_Result> ThongKeGopYPhanMemChiTiet(Nullable<int> idCau)
+        {
+            var idCauParameter = idCau.HasValue ?
+                new ObjectParameter("idCau", idCau) :
+                new ObjectParameter("idCau", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYPhanMemChiTiet_Result>("ThongKeGopYPhanMemChiTiet", idCauParameter);
+        }
     }
 }
