@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebMVC.Dal;
 using System.Linq;
+using WebMVC.Dal;
 using WebMVC.Dal.Extensions;
 using WebMVC.Entities;
 

@@ -10,8 +10,7 @@
 namespace WebMVC.Entities
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class ThuTuc
     {
         public int ThuTucID { get; set; }

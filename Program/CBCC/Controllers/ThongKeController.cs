@@ -1,4 +1,6 @@
 ﻿using Aspose.Cells;
+using CBCC.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,8 +8,6 @@ using System.IO;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 using WebMVC.Entities;
-using CBCC.Models;
-using PagedList;
 
 namespace CBCC.Controllers
 {

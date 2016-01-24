@@ -9,8 +9,7 @@
 
 namespace WebMVC.Entities
 {
-    using System;
-    
+
     public partial class KetQuaDanhGiaByDanhGiaID_Result
     {
         public string TenTieuChi { get; set; }

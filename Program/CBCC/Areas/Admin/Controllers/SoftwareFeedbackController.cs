@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using System;
 using System.Linq;
-using PagedList;
-using System.Web;
 using System.Web.Mvc;
-using WebMVC.Entities;
 using WebMVC.Bussiness;
 
 namespace CBCC.Areas.Admin.Controllers

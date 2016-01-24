@@ -1,10 +1,7 @@
-﻿using CBCC.Models;
-using CBCC.Models.GopY;
+﻿using CBCC.Models.GopY;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 

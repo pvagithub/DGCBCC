@@ -9,9 +9,7 @@
 
 namespace WebMVC.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class Setting
     {
         public long ID { get; set; }

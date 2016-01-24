@@ -13,9 +13,6 @@ namespace CBCC
                         "~/Scripts/highcharts-3d.js",
                         "~/Scripts/exporting.js",
                         "~/Scripts/bootstrap-datepicker.js"
-
-
-
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

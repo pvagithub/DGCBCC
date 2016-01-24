@@ -10,8 +10,7 @@
 namespace WebMVC.Entities
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class ThongKeTongHop
     {
         public int ID { get; set; }

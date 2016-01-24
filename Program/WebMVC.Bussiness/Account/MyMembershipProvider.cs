@@ -1,13 +1,10 @@
-﻿ 
+﻿
 using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
-using WebMVC.Framework.Utilities;
-using WebMVC.Entities;
 using WebMVC.Dal;
+using WebMVC.Framework.Utilities;
 
 namespace WebMVC.Bussiness
 {

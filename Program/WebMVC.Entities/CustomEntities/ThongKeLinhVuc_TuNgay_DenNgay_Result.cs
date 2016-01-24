@@ -9,9 +9,6 @@
 
 namespace WebMVC.Entities
 {
-    using System;
-    using System.Web.Mvc;
-    using System.Collections.Generic;
 
     public partial class ThongKeLinhVuc_TuNgay_DenNgay_Result 
     { 

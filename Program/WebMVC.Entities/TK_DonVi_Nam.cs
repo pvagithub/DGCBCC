@@ -10,8 +10,7 @@
 namespace WebMVC.Entities
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class TK_DonVi_Nam
     {
         public int ID { get; set; }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-
+﻿
 namespace CBCC.Models
 { 
     public class KQDanhGiaModel

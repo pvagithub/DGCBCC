@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using PagedList;
 using System;
-using PagedList;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
-using WebMVC.Entities;
-using WebMVC.Framework.Utilities;
 
 namespace CBCC.Areas.Admin.Controllers
 {

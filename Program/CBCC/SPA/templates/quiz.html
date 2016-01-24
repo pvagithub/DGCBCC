@@ -1,19 +1,17 @@
 ﻿
 <div id="quiz">
     <div ng-show="config.showPager">
-        <div ng-if="config.title=(mode!='review' ? true : false)">
-            <p style="font-size: 22px;padding-top: 10px">
+        <div class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
                 Có tất cả <strong>{{totalItems}}</strong> câu hỏi, Ông/Bà đang đánh giá câu hỏi số:
-            </p>
         </div>
-        <div ng-if="config.title=(mode=='review' ? true : false)">
+        <div class="titlesbn" ng-if="config.title=(mode=='review' ? true : false)">
             <p style="font-size: 22px;padding-top: 10px">
                 Danh sách các câu hỏi đã được Ông/Bà đánh giá chưa được
             </p>
         </div>
     </div>
-    <h1 class="center title_quiz">{{quiz.name}}</h1>
-    <h4 class="center sub_title_quiz">{{quiz.description}}</h4>
+    <!--<h1 class="center title_quiz">{{quiz.name}}</h1>
+    <h4 class="center sub_title_quiz">{{quiz.description}}</h4>-->
     <div class="quizNav ">
         <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
         <button class="btn btn-danger btn_ketthuc" ng-show="config.showPager" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
@@ -24,7 +22,7 @@
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
                 <h2>{{currentPage}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
-                    <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="ng-scope_content ">
+                    <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
                         <label for="{{option.Id}}" class="changeHeight">
                             <input id="{{option.Id}}" type="checkbox" onclick="AutoSaveGopY();" ng-model="option.Selected" ng-change="onSelect(question, option);" />
                             {{option.Name}}
@@ -56,7 +54,7 @@
     </div>
     <div class="result" ng-show="mode=='result'">
         <div class="col-md-12 col-sm-12 col-xs-12 ">
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+            <div class="col-sm-12 col-lg-2 form-group">
                 <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ; font-size:17px">
                     Cảm ơn Ông/Bà đã thực hiện đánh giá. Sự góp ý của Ông/Bà sẽ góp
                     phần nâng cao hơn nữa chất lượng dịch vụ hành chính công tại TP.

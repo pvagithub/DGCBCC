@@ -67,7 +67,7 @@ body {
     /*font-family: "Myriad Pro Regular";*/
     /*font-size: 15px;*/
     line-height: 1.42857;
-    background: #e9e9e9 none repeat scroll 0 0;
+    background: #fff none repeat scroll 0 0;
 }
 
 .slogan {
@@ -203,10 +203,6 @@ hr {
             background-color: #393939;
         }
 
-.logo {
-    background-color: #fff;
-}
-
 #sidebar-footer {
     background-color: #444;
     position: absolute;
@@ -218,7 +214,6 @@ hr {
     background: #0887cb none repeat scroll 0 0;
     clear: both;
     color: white;
-    margin-top: 20px;
 }
 
 label {
@@ -739,19 +734,20 @@ h2.titlecate {
     float: right !important;
     margin-right: 0;
 }
-
-.container-fluid.body-content {
-    margin-top: 15px;
-}
-
 /* Custom page CSS
 -------------------------------------------------- */
+.logo {
+    background: url('../Images/IconWeb/cbcc.png') no-repeat;
+    height: 110px;
+    padding-top: 66px;
+    padding-left: 125px;
+}
 
 header {
-    background: white none repeat scroll 0 0;
+    /*background: white none repeat scroll 0 0;*/
+    background: url('../Images/IconWeb/bg_top.png') repeat-x scroll 0 0 transparent;
     color: #000000;
-    height: 118px;
-    padding-top: 5px;
+    height: 110px;
 }
 
     header h1, header h2, header h3 a, header a, header a:hover {
@@ -888,7 +884,7 @@ h1, .h1 {
 .body-content {
     background: white none repeat scroll 0 0;
     border-radius: 4px;
-    min-height: 400px;
+    min-height: 425px;
 }
 
 .header-right {
@@ -1463,6 +1459,7 @@ thead {
     padding: 15px;
     width: 150px;
 }
+
 .btn-review {
     font-family: tahoma;
     font-size: 19px;
@@ -1470,6 +1467,7 @@ thead {
     padding: 5px;
     width: 128px;
 }
+
 .btn-continue {
     font-family: tahoma;
     font-size: 19px;
@@ -1478,6 +1476,7 @@ thead {
     width: 128px;
     background-color: #f0ad4e !important;
 }
+
 .pagination_spa > li > a, .pagination_spa > li > span {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -1488,4 +1487,62 @@ thead {
     padding: 8px 15px;
     position: relative;
     text-decoration: none;
+}
+
+.bulkhead {
+    border: 3px solid black;
+}
+
+.wrap-content {
+    width: 80%;
+    background-color: #e8e8e8;
+    margin: auto;
+    min-height: 425px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.titlesbn {
+    background-color: #c5e0b4;
+    padding: 10px;
+    color: black !important;
+    text-align: center;
+    height:80px;
+    padding-top:2%;
+}
+
+.footersbn {
+    background-color: #f5f5f5;
+    font-style: italic;
+    padding: 10px;
+    color: #9e9e9e !important;
+}
+
+.gachngang {
+    border: 1px solid #e9e9e9;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+.loicamon .pull-left{
+    width:15%;
+    text-align:right;
+    padding-right:10px;
+    padding-top:5px;
+}
+.loicamon .pull-right{
+    width:85%;
+    padding-right:5%;
+}
+.footersbn i{
+    font-size:12px;
+}
+div.row-answer{
+    width:80%;
+}
+.wrap-content-quiz{
+    width:100%;
+}
+#quiz .titlesbn{
+    width:80%;
+    margin:auto;
 }

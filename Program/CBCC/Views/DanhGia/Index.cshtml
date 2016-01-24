@@ -119,11 +119,13 @@
         #btnSendMessage {
             font-size: 14px;
         }
-        .changeHeight{
+
+        .changeHeight {
             min-height: 52px;
         }
-        .input-lg{
-            padding:10px 7px;
+
+        .input-lg {
+            padding: 10px 7px;
         }
     </style>
 }
@@ -131,8 +133,8 @@
     <input type="hidden" id="idHoSo" />
     <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
         <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
-            <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
-                Đây là phiên bản thử nghiệm. Vui lòng nhập <span style="font-weight:bold">Số biên nhận hồ sơ</span> hoặc <span style="font-weight:bold">mã số</span>  để thực hiện đánh giá. 
+            <div class="text-left titlesbn">
+                <i class="text_bold">Đây là phiên bản thử nghiệm.</i><br /> Vui lòng nhập <span style="font-weight:bold">Số biên nhận hồ sơ</span> hoặc <span style="font-weight:bold">mã số</span>  để thực hiện đánh giá.
             </div>
             <h1></h1>
             <div class="warrper_input_sbn">
@@ -161,306 +163,316 @@
                 </div>
 
             </div>
-            <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
-                Để nâng cao hơn nữa sự hài lòng của người dân và tổ chức đối với dịch vụ hành chính công tại TP. HCM, kính mong Quý Ông/Bà cho biết ý kiến đánh giá về dịch vụ hành chính mà Quý Ông/Bà đã hoặc đang thực hiện. <br>
-                Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính tại TP. HCM ngày một hoàn thiện hơn. <br>
-                Xin cảm ơn. 
+            <div class="text-left footersbn">
+                <span class="text_bold">Xin chân thành cảm ơn.</span><br />
+                <i>dịch vụ hành chính công tại TP.HCM:</i>
+                <div class="gachngang"></div>
+                <div class="loicamon">
+                    <div class="pull-left"> <i class="glyphicon glyphicon-heart"></i></div>
+                    <div class="pull-right" >
+                        Để nâng cao hơn nữa sự hài lòng của người dân và tổ chức đối với dịch vụ hành chính công tại TP. HCM, kính mong Quý Ông/Bà cho biết ý kiến đánh giá về dịch vụ hành chính mà Quý Ông/Bà đã hoặc đang thực hiện. <br>
+                        Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính tại TP. HCM ngày một hoàn thiện hơn.
+                    </div>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
 
         <br />
     </div>
 </form>
-<div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
-    <div class="main">
-        <div ui-view></div>
-    </div>
-</div>
-
-<!--Start of Gop Y Script-->
-
-<div id="fl813691" class="hide">
-    <div id="eb951855">
-        <div id="cob263512">
-            <div id="coh963846" style="cursor:pointer" onclick="javascript: toggleFeddback();">
-                <ul id="coc67178">
-                    <li id="pf204652hide" style="display:none"><a class="min" title="Ẩn  đi">Ẩn</a></li>
-                    <li id="pf204652show"><a class="max" title="Hiện  lại">Xem </a></li>
-                </ul>
-                <span> Góp ý cho câu hỏi trên</span>
-            </div>
-            <div id="co453569" style="background:#d9534f none repeat scroll 0 0">
-                <textarea rows="3" id="txtGopY"></textarea>
-                <input id="btnSendMessage" name="btnSendMessage" type="button" class="btn btn-success btn-sm" value="Gởi góp ý" />
-            </div>
+<div class="wrap-content-quiz">
+    <div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
+        <div class="main">
+            <div ui-view></div>
         </div>
     </div>
 </div>
-<input type="hidden" id="currentPage" value="0" name="currentPage" />
-<input id="txttoggle" type="hidden" value="0" />
-<!--Start of Gop Y Script-->
-@section scripts{
 
-    <script>
+    <!--Start of Gop Y Script-->
 
-        var Member = new function () {
-            this.ReloadCaptcha = function (u, t) {
-                var r = new Date().getTime();
-                $("#captcha").attr("src", "Ajax/Captcha.ashx?rand=" + r + (t !== undefined ? "&t=" + t : ""));
-            }
-        }
-        $(document).ready(function () {
-            //$("#not_exists").hide();
-            initMember();
+    <div id="fl813691" class="hide">
+        <div id="eb951855">
+            <div id="cob263512">
+                <div id="coh963846" style="cursor:pointer" onclick="javascript: toggleFeddback();">
+                    <ul id="coc67178">
+                        <li id="pf204652hide" style="display:none"><a class="min" title="Ẩn  đi">Ẩn</a></li>
+                        <li id="pf204652show"><a class="max" title="Hiện  lại">Xem </a></li>
+                    </ul>
+                    <span> Góp ý cho câu hỏi trên</span>
+                </div>
+                <div id="co453569" style="background:#d9534f none repeat scroll 0 0">
+                    <textarea rows="3" id="txtGopY"></textarea>
+                    <input id="btnSendMessage" name="btnSendMessage" type="button" class="btn btn-success btn-sm" value="Gởi góp ý" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="currentPage" value="0" name="currentPage" />
+    <input id="txttoggle" type="hidden" value="0" />
+    <!--Start of Gop Y Script-->
+    @section scripts{
 
-            $("form input").keypress(function (e) {
-                if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-                    $('#danhgia').click();
-                    return true;
+        <script>
+
+            var Member = new function () {
+                this.ReloadCaptcha = function (u, t) {
+                    var r = new Date().getTime();
+                    $("#captcha").attr("src", "Ajax/Captcha.ashx?rand=" + r + (t !== undefined ? "&t=" + t : ""));
                 }
+            }
+            $(document).ready(function () {
+                //$("#not_exists").hide();
+                initMember();
+
+                $("form input").keypress(function (e) {
+                    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                        $('#danhgia').click();
+                        return true;
+                    }
+                });
+
             });
 
-        });
-
-        function initMember() {
-            if (Member === undefined) {
-                setTimeout("initMember()", 100); return;
-            }
-
-            Member.ReloadCaptcha();
-            $("#captcha").click(function () { Member.ReloadCaptcha(); });
-            $("#refresh").click(function () { Member.ReloadCaptcha(); });
-        }
-        // save feedback
-        $('#btnSendMessage').click(function () {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
-            $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
-                if (data == true) {
-                    $('#txtGopY').val(''); // save feedback success, clear text
-                    pf204652clickhide();
+            function initMember() {
+                if (Member === undefined) {
+                    setTimeout("initMember()", 100); return;
                 }
-            })
-        });
-        function AutoSaveGopY() {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
-            $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
-                if (data == true) {
-                    $('#txtGopY').val(''); // save feedback success, clear text
-                    pf204652clickhide();
-                    document.getElementById('txttoggle').value = "0";
-                }
-            })
-        };
-        // show virtual keyboard
-        $('#danhgia').click(function () {
-            $("#msg_notify").html("");
-            // Validate input số bien nhận
 
-            // If sai
-            if ($('#soBienNhan').val().length < 5) {
-                var htmlString = "<em>Số biên nhận/mã số không hợp lệ!</em>";
-                $("#msg_notify").html(htmlString);
-                //bootbox.alert("Số biên nhận không hợp lệ", function () {
-                //})
+                Member.ReloadCaptcha();
+                $("#captcha").click(function () { Member.ReloadCaptcha(); });
+                $("#refresh").click(function () { Member.ReloadCaptcha(); });
             }
-            else {
-                //Get thông tin ho sơ
-
-                $.getJSON('/DanhGia/HoSoGetBySoBienNhan_DanhGia?soBienNhan=' + $('#soBienNhan').val(), function (data) {
-
-                    // Neu hoso không tồn tại
-                    if (data.IsExist == false) {
-                        var htmlString = "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
-                        $("#msg_notify").html(htmlString);
-                        //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
-                        //})
+            // save feedback
+            $('#btnSendMessage').click(function () {
+                var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
+                $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
+                    if (data == true) {
+                        $('#txtGopY').val(''); // save feedback success, clear text
+                        pf204652clickhide();
                     }
-                        // Neu hoso  tồn tại
-                    else {
-                        if (data.DaDuocDanhGia == true) {
-                            var htmlString = "<em>Số biên nhận/mã số đã được đánh giá!</em>";
-                            $("#msg_notify").html(htmlString);
-                            //bootbox.alert("Hồ sơ đã được đánh giá", function () {
+                })
+            });
+            function AutoSaveGopY() {
+                var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
+                $.post('@Url.Action("InsertGopYCauHoi", "DanhGia")', param, function (data) {
+                    if (data == true) {
+                        $('#txtGopY').val(''); // save feedback success, clear text
+                        pf204652clickhide();
+                        document.getElementById('txttoggle').value = "0";
+                    }
+                })
+            };
+            // show virtual keyboard
+            $('#danhgia').click(function () {
+                $("#msg_notify").html("");
+                // Validate input số bien nhận
 
+                // If sai
+                if ($('#soBienNhan').val().length < 5) {
+                    var htmlString = "<em>Số biên nhận/mã số không hợp lệ!</em>";
+                    $("#msg_notify").html(htmlString);
+                    //bootbox.alert("Số biên nhận không hợp lệ", function () {
+                    //})
+                }
+                else {
+                    //Get thông tin ho sơ
+
+                    $.getJSON('/DanhGia/HoSoGetBySoBienNhan_DanhGia?soBienNhan=' + $('#soBienNhan').val(), function (data) {
+
+                        // Neu hoso không tồn tại
+                        if (data.IsExist == false) {
+                            var htmlString = "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
+                            $("#msg_notify").html(htmlString);
+                            //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
                             //})
                         }
+                            // Neu hoso  tồn tại
                         else {
-                            // Lưu thông tin hồ sơ
-                            if (data.isCaptchaValid && null == data.HoSo) {
-                                $('#idHoSo').val($('#soBienNhan').val());
-                                $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
-                                });
-                                // Load màn hình đánh giá
-                                $('#danhgia_Content').delay(100).toggle('slow', function () {
+                            if (data.DaDuocDanhGia == true) {
+                                var htmlString = "<em>Số biên nhận/mã số đã được đánh giá!</em>";
+                                $("#msg_notify").html(htmlString);
+                                //bootbox.alert("Hồ sơ đã được đánh giá", function () {
 
-                                });
-                                $('#fl813691').addClass('show').removeClass('hide');
-                                $('.changeHeight').css("height", "auto");
-                            } else {
-                                // an so bien nhan vao #idHoSo
-                                $('#idHoSo').val(data.HoSo.ID);
+                                //})
+                            }
+                            else {
+                                // Lưu thông tin hồ sơ
+                                if (data.isCaptchaValid && null == data.HoSo) {
+                                    $('#idHoSo').val($('#soBienNhan').val());
+                                    $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
+                                    });
+                                    // Load màn hình đánh giá
+                                    $('#danhgia_Content').delay(100).toggle('slow', function () {
 
-                                //Ẩn màn hình nhập số biên nhận
+                                    });
+                                    $('#fl813691').addClass('show').removeClass('hide');
+                                    $('.changeHeight').css("height", "auto");
+                                } else {
+                                    // an so bien nhan vao #idHoSo
+                                    $('#idHoSo').val(data.HoSo.ID);
+
+                                    //Ẩn màn hình nhập số biên nhận
 
 
-                                bootbox.dialog({
-                                    title: "Thông tin hồ sơ",
-                                    message:
-                                    '<div class="row">  ' +
-                                         '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
+                                    bootbox.dialog({
+                                        title: "Thông tin hồ sơ",
+                                        message:
+                                        '<div class="row">  ' +
+                                             '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
 
-                                                    '<div>' +
-                                                        '<p class="info_user_per">' +
-                                                            '<b>Số biên nhận hồ sơ: </b>' + JSONtostring(data.HoSo.SoBienNhan) + '<br />' +
-                                                            '<b> Ngày tiếp nhận: </b>' + JSONDate(data.HoSo.NgayNhan) + '<br />' +
-                                                            '<b> Ngày hẹn trả: </b>' + JSONDate(data.HoSo.NgayHenTra) + '<br />' +
-                                                            '<b> Địa chỉ: </b>' + JSONtostring(data.HoSo.DiaChi) + '<br />' +
-                                                         '</p>' +
-                                                    '</div>' +
+                                                        '<div>' +
+                                                            '<p class="info_user_per">' +
+                                                                '<b>Số biên nhận hồ sơ: </b>' + JSONtostring(data.HoSo.SoBienNhan) + '<br />' +
+                                                                '<b> Ngày tiếp nhận: </b>' + JSONDate(data.HoSo.NgayNhan) + '<br />' +
+                                                                '<b> Ngày hẹn trả: </b>' + JSONDate(data.HoSo.NgayHenTra) + '<br />' +
+                                                                '<b> Địa chỉ: </b>' + JSONtostring(data.HoSo.DiaChi) + '<br />' +
+                                                             '</p>' +
+                                                        '</div>' +
 
-                                         '</div>' +
+                                             '</div>' +
 
-                                        '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
-                                            '<div>' +
-                                                '<p class="info_user_per">' +
+                                            '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">' +
+                                                '<div>' +
+                                                    '<p class="info_user_per">' +
 
-                                                    '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
+                                                        '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
 
-                                                    '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
-                                                    '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
-                                                    '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.NguoiNop) + '<br />' +
-                                                    '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
+                                                        '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
+                                                        '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
+                                                        '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.NguoiNop) + '<br />' +
+                                                        '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
 
-                                                '</p>' +
-                                              '</div>' +
-                                        '</div>' +
-                                 '</div>',
+                                                    '</p>' +
+                                                  '</div>' +
+                                            '</div>' +
+                                     '</div>',
 
-                                    buttons: {
-                                        success: {
-                                            label: "Bắt đầu đánh giá",
-                                            className: "btn-success",
-                                            callback: function () {
+                                        buttons: {
+                                            success: {
+                                                label: "Bắt đầu đánh giá",
+                                                className: "btn-success",
+                                                callback: function () {
 
-                                                $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
-                                                });
+                                                    $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
+                                                    });
 
-                                                // Load màn hình đánh giá
-                                                $('#danhgia_Content').delay(100).toggle('slow', function () {
+                                                    // Load màn hình đánh giá
+                                                    $('#danhgia_Content').delay(100).toggle('slow', function () {
 
-                                                });
-                                                // show gop y cho cau hoi
-                                                $('#fl813691').addClass('show').removeClass('hide');
-                                                $('.changeHeight').css("height", "auto");
+                                                    });
+                                                    // show gop y cho cau hoi
+                                                    $('#fl813691').addClass('show').removeClass('hide');
+                                                    $('.changeHeight').css("height", "auto");
+                                                }
                                             }
                                         }
                                     }
+                                 );
                                 }
-                             );
+
+
                             }
-
-
                         }
-                    }
-                })
+                    })
 
-            }
-        });
-        function JSONDate(dateStr) {
-            if (dateStr != null && dateStr.length > 0) {
-                var m, day;
-                jsonDate = dateStr;
-                var d = new Date(parseInt(jsonDate.substr(6)));
-                m = d.getMonth() + 1;
-                if (m < 10)
-                    m = '0' + m
-                if (d.getDate() < 10)
-                    day = '0' + d.getDate()
+                }
+            });
+            function JSONDate(dateStr) {
+                if (dateStr != null && dateStr.length > 0) {
+                    var m, day;
+                    jsonDate = dateStr;
+                    var d = new Date(parseInt(jsonDate.substr(6)));
+                    m = d.getMonth() + 1;
+                    if (m < 10)
+                        m = '0' + m
+                    if (d.getDate() < 10)
+                        day = '0' + d.getDate()
+                    else
+                        day = d.getDate();
+                    return (day + '/' + m + '/' + d.getFullYear())
+                }
                 else
-                    day = d.getDate();
-                return (day + '/' + m + '/' + d.getFullYear())
+                    return "";
             }
-            else
-                return "";
-        }
-        function JSONtostring(s) {
-            if (s != null && s.length > 0) {
-                return s;
+            function JSONtostring(s) {
+                if (s != null && s.length > 0) {
+                    return s;
+                }
+                else
+                    return "";
             }
-            else
-                return "";
-        }
-        function SelectGopYCauHoi() {
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val() };
-            $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
-                $('#txtGopY').val(data); // save feedback success, clear text
-            })
-        }
+            function SelectGopYCauHoi() {
+                var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#txtQuestionId').val() };
+                $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
+                    $('#txtGopY').val(data); // save feedback success, clear text
+                })
+            }
 
-    </script>
-    <script>
-        pf204652bottomLayer = document.getElementById('fl813691');
-        var pf204652IntervalId = 0;
-        var pf204652maxHeight = 26;//Chieu cao khung quang cao
-        var pf204652minHeight = 26;
-        var pf204652curHeight = 0;
-        function pf204652show() {
-            pf204652curHeight += 2;
-            if (pf204652curHeight > pf204652maxHeight) {
-                clearInterval(pf204652IntervalId);
+        </script>
+        <script>
+            pf204652bottomLayer = document.getElementById('fl813691');
+            var pf204652IntervalId = 0;
+            var pf204652maxHeight = 26;//Chieu cao khung quang cao
+            var pf204652minHeight = 26;
+            var pf204652curHeight = 0;
+            function pf204652show() {
+                pf204652curHeight += 2;
+                if (pf204652curHeight > pf204652maxHeight) {
+                    clearInterval(pf204652IntervalId);
+                }
+                pf204652bottomLayer.style.height = '31%';
             }
-            pf204652bottomLayer.style.height = '31%';
-        }
-        function toggleFeddback() {
-            var val = document.getElementById('txttoggle').value;
-            if (val == "0") {
-                pf204652clickshow();
-                document.getElementById('txttoggle').value = "1";
+            function toggleFeddback() {
+                var val = document.getElementById('txttoggle').value;
+                if (val == "0") {
+                    pf204652clickshow();
+                    document.getElementById('txttoggle').value = "1";
+                }
+                else {
+                    pf204652clickhide();
+                    document.getElementById('txttoggle').value = "0";
+                }
             }
-            else {
-                pf204652clickhide();
-                document.getElementById('txttoggle').value = "0";
+            function pf204652hide() {
+                pf204652curHeight -= 3;
+                if (pf204652curHeight < pf204652minHeight) {
+                    clearInterval(pf204652IntervalId);
+                }
+                pf204652bottomLayer.style.height = '4%';
             }
-        }
-        function pf204652hide() {
-            pf204652curHeight -= 3;
-            if (pf204652curHeight < pf204652minHeight) {
-                clearInterval(pf204652IntervalId);
-            }
-            pf204652bottomLayer.style.height = '4%';
-        }
-        pf204652IntervalId = setInterval('pf204652hide()', 5);
-        function pf204652clickhide() {
-            document.getElementById('pf204652hide').style.display = 'none';
-            document.getElementById('pf204652show').style.display = 'inline';
             pf204652IntervalId = setInterval('pf204652hide()', 5);
-        }
-        function pf204652clickshow() {
-            document.getElementById('pf204652hide').style.display = 'inline';
-            document.getElementById('pf204652show').style.display = 'none';
-            pf204652IntervalId = setInterval('pf204652show()', 5);
-        }
-        function pf204652clickclose() {
-            document.body.style.marginBottom = '0px';
-            pf204652bottomLayer.style.display = 'none';
-        }
-        // hide popup feedback
-        function hidePopup() {
-            window.location = '@Url.Action("Index", "GopY")';
-            $('#fl813691').addClass('hide').removeClass('show');
-        }
+            function pf204652clickhide() {
+                document.getElementById('pf204652hide').style.display = 'none';
+                document.getElementById('pf204652show').style.display = 'inline';
+                pf204652IntervalId = setInterval('pf204652hide()', 5);
+            }
+            function pf204652clickshow() {
+                document.getElementById('pf204652hide').style.display = 'inline';
+                document.getElementById('pf204652show').style.display = 'none';
+                pf204652IntervalId = setInterval('pf204652show()', 5);
+            }
+            function pf204652clickclose() {
+                document.body.style.marginBottom = '0px';
+                pf204652bottomLayer.style.display = 'none';
+            }
+            // hide popup feedback
+            function hidePopup() {
+                window.location = '@Url.Action("Index", "GopY")';
+                $('#fl813691').addClass('hide').removeClass('show');
+            }
 
-        // select feedback when choose page
-        var $currentPage = $('#currentPage');
-        function updateChange() {
-            $('#txtGopY').val('');
-            var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $currentPage.val() };
-            $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
-                $('.changeHeight').css("height", $('#lblHeight' + $currentPage.val()).height() - 20 + "px");
-                $('#txtGopY').val(data); // save feedback success, clear text
-            })
-            // set auto height
-        }
-        $currentPage.on('change', updateChange);
-    </script>
-}
+            // select feedback when choose page
+            var $currentPage = $('#currentPage');
+            function updateChange() {
+                $('#txtGopY').val('');
+                var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $currentPage.val() };
+                $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
+                    //$('.changeHeight').css("height", $('#lblHeight' + $currentPage.val()).height() - 20 + "px");
+                    $('#txtGopY').val(data); // save feedback success, clear text
+                })
+                // set auto height
+            }
+            $currentPage.on('change', updateChange);
+        </script>
+    }

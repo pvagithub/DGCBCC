@@ -1,5 +1,4 @@
 ﻿using CBCC.Models;
-
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -8,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-
 using WebMVC.Bussiness;
 using WebMVC.Framework.Utilities;
 
@@ -74,7 +72,7 @@ namespace CBCC.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
                 else

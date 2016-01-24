@@ -10,17 +10,11 @@
 namespace WebMVC.Entities
 {
     using System;
-
-    public partial class TK_ThuTuc_Nam
+    
+    public partial class ThongKeGopYPhanMemChiTiet_Result
     {
-        public int ID { get; set; }
-        public Nullable<int> DonViID { get; set; }
-        public string TenDonVi { get; set; }
-        public Nullable<int> LinhVucID { get; set; }
-        public string TenLinhVuc { get; set; }
-        public Nullable<int> ThuTucID { get; set; }
-        public string TenThuTuc { get; set; }
-        public Nullable<int> NamID { get; set; }
-        public string KeQuaDanhGia { get; set; }
+        public string MaTL { get; set; }
+        public string Answer { get; set; }
+        public Nullable<int> SoLuotDanhGia { get; set; }
     }
 }
