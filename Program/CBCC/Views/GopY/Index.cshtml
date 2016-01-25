@@ -19,16 +19,12 @@
 }
 <form name="GopY" id="GopYForm" class="form-add">
     <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
-        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-            <div class="text-left" style="background-color: #f4b183;font-style:italic; padding:10px; color:black !important; ">
-                Cảm ơn Ông/Bà đã thực hiện đánh giá. Sự góp ý của Ông/Bà sẽ góp phần nâng cao hơn nữa chất lượng dịch vụ hành chính công tại TP.HCM.<br>
-                Để hoàn thiện hệ thống đánh giá và phục vụ Ông/Bà được tốt hơn, kính mong Ông/Bà cho biết thêm ý kiến về Hệ thống phần mềm đánh giá của chúng tôi. <br>
-                Xin cảm ơn.
-            </div>
-        </div>
+	
         <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
             <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ">
-                Xin chân thành cảm ơn Ông/Bà đã thực hiện đánh giá, kính mong Ông/Bà giành thêm chút thời gian quý báo để góp ý cho hệ thống phần mềm này, để chúng tôi hoàn thiện phục vụ Ông/Bà tốt hơn.
+                 Để hoàn thiện hệ thống đánh giá và phục vụ Ông/Bà được tốt hơn, kính mong Ông/Bà cho biết thêm ý kiến về Hệ thống phần mềm đánh giá của chúng tôi.
+				 <br/>
+				 Xin cảm ơn.
             </div>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -54,12 +50,13 @@
                             {
                                 if (it.Type == TypeControl.Checkbox)
                                 {
-                                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px;"><input style="width:22px;height:22px;" type="checkbox" id='@item.ID@it.ID' value="@it.ID" name='@item.ID@it.ID'> @it.Answer</label>
+                                    <label class="input-lg col-sm-3 col-lg-3" style="background-color:#bac8d5;margin: 0px 5px 0 5px; height:inherit;margin-bottom:5px">
+                                    <input style="width:22px;height:22px;" type="checkbox" id='@item.ID@it.ID' value="@it.ID" name='@item.ID@it.ID'> @it.Answer</label>
                                 }
                                 else if (it.Type == TypeControl.Textbox)
                                 {
                                     var classNameLabel = "input-lg col-sm-1 col-lg-1";
-                                    var classNameText = "input-lg col-sm-4 col-lg-3";
+                                    var classNameText = "input-lg col-sm-2 col-lg-3";
                                     var type = "text";
                                     if (it.Answer.Length > 20)
                                     {
@@ -67,7 +64,7 @@
                                         classNameText = "input-lg col-sm-1 col-lg-1";
                                         type = "number";
                                     }
-                                    <label class="@classNameLabel" style="background-color:#bac8d5;margin: 0px 5px 0 5px;">@it.Answer</label>
+                                    <label class="@classNameLabel" style="background-color:#bac8d5;margin: 0px 5px 0 5px;height:inherit;margin-bottom:5px">@it.Answer</label>
                                     <input class="@classNameText" type="@type" name='@item.ID.ToString()txtKhac' id='@item.ID.ToString()txtKhac' />
                                     <input class="idKhac" hidden="hidden" name='h_@item.ID.ToString()' value="@it.ID" />
                                 }
@@ -76,9 +73,9 @@
                     }
                 }
             }
-            <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
-                <label class="col-sm-6 col-lg-6"></label>
-                <input id="btnGui" type="button" class="btn btn-warning col-sm-2 col-lg-2" value="Gửi" />
+            <div class="col-xs-12 col-sm-12 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                <label class="col-xs-3 col-lg-6"></label>
+                <input id="btnGui" type="button" class="btn btn-warning col-xs-5 col-sm-2 col-lg-2" value="Gửi" />
             </div>
 
         </div>

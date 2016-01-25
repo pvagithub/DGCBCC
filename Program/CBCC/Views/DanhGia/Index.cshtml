@@ -140,7 +140,7 @@
             <div class="warrper_input_sbn">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
-                        <input id="soBienNhan" class="form-control keyboardInput" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá">
+                        <input id="soBienNhan" class="form-control" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá" autocomplete="off">
                         <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
                     </span>
                 </div>
@@ -156,7 +156,7 @@
             <div class="warrper_input_sbn">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
-                        <span class="input-lg">Mã số đánh giá</span>
+                        <span style="font-size:14px;">Mã số đánh giá</span>
                         <img class="input-lg" id="captcha" alt="Security Code" style="cursor: pointer;" />
                         <img id="refresh" class="input-lg" src="~/Images/IconWeb/swap-arrows-refresh.jpg" style="cursor:pointer;" />
                     </span>
@@ -164,17 +164,19 @@
 
             </div>
             <div class="text-left footersbn">
-                <span class="text_bold">Xin chân thành cảm ơn.</span><br />
-                <i>dịch vụ hành chính công tại TP.HCM:</i>
-                <div class="gachngang"></div>
-                <div class="loicamon">
+				  <div class="loicamon">
                     <div class="pull-left"> <i class="glyphicon glyphicon-heart"></i></div>
                     <div class="pull-right" >
-                        Để nâng cao hơn nữa sự hài lòng của người dân và tổ chức đối với dịch vụ hành chính công tại TP. HCM, kính mong Quý Ông/Bà cho biết ý kiến đánh giá về dịch vụ hành chính mà Quý Ông/Bà đã hoặc đang thực hiện. <br>
-                        Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính tại TP. HCM ngày một hoàn thiện hơn.
+                        Để nâng cao hơn nữa sự hài lòng của người dân và tổ chức đối sự phục vụ của cơ quan hành chính nhà nước thuộc TP. HCM, kính mong Quý Ông/Bà cho biết ý kiến đánh giá về dịch vụ hành chính mà Quý Ông/Bà đã hoặc đang thực hiện. <br>
+                        Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. HCM ngày một hoàn thiện hơn.
                     </div>
                 </div>
-                <div class="clearfix"></div>
+				  <div class="clearfix"></div>
+				   <div class="gachngang"></div>
+                <div style="font-weight:bold;text-align: right;">Xin chân thành cảm ơn.</div>
+                              
+              
+              
             </div>
         </div>
 
@@ -421,7 +423,7 @@
                 if (pf204652curHeight > pf204652maxHeight) {
                     clearInterval(pf204652IntervalId);
                 }
-                pf204652bottomLayer.style.height = '31%';
+                pf204652bottomLayer.style.height = '28%';
             }
             function toggleFeddback() {
                 var val = document.getElementById('txttoggle').value;

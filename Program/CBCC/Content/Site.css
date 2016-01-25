@@ -1507,8 +1507,8 @@ thead {
     padding: 10px;
     color: black !important;
     text-align: center;
-    height:80px;
-    padding-top:2%;
+    height: 80px;
+    padding-top: 2%;
 }
 
 .footersbn {
@@ -1520,29 +1520,41 @@ thead {
 
 .gachngang {
     border: 1px solid #e9e9e9;
-    margin-top:5px;
-    margin-bottom:10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
-.loicamon .pull-left{
-    width:15%;
-    text-align:right;
-    padding-right:10px;
-    padding-top:5px;
+
+.loicamon .pull-left {
+    width: 15%;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 5px;
 }
-.loicamon .pull-right{
-    width:85%;
-    padding-right:5%;
+
+.loicamon .pull-right {
+    width: 85%;
+    padding-right: 5%;
 }
-.footersbn i{
-    font-size:12px;
+
+.footersbn i {
+    font-size: 12px;
 }
-div.row-answer{
-    width:80%;
+
+div.row-answer {
+    width: 80%;
 }
-.wrap-content-quiz{
-    width:100%;
+
+.wrap-content-quiz {
+    width: 100%;
 }
-#quiz .titlesbn{
-    width:80%;
-    margin:auto;
+
+#quiz .titlesbn {
+    width: 80%;
+    margin: auto;
+    height: inherit;
+    margin-bottom: 10px;
 }
+
+    #quiz .titlesbn > p {
+        font-size: 22px;
+    }
