@@ -13,11 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Bussiness", "WebMVC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Framework", "WebMVC.Framework\WebMVC.Framework.csproj", "{1C1EE26E-3B3F-4A7B-B82F-C3011E904357}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5261352B-427D-4FD5-A3CC-552BA839FA94}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\GESoft\LandingPage-Mobile\LP.Web\LP.Web\bin\WebControlCaptcha.dll = ..\..\..\..\GESoft\LandingPage-Mobile\LP.Web\LP.Web\bin\WebControlCaptcha.dll
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
