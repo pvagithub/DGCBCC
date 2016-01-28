@@ -97,6 +97,7 @@ namespace WebMVC.Bussiness
                 if (gopy != null)
                 {
                     gopy.NoiDungGopY = model.NoiDungGopY;
+                    gopy.TieuChiId = model.TieuChiId;
                 }
                 else
                     context.GopYCauHois.Add(model);

@@ -49,10 +49,13 @@ namespace CBCC.Controllers
                         datas["SoBienNhan"] = soBienNhan;
                         dsInfo = clientweb.WebSearch(datas);
 
+                        int donViId = 0;
                         if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
                         {
+                            int.TryParse(dsInfo.Tables[0].Rows[0]["MaDonVi"].ToString(), out donViId);
                             hoSo = new HoSo()
                             {
+                                DonViID = donViId,
                                 SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
                                 TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
                                 DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
