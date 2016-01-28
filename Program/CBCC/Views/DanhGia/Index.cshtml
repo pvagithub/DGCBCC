@@ -1,4 +1,6 @@
-﻿@{
+﻿@using WebMVC.Entities;
+@model List<DonVi>
+@{
     ViewBag.Title = "Đánh giá công chức tiếp nhận và giải quyết hồ sơ";
 }
 @section styles{
@@ -140,6 +142,32 @@
             <div class="warrper_input_sbn">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
+                        <select class="bs-select form-control" id="cbDonVi">
+                            @{
+                                var lsDVParent = Model.Where(p => p.ParentDonViID == null).ToList();
+                                foreach (var item in lsDVParent)
+                                {
+                                    <optgroup label="@item.TenDonVi">
+                                        @{
+                                    var lsDVChild = Model.Where(p => p.ParentDonViID == item.DonViID).ToList();
+                                    foreach (var it in lsDVChild)
+                                    {
+                                        <option value="@it.DonViID">@it.TenDonVi</option>
+                                    }
+                                        }
+
+                                    </optgroup>
+                                }
+                            }
+
+                        </select>
+                    </span>
+                </div>
+
+            </div><h1></h1>
+            <div class="warrper_input_sbn">
+                <div class="input-group">
+                    <span class="form-group input-group-btn">
                         <input id="soBienNhan" class="form-control" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá" autocomplete="off">
                         <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
                     </span>
@@ -267,6 +295,8 @@
             };
             // show virtual keyboard
             $('#danhgia').click(function () {
+                //alert($("#cbDonVi option:selected").val());
+                //return false;
                 $("#msg_notify").html("");
                 // Validate input số bien nhận
 
