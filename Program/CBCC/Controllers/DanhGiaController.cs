@@ -14,7 +14,8 @@ namespace CBCC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var lsDonVi = DanhMucService.DonViGetAllList();
+            return View(lsDonVi);
         }
 
         public JsonResult HoSoGetBySoBienNhan_DanhGia(string soBienNhan)
@@ -93,7 +94,7 @@ namespace CBCC.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo)
+        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo, int iDonViID)
         {
             bool result = true;
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
@@ -121,7 +122,7 @@ namespace CBCC.Controllers
                 lstKQDG.Add(kq);
             }
 
-            result = DanhGiaService.SaveKetQuaDanhGia(danhGia, lstKQDG, long.Parse(iDHoSo));
+            result = DanhGiaService.SaveKetQuaDanhGia(danhGia, lstKQDG, long.Parse(iDHoSo), iDonViID);
             return Json(new { result }, JsonRequestBehavior.AllowGet);
         }
 
