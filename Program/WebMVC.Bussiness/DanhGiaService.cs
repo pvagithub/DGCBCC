@@ -11,7 +11,7 @@ namespace WebMVC.Bussiness
     {
         #region Kết quả đánh giá
 
-        public static bool SaveKetQuaDanhGia(DanhGia _Danhgia, List<KetQuaDanhGia> _KetQuaDanhGia, long idHoSo,int DonViID)
+        public static bool SaveKetQuaDanhGia(DanhGia _Danhgia, List<KetQuaDanhGia> _KetQuaDanhGia, long idHoSo, int DonViID, string soBN)
         {
             using (var context = new DataModelEntities())
             {
@@ -20,9 +20,10 @@ namespace WebMVC.Bussiness
                 var hoSo = context.HoSoes.Find(idHoSo);
                 if (hoSo != null)
                 {
-                    _Danhgia.HoSoID = hoSo.ID.ToString();
-                    _Danhgia.SoBienNhan = hoSo.SoBienNhan;
                     _Danhgia.DonViID = hoSo.DonViID;
+                    _Danhgia.HoSoID = hoSo.ID.ToString();
+                    _Danhgia.MaDonVi = hoSo.MaDonVi;
+                    _Danhgia.SoBienNhan = soBN;
                     _Danhgia.TenDonVi = hoSo.TenDonVi;
                     _Danhgia.LinhVucID = hoSo.LinhVucID;
                     _Danhgia.TenLinhVuc = hoSo.TenLinhVuc;
@@ -35,8 +36,9 @@ namespace WebMVC.Bussiness
                 else
                 {
                     _Danhgia.HoSoID = null;
-                    _Danhgia.SoBienNhan = idHoSo.ToString();
+                    _Danhgia.SoBienNhan = soBN;
                     _Danhgia.DonViID = DonViID;
+                    _Danhgia.MaDonVi = null;
                     _Danhgia.TenDonVi = null;
                     _Danhgia.LinhVucID = null;
                     _Danhgia.TenLinhVuc = null;

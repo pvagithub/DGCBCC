@@ -11,10 +11,11 @@ namespace WebMVC.Dal
 {
     using System;
     using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
     using WebMVC.Entities;
-
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+    
     public partial class DataModelEntities : DbContext
     {
         public DataModelEntities()

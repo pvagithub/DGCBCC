@@ -10,7 +10,8 @@
 namespace WebMVC.Entities
 {
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class TK_ThuTuc_Thang
     {
         public int ID { get; set; }

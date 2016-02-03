@@ -44,7 +44,18 @@
                         <textarea type="text" class="form-control" id="MoTa" name="MoTa" placeholder="Mô tả..." />
                     </div>
                 </div>
-               
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Loại đơn vị</label>
+                    <div class="col-xs-8">
+                        <select name="ParentDonViID" id="ParentDonViID">
+                            <option value="">--- Chọn loại đơn vị ---</option>
+                            @foreach (var item in (List<DonVi>)ViewBag.LoaiDonVi)
+                            {
+                                <option value="@item.DonViID">@item.TenDonVi</option>
+                            }
+                        </select>
+                    </div>
+                </div>
             </form>
 
             <div class="clearfix"></div>

@@ -31,6 +31,7 @@
           <Property Name="PhongBan" Type="nvarchar" MaxLength="250" />
           <Property Name="NgayDanhGia" Type="datetime" />
           <Property Name="DanhGiaTrucTiep" Type="bit" />
+          <Property Name="MaDonVi" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
@@ -69,9 +70,9 @@
           </Key>
           <Property Name="GopYCauHoiId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SoBienNhan" Type="varchar" MaxLength="50" />
+          <Property Name="TieuChiId" Type="bigint" />
           <Property Name="CauHoiId" Type="bigint" />
           <Property Name="NoiDungGopY" Type="nvarchar(max)" />
-          <Property Name="TieuChiId" Type="bigint" />
         </EntityType>
         <EntityType Name="GopYQuestion">
           <Key>
@@ -104,6 +105,7 @@
           <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
           <Property Name="DaDanhGia" Type="bit" />
           <Property Name="DanhGiaID" Type="bigint" />
+          <Property Name="MaDonVi" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="InputTypeTieuChi">
           <Key>
@@ -1261,7 +1263,7 @@
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ThongKeGopYPhanMemChiTiet" ReturnType="Collection(DataModel.ThongKeGopYPhanMemChiTiet_Result)">
-            <Parameter Name="idCau" Mode="In" Type="Int32" />
+          <Parameter Name="idCau" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
@@ -1338,6 +1340,7 @@
           <Property Name="NgayDanhGia" Type="DateTime" Precision="3" />
           <Property Name="DanhGiaTrucTiep" Type="Boolean" />
           <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_DanhGia" FromRole="DanhGia" ToRole="KetQuaDanhGia" />
+          <Property Name="MaDonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
@@ -1377,6 +1380,7 @@
           <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DaDanhGia" Type="Boolean" />
           <Property Name="DanhGiaID" Type="Int64" />
+          <Property Name="MaDonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="InputTypeTieuChi">
           <Key>
@@ -2013,6 +2017,8 @@
           <Property Type="String" Name="MaTL" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Answer" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="SoLuotDanhGia" Nullable="true" />
+          <Property Type="String" Name="NoiDungTL" Nullable="true" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2135,6 +2141,7 @@
           <EntitySetMapping Name="DanhGias">
             <EntityTypeMapping TypeName="DataModel.DanhGia">
               <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
                 <ScalarProperty Name="DanhGiaTrucTiep" ColumnName="DanhGiaTrucTiep" />
                 <ScalarProperty Name="NgayDanhGia" ColumnName="NgayDanhGia" />
                 <ScalarProperty Name="PhongBan" ColumnName="PhongBan" />
@@ -2168,6 +2175,7 @@
           <EntitySetMapping Name="HoSoes">
             <EntityTypeMapping TypeName="DataModel.HoSo">
               <MappingFragment StoreEntitySet="HoSo">
+                <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
                 <ScalarProperty Name="DanhGiaID" ColumnName="DanhGiaID" />
                 <ScalarProperty Name="DaDanhGia" ColumnName="DaDanhGia" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
@@ -2729,6 +2737,8 @@
                 <ScalarProperty Name="MaTL" ColumnName="MaTL" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="SoLuotDanhGia" ColumnName="SoLuotDanhGia" />
+                <ScalarProperty Name="NoiDungTL" ColumnName="NoiDungTL" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

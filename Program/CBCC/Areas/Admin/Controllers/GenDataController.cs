@@ -378,7 +378,7 @@ namespace CBCC.Areas.Admin.Controllers
                         }
                     }
 
-                    DanhGiaService.SaveKetQuaDanhGia(danhgia, lstKQDG, item.ID,1);
+                    DanhGiaService.SaveKetQuaDanhGia(danhgia, lstKQDG, item.ID,1,"0");
                 }
 
                 result = true;

@@ -31,6 +31,7 @@ namespace WebMVC.Entities
         public string PhongBan { get; set; }
         public Nullable<System.DateTime> NgayDanhGia { get; set; }
         public Nullable<bool> DanhGiaTrucTiep { get; set; }
+        public string MaDonVi { get; set; }
     
         public virtual ICollection<KetQuaDanhGia> KetQuaDanhGias { get; set; }
     }

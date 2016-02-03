@@ -10,7 +10,8 @@
 namespace WebMVC.Entities
 {
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class LinhVucDonVi
     {
         public int ID { get; set; }

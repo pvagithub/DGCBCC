@@ -16,5 +16,7 @@ namespace WebMVC.Entities
         public string MaTL { get; set; }
         public string Answer { get; set; }
         public Nullable<int> SoLuotDanhGia { get; set; }
+        public string NoiDungTL { get; set; }
+        public int Type { get; set; }
     }
 }

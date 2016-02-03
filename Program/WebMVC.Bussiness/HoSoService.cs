@@ -81,7 +81,19 @@ namespace WebMVC.Bussiness
                 context.SaveChanges();
             }
         }
+        public static string HoSoCreate(HoSo hs)
+        {
+            string id = string.Empty;
+            using (var context = new DataModelEntities())
+            {
+                context.ReadCommited();
 
+                context.HoSoes.Add(hs);
+                context.SaveChanges();
+                id = hs.HoSoID;
+            }
+            return id;
+        }
         #endregion HoSo
     }
 }

@@ -10,6 +10,18 @@ namespace CBCC.Areas.Admin.Controllers
     public class DonViController : Controller
     {
         [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            try
+            {
+                ViewBag.LoaiDonVi = DanhMucService.DonViGetAllList().Where(p => p.ParentDonViID == null).ToList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -29,7 +41,7 @@ namespace CBCC.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                donVi = donVi.Where(s => s.TenDonVi.Contains(searchString) || s.MoTa.Contains(searchString)).ToList();
+                donVi = donVi.Where(s => s.MaDonVi.Contains(searchString) || s.TenDonVi.Contains(searchString) || s.MoTa.Contains(searchString)).ToList();
             }
 
             switch (sortOrder)
@@ -73,6 +85,8 @@ namespace CBCC.Areas.Admin.Controllers
                 item.TenDonVi = donVi.TenDonVi;
                 item.MoTa = donVi.MoTa;
                 item.MaDonVi = donVi.MaDonVi;
+                item.ParentDonViID = donVi.ParentDonViID;
+                item.Active = true;
                 int id = DanhMucService.DonViCreate(item);
                 return RedirectToAction("Index");
             }

@@ -50,7 +50,7 @@ namespace WebMVC.Bussiness
                 item.TenDonVi = donVi.TenDonVi;
                 item.MoTa = donVi.MoTa;
                 item.MaDonVi = donVi.MaDonVi;
-
+                item.ParentDonViID = donVi.ParentDonViID;
                 context.SaveChanges();
             }
         }

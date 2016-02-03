@@ -18,7 +18,7 @@ namespace CBCC.Controllers
             return View(lsDonVi);
         }
 
-        public JsonResult HoSoGetBySoBienNhan_DanhGia(string soBienNhan)
+        public JsonResult HoSoGetBySoBienNhan_DanhGia(string soBienNhan, string maDonVi)
         {
             HoSo hoSo = null;
             if (null != Session["CAPTCHA"])
@@ -47,15 +47,16 @@ namespace CBCC.Controllers
 
                         Dictionary<object, object> datas = new Dictionary<object, object>();
                         datas["SoBienNhan"] = soBienNhan;
+                        datas["MaDonVi"] = maDonVi;
                         dsInfo = clientweb.WebSearch(datas);
 
                         int donViId = 0;
                         if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
                         {
-                            int.TryParse(dsInfo.Tables[0].Rows[0]["MaDonVi"].ToString(), out donViId);
                             hoSo = new HoSo()
                             {
-                                DonViID = donViId,
+                                MaDonVi = maDonVi,
+                                NguoiNop = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
                                 SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
                                 TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
                                 DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
@@ -64,7 +65,7 @@ namespace CBCC.Controllers
                             };
                             //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
                             isExist = true;
-
+                            HoSoService.HoSoCreate(hoSo);
                         }
 
                         //string matinhtrang = clientvoice.VoiceSearch(datas);
@@ -97,7 +98,7 @@ namespace CBCC.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo, int iDonViID)
+        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo, int iDonViID, string soBN)
         {
             bool result = true;
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
@@ -125,7 +126,7 @@ namespace CBCC.Controllers
                 lstKQDG.Add(kq);
             }
 
-            result = DanhGiaService.SaveKetQuaDanhGia(danhGia, lstKQDG, long.Parse(iDHoSo), iDonViID);
+            result = DanhGiaService.SaveKetQuaDanhGia(danhGia, lstKQDG, long.Parse(iDHoSo), iDonViID, soBN);
             return Json(new { result }, JsonRequestBehavior.AllowGet);
         }
 

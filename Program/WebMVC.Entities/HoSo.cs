@@ -10,7 +10,8 @@
 namespace WebMVC.Entities
 {
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class HoSo
     {
         public long ID { get; set; }
@@ -32,5 +33,6 @@ namespace WebMVC.Entities
         public string DienThoai { get; set; }
         public Nullable<bool> DaDanhGia { get; set; }
         public Nullable<long> DanhGiaID { get; set; }
+        public string MaDonVi { get; set; }
     }
 }

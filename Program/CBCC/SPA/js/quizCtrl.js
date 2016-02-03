@@ -97,8 +97,9 @@
         var _danhSachKQ = JSON.stringify(answers);
         var IDHoSo = ($('#idHoSo').val());
         var _donViID = $("#cbDonVi option:selected").val();
+        var _soBN = $('#soBienNhan').val();
         if ($scope.config.submit == true) {
-            $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo + '&iDonViID=' + _donViID, answers).success(function (data, status) {
+            $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo + '&iDonViID=' + _donViID + '&soBN=' + _soBN, answers).success(function (data, status) {
                 if (data.result == true) {
                     $scope.mode = 'result';
                 }
