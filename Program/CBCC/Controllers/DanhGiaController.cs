@@ -98,7 +98,7 @@ namespace CBCC.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo, int iDonViID, string soBN)
+        public JsonResult SaveDanhGia(string DanhSachKQ, string iDHoSo, string iDonViID, string soBN)
         {
             bool result = true;
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();

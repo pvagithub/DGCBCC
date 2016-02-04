@@ -31,7 +31,7 @@
           <Property Name="PhongBan" Type="nvarchar" MaxLength="250" />
           <Property Name="NgayDanhGia" Type="datetime" />
           <Property Name="DanhGiaTrucTiep" Type="bit" />
-          <Property Name="MaDonVi" Type="varchar" MaxLength="50" />
+          <Property Name="MaDonVi" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
@@ -1340,7 +1340,7 @@
           <Property Name="NgayDanhGia" Type="DateTime" Precision="3" />
           <Property Name="DanhGiaTrucTiep" Type="Boolean" />
           <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_DanhGia" FromRole="DanhGia" ToRole="KetQuaDanhGia" />
-          <Property Name="MaDonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaDonVi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
