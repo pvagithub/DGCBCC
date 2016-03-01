@@ -778,5 +778,108 @@ namespace WebMVC.Dal
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeGopYPhanMemChiTiet_Result>("ThongKeGopYPhanMemChiTiet", idCauParameter);
         }
+    
+        public virtual int ThongKeNhomTieuChiDonVi_ByTime(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay, Nullable<int> donVi)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            var donViParameter = donVi.HasValue ?
+                new ObjectParameter("DonVi", donVi) :
+                new ObjectParameter("DonVi", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeNhomTieuChiDonVi_ByTime", tuNgayParameter, denNgayParameter, donViParameter);
+        }
+    
+        public virtual int ThongKeNhomTieuChiTP_ByTime(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeNhomTieuChiTP_ByTime", tuNgayParameter, denNgayParameter);
+        }
+    
+        public virtual int ThongKeToanTP_ByTime(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_ByTime", tuNgayParameter, denNgayParameter);
+        }
+    
+        public virtual int ThongKeToanTP_DonVi_ByDonVi_ByTime(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay, Nullable<int> donViID)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            var donViIDParameter = donViID.HasValue ?
+                new ObjectParameter("DonViID", donViID) :
+                new ObjectParameter("DonViID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByDonVi_ByTime", tuNgayParameter, denNgayParameter, donViIDParameter);
+        }
+    
+        public virtual int ThongKeToanTP_DonVi_ByTime(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay, Nullable<int> donVi)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            var donViParameter = donVi.HasValue ?
+                new ObjectParameter("DonVi", donVi) :
+                new ObjectParameter("DonVi", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime", tuNgayParameter, denNgayParameter, donViParameter);
+        }
+    
+        public virtual int ThongKeToanTP_DonVi_ByTime_10Bottom(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime_10Bottom", tuNgayParameter, denNgayParameter);
+        }
+    
+        public virtual int ThongKeToanTP_DonVi_ByTime_10Top(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime_10Top", tuNgayParameter, denNgayParameter);
+        }
     }
 }

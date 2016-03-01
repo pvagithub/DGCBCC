@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="CustomEntities\CauTraLoiExtend.cs" />
     <Compile Include="CustomEntities\Enum.cs" />
+    <Compile Include="CustomEntities\ThongKe.cs" />
     <Compile Include="CustomEntities\ThongKeThuTuc_TuNgay_DenNgay_Result.cs" />
     <Compile Include="CustomEntities\ThongKeLinhVuc_TuNgay_DenNgay_Result.cs" />
     <Compile Include="CustomEntities\ThongKeDonVi_TuNgay_DenNgay_Result.cs" />

@@ -1,0 +1,58 @@
+﻿.item_table {
+    float: left;
+}
+
+.text_main_col > a {
+    color: #0d55a3;
+}
+
+.item_table_header {
+    color: #0d55a3;
+}
+
+.col_cauhoi {
+    float: left;
+    width: 423px;
+}
+
+.content_tk > div {
+    float: left;
+    min-width: 360px;
+}
+
+.content_tk {
+    margin-bottom: 0 !important;
+    min-width: 5310px;
+    padding: 15px;
+    width: 5310px;
+}
+
+.col_cauhoi.fix_left {
+    width: 200px;
+}
+
+.col_tieuchi {
+    color: #003868;
+    font-family: tahoma;
+    font-weight: bold;
+}
+
+.text_main_col {
+    color: #0d55a3;
+    font-family: tahoma;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.fixed_left {
+    display: block;
+    left: 195px;
+    position: fixed;
+    top: 156px;
+    width: 200px;
+}
+
+.fix_left.fix_left_1 {
+    width: 184px;
+}
+

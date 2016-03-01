@@ -209,6 +209,9 @@
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SoftwareFeedbackController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeNhomTieuChiController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeDonViController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeThanhPhoController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuTucController.cs" />
     <Compile Include="Areas\Admin\Controllers\TieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -711,6 +714,7 @@
     <Content Include="Content\keyboard\keyboard.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\dropdown-menu.css" />
+    <Content Include="Content\Site2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfontba72.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -737,6 +741,10 @@
     <Content Include="Images\IconWeb\logo.png" />
     <Content Include="Images\IconWeb\swap-arrows-refresh.jpg" />
     <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.dotdotdot.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
@@ -746,6 +754,7 @@
     <Content Include="Scripts\perfect-scrollbar\js\min\perfect-scrollbar.min.js" />
     <Content Include="Scripts\perfect-scrollbar\js\perfect-scrollbar.jquery.js" />
     <Content Include="Scripts\perfect-scrollbar\js\perfect-scrollbar.js" />
+    <Content Include="Scripts\StickyTableHeaders\css\component2.css" />
     <Content Include="Scripts\StickyTableHeaders\css\component.css" />
     <Content Include="Scripts\StickyTableHeaders\css\demo.css" />
     <Content Include="Scripts\StickyTableHeaders\css\normalize.css" />
@@ -779,6 +788,9 @@
     <Content Include="Areas\Admin\Views\GopYAnswers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManageFeedback\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SoftwareFeedback\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThanhPho\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonVi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeNhomTieuChi\Index.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />

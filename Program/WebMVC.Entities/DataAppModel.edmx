@@ -827,6 +827,15 @@
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="ThongKeNhomTieuChiDonVi_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DonVi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeNhomTieuChiTP_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ThongKeThuTuc_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonViID" Type="int" Mode="In" />
           <Parameter Name="LinhVucID" Type="int" Mode="In" />
@@ -861,6 +870,28 @@
         </Function>
         <Function Name="ThongKeToanTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_ByDonVi_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DonViID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DonVi" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_ByTime_10Bottom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_ByTime_10Top" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
         </Function>
         <Function Name="ThongKeToanTP_DonVi_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Year" Type="int" Mode="In" />
@@ -1264,6 +1295,37 @@
           </FunctionImport>
           <FunctionImport Name="ThongKeGopYPhanMemChiTiet" ReturnType="Collection(DataModel.ThongKeGopYPhanMemChiTiet_Result)">
           <Parameter Name="idCau" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeNhomTieuChiDonVi_ByTime">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DonVi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeNhomTieuChiTP_ByTime">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_ByTime">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_ByDonVi_ByTime">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_ByTime">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DonVi" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_ByTime_10Bottom">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_ByTime_10Top">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
@@ -2742,6 +2804,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ThongKeNhomTieuChiDonVi_ByTime" FunctionName="DataModel.Store.ThongKeNhomTieuChiDonVi_ByTime" />
+          <FunctionImportMapping FunctionImportName="ThongKeNhomTieuChiTP_ByTime" FunctionName="DataModel.Store.ThongKeNhomTieuChiTP_ByTime" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_ByTime" FunctionName="DataModel.Store.ThongKeToanTP_ByTime" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByDonVi_ByTime" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByDonVi_ByTime" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime_10Bottom" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime_10Bottom" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime_10Top" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime_10Top" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

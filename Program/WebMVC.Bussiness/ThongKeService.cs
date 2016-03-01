@@ -426,5 +426,186 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+
+        #region Write New Thong Ke
+        /// <summary>
+        /// Biểu đồ thống kê toàn Tp theo tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian
+        /// </summary>
+        public static ThongKe ThongKeToanTP_ByTime(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_ByTime @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Biểu đồ thống kê toàn Tp theo tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian
+        /// Biểu đồ thống kê tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian của từng đơn vị
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_BanBieu_ByTime(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_BanBieu_ByTime @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Thống kê 10 đơn vị có tỷ lệ hài lòng cao nhất
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_DonVi_ByTime_10Top(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime_10Top @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Thống kê 10 đơn vị có tỷ lệ hài lòng thấp nhất
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_DonVi_ByTime_10Bottom(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime_10Bottom @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Biểu đồ thống kê tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian của từng đơn vị
+        /// </summary>
+        public static ThongKe ThongKeToanTP_DonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var donViIDParameter = new SqlParameter("DonVi", donViID);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime @TuNgay,@DenNgay,@DonVi",
+                    tuNgayParameter, denNgayParameter, donViIDParameter).FirstOrDefault();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Bản biểu thống kê theo tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian  của từng đơn vị
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_DonVi_ByDonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var donViIDParameter = new SqlParameter("DonVi", donViID);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByDonVi_ByTime @TuNgay,@DenNgay,@DonVi",
+                    tuNgayParameter, denNgayParameter, donViIDParameter).ToList();
+
+                return result;
+            }
+        }
+        
+
+        /// <summary>
+        /// Báo cáo thống kê theo các nhóm tiêu chí của toàn thành phố
+        /// </summary>
+        public static List<ThongKe> ThongKeNhomTieuChiTP_ByTime(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeNhomTieuChiTP_ByTime @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Báo cáo thống kê theo các nhóm tiêu chí theo từng đơn vị
+        /// </summary>
+        public static List<ThongKe> ThongKeNhomTieuChiDonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var donViIDParameter = new SqlParameter("DonVi", donViID);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeNhomTieuChiDonVi_ByTime @TuNgay,@DenNgay,@DonVi",
+                    tuNgayParameter, denNgayParameter, donViIDParameter).ToList();
+
+                return result;
+            }
+        }
+        #endregion
+
     }
 }

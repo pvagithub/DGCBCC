@@ -20,8 +20,16 @@
     <link href="~/Areas/Admin/Content/bower_components/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="~/Areas/Admin/Content/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/Areas/Admin/Content/bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="~/Content/Site2.css" rel="stylesheet" />
+    <link href="~/Scripts/StickyTableHeaders/css/component2.css" rel="stylesheet" />
+    @*<link href="~/Scripts/StickyTableHeaders/css/demo.css" rel="stylesheet" />*@
+    <link href="~/Scripts/StickyTableHeaders/css/normalize.css" rel="stylesheet" />
+    <script src="~/Scripts/StickyTableHeaders/js/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="~/Scripts/StickyTableHeaders/js/jquery.stickyheader.js"></script>
 </head>
 <body>
 
@@ -38,17 +46,17 @@
         </div>
     </div>
     <!-- jQuery -->
-    <script src="~/Areas/Admin/Content/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Areas/Admin/Content/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="~/Areas/Admin/Content/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <!-- Morris Charts JavaScript -->
     <script src="~/Areas/Admin/Content/bower_components/raphael/raphael-min.js"></script>
-
+    <script src="~/Scripts/jquery-ui.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Areas/Admin/Content/dist/js/sb-admin-2.js"></script>
     <script src="~/Scripts/bootbox.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

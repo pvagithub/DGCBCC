@@ -1,0 +1,290 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê Thành Phố";
+    int i;
+    var listNhomTieuChi = (List<ThongKe>)ViewBag.NhomTieuChiTP;
+    var listNhomTieuChi2 = (List<ThongKe>)ViewBag.NhomTieuChi;
+}
+
+<h3>Thống kê nhóm tiêu chí</h3>
+
+@section scripts{
+ 
+    <script>
+        $('#tuNgay').datepicker({
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+        $('#denNgay').datepicker(
+        {
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+    </script>
+}
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+@using (Html.BeginForm("Index", "ThongKeNhomTieuChi"))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-2">
+            <input id="tuNgay" name="tuNgay" type="text" value="@ViewBag.TuNgay" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+        <div class="col-md-2"><p class="text-right">Ngày kết thúc:</p></div>
+        <div class="col-md-2"><input id="denNgay" name="denNgay" type="text" value="@ViewBag.DenNgay" placeholder="Chọn ngày kết thúc" class="form-control"></div>
+        <div class="col-md-1"><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Xem</button></div>
+    </div>
+}
+<br />
+<div class="row">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Thành phố</a></li>
+        <li class=""><a href="#tab2" data-toggle="tab">Từng đơn vị</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="tab1">
+            @if (listNhomTieuChi.Count == 0)
+            {
+                <div class="warning">Chưa có dữ liệu</div>
+            }
+            else
+            {
+
+                <table class="overflow-y col-lg-12 content_tk  table table-hover   table-bordered">
+
+                    <thead>
+                        <tr>
+
+                            <th class="col_cauhoi fix_left">
+                                <div class="text_main_col  col_cauhoi fix_left fix_left_1">Tiêu chí</div>
+                            </th>
+                            @{
+                string[] lsttieuChi = listNhomTieuChi[0].KetQuaDanhGia.Split(';');
+
+                for (i = 1; i < lsttieuChi.Length; i++)
+                {
+
+                    string[] cauhoi = lsttieuChi[i].Split('☺');
+
+                    <th>
+                        <div class="col_cauhoi">
+
+                            <div class="col_tieuchi">
+                                @cauhoi[0]
+                            </div>
+                        </div>
+                    </th>
+
+                }
+
+                            }
+                        </tr>
+
+                        <tr>
+
+                            <th class="col_cauhoi fix_left">
+                                <div class="text_main_col col_cauhoi fix_left fix_left_1">ĐV - Câu TL</div>
+                            </th>
+                            @{
+
+                for (i = 1; i < lsttieuChi.Length; i++)
+                {
+
+                    string[] cauhoi = lsttieuChi[i].Split('☺');
+
+                    <th>
+
+                        @for (int y = 1; y < cauhoi.Length; y++)
+                        {
+                            string[] cautraloi = cauhoi[y].Split(new[] { "__" }, StringSplitOptions.None);
+                            for (int z = 0; z < cautraloi.Length; z++)
+                            {
+                                var width = 100 / (cautraloi.Length - 1);
+                                <div class="item_table item_table_header" style="width:@width%">@cautraloi[z].Split('_')[0]</div>
+                            }
+                        }
+                    </th>
+                }}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int e = 0; e < listNhomTieuChi.Count; e++)
+                        {
+
+                            <tr>
+                                <th class="col_cauhoi fix_left">
+                                    <div class="text_main_col">
+                                        <a href="#">
+                                            @listNhomTieuChi[e].TenDonVi
+                                        </a>
+                                    </div>
+                                </th>
+                                @{
+                            var item = listNhomTieuChi[e].KetQuaDanhGia;
+
+                            string[] tieuChi1 = item.Split(';');
+
+                            for (i = 1; i < tieuChi1.Length; i++)
+                            {
+
+                                string[] cauhoi = tieuChi1[i].Split('☺');
+
+                                <td>
+
+                                    @{
+                                string[] cautraloi = cauhoi[1].Split(new[] { "__" }, StringSplitOptions.None);
+
+                                for (int z = 1; z < cautraloi.Length; z++)
+                                {
+                                    var text = cautraloi[z].ToString();
+                                    var index_char = text.Split('_')[0];
+                                    var width = 100 / (cautraloi.Length - 1);
+
+                                    <div class="item_table" style="width:@width%">@text.Replace(index_char + "_", "")</div>
+                                }
+                                    }
+                                </td>
+
+                            }
+                                }
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+            }
+        </div>
+        <div class="tab-pane fade" id="tab2">
+            @if (listNhomTieuChi2.Count == 0)
+            {
+                <div class="warning">Chưa có dữ liệu</div>
+            }
+            else
+            {
+
+                <table class="overflow-y col-lg-12 content_tk  table table-hover   table-bordered">
+
+                    <thead>
+                        <tr>
+
+                            <th class="col_cauhoi fix_left">
+                                <div class="text_main_col  col_cauhoi fix_left fix_left_1">Tiêu chí</div>
+                            </th>
+                            @{
+                string[] lsttieuChi = listNhomTieuChi2[0].KetQuaDanhGia.Split(';');
+
+                for (i = 1; i < lsttieuChi.Length; i++)
+                {
+
+                    string[] cauhoi = lsttieuChi[i].Split('☺');
+
+                    <th>
+                        <div class="col_cauhoi">
+
+                            <div class="col_tieuchi">
+                                @cauhoi[0]
+                            </div>
+                        </div>
+                    </th>
+
+                }
+
+                            }
+                        </tr>
+
+                        <tr>
+
+                            <th class="col_cauhoi fix_left">
+                                <div class="text_main_col col_cauhoi fix_left fix_left_1">ĐV - Câu TL</div>
+                            </th>
+                            @{
+
+                for (i = 1; i < lsttieuChi.Length; i++)
+                {
+
+                    string[] cauhoi = lsttieuChi[i].Split('☺');
+
+                    <th>
+
+                        @for (int y = 1; y < cauhoi.Length; y++)
+                        {
+                            string[] cautraloi = cauhoi[y].Split(new[] { "__" }, StringSplitOptions.None);
+                            for (int z = 0; z < cautraloi.Length; z++)
+                            {
+                                var width = 100 / (cautraloi.Length - 1);
+                                <div class="item_table item_table_header" style="width:@width%">@cautraloi[z].Split('_')[0]</div>
+                            }
+                        }
+                    </th>
+                }}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int e = 0; e < listNhomTieuChi2.Count; e++)
+                        {
+
+                            <tr>
+                                <th class="col_cauhoi fix_left">
+                                    <div class="text_main_col">
+                                        <a href="#">
+                                            @listNhomTieuChi2[e].TenDonVi
+                                        </a>
+                                    </div>
+                                </th>
+                                @{
+                            var item = listNhomTieuChi2[e].KetQuaDanhGia;
+
+                            string[] tieuChi1 = item.Split(';');
+
+                            for (i = 1; i < tieuChi1.Length; i++)
+                            {
+
+                                string[] cauhoi = tieuChi1[i].Split('☺');
+
+                                <td>
+
+                                    @{
+                                string[] cautraloi = cauhoi[1].Split(new[] { "__" }, StringSplitOptions.None);
+
+                                for (int z = 1; z < cautraloi.Length; z++)
+                                {
+                                    var text = cautraloi[z].ToString();
+                                    var index_char = text.Split('_')[0];
+                                    var width = 100 / (cautraloi.Length - 1);
+
+                                    <div class="item_table" style="width:@width%">@text.Replace(index_char + "_", "")</div>
+                                }
+                                    }
+                                </td>
+
+                            }
+                                }
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+            }
+        </div>
+    </div>
+</div>
