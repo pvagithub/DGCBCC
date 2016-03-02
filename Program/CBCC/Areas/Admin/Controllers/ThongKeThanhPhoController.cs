@@ -21,9 +21,9 @@ namespace CBCC.Areas.Admin.Controllers
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
-                thongke.HaiLong = 100;
-                thongke.KhongHaiLong = 0;
-                thongke.BinhThuong = 0;
+                thongke.HaiLong = 85;
+                thongke.KhongHaiLong = 5;
+                thongke.BinhThuong = 10;
             }
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
