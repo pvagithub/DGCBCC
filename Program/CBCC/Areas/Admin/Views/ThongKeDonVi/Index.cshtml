@@ -30,18 +30,21 @@
         <div class="col-md-3">
             <span class="form-group input-group-btn">
                 <select class="bs-select form-control" id="cbDonVi" name="cbDonVi">
-                    @{
-                        var listEntity = ((List<DonVi>)ViewBag.DonVi).Where(x=>x.ParentDonViID != null).ToList();
-                        foreach (var item in listEntity)
+                                        @{
+                        var listParent = ((List<DonVi>)ViewBag.DonVi).Where(x => x.ParentDonViID == null).ToList();
+                        foreach (var item in listParent)
                         {
-                            if (ViewBag.DonViID != null && (ViewBag.DonViID.ToString() == item.DonViID.ToString()))
-                            {<option value="@item.DonViID" selected>@item.TenDonVi</option>}
-                            else
-                            {
-                            <option value="@item.DonViID">@item.TenDonVi</option>}
+                            <optgroup label="@item.TenDonVi">
+                                @{var listEntity = ((List<DonVi>)ViewBag.DonVi).Where(x=>x.ParentDonViID == item.DonViID).ToList();
+                                    foreach (var it in listEntity)
+                                    {
+                                    <option value="@it.DonViID">@it.TenDonVi</option>}
+                                  }
+                            </optgroup>
                         }
-}
-                </select>
+                              
+                        }
+</select>
             </span>
 
         </div>
@@ -70,7 +73,7 @@
             <table class="table table-hover">
                 <tr>
                     <th>STT</th>
-                    <th>Month/Year</th>
+                    <th>Tháng/Năm</th>
                     <th>Hài lòng</th>
                     <th>Bình thường</th>
                     <th>Không hài lòng</th>
