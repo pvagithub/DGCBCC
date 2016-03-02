@@ -52,12 +52,17 @@ namespace WebMVC.Bussiness
                 context.SaveChanges();
                 var idDanhGia = _Danhgia.ID;
                 ///Lưu ket quả danh giá co thông ke
-
+                List<KetQuaDanhGia> lstit = new List<KetQuaDanhGia>();
                 foreach (var item in _KetQuaDanhGia)
                 {
-                    item.DanhGiaID = idDanhGia;
-                    context.KetQuaDanhGias.Add(item);
+                    KetQuaDanhGia it = new KetQuaDanhGia();
+                    it.DanhGiaID = idDanhGia;
+                    it.TieuChiID = item.TieuChiID;
+                    it.CauTraLoiID = item.CauTraLoiID;
+                    it.TypeInput = item.TypeInput;
+                    lstit.Add(it);
                 }
+                context.KetQuaDanhGias.AddRange(lstit);
                 context.SaveChanges();
                 //Cập nhật thông tin đánh giá cho Hồ sơ
 

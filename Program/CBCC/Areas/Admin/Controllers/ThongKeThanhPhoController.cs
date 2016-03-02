@@ -24,10 +24,16 @@ namespace CBCC.Areas.Admin.Controllers
                 thongke.HaiLong = 85;
                 thongke.KhongHaiLong = 5;
                 thongke.BinhThuong = 10;
+                thongke.SCBinhThuong = "0/0";
+                thongke.SCHaiLong = "0/0";
+                thongke.SCKhongHaiLong = "0/0";
             }
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
+            ViewBag.SCBinhThuong = thongke.SCBinhThuong;
+            ViewBag.SCHaiLong = thongke.SCHaiLong;
+            ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
             return View();
         }
         [HttpPost]
@@ -44,12 +50,18 @@ namespace CBCC.Areas.Admin.Controllers
                 thongke.HaiLong = 100;
                 thongke.KhongHaiLong = 0;
                 thongke.BinhThuong = 0;
+                thongke.SCBinhThuong = "0/0";
+                thongke.SCHaiLong = "0/0";
+                thongke.SCKhongHaiLong = "0/0";
             }
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
+            ViewBag.SCBinhThuong = thongke.SCBinhThuong;
+            ViewBag.SCHaiLong = thongke.SCHaiLong;
+            ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
 
             // ban bieu
             ViewBag.BanBieu = ThongKeService.ThongKeToanTP_BanBieu_ByTime(tuNgay, denNgay);

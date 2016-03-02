@@ -28,10 +28,16 @@ namespace CBCC.Areas.Admin.Controllers
                 thongke.HaiLong = 100;
                 thongke.KhongHaiLong = 0;
                 thongke.BinhThuong = 0;
+                thongke.SCBinhThuong = "0/0";
+                thongke.SCHaiLong = "0/0";
+                thongke.SCKhongHaiLong = "0/0";
             }
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
+            ViewBag.SCBinhThuong = thongke.SCBinhThuong;
+            ViewBag.SCHaiLong = thongke.SCHaiLong;
+            ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
             return View();
         }
         [HttpPost]
@@ -41,21 +47,26 @@ namespace CBCC.Areas.Admin.Controllers
             denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
             #region thong ke toan tinh
             ThongKe thongke;
-            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(tuNgay, denNgay, cbDonVi);
+            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(tuNgay, denNgay, 0);
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
                 thongke.HaiLong = 100;
                 thongke.KhongHaiLong = 0;
                 thongke.BinhThuong = 0;
+                thongke.SCBinhThuong = "0/0";
+                thongke.SCHaiLong = "0/0";
+                thongke.SCKhongHaiLong = "0/0";
             }
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
-            ViewBag.DonViID = cbDonVi;
+            ViewBag.MaDonVi = cbDonVi;
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
-
+            ViewBag.SCBinhThuong = thongke.SCBinhThuong;
+            ViewBag.SCHaiLong = thongke.SCHaiLong;
+            ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
             // ban bieu
             ViewBag.BanBieu = ThongKeService.ThongKeToanTP_DonVi_ByDonVi_ByTime(tuNgay, denNgay, cbDonVi);
             #endregion

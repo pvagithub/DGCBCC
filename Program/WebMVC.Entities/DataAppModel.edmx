@@ -551,42 +551,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KetQuaDanhGia_CauTraLoi">
-          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="0..1" />
-          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CauTraLoi">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="KetQuaDanhGia">
-              <PropertyRef Name="CauTraLoiID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KetQuaDanhGia_DanhGia">
-          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="0..1" />
-          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DanhGia">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="KetQuaDanhGia">
-              <PropertyRef Name="DanhGiaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KetQuaDanhGia_TieuChi">
-          <End Role="TieuChi" Type="Self.TieuChi" Multiplicity="0..1" />
-          <End Role="KetQuaDanhGia" Type="Self.KetQuaDanhGia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TieuChi">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="KetQuaDanhGia">
-              <PropertyRef Name="TieuChiID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LinhVucDonVi_DonVi">
           <End Role="DonVi" Type="Self.DonVi" Multiplicity="0..1" />
           <End Role="LinhVucDonVi" Type="Self.LinhVucDonVi" Multiplicity="*" />
@@ -878,12 +842,12 @@
         <Function Name="ThongKeToanTP_DonVi_ByDonVi_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
-          <Parameter Name="DonViID" Type="int" Mode="In" />
+          <Parameter Name="MaDonVi" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ThongKeToanTP_DonVi_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
-          <Parameter Name="DonVi" Type="int" Mode="In" />
+          <Parameter Name="MaDV" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ThongKeToanTP_DonVi_ByTime_10Bottom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
@@ -956,18 +920,6 @@
           <AssociationSet Name="FK_ChiTieu_NhomChiTieu" Association="Self.FK_ChiTieu_NhomChiTieu">
             <End Role="NhomTieuChi" EntitySet="NhomTieuChi" />
             <End Role="TieuChi" EntitySet="TieuChi" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KetQuaDanhGia_CauTraLoi" Association="Self.FK_KetQuaDanhGia_CauTraLoi">
-            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
-            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KetQuaDanhGia_DanhGia" Association="Self.FK_KetQuaDanhGia_DanhGia">
-            <End Role="DanhGia" EntitySet="DanhGia" />
-            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KetQuaDanhGia_TieuChi" Association="Self.FK_KetQuaDanhGia_TieuChi">
-            <End Role="TieuChi" EntitySet="TieuChi" />
-            <End Role="KetQuaDanhGia" EntitySet="KetQuaDanhGia" />
           </AssociationSet>
           <AssociationSet Name="FK_LinhVucDonVi_DonVi" Association="Self.FK_LinhVucDonVi_DonVi">
             <End Role="DonVi" EntitySet="DonVi" />
@@ -1312,12 +1264,12 @@
           <FunctionImport Name="ThongKeToanTP_DonVi_ByDonVi_ByTime">
             <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
-            <Parameter Name="DonViID" Mode="In" Type="Int32" />
+            <Parameter Name="MaDonVi" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ThongKeToanTP_DonVi_ByTime">
             <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
-            <Parameter Name="DonVi" Mode="In" Type="Int32" />
+            <Parameter Name="MaDV" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ThongKeToanTP_DonVi_ByTime_10Bottom">
             <Parameter Name="TuNgay" Mode="In" Type="DateTime" />

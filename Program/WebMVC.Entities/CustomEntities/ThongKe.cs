@@ -13,10 +13,14 @@ namespace WebMVC.Entities
     public partial class ThongKe 
     { 
         public int? DonViID { get; set; }
+        public string MaDonVi { get; set; }
         public string TenDonVi { get; set; }
         public string KetQuaDanhGia { get; set; }
         public double? HaiLong { get; set; }
         public double? KhongHaiLong { get; set; }
         public double? BinhThuong { get; set; }
+        public string SCHaiLong { get; set; }
+        public string SCKhongHaiLong { get; set; }
+        public string SCBinhThuong { get; set; }
     }
 }

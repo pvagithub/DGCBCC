@@ -70,13 +70,13 @@
                                 @banbieu[i].TenDonVi
                             </td>
                             <td>
-                                @banbieu[i].HaiLong
+                                @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
                             </td>
                             <td>
-                                @banbieu[i].BinhThuong
+                                @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
                             </td>
                             <td>
-                                @banbieu[i].KhongHaiLong
+                                @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
                             </td>
                         </tr>
                     }
@@ -103,13 +103,13 @@
                                 @caonhat[i].TenDonVi
                             </td>
                             <td>
-                                @caonhat[i].HaiLong
+                                @caonhat[i].HaiLong% (@caonhat[i].SCHaiLong)
                             </td>
                             <td>
-                                @caonhat[i].BinhThuong
+                                @caonhat[i].BinhThuong% (@caonhat[i].SCBinhThuong)
                             </td>
                             <td>
-                                @caonhat[i].KhongHaiLong
+                                @caonhat[i].KhongHaiLong% (@caonhat[i].SCKhongHaiLong)
                             </td>
                         </tr>
                     }
@@ -137,13 +137,13 @@
                                 @thapnhat[i].TenDonVi
                             </td>
                             <td>
-                                @thapnhat[i].HaiLong
+                                @thapnhat[i].HaiLong% (@thapnhat[i].SCHaiLong)
                             </td>
                             <td>
-                                @thapnhat[i].BinhThuong
+                                @thapnhat[i].BinhThuong% (@thapnhat[i].SCBinhThuong)
                             </td>
                             <td>
-                                @thapnhat[i].KhongHaiLong
+                                @thapnhat[i].KhongHaiLong% (@thapnhat[i].SCKhongHaiLong)
                             </td>
                         </tr>
                     }
@@ -155,57 +155,58 @@
 @section scripts{
     <script src="~/Scripts/highcharts.js"></script>
     <script>
-        $('#tuNgay').datepicker({
-            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
-        });
-        $('#denNgay').datepicker(
-        {
-            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
-        });
-        $(function () {
-            $('#container').highcharts({
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
-                },
-                title: {
-                    text: ''
-                },
-                //tooltip: {
-                //    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
-                //},
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.2f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
+    $('#tuNgay').datepicker({
+        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+    });
+    $('#denNgay').datepicker(
+    {
+        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+    });
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            //tooltip: {
+            //    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+            //},
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        format: '<b>{point.name}</b>: {point.percentage:.2f}%',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
-                    }
-                },
-                series: [{
-                    name: '',
-                    colorByPoint: true,
-                    data: [{
-                        name: 'Hài Lòng',
-                        y: @ViewBag.HaiLong,
-                        sliced: true,
-                        selected: true
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: '',
+                colorByPoint: true,
+                data: [{
+                    name: 'Hài Lòng: @ViewBag.HaiLong% (@ViewBag.SCHaiLong)',
+                    y: @ViewBag.HaiLong,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Bình Thường: @ViewBag.BinhThuong% (@ViewBag.SCBinhThuong)',
+                    y: @ViewBag.BinhThuong
                     }, {
-                        name: 'Bình Thường',
-                        y: @ViewBag.BinhThuong
-                        }, {
-                            name: 'Không Hài Lòng',
-                            y: @ViewBag.KhongHaiLong
-                            }]
-                }]
-            });
+                        name: 'Không Hài Lòng: @ViewBag.KhongHaiLong% (@ViewBag.SCKhongHaiLong)',
+                        y: @ViewBag.KhongHaiLong
+                        }]
+            }]
         });
-    </script>
+    });
+</script>
 }
