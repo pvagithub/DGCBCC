@@ -17,9 +17,8 @@ namespace CBCC.Areas.Admin.Controllers
         {
             ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
-            List<ThongKe> result = ThongKeService.ThongKeNhomTieuChiTP_ByTime(ViewBag.TuNgay, ViewBag.DenNgay);
-            ViewBag.NhomTieuChiTP = result;
-            ViewBag.NhomTieuChi = new List<ThongKe>();
+            ViewBag.NhomTieuChiTP = ThongKeService.ThongKeNhomTieuChiTP_ByTime(ViewBag.TuNgay, ViewBag.DenNgay) as List<ThongKe>;
+            ViewBag.NhomTieuChi = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, "0") as List<ThongKe>;
             return View();
         }
         [HttpPost]
@@ -28,12 +27,11 @@ namespace CBCC.Areas.Admin.Controllers
             tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
             denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
             #region thong ke toan tinh
-            List<ThongKe> result = ThongKeService.ThongKeNhomTieuChiTP_ByTime(tuNgay, denNgay);
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
-            ViewBag.NhomTieuChiTP = result;
+            ViewBag.NhomTieuChiTP = ThongKeService.ThongKeNhomTieuChiTP_ByTime(tuNgay, denNgay) as List<ThongKe>;
             // ban bieu
-            ViewBag.NhomTieuChi = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime(tuNgay, denNgay, 0);
+            ViewBag.NhomTieuChi = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime(tuNgay, denNgay, "0") as List<ThongKe>;
             #endregion
             return View();
         }

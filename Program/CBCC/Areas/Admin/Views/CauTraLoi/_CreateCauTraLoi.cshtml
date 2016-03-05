@@ -43,7 +43,11 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3 float_left text-right">Giá trị</label>
                     <div class="col-xs-8">
-                        @Html.DropDownListFor(x => x.GiaTri, Model.ListGiaTri)
+                        <select name="GiaTri" class="form-control">
+                            <option value="1">Hài lòng</option>
+                            <option value="0">Bình thường</option>
+                            <option value="-1">Không hài lòng</option>
+                        </select>
                     </div>
                 </div>
                 

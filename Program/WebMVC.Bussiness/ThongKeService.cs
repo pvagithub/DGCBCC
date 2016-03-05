@@ -540,7 +540,7 @@ namespace WebMVC.Bussiness
         /// <summary>
         /// Bản biểu thống kê theo tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian  của từng đơn vị
         /// </summary>
-        public static List<ThongKe> ThongKeToanTP_DonVi_ByDonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        public static List<ThongKe> ThongKeToanTP_DonVi_ByDonVi_ByTime(string tuNgay, string denNgay, string donViID)
         {
             using (var context = new DataModelEntities())
             {
@@ -586,7 +586,7 @@ namespace WebMVC.Bussiness
         /// <summary>
         /// Báo cáo thống kê theo các nhóm tiêu chí theo từng đơn vị
         /// </summary>
-        public static List<ThongKe> ThongKeNhomTieuChiDonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        public static List<ThongKe> ThongKeNhomTieuChiDonVi_ByTime(string tuNgay, string denNgay, string donViID)
         {
             using (var context = new DataModelEntities())
             {

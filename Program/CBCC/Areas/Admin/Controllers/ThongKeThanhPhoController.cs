@@ -34,6 +34,11 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.SCBinhThuong = thongke.SCBinhThuong;
             ViewBag.SCHaiLong = thongke.SCHaiLong;
             ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
+
+            // ban bieu
+            ViewBag.BanBieu = ThongKeService.ThongKeToanTP_BanBieu_ByTime(ViewBag.TuNgay, ViewBag.DenNgay);
+            ViewBag.CaoNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Top(ViewBag.TuNgay, ViewBag.DenNgay);
+            ViewBag.ThapNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Bottom(ViewBag.TuNgay, ViewBag.DenNgay);
             return View();
         }
         [HttpPost]
