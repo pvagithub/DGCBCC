@@ -23,7 +23,7 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
             ThongKe thongke;
-            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, 0);
+            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, ViewBag.MaDonVi);
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
@@ -46,13 +46,13 @@ namespace CBCC.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(int cbDonVi, string tuNgay, string denNgay)
+        public ActionResult Index(string cbDonVi, string tuNgay, string denNgay)
         {
             tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
             denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
             #region thong ke toan tinh
             ThongKe thongke;
-            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(tuNgay, denNgay, 0);
+            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(tuNgay, denNgay, cbDonVi);
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
@@ -73,7 +73,7 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.SCHaiLong = thongke.SCHaiLong;
             ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
             // ban bieu
-            ViewBag.BanBieu = ThongKeService.ThongKeToanTP_DonVi_ByDonVi_ByTime(tuNgay, denNgay, cbDonVi.ToString());
+            ViewBag.BanBieu = ThongKeService.ThongKeToanTP_DonVi_ByDonVi_ByTime(tuNgay, denNgay, cbDonVi);
             #endregion
             return View();
         }

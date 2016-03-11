@@ -518,7 +518,7 @@ namespace WebMVC.Bussiness
         /// <summary>
         /// Biểu đồ thống kê tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian của từng đơn vị
         /// </summary>
-        public static ThongKe ThongKeToanTP_DonVi_ByTime(string tuNgay, string denNgay, int donViID)
+        public static ThongKe ThongKeToanTP_DonVi_ByTime(string tuNgay, string denNgay, string maDonVi)
         {
             using (var context = new DataModelEntities())
             {
@@ -529,10 +529,10 @@ namespace WebMVC.Bussiness
                           new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
                 var denNgayParameter = denNgay != null ?
                      new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
-                var donViIDParameter = new SqlParameter("DonVi", donViID);
+                var maDonViParameter = new SqlParameter("MaDV", maDonVi);
 
-                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime @TuNgay,@DenNgay,@DonVi",
-                    tuNgayParameter, denNgayParameter, donViIDParameter).FirstOrDefault();
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime @TuNgay,@DenNgay,@MaDV",
+                    tuNgayParameter, denNgayParameter, maDonViParameter).FirstOrDefault();
 
                 return result;
             }

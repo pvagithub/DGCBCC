@@ -39,7 +39,7 @@
                                         var listEntity = ((List<DonVi>)ViewBag.DonVi).Where(x=>x.ParentDonViID == item.DonViID).ToList();
                                         foreach (var it in listEntity)
                                         {
-                                            if (ViewBag.MaDonVi is string && ViewBag.MaDonVi == it.MaDonVi) 
+                                            if (ViewBag.MaDonVi !=null && ViewBag.MaDonVi.ToString() == it.MaDonVi.ToString()) 
                                             { 
                                                 <option value="@it.MaDonVi" selected>@it.TenDonVi</option>
                                             }
