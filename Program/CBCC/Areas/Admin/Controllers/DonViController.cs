@@ -41,7 +41,7 @@ namespace CBCC.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                donVi = donVi.Where(s => s.MaDonVi.Contains(searchString) || s.TenDonVi.Contains(searchString) || s.MoTa.Contains(searchString)).ToList();
+                donVi = donVi.Where(s => (s.MaDonVi != null && s.MaDonVi.Contains(searchString)) || (s.TenDonVi != null && s.TenDonVi.Contains(searchString))).ToList();
             }
 
             switch (sortOrder)

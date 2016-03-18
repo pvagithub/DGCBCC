@@ -1,10 +1,5 @@
-﻿using DotNet.Highcharts;
-using DotNet.Highcharts.Enums;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 using WebMVC.Entities;
