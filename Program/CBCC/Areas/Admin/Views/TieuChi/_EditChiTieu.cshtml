@@ -83,6 +83,13 @@
                         @Html.TextBoxFor(m => m.TenVanTat, new { @class = "form-control required", id = "TenVanTat", name = "TenVanTat", placeholder = "Tên vắn tắt...", @maxlength = "200" })
                     </div>
                 </div>
+                <div class="form-group">
+
+                    <label class="control-label col-xs-3 float_left text-right clsEven">Thứ tự hiển thị</label>
+                    <div class="col-xs-3 heightrow">
+                        @Html.TextBoxFor(m => m.OrderDisplay, new { @class = "form-control required", id = "OrderDisplay", name = "OrderDisplay", @maxlength = "200" })
+                    </div>
+                </div>
             </form>
 
             <div class="clearfix"></div>

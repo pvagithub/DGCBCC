@@ -26,6 +26,7 @@
         <th>Các lựa chọn</th>
         <th>Nhóm tiêu chí</th>
         <th>Tên vắn tắt</th>
+        <th>Thứ tự hiển thị</th>
         <th>Trạng thái</th>
         <th>
             <a href='/Admin/TieuChi/Create'
@@ -70,6 +71,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenVanTat, item.TenVanTat)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.OrderDisplay, item.OrderDisplay)
             </td>
             <td align="center">
                 @{

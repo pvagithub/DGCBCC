@@ -85,6 +85,7 @@ namespace CBCC.Areas.Admin.Controllers
                     tieuchi.TenVanTat = tieuchiModel.TenTieuChi;
                 else
                     tieuchi.TenVanTat = tieuchiModel.TenVanTat;
+                tieuchi.OrderDisplay = tieuchiModel.OrderDisplay;
                 int IDTieuChi = DanhMucService.TieuChiCreate(tieuchi);
 
                 if (tieuchiModel.ListIDCauTraLoi != null && tieuchiModel.ListIDCauTraLoi.Count > 0)
@@ -112,7 +113,7 @@ namespace CBCC.Areas.Admin.Controllers
             tieuchi.TenVanTat = tieuchiGet.TenVanTat;
             tieuchi.TypeInput = tieuchiGet.TypeInput;
             tieuchi.Active = tieuchiGet.Active;
-        
+            tieuchi.OrderDisplay = tieuchiGet.OrderDisplay;
 
             tieuchi.ListIDCauTraLoi = (from i in dsCauTraLoi select i.ToString()).ToList();
 
