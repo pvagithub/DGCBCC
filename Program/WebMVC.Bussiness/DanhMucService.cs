@@ -280,7 +280,7 @@ namespace WebMVC.Bussiness
                 dsCauTraLoi = context.TieuChiCauTraLois.Include(x => x.CauTraLoi).OrderByDescending(x => x.CauTraLoi.GiaTri).ToList();
                 context.ReadUncommited();
 
-                return context.TieuChis.OrderBy(x => x.ID).Include(x => x.NhomTieuChi).AsNoTracking().ToList();
+                return context.TieuChis.OrderBy(x => x.OrderDisplay).Include(x => x.NhomTieuChi).AsNoTracking().ToList();
             }
         }
 
@@ -289,7 +289,7 @@ namespace WebMVC.Bussiness
             using (var context = new DataModelEntities())
             {
                 context.ReadUncommited();
-                IQueryable<TieuChi> query = context.TieuChis.Where(x => x.Active == true);
+                IQueryable<TieuChi> query = context.TieuChis.Where(x => x.Active == true).OrderBy(x => x.OrderDisplay);
                 return query.Include(x => x.NhomTieuChi).AsNoTracking().ToList();
             }
         }
@@ -324,8 +324,13 @@ namespace WebMVC.Bussiness
                 item.TenTieuChi = chitieu.TenTieuChi;
                 item.Active = chitieu.Active;
                 item.NhomTieuChiID = chitieu.NhomTieuChiID;
-                item.TypeInput = chitieu.TypeInput;
+                //item.TypeInput = chitieu.TypeInput;
+                item.TypeInput = 1;
                 item.TenVanTat = chitieu.TenVanTat;
+                if (chitieu.OrderDisplay is int)
+                    item.OrderDisplay = chitieu.OrderDisplay;
+                else
+                    item.OrderDisplay = 1;
 
                 context.ReadCommited();
                 context.SaveChanges();
