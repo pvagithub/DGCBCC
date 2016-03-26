@@ -80,12 +80,16 @@ namespace CBCC.Areas.Admin.Controllers
                 tieuchi.Active = true;
                 tieuchi.TenTieuChi = tieuchiModel.TenTieuChi;
                 tieuchi.NhomTieuChiID = tieuchiModel.NhomTieuChiID;
-                tieuchi.TypeInput = tieuchiModel.TypeInput;
+                //tieuchi.TypeInput = tieuchiModel.TypeInput;
+                tieuchi.TypeInput = 1;
                 if (string.IsNullOrEmpty(tieuchiModel.TenVanTat))
                     tieuchi.TenVanTat = tieuchiModel.TenTieuChi;
                 else
                     tieuchi.TenVanTat = tieuchiModel.TenVanTat;
-                tieuchi.OrderDisplay = tieuchiModel.OrderDisplay;
+                if (tieuchiModel.OrderDisplay is int)
+                    tieuchi.OrderDisplay = tieuchiModel.OrderDisplay;
+                else
+                    tieuchi.OrderDisplay = 1;
                 int IDTieuChi = DanhMucService.TieuChiCreate(tieuchi);
 
                 if (tieuchiModel.ListIDCauTraLoi != null && tieuchiModel.ListIDCauTraLoi.Count > 0)

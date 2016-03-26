@@ -34,55 +34,45 @@
                 </div>
                 <br />
                 <div class="clearfix"></div>
-
-                <div class="form-group">
-
+                @*<div class="form-group hidden" >
                     <label class="control-label col-xs-3 float_left text-right">Loại input</label>
                     <div class="col-xs-9">
                         @Html.DropDownListFor(x => x.TypeInput, Model.LoaiInputList)
                     </div>
-                </div>
-
+                </div>*@
+                <p></p>
                 <div class="form-group">
                     <label class="control-label col-xs-3 float_left text-right ">Nhóm tiêu chí</label>
                     <div class="col-xs-9">
-                        @Html.DropDownListFor(x => x.NhomTieuChiID, Model.ListNhomTieuChi)
+                        @Html.DropDownListFor(x => x.NhomTieuChiID, Model.ListNhomTieuChi, new { @class="form-control" })
                     </div>
                 </div>
+                <br /><br />
                 <div class="form-group">
-
                     <label class="control-label col-xs-3 float_left text-right clsOdd">Các câu trả lời</label>
                     <div class="col-xs-9 lstMullti">
-
                         <select class="col-xs-12" id="ListIDCauTraLoi_Create" name="ListIDCauTraLoi" multiple="multiple">
-
                             @foreach (var item in Model.ListDanhSachTraLoi)
                             {
-
                                 <option value="@item.Value">@item.Text</option>
-
                             }
                         </select>
                     </div>
                 </div>
-                <br />
                 <div class="clearfix"></div>
                 <div class="form-group">
-
                     <label class="control-label col-xs-3 float_left text-right clsEven">Tên vắn tắt</label>
                     <div class="col-xs-9 heightrow">
                         <input type="text" class="form-control required" id="TenVanTat" name="TenVanTat" placeholder="Tên vắn tắt..." maxlength="100" />
                     </div>
                 </div>
                 <div class="form-group">
-
-                    <label class="control-label col-xs-3 float_left text-right clsEven">Thứ tự hiển thị</label>
+                    <label class="control-label col-xs-3 float_left text-right clsOdd">Thứ tự hiển thị</label>
                     <div class="col-xs-3 heightrow">
                         <input type="text" class="form-control required" id="OrderDisplay" name="OrderDisplay" maxlength="3" />
                     </div>
                 </div>
             </form>
-
             <div class="clearfix"></div>
         </div>
         <div class="modal-footer">

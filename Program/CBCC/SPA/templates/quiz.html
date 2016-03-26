@@ -1,8 +1,11 @@
 ﻿
 <div id="quiz">
     <div ng-show="config.showPager">
-        <div class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
+        <div ng-show="currentPage < 7" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
             <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi, Ông/Bà đang đánh giá câu hỏi số:</p>
+        </div>
+        <div ng-show="currentPage > 6" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
+            <p> Các câu hỏi mở rộng:</p>
         </div>
         <div class="titlesbn" ng-if="config.title=(mode=='review' ? true : false)">
             <p>
@@ -10,14 +13,27 @@
             </p>
         </div>
     </div>
-    <!--<h1 class="center title_quiz">{{quiz.name}}</h1>
-    <h4 class="center sub_title_quiz">{{quiz.description}}</h4>-->
     <div class="quizNav ">
         <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
-        <button class="btn btn-danger btn_ketthuc" ng-show="config.showPager" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
+        <button class="btn btn-danger btn_ketthuc" ng-show="currentPage > 6 || mode=='review'" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
+        <button style="font-size:17px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success btn_ketthuc" ng-show="mode=='review'" ng-click="continue();">Tiếp tục</button>
     </div>
     <div ng-show="mode=='quiz'">
-        <div ng-repeat="question in filteredQuestions">
+        <div ng-repeat="question in filteredQuestions" ng-if="currentPage < 7">
+            <div class="question">
+                <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
+                <h2>{{currentPage}}. {{question.Name}}</h2>
+                <div class="options" id="lblHeight{{currentPage}}">
+                    <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
+                        <label for="{{option.Id}}" class="changeHeight">
+                            <input id="{{option.Id}}" type="checkbox" onclick="AutoSaveGopY();" ng-model="option.Selected" ng-change="onSelect(question, option);" />
+                            {{option.Name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="question in filteredQuestions" ng-if="currentPage > 6">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
                 <h2>{{currentPage}}. {{question.Name}}</h2>
@@ -45,9 +61,10 @@
         </div>
     </div>
     <div class="review" ng-show="mode=='review'">
-        <div ng-repeat="question in questions">
+        <div ng-repeat="question in questions" ng-if="$index < 6">
             <div ng-if="question.QuestionTypeId == 1" ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Đã đánh giá'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
         </div>
+
         <!--<div>
             <button class="btn btn-primary btn_spa" ng-click="goTo(currentPage)">Quay lại</button>
         </div>-->
@@ -71,9 +88,12 @@
                     <br /><br />
                     <div>
                         <span style="float:left">Xin cảm ơn.</span>
-                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" onclick="hidePopup();" ng-click="onSubmit();">Tiếp tục</button>
+                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" ng-click="continue();">Tiếp tục</button>
                     </div>
                     <div class="clearfix"></div>
+                </div>
+                <div class="text-center" style="background-color: #C5E0B4; padding:10px; color:black !important ; font-size:17px">
+                    <button class="btn btn-danger btn_ketthuc" style="font-weight: bold;font-size: 19px;" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
                 </div>
             </div>
         </div>

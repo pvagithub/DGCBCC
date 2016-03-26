@@ -1,6 +1,5 @@
 ﻿app.controller('quizCtrl', ['$scope', '$http', 'helperService', function ($scope, $http, helper) {
     $scope.quizName = 'SPA/data/csharp.js';
-
     //Note: Only those configs are functional which is documented at: http://www.codeproject.com/Articles/860024/Quiz-Application-in-AngularJs
     // Others are work in progress.
     $scope.defaultConfig = {
@@ -17,11 +16,14 @@
         'showPager': true,
         'theme': 'none',
         'submit': false,
-        'title': true
+        'title': true,
+        'force': 6
     }
     $scope.goTo = function (index) {
+
         if (index > 0 && index <= $scope.totalItems) {
             $scope.currentPage = index;
+            $scope.showPopup();
             $scope.mode = 'quiz';
         }
         if (index > $scope.totalItems) index = $scope.totalItems;
@@ -42,16 +44,28 @@
                 }
             });
         }
+        if ($scope.totalItems == 12) {
+            $scope.paging();
+        }
+        if ($scope.currentPage == 12) {
+            $scope.onSubmit();
+            window.location = 'GopY/Index';
+            $scope.currentPage = 13;
+            $scope.config.showPager = false;
+            $scope.mode = 'none';
+        }
         if ($scope.currentPage == $scope.totalItems) {
             //$scope.onSubmit();
             //window.location = 'GopY/Index';
             $scope.mode = 'result';
+            $scope.hidePopup();
             $scope.config.showPager = false;
         }
         $scope.goTo($scope.currentPage + 1);
     }
     $scope.review = function () {
         $scope.mode = 'review';
+        $scope.hidePopup();
         $scope.config.showPager = true;
     }
 
@@ -102,6 +116,7 @@
             $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo + '&iDonViID=' + _donViID + '&soBN=' + _soBN, answers).success(function (data, status) {
                 if (data.result == true) {
                     $scope.mode = 'result';
+                    $scope.hidePopup();
                 }
                 else {
                     //Bao loi
@@ -138,7 +153,7 @@
              $scope.quiz = res.data.quiz;
              $scope.config = helper.extend({}, $scope.defaultConfig, res.data.config);
              $scope.questions = $scope.config.shuffleQuestions ? helper.shuffle(res.data.questions) : res.data.questions;
-             $scope.totalItems = $scope.questions.length;
+             $scope.totalItems = $scope.currentPage < 7 ? $scope.config.force : $scope.questions.length;
              $scope.itemsPerPage = $scope.config.pageSize;
              $scope.currentPage = 1;
              $scope.mode = 'quiz';
@@ -184,4 +199,38 @@
         });
         return result;
     };
+
+    $scope.isAnswered6Question = function (maxlen) {
+        var count = 0;
+        for (var index = 0; index < maxlen; index++) {
+            $scope.questions[index].Options.forEach(function (element, index, array) {
+                if (element.Selected == true) {
+                    count++;
+                }
+            });
+        }
+        $scope.config.answered = count;
+    };
+    $scope.continue = function () {
+        $scope.currentPage = 7;
+        $scope.totalItems = 12;
+        $scope.paging();
+        $scope.config.showPager = true;
+        $scope.mode = 'quiz';
+        $scope.showPopup();
+    }
+    $scope.showPopup = function () {
+        $('#fl813691').addClass('show').removeClass('hide');
+    }
+    $scope.hidePopup = function () {
+        $('#fl813691').addClass('hide').removeClass('show');
+    }
+    $scope.paging = function () {
+        $('.pagination_spa').find('.ng-scope').each(function (e) {
+            var index = parseInt($(this).find('.ng-binding').text());
+            if (index < 7) {
+                $(this).find('.ng-binding').remove();
+            }
+        })
+    }
 }]);

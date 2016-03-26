@@ -13,6 +13,8 @@ namespace CBCC.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.sobiennhan = Request.QueryString["sobienhan"] != null ? Request.QueryString["sobienhan"].ToString() : "";
+            ViewBag.madonvi = Request.QueryString["MaDonVi"] != null ? Request.QueryString["MaDonVi"].ToString() : "";
             var lsDonVi = DanhMucService.DonViGetAllList();
             return View(lsDonVi);
         }
@@ -49,7 +51,6 @@ namespace CBCC.Controllers
                         datas["MaDonVi"] = maDonVi;
                         dsInfo = clientweb.WebSearch(datas);
 
-                        int donViId = 0;
                         if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
                         {
                             hoSo = new HoSo()

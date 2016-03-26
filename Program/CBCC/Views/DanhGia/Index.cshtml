@@ -153,7 +153,13 @@
                                     var lsDVChild = Model.Where(p => p.ParentDonViID == item.DonViID).ToList();
                                     foreach (var it in lsDVChild)
                                     {
-                                        <option value="@it.MaDonVi">@it.TenDonVi</option>
+                                        if (ViewBag.madonvi == it.MaDonVi.ToString())
+                                        {
+                                            <option value="@it.MaDonVi" selected>@it.TenDonVi</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="@it.MaDonVi">@it.TenDonVi</option>}
                                     }
                                         }
 
@@ -169,7 +175,7 @@
             <div class="warrper_input_sbn">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
-                        <input id="soBienNhan" class="form-control" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá" autocomplete="off">
+                        <input id="soBienNhan" class="form-control" value="@ViewBag.sobiennhan" name="soBienNhan" type="text" placeholder="Nhập số biên nhận hoặc mã số đánh giá" autocomplete="off">
                         <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
                     </span>
                 </div>
@@ -297,7 +303,6 @@
         };
         // show virtual keyboard
         $('#danhgia').click(function () {
-            //alert($("#cbDonVi option:selected").val());
             //return false;
             $("#msg_notify").html("");
             // validate đơn vị
@@ -376,10 +381,10 @@
                                             '<div>' +
                                                 '<p class="info_user_per">' +
 
-                                                    '<b> Tên đơn vị: </b>' + JSONtostring(data.HoSo.TenDonVi) + '<br />' +
+                                                    '<b> Tên đơn vị: </b>' + $('#cbDonVi option:selected').text() + '<br />' +
 
                                                     '<b> Lĩnh vực: </b>' + JSONtostring(data.HoSo.TenLinhVuc) + '<br />' +
-                                                    '<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
+                                                    //'<b> Số ngày giải quyết: </b>' + JSONtostring(data.HoSo.SoNgayGiaiQuyet) + '<br />' +
                                                     '<b> Họ tên người nộp:  </b>' + JSONtostring(data.HoSo.TenToChuc) + '<br />' +
                                                     '<b> Điện thoại:         </b>' + JSONtostring(data.HoSo.DienThoai) + '<br />' +
 
@@ -448,7 +453,12 @@
                 $('#txtGopY').val(data); // save feedback success, clear text
             })
         }
-
+        $(document).ready(function () {
+            var sobiennhan = $('#soBienNhan').val();
+            if (sobiennhan.length > 0) {
+                $('#danhgia').click();
+            }
+        });
     </script>
     <script>
         pf204652bottomLayer = document.getElementById('fl813691');
