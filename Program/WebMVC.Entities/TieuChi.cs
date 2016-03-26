@@ -26,6 +26,7 @@ namespace WebMVC.Entities
         public string TenVanTat { get; set; }
         public Nullable<int> TypeInput { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<int> OrderDisplay { get; set; }
     
         public virtual ICollection<KetQuaDanhGia> KetQuaDanhGias { get; set; }
         public virtual NhomTieuChi NhomTieuChi { get; set; }
