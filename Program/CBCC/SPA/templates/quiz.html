@@ -2,7 +2,7 @@
 <div id="quiz">
     <div ng-show="config.showPager">
         <div ng-show="currentPage < 7" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
-            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi, Ông/Bà đang đánh giá câu hỏi số:</p>
+            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi bắt buộc và 6 câu hỏi mở rộng. Ông/Bà đang đánh giá câu hỏi số:</p>
         </div>
         <div ng-show="currentPage > 6" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
             <p> Các câu hỏi mở rộng:</p>
@@ -83,18 +83,24 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="text-left" style="background-color: #f4b183; padding:10px; color:black !important ; font-size:17px">
-                    Để hoàn thiện hệ thống đánh giá và phục vụ Ông/Bà được tốt hơn, kính mong Ông/Bà cho biết thêm ý kiến về hệ thống phần mềm đánh giá của chúng tôi.
-                    <br /><br />
+                <div class="text-left" style="background-color: #f4b183; padding-top:10px; color:black !important ; font-size:17px">
+                    
                     <div>
-                        <span style="float:left">Xin cảm ơn.</span>
+                        <span style="float:left">Để hoàn tất đánh giá, xin hãy nhấn nút</span>
+                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; " class="btn btn-danger btn_ketthuc" ng-click="onSubmit();">Kết thúc</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="text-left" style="background-color:#c5e0b4; padding:10px; color:black !important ; font-size:17px">
+
+                    <div>
+                        <span style="float:left">Để đánh giá tiếp các câu mở rộng, xin nhấn nút</span>
                         <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" ng-click="continue();">Tiếp tục</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="text-center" style="background-color: #C5E0B4; padding:10px; color:black !important ; font-size:17px">
-                    <button class="btn btn-danger btn_ketthuc" style="font-weight: bold;font-size: 19px;" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
-                </div>
+            </div>
+                
             </div>
         </div>
     </div>
