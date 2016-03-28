@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="quizNav ">
-        <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
+        <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItemsAgain" items-per-page="itemsPerPage" ng-model="currentPageAgain" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
         <button class="btn btn-danger btn_ketthuc" ng-show="currentPage > 6 || mode=='review'" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
         <button style="font-size:17px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success btn_ketthuc" ng-show="mode=='review'" ng-click="continue();">Tiếp tục</button>
     </div>
@@ -22,7 +22,7 @@
         <div ng-repeat="question in filteredQuestions" ng-if="currentPage < 7">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
-                <h2>{{currentPage}}. {{question.Name}}</h2>
+                <h2>{{currentPageAgain}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
                         <label for="{{option.Id}}" class="changeHeight">
@@ -36,7 +36,7 @@
         <div ng-repeat="question in filteredQuestions" ng-if="currentPage > 6">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
-                <h2>{{currentPage}}. {{question.Name}}</h2>
+                <h2>{{currentPageAgain}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
                         <label for="{{option.Id}}" class="changeHeight">

@@ -23,6 +23,7 @@
 
         if (index > 0 && index <= $scope.totalItems) {
             $scope.currentPage = index;
+            $scope.currentPageAgain = index % 6 == 0 ? 6 : index % 6;
             $scope.showPopup();
             $scope.mode = 'quiz';
         }
@@ -154,8 +155,10 @@
              $scope.config = helper.extend({}, $scope.defaultConfig, res.data.config);
              $scope.questions = $scope.config.shuffleQuestions ? helper.shuffle(res.data.questions) : res.data.questions;
              $scope.totalItems = $scope.currentPage < 7 ? $scope.config.force : $scope.questions.length;
+             $scope.totalItemsAgain = 6;
              $scope.itemsPerPage = $scope.config.pageSize;
              $scope.currentPage = 1;
+             $scope.currentPageAgain = 1;
              $scope.mode = 'quiz';
 
              $scope.$watch('currentPage + itemsPerPage', function () {
@@ -213,7 +216,9 @@
     };
     $scope.continue = function () {
         $scope.currentPage = 7;
+        $scope.currentPageAgain = 1;
         $scope.totalItems = 12;
+        $scope.totalItemsAgain = 6;
         $scope.paging();
         $scope.config.showPager = true;
         $scope.mode = 'quiz';
@@ -227,10 +232,10 @@
     }
     $scope.paging = function () {
         $('.pagination_spa').find('.ng-scope').each(function (e) {
-            var index = parseInt($(this).find('.ng-binding').text());
-            if (index < 7) {
-                $(this).find('.ng-binding').remove();
-            }
+            //var index = parseInt($(this).find('.ng-binding').text());
+            //if (index < 7) {
+            //    $(this).find('.ng-binding').remove();
+            //}
         })
     }
 }]);
