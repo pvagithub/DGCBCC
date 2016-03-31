@@ -90,6 +90,24 @@
                         @Html.TextBoxFor(m => m.OrderDisplay, new { @class = "form-control required", id = "OrderDisplay", name = "OrderDisplay", @maxlength = "200" })
                     </div>
                 </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3 float_left text-right clsOdd">Loại câu</label>
+                    <div class="col-xs-3 heightrow">
+                        <select class="col-xs-12 form-control" id="LoaiCau" name="LoaiCau">
+                            @if (Model.LoaiCau == 1)
+                            {
+                                <option value="1" selected>Bắt buộc</option>
+                                <option value="2">Mở rộng</option>
+                            }
+                            else
+                            {
+                                <option value="1">Bắt buộc</option>
+                                <option value="2" selected>Mở rộng</option>
+                            }
+                        </select>
+                    </div>
+                </div>
             </form>
 
             <div class="clearfix"></div>

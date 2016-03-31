@@ -90,6 +90,10 @@ namespace CBCC.Areas.Admin.Controllers
                     tieuchi.OrderDisplay = tieuchiModel.OrderDisplay;
                 else
                     tieuchi.OrderDisplay = 1;
+                if (tieuchiModel.LoaiCau is int)
+                    tieuchi.LoaiCau = tieuchiModel.LoaiCau;
+                else
+                    tieuchi.LoaiCau = 1;
                 int IDTieuChi = DanhMucService.TieuChiCreate(tieuchi);
 
                 if (tieuchiModel.ListIDCauTraLoi != null && tieuchiModel.ListIDCauTraLoi.Count > 0)

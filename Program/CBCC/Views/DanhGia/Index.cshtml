@@ -520,6 +520,12 @@
             $.post('@Url.Action("SelectGopYCauHoi", "DanhGia")', param, function (data) {
                 //$('.changeHeight').css("height", $('#lblHeight' + $currentPage.val()).height() - 20 + "px");
                 $('#txtGopY').val(data); // save feedback success, clear text
+                $('.pagination_spa').find('.ng-scope').each(function (e) {
+                    var index = parseInt($(this).find('.ng-binding').text());
+                    if (index > 6) {
+                        $(this).find('.ng-binding').text(index - 6);
+                    }
+                })
             })
             // set auto height
         }

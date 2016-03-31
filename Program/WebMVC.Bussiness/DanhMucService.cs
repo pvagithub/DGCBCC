@@ -289,7 +289,7 @@ namespace WebMVC.Bussiness
             using (var context = new DataModelEntities())
             {
                 context.ReadUncommited();
-                IQueryable<TieuChi> query = context.TieuChis.Where(x => x.Active == true).OrderBy(x => x.OrderDisplay);
+                IQueryable<TieuChi> query = context.TieuChis.Where(x => x.Active == true).OrderBy(x => x.LoaiCau);
                 return query.Include(x => x.NhomTieuChi).AsNoTracking().ToList();
             }
         }
@@ -331,7 +331,10 @@ namespace WebMVC.Bussiness
                     item.OrderDisplay = chitieu.OrderDisplay;
                 else
                     item.OrderDisplay = 1;
-
+                if (chitieu.LoaiCau is int)
+                    item.LoaiCau = chitieu.LoaiCau;
+                else
+                    item.LoaiCau = 1;
                 context.ReadCommited();
                 context.SaveChanges();
             }

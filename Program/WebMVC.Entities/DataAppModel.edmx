@@ -303,6 +303,7 @@
           <Property Name="TypeInput" Type="int" />
           <Property Name="Active" Type="bit" />
           <Property Name="OrderDisplay" Type="int" />
+          <Property Name="LoaiCau" Type="int" />
         </EntityType>
         <EntityType Name="TieuChiCauTraLoi">
           <Key>
@@ -1591,6 +1592,7 @@
           <NavigationProperty Name="NhomTieuChi" Relationship="DataModel.FK_ChiTieu_NhomChiTieu" FromRole="TieuChi" ToRole="NhomTieuChi" />
           <NavigationProperty Name="TieuChiCauTraLois" Relationship="DataModel.FK_TieuChiCauTraLoi_TieuChi" FromRole="TieuChi" ToRole="TieuChiCauTraLoi" />
           <Property Name="OrderDisplay" Type="Int32" />
+          <Property Name="LoaiCau" Type="Int32" />
         </EntityType>
         <EntityType Name="TieuChiCauTraLoi">
           <Key>
@@ -2401,6 +2403,7 @@
           <EntitySetMapping Name="TieuChis">
             <EntityTypeMapping TypeName="DataModel.TieuChi">
               <MappingFragment StoreEntitySet="TieuChi">
+                <ScalarProperty Name="LoaiCau" ColumnName="LoaiCau" />
                 <ScalarProperty Name="OrderDisplay" ColumnName="OrderDisplay" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="TypeInput" ColumnName="TypeInput" />

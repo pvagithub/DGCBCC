@@ -23,7 +23,9 @@
 
         if (index > 0 && index <= $scope.totalItems) {
             $scope.currentPage = index;
-            $scope.currentPageAgain = index % 6 == 0 ? 6 : index % 6;
+            if ($scope.currentPage > 6) {
+                $scope.totalItems = 12;
+            }
             $scope.showPopup();
             $scope.mode = 'quiz';
         }
@@ -46,7 +48,7 @@
             });
         }
         if ($scope.totalItems == 12) {
-            $scope.paging();
+            $scope.pagingTotal();
         }
         if ($scope.currentPage == 12) {
             $scope.onSubmit();
@@ -116,6 +118,7 @@
         if ($scope.config.submit == true) {
             $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo + '&iDonViID=' + _donViID + '&soBN=' + _soBN, answers).success(function (data, status) {
                 if (data.result == true) {
+                    window.location = 'GopY/Index';
                     $scope.mode = 'result';
                     $scope.hidePopup();
                 }
@@ -155,10 +158,8 @@
              $scope.config = helper.extend({}, $scope.defaultConfig, res.data.config);
              $scope.questions = $scope.config.shuffleQuestions ? helper.shuffle(res.data.questions) : res.data.questions;
              $scope.totalItems = $scope.currentPage < 7 ? $scope.config.force : $scope.questions.length;
-             $scope.totalItemsAgain = 6;
              $scope.itemsPerPage = $scope.config.pageSize;
              $scope.currentPage = 1;
-             $scope.currentPageAgain = 1;
              $scope.mode = 'quiz';
 
              $scope.$watch('currentPage + itemsPerPage', function () {
@@ -214,28 +215,40 @@
         }
         $scope.config.answered = count;
     };
+
     $scope.continue = function () {
         $scope.currentPage = 7;
-        $scope.currentPageAgain = 1;
         $scope.totalItems = 12;
-        $scope.totalItemsAgain = 6;
         $scope.paging();
         $scope.config.showPager = true;
         $scope.mode = 'quiz';
         $scope.showPopup();
     }
+
     $scope.showPopup = function () {
         $('#fl813691').addClass('show').removeClass('hide');
     }
+
     $scope.hidePopup = function () {
         $('#fl813691').addClass('hide').removeClass('show');
     }
+
     $scope.paging = function () {
         $('.pagination_spa').find('.ng-scope').each(function (e) {
-            //var index = parseInt($(this).find('.ng-binding').text());
-            //if (index < 7) {
-            //    $(this).find('.ng-binding').remove();
-            //}
+            var index = parseInt($(this).find('.ng-binding').text());
+            if (index < 7) {
+                $(this).find('.ng-binding').remove();
+            }
         })
     }
+
+    $scope.pagingTotal = function () {
+        $('.pagination_spa').find('.ng-scope').each(function (e) {
+            var index = parseInt($(this).find('.ng-binding').text());
+            if (index > 6) {
+                $(this).find('.ng-binding').text(index - $scope.config.force);
+            }
+        })
+    }
+
 }]);

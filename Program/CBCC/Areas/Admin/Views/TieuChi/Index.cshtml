@@ -27,6 +27,7 @@
         <th>Nhóm tiêu chí</th>
         <th>Tên vắn tắt</th>
         <th>Thứ tự hiển thị</th>
+        <th>Loại câu</th>
         <th>Trạng thái</th>
         <th>
             <a href='/Admin/TieuChi/Create'
@@ -74,6 +75,16 @@
             </td>
             <td align="center">
                 @Html.DisplayFor(modelItem => item.OrderDisplay, item.OrderDisplay)
+            </td>
+            <td align="center">
+                @if (item.LoaiCau == 1)
+                {
+                    <span>Bắt buộc</span>
+                }
+                else
+                {
+                    <span>Mở rộng</span>
+                }
             </td>
             <td align="center">
                 @{

@@ -2,10 +2,10 @@
 <div id="quiz">
     <div ng-show="config.showPager">
         <div ng-show="currentPage < 7" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
-            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi bắt buộc và 6 câu hỏi mở rộng. Ông/Bà đang đánh giá câu hỏi số:</p>
+            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi bắt buộc và 6 câu hỏi mở rộng.Ông/Bà đang đánh giá câu hỏi số:</p>
         </div>
         <div ng-show="currentPage > 6" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
-            <p> Các câu hỏi mở rộng:</p>
+            <p> Có 6 câu hỏi mở rộng, Ông/Bà đang đánh giá câu hỏi số:</p>
         </div>
         <div class="titlesbn" ng-if="config.title=(mode=='review' ? true : false)">
             <p>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="quizNav ">
-        <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItemsAgain" items-per-page="itemsPerPage" ng-model="currentPageAgain" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
+        <pagination class="pagination_spa" ng-show="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="config.allowReview=(currentPage==totalItems ? true : false)"></pagination>
         <button class="btn btn-danger btn_ketthuc" ng-show="currentPage > 6 || mode=='review'" onclick="hidePopup();" ng-click="onSubmit();">Kết thúc</button>
         <button style="font-size:17px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success btn_ketthuc" ng-show="mode=='review'" ng-click="continue();">Tiếp tục</button>
     </div>
@@ -22,7 +22,7 @@
         <div ng-repeat="question in filteredQuestions" ng-if="currentPage < 7">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
-                <h2>{{currentPageAgain}}. {{question.Name}}</h2>
+                <h2>{{currentPage}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
                         <label for="{{option.Id}}" class="changeHeight">
@@ -36,7 +36,7 @@
         <div ng-repeat="question in filteredQuestions" ng-if="currentPage > 6">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
-                <h2>{{currentPageAgain}}. {{question.Name}}</h2>
+                <h2>{{currentPage - config.force}}. {{question.Name}}</h2>
                 <div class="options" id="lblHeight{{currentPage}}">
                     <div ng-repeat="option in question.Options" ng-if="question.QuestionTypeId == 1" class="row-answer ng-scope_content">
                         <label for="{{option.Id}}" class="changeHeight">
@@ -64,7 +64,6 @@
         <div ng-repeat="question in questions" ng-if="$index < 6">
             <div ng-if="question.QuestionTypeId == 1" ng-click="goTo($index + 1)" class="{{ isAnswered($index) == 'Đã đánh giá'? 'answered': 'not-answered' }}">{{$index + 1}}. {{ isAnswered($index) }}</div>
         </div>
-
         <!--<div>
             <button class="btn btn-primary btn_spa" ng-click="goTo(currentPage)">Quay lại</button>
         </div>-->
@@ -73,9 +72,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="col-sm-12 col-lg-2 form-group">
                 <div class="text-left" style="background-color: #c5e0b4; padding:10px; color:black !important ; font-size:17px">
-                    Cảm ơn Ông/Bà đã thực hiện đánh giá. Sự góp ý của Ông/Bà sẽ góp
-                    phần nâng cao hơn nữa chất lượng dịch vụ hành chính công tại TP.
-                    HCM.
+                    Cảm ơn Ông/Bà đã thực hiện đánh giá. Sự góp ý của Ông/Bà sẽ góp phần nâng cao hơn nữa chất lượng dịch vụ hành chính công tại TP. HCM.
                     <br /><br />
                     <div>
                         <span style="float:left">Để xem lại kết quả, xin hãy nhất nút</span>
@@ -84,7 +81,6 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="text-left" style="background-color: #f4b183; padding-top:10px; padding-left:10px; color:black !important ; font-size:17px">
-                    
                     <div>
                         <span style="float:left">Để hoàn tất đánh giá, xin hãy nhấn nút</span>
                         <button style="float:right;font-weight:bold; font-size:19px; width:128px; " class="btn btn-danger btn_ketthuc" ng-click="onSubmit();">Kết thúc</button>
@@ -92,15 +88,12 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="text-left" style="background-color:#c5e0b4; padding:10px; color:black !important ; font-size:17px">
-
                     <div>
                         <span style="float:left">Để đánh giá tiếp các câu mở rộng, xin nhấn nút</span>
                         <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" ng-click="continue();">Tiếp tục</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </div>
-                
             </div>
         </div>
     </div>
