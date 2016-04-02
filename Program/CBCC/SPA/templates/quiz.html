@@ -1,10 +1,10 @@
 ﻿
 <div id="quiz">
     <div ng-show="config.showPager">
-        <div ng-show="currentPage < 7" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
-            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi bắt buộc và 6 câu hỏi mở rộng.Ông/Bà đang đánh giá câu hỏi số:</p>
+        <div ng-show="currentPage < 7" class="titlesbn2" ng-if="config.title=(mode!='review' ? true : false)">
+            <p>   Có tất cả <strong>{{totalItems}}</strong> câu hỏi bắt buộc và 6 câu hỏi mở rộng.<br />Ông/Bà đang đánh giá câu hỏi số:</p>
         </div>
-        <div ng-show="currentPage > 6" class="titlesbn" ng-if="config.title=(mode!='review' ? true : false)">
+        <div ng-show="currentPage > 6" class="titlesbn2" ng-if="config.title=(mode!='review' ? true : false)">
             <p> Có 6 câu hỏi mở rộng, Ông/Bà đang đánh giá câu hỏi số:</p>
         </div>
         <div class="titlesbn" ng-if="config.title=(mode=='review' ? true : false)">
@@ -19,7 +19,7 @@
         <button style="font-size:17px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success btn_ketthuc" ng-show="mode=='review'" ng-click="continue();">Tiếp tục</button>
     </div>
     <div ng-show="mode=='quiz'">
-        <div ng-repeat="question in filteredQuestions" ng-if="currentPage < 7">
+        <div ng-repeat="question in filteredQuestions" ng-if="currentPage < 7" class="titlequestion">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
                 <h2>{{currentPage}}. {{question.Name}}</h2>
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div ng-repeat="question in filteredQuestions" ng-if="currentPage > 6">
+        <div ng-repeat="question in filteredQuestions" ng-if="currentPage > 6" class="titlequestion">
             <div class="question">
                 <input id="txtQuestionId" name="txtQuestionId" value="{{question.Id}}" type="text" class="hide" />
                 <h2>{{currentPage - config.force}}. {{question.Name}}</h2>
@@ -80,21 +80,23 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="text-left" style="background-color: #f4b183; padding-top:10px; padding-left:10px; color:black !important ; font-size:17px">
-                    <div>
-                        <span style="float:left">Để hoàn tất đánh giá, xin hãy nhấn nút</span>
-                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; " class="btn btn-danger btn_ketthuc" ng-click="onSubmit();">Kết thúc</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="text-left" style="background-color:#c5e0b4; padding:10px; color:black !important ; font-size:17px">
+                <div class="text-left" style="background-color: #f4b183; padding:10px; color:black !important ; font-size:17px">
                     <div>
                         <span style="float:left">Để đánh giá tiếp các câu mở rộng, xin nhấn nút</span>
                         <button style="float:right;font-weight:bold; font-size:19px; width:128px; background-color:#f0ad4e!important;border-color:brown" class="btn btn-success" ng-click="continue();">Tiếp tục</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
+                <div class="text-left" style="background-color:#c5e0b4; padding-top:10px;padding-left:10px; color:black !important ; font-size:17px">
+                    <div>
+                        <span style="float:left">Để hoàn tất đánh giá, xin hãy nhấn nút</span>
+                        <button style="float:right;font-weight:bold; font-size:19px; width:128px; " class="btn btn-danger btn_ketthuc" ng-click="onSubmit();">Kết thúc</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
+    </div>
+    <div ng-show="mode=='none'">
     </div>
 </div>

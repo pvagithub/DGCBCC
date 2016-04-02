@@ -232,7 +232,6 @@
     <Compile Include="Controllers\GopYController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HuongDanController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1268,7 +1267,6 @@
     <Content Include="Views\ThongKe\_Partial_ThuTuc_Thang.cshtml" />
     <Content Include="Views\ThongKe\_Partial_ThuTuc_Tuan.cshtml" />
     <Content Include="Views\ThongKe\_Partial_ThuTuc_TuNgay_DenNgay.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.eot" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.ttf" />
     <Content Include="Scripts\StickyTableHeaders\fonts\blokk\BLOKKRegular.woff" />

@@ -51,20 +51,22 @@
             $scope.pagingTotal();
         }
         if ($scope.currentPage == 12) {
-            $scope.onSubmit();
-            window.location = 'GopY/Index';
-            $scope.currentPage = 13;
-            $scope.config.showPager = false;
-            $scope.mode = 'none';
+            //$scope.onSubmit();
+            //window.location = 'GopY/Index';
+            //$scope.currentPage = 13;
+            //$scope.config.showPager = false;
+            //$scope.mode = 'none';
         }
-        if ($scope.currentPage == $scope.totalItems) {
+        if ($scope.currentPage == $scope.totalItems && $scope.currentPage < 7) {
             //$scope.onSubmit();
             //window.location = 'GopY/Index';
             $scope.mode = 'result';
             $scope.hidePopup();
             $scope.config.showPager = false;
         }
-        $scope.goTo($scope.currentPage + 1);
+        if ($scope.currentPage < $scope.totalItems) {
+            $scope.goTo($scope.currentPage + 1);
+        }
     }
     $scope.review = function () {
         $scope.mode = 'review';
@@ -119,7 +121,7 @@
             $http.post('/DanhGia/SaveDanhGia?' + 'DanhSachKQ=' + _danhSachKQ + '&iDHoSo=' + IDHoSo + '&iDonViID=' + _donViID + '&soBN=' + _soBN, answers).success(function (data, status) {
                 if (data.result == true) {
                     window.location = 'GopY/Index';
-                    $scope.mode = 'result';
+                    //$scope.mode = 'result';
                     $scope.hidePopup();
                 }
                 else {
