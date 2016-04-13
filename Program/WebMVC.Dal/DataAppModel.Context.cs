@@ -881,5 +881,26 @@ namespace WebMVC.Dal
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime_10Top", tuNgayParameter, denNgayParameter);
         }
+    
+        public virtual int ThongKeToanTP_DonVi_ByTime_All(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay, string name, string sort)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var sortParameter = sort != null ?
+                new ObjectParameter("Sort", sort) :
+                new ObjectParameter("Sort", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime_All", tuNgayParameter, denNgayParameter, nameParameter, sortParameter);
+        }
     }
 }

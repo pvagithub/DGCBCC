@@ -516,6 +516,28 @@ namespace WebMVC.Bussiness
             }
         }
         /// <summary>
+        /// Thống kê tất  cả đơn vị
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_DonVi_ByTime_All(string tuNgay, string denNgay, string name, string sort)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var nameParameter = new SqlParameter("Name", name);
+                var sortParameter = new SqlParameter("Sort", sort);
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_DonVi_ByTime_All @TuNgay,@DenNgay,@Name,@Sort",
+                    tuNgayParameter, denNgayParameter, nameParameter, sortParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
         /// Biểu đồ thống kê tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian của từng đơn vị
         /// </summary>
         public static ThongKe ThongKeToanTP_DonVi_ByTime(string tuNgay, string denNgay, string maDonVi)
@@ -559,7 +581,7 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
-        
+
 
         /// <summary>
         /// Báo cáo thống kê theo các nhóm tiêu chí của toàn thành phố
@@ -605,7 +627,61 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
-        
+        /// <summary>
+        /// Thống kê 2 thang gan nhat
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_BanBieu_ThreeMonth(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_BanBieu_ThreeMonth @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Detail month/ year
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_BanBieu_ByMonthYear(int month, int year)
+        {
+            using (var context = new DataModelEntities())
+            {
+
+                var monthParameter = new SqlParameter("Month", month);
+                var yearParameter = new SqlParameter("Year", year);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_BanBieu_ByMonthYear @Month,@Year",
+                    monthParameter, yearParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Detail month/ year
+        /// </summary>
+        public static List<ThongKe> ThongKeToanTP_BanBieu_ByDonViMonthYear(string madonvi, int month, int year)
+        {
+            using (var context = new DataModelEntities())
+            {
+                var mdvParameter = new SqlParameter("MaDonVi", madonvi);
+                var monthParameter = new SqlParameter("Month", month);
+                var yearParameter = new SqlParameter("Year", year);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_BanBieu_ByDonViMonthYear @MaDonVi,@Month,@Year", mdvParameter, monthParameter, yearParameter).ToList();
+
+                return result;
+            }
+        }
+
         #endregion
 
     }
