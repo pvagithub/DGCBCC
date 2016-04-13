@@ -825,6 +825,19 @@
         <Function Name="ThongKeToanTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Year" Type="int" Mode="In" />
         </Function>
+        <Function Name="ThongKeToanTP_BanBieu_ByDonViMonthYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaDonVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Month" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_BanBieu_ByMonthYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Month" Type="int" Mode="In" />
+          <Parameter Name="Year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_BanBieu_ThreeMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ThongKeToanTP_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
@@ -846,6 +859,12 @@
         <Function Name="ThongKeToanTP_DonVi_ByTime_10Top" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeToanTP_DonVi_ByTime_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sort" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ThongKeToanTP_DonVi_Nam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Year" Type="int" Mode="In" />
@@ -1262,6 +1281,25 @@
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ThongKeToanTP_DonVi_ByTime_10Top">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_DonVi_ByTime_All">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Sort" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_BanBieu_ByDonViMonthYear">
+            <Parameter Name="MaDonVi" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_BanBieu_ByMonthYear" ReturnType="Collection(DataModel.ThongKeToanTP_BanBieu_ByMonthYear_Result)">
+            <Parameter Name="Month" Mode="In" Type="Int32" />
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKeToanTP_BanBieu_ThreeMonth" ReturnType="Collection(DataModel.ThongKeToanTP_BanBieu_ThreeMonth_Result)">
             <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2022,6 +2060,15 @@
           <Property Type="String" Name="NoiDungTL" Nullable="true" />
           <Property Type="Int32" Name="Type" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="ThongKeToanTP_BanBieu_ByMonthYear_Result">
+          <Property Type="String" Name="MaDonVi" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TenDonVi" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Soluot" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ThongKeToanTP_BanBieu_ThreeMonth_Result">
+          <Property Type="String" Name="MonthYear" Nullable="true" MaxLength="7" />
+          <Property Type="Int32" Name="Soluot" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2753,6 +2800,25 @@
           <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime" />
           <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime_10Bottom" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime_10Bottom" />
           <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime_10Top" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime_10Top" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_DonVi_ByTime_All" FunctionName="DataModel.Store.ThongKeToanTP_DonVi_ByTime_All" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_BanBieu_ByDonViMonthYear" FunctionName="DataModel.Store.ThongKeToanTP_BanBieu_ByDonViMonthYear" />
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_BanBieu_ByMonthYear" FunctionName="DataModel.Store.ThongKeToanTP_BanBieu_ByMonthYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.ThongKeToanTP_BanBieu_ByMonthYear_Result">
+                <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="Soluot" ColumnName="Soluot" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ThongKeToanTP_BanBieu_ThreeMonth" FunctionName="DataModel.Store.ThongKeToanTP_BanBieu_ThreeMonth">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.ThongKeToanTP_BanBieu_ThreeMonth_Result">
+                <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+                <ScalarProperty Name="Soluot" ColumnName="Soluot" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

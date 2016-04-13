@@ -211,6 +211,7 @@
     <Compile Include="Areas\Admin\Controllers\SoftwareFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeNhomTieuChiController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeDonViController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeThreeMonthController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeThanhPhoController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThuTucController.cs" />
     <Compile Include="Areas\Admin\Controllers\TieuChiController.cs" />
@@ -790,6 +791,9 @@
     <Content Include="Areas\Admin\Views\ThongKeThanhPho\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeDonVi\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeNhomTieuChi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThreeMonth\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThreeMonth\GetDonViMonthYear.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThreeMonth\ThongKeToanTP_BanBieu_ByDonViMonthYear.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />

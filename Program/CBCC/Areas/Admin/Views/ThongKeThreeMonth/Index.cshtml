@@ -1,0 +1,92 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê 3 Tháng Gần Nhất";
+    int i;
+    var lst = new List<ThongKe>();
+    if (ViewBag.ThreeMonth != null)
+    {
+        lst = ViewBag.ThreeMonth as List<ThongKe>;
+    }
+}
+
+<h3>Thống kê 3 tháng gần nhất</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+
+<div class="row">
+    <table class="table table-hover">
+        <tr>
+            <th></th>
+            @foreach (var item in lst)
+            {
+                <th>@item.MonthYear</th>
+            }
+        </tr>
+        <tr>
+            <td>Số lượt đánh giá</td>
+            @foreach (var item in lst)
+            {
+                var arr = item.MonthYear.Split('/');
+                <td><a href="@Url.Action("GetDonViMonthYear", "ThongKeThreeMonth", new { month = arr[0], year = arr[1] })"> @item.Soluot</a></td>
+            }
+        </tr>
+    </table>
+
+</div>
+@section scripts{
+    <script src="~/Scripts/highcharts.js"></script>
+    <script>
+
+        $(function () {
+            $('a[class=changeArr]').click(function () {
+                $('.se-pre-con').fadeIn("fast");
+                var name = "";
+                var sort = "";
+                if ($(this).find('i').hasClass('glyphicon-chevron-down')) {
+                    $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                    name = $(this).attr("data-value");
+                    sort = "DESC";
+                }
+                else {
+                    $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                    name = $(this).attr("data-value");
+                    sort = "ASC";
+                }
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("GetAllDonVi", "ThongKeThanhPho")",
+                    data: { tuNgay: $('#tuNgay').val(), denNgay: $('#denNgay').val(), name: name, sort: sort },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            var app = "";
+                            for (var i = 0; i < response.data.length; i++) {
+                                app += "<tr><td>" + (i + 1) + "</td><td>" + response.data[i].TenDonVi + "</td><td>" + response.data[i].HaiLong + "% (" + response.data[i].SCHaiLong + ")</td><td>" + response.data[i].BinhThuong + "% (" + response.data[i].SCBinhThuong + ")</td><td>" + response.data[i].KhongHaiLong + "% (" + response.data[i].SCKhongHaiLong + ")</td></tr>";
+                            }
+                            $('.appendRows').html(app);
+                        }
+                        $('.se-pre-con').fadeOut("fast");
+                    }
+                });
+            });
+
+        });
+    </script>
+}

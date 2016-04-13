@@ -23,7 +23,9 @@
         box-shadow: none;
     }
     /* bootstrap hack end */
+   
 </style>
+
 @using (Html.BeginForm("Index", "ThongKeThanhPho"))
 {
     <div class="row">
@@ -45,6 +47,7 @@
         <li class=""><a href="#tab2" data-toggle="tab">Bản biểu</a></li>
         <li class=""><a href="#tab3" data-toggle="tab">Top 10 cao nhất</a></li>
         <li class=""><a href="#tab4" data-toggle="tab">Top 10 thấp nhất</a></li>
+        <li class=""><a href="#tab5" data-toggle="tab">Tất cả đơn vị</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="tab1">
@@ -64,21 +67,21 @@
                     var banbieu = (List<ThongKe>)ViewBag.BanBieu;
                     for (i = 0; i < banbieu.Count; i++)
                     {
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>
-                                @banbieu[i].TenDonVi
-                            </td>
-                            <td>
-                                @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
-                            </td>
-                            <td>
-                                @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
-                            </td>
-                            <td>
-                                @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
-                            </td>
-                        </tr>
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>
+                        @banbieu[i].TenDonVi
+                    </td>
+                    <td>
+                        @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
+                    </td>
+                    <td>
+                        @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
+                    </td>
+                    <td>
+                        @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
+                    </td>
+                </tr>
                     }
                 }
             </table>
@@ -97,21 +100,21 @@
                     var caonhat = (List<ThongKe>)ViewBag.CaoNhat;
                     for (i = 0; i < caonhat.Count; i++)
                     {
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>
-                                @caonhat[i].TenDonVi
-                            </td>
-                            <td>
-                                @caonhat[i].HaiLong% (@caonhat[i].SCHaiLong)
-                            </td>
-                            <td>
-                                @caonhat[i].BinhThuong% (@caonhat[i].SCBinhThuong)
-                            </td>
-                            <td>
-                                @caonhat[i].KhongHaiLong% (@caonhat[i].SCKhongHaiLong)
-                            </td>
-                        </tr>
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>
+                        @caonhat[i].TenDonVi
+                    </td>
+                    <td>
+                        @caonhat[i].HaiLong% (@caonhat[i].SCHaiLong)
+                    </td>
+                    <td>
+                        @caonhat[i].BinhThuong% (@caonhat[i].SCBinhThuong)
+                    </td>
+                    <td>
+                        @caonhat[i].KhongHaiLong% (@caonhat[i].SCKhongHaiLong)
+                    </td>
+                </tr>
                     }
                 }
             </table>
@@ -130,24 +133,59 @@
                     var thapnhat = (List<ThongKe>)ViewBag.ThapNhat;
                     for (i = 0; i < thapnhat.Count; i++)
                     {
-                        <tr>
+                <tr>
 
-                            <td>@(i + 1)</td>
-                            <td>
-                                @thapnhat[i].TenDonVi
-                            </td>
-                            <td>
-                                @thapnhat[i].HaiLong% (@thapnhat[i].SCHaiLong)
-                            </td>
-                            <td>
-                                @thapnhat[i].BinhThuong% (@thapnhat[i].SCBinhThuong)
-                            </td>
-                            <td>
-                                @thapnhat[i].KhongHaiLong% (@thapnhat[i].SCKhongHaiLong)
-                            </td>
-                        </tr>
+                    <td>@(i + 1)</td>
+                    <td>
+                        @thapnhat[i].TenDonVi
+                    </td>
+                    <td>
+                        @thapnhat[i].HaiLong% (@thapnhat[i].SCHaiLong)
+                    </td>
+                    <td>
+                        @thapnhat[i].BinhThuong% (@thapnhat[i].SCBinhThuong)
+                    </td>
+                    <td>
+                        @thapnhat[i].KhongHaiLong% (@thapnhat[i].SCKhongHaiLong)
+                    </td>
+                </tr>
                     }
                 }
+            </table>
+        </div>
+        <div class="tab-pane fade" id="tab5">
+            <table class="table table-hover">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên đơn vị</th>
+                        <th>Hài lòng  <a data-value="HL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                        <th>Bình thường  <a data-value="BT" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                        <th>Không hài lòng  <a data-value="KHL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                    </tr>
+                <tbody class="appendRows">
+                    @if (ViewBag.AllDonVi != null)
+                    {
+                        var alldonvi = ViewBag.AllDonVi as List<ThongKe>;
+                        for (i = 0; i < alldonvi.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>
+                                    @alldonvi[i].TenDonVi
+                                </td>
+                                <td>
+                                    @alldonvi[i].HaiLong% (@alldonvi[i].SCHaiLong)
+                                </td>
+                                <td>
+                                    @alldonvi[i].BinhThuong% (@alldonvi[i].SCBinhThuong)
+                                </td>
+                                <td>
+                                    @alldonvi[i].KhongHaiLong% (@alldonvi[i].SCKhongHaiLong)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         </div>
     </div>
@@ -155,58 +193,89 @@
 @section scripts{
     <script src="~/Scripts/highcharts.js"></script>
     <script>
-    $('#tuNgay').datepicker({
-        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
-    });
-    $('#denNgay').datepicker(
-    {
-        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
-    });
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: ''
-            },
-            //tooltip: {
-            //    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
-            //},
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false,
-                        format: '<b>{point.name}</b>: {point.percentage:.2f}%',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        }
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                name: '',
-                colorByPoint: true,
-                data: [{
-                    name: 'Hài Lòng: @ViewBag.HaiLong% (@ViewBag.SCHaiLong)',
-                    y: @ViewBag.HaiLong,
-                    sliced: true,
-                    selected: true
-                }, {
-                    name: 'Bình Thường: @ViewBag.BinhThuong% (@ViewBag.SCBinhThuong)',
-                    y: @ViewBag.BinhThuong
-                    }, {
-                        name: 'Không Hài Lòng: @ViewBag.KhongHaiLong% (@ViewBag.SCKhongHaiLong)',
-                        y: @ViewBag.KhongHaiLong
-                        }]
-            }]
+        $('#tuNgay').datepicker({
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
         });
-    });
-</script>
+        $('#denNgay').datepicker(
+        {
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+        $(function () {
+            $('a[class=changeArr]').click(function () {
+                $('.se-pre-con').fadeIn("fast");
+                var name="";
+                var sort="";
+                if($(this).find('i').hasClass('glyphicon-chevron-down')){
+                    $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                    name = $(this).attr("data-value");
+                        sort ="DESC";
+                }
+                else{
+                    $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                    name = $(this).attr("data-value");
+                    sort ="ASC";
+                }
+                $.ajax({
+                    type:"post",
+                    url:"@Url.Action("GetAllDonVi", "ThongKeThanhPho")",
+                    data:{tuNgay:$('#tuNgay').val(),denNgay:$('#denNgay').val(),name:name,sort:sort},
+                    dataType:'json',
+                    success:function (response) {
+                        if(response.success){
+                            var app="";
+                            for (var i = 0; i < response.data.length; i++) {
+                                app+="<tr><td>"+ (i+1) +"</td><td>"+ response.data[i].TenDonVi +"</td><td>"+ response.data[i].HaiLong +"% ("+response.data[i].SCHaiLong+")</td><td>"+ response.data[i].BinhThuong +"% ("+response.data[i].SCBinhThuong+")</td><td>"+ response.data[i].KhongHaiLong +"% ("+response.data[i].SCKhongHaiLong+")</td></tr>";
+                            }
+                            $('.appendRows').html(app);
+                        }
+                        $('.se-pre-con').fadeOut("fast");
+                    }
+                });
+            });
+            $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: ''
+                },
+                //tooltip: {
+                //    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+                //},
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            format: '<b>{point.name}</b>: {point.percentage:.2f}%',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: '',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Hài Lòng: @ViewBag.HaiLong% (@ViewBag.SCHaiLong)',
+                        y: @ViewBag.HaiLong,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: 'Bình Thường: @ViewBag.BinhThuong% (@ViewBag.SCBinhThuong)',
+                        y: @ViewBag.BinhThuong
+                        }, {
+                            name: 'Không Hài Lòng: @ViewBag.KhongHaiLong% (@ViewBag.SCKhongHaiLong)',
+                            y: @ViewBag.KhongHaiLong
+                            }]
+                }]
+            });
+        });
+    </script>
 }

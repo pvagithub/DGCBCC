@@ -30,9 +30,22 @@
     <link href="~/Scripts/StickyTableHeaders/css/normalize.css" rel="stylesheet" />
     <script src="~/Scripts/StickyTableHeaders/js/jquery.ba-throttle-debounce.min.js"></script>
     <script src="~/Scripts/StickyTableHeaders/js/jquery.stickyheader.js"></script>
+    <style>
+         .se-pre-con {
+    background: #fff url("../Images/IconWeb/Preloader_2.gif") no-repeat scroll center center;
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none;
+}
+    </style>
 </head>
 <body>
-
+    <div class="se-pre-con"></div>
     <div id="wrapper">
 
         @Html.Partial("_Header")

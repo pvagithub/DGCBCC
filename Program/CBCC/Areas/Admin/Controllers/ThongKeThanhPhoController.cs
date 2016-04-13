@@ -39,6 +39,7 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.BanBieu = ThongKeService.ThongKeToanTP_BanBieu_ByTime(ViewBag.TuNgay, ViewBag.DenNgay);
             ViewBag.CaoNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Top(ViewBag.TuNgay, ViewBag.DenNgay);
             ViewBag.ThapNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Bottom(ViewBag.TuNgay, ViewBag.DenNgay);
+            ViewBag.AllDonVi = ThongKeService.ThongKeToanTP_DonVi_ByTime_All(ViewBag.TuNgay, ViewBag.DenNgay, "HL", "ASC");
             return View();
         }
         [HttpPost]
@@ -72,8 +73,23 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.BanBieu = ThongKeService.ThongKeToanTP_BanBieu_ByTime(tuNgay, denNgay);
             ViewBag.CaoNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Top(tuNgay, denNgay);
             ViewBag.ThapNhat = ThongKeService.ThongKeToanTP_DonVi_ByTime_10Bottom(tuNgay, denNgay);
+            ViewBag.AllDonVi = ThongKeService.ThongKeToanTP_DonVi_ByTime_All(tuNgay, denNgay, "HL", "ASC");
             #endregion
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetAllDonVi(string tuNgay, string denNgay, string name, string sort)
+        {
+            try
+            {
+                var result = ThongKeService.ThongKeToanTP_DonVi_ByTime_All(tuNgay, denNgay, name, sort);
+                return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, data = "" }, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }
