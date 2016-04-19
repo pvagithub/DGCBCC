@@ -16,6 +16,13 @@ namespace CBCC
               namespaces: new[] { "CBCC.Controllers" }
 
             );
+            routes.MapRoute(
+                name: "GopY",
+                url: "{controller}/{action}/{sbn}",
+                defaults: new { controller = "GopY", action = "Index", sbn = UrlParameter.Optional },
+              namespaces: new[] { "CBCC.Controllers" }
+
+            );
         }
     }
 }

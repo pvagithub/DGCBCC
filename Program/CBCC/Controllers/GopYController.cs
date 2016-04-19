@@ -31,7 +31,7 @@ namespace CBCC.Controllers
             NameOfKey.Add("4", "Khó sử dụng");
         }
         // GET: GopY
-        public ActionResult Index()
+        public ActionResult Index(string sbn="")
         {
             ViewBag.IsGopY = true;
             List<GopYHTViewModel> list = new List<GopYHTViewModel>();
@@ -59,6 +59,7 @@ namespace CBCC.Controllers
                 };
                 list.Add(ht);
             }
+            TempData["sbn"] = sbn;
             return View(list);
         }
         [HttpPost]
@@ -68,6 +69,7 @@ namespace CBCC.Controllers
             var lsAnswers = lsdata.Where(p => (p.name.StartsWith("1") || p.name.StartsWith("2") || p.name.StartsWith("3") || p.name.StartsWith("4")) && p.value != null).ToList();
             try
             {
+                var sbn = TempData["sbn"].ToString();
                 for (int i = 0; i < lsAnswers.Count; i++)
                 {
                     //var rs = NameOfKey.ContainsKey(lsAnswers[i].value);
@@ -78,6 +80,7 @@ namespace CBCC.Controllers
                     var GopY = new WebMVC.Entities.GopY()
                    {
                        IDCau = i + 1,
+                       SBN=sbn,
                        MaTL =lsAnswers[i].name.ToLower().Contains("khac")?idKhac.value:lsAnswers[i].name.Remove(0,1),
                        NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  "" :lsAnswers[i].value
                    };
