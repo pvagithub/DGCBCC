@@ -625,6 +625,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="f_GetValue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GenTuanThongKeTheoNam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Year" Type="int" Mode="In" />
@@ -787,6 +792,10 @@
           <Parameter Name="DonVi" Type="int" Mode="In" />
         </Function>
         <Function Name="ThongKeNhomTieuChiTP_ByTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="datetime" Mode="In" />
+          <Parameter Name="DenNgay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThongKeNoiDungGopYPhanMem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TuNgay" Type="datetime" Mode="In" />
           <Parameter Name="DenNgay" Type="datetime" Mode="In" />
         </Function>
@@ -1240,7 +1249,6 @@
           <FunctionImport Name="KetQuaDanhGiaByDanhGiaID" ReturnType="Collection(DataModel.KetQuaDanhGiaByDanhGiaID_Result)">
           <Parameter Name="DanhGiaID" Mode="In" Type="Int64" />
           </FunctionImport>
-          <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
           <EntitySet Name="GopYCauHois" EntityType="DataModel.GopYCauHoi" />
           <EntitySet Name="GopYQuestions" EntityType="DataModel.GopYQuestion" />
           <EntitySet Name="GopYAnswers" EntityType="DataModel.GopYAnswer" />
@@ -1303,6 +1311,11 @@
             <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
             <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="ThongKeNoiDungGopYPhanMem" ReturnType="Collection(DataModel.ThongKeNoiDungGopYPhanMem_Result)">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Gopies" EntityType="DataModel.GopY" />
           </EntityContainer>
         <ComplexType Name="GetThongKeToanTP_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -2008,15 +2021,6 @@
           <Property Type="String" Name="TenTieuChi" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="TenCauTraLoi" Nullable="true" MaxLength="1000" />
         </ComplexType>
-        <EntityType Name="GopY">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDCau" Type="Int32" Nullable="false" />
-          <Property Name="MaTL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NoiDungTL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="GopYCauHoi">
           <Key>
             <PropertyRef Name="GopYCauHoiId" />
@@ -2069,6 +2073,20 @@
           <Property Type="String" Name="MonthYear" Nullable="true" MaxLength="7" />
           <Property Type="Int32" Name="Soluot" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ThongKeNoiDungGopYPhanMem_Result">
+          <Property Type="Int32" Name="IDCau" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="NDGopY" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="GopY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCau" Type="Int32" Nullable="false" />
+          <Property Name="MaTL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoiDungTL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2724,16 +2742,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Gopies">
-            <EntityTypeMapping TypeName="DataModel.GopY">
-              <MappingFragment StoreEntitySet="GopY">
-                <ScalarProperty Name="NoiDungTL" ColumnName="NoiDungTL" />
-                <ScalarProperty Name="MaTL" ColumnName="MaTL" />
-                <ScalarProperty Name="IDCau" ColumnName="IDCau" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GopYCauHois">
             <EntityTypeMapping TypeName="DataModel.GopYCauHoi">
               <MappingFragment StoreEntitySet="GopYCauHoi">
@@ -2819,6 +2827,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ThongKeNoiDungGopYPhanMem" FunctionName="DataModel.Store.ThongKeNoiDungGopYPhanMem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataModel.ThongKeNoiDungGopYPhanMem_Result">
+                <ScalarProperty Name="IDCau" ColumnName="IDCau" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="NDGopY" ColumnName="NDGopY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Gopies">
+            <EntityTypeMapping TypeName="DataModel.GopY">
+              <MappingFragment StoreEntitySet="GopY">
+                <ScalarProperty Name="NoiDungTL" ColumnName="NoiDungTL" />
+                <ScalarProperty Name="MaTL" ColumnName="MaTL" />
+                <ScalarProperty Name="IDCau" ColumnName="IDCau" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

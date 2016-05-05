@@ -158,6 +158,9 @@
     <Compile Include="ThongKeGopYPhanMem_Result.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThongKeNoiDungGopYPhanMem_Result.cs">
+      <DependentUpon>DataAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ThongKeToanTP_BanBieu_ByMonthYear_Result.cs">
       <DependentUpon>DataAppModel.tt</DependentUpon>
     </Compile>

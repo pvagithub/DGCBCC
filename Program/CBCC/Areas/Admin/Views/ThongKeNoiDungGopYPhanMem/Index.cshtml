@@ -1,0 +1,88 @@
+﻿@using WebMVC.Entities;
+@model List<WebMVC.Entities.ThongKe>
+@{
+    ViewBag.Title = "Thống kê nội dung góp ý phần mềm";
+    int i;
+}
+
+<h3>Thống kê nội dung góp ý phần mềm</h3>
+
+@using (Html.BeginForm("Index", "ThongKeNoiDungGopYPhanMem"))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-2">
+            <input id="tuNgay" name="tuNgay" type="text" value="@ViewBag.TuNgay" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+        <div class="col-md-2"><p class="text-right">Ngày kết thúc:</p></div>
+        <div class="col-md-2"><input id="denNgay" name="denNgay" type="text" value="@ViewBag.DenNgay" placeholder="Chọn ngày kết thúc" class="form-control"></div>
+        <div class="col-md-1"><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Xem</button></div>
+    </div>
+}
+<br />
+<table class="table table-hover table-striped">
+    <tr>
+        <th>STT</th>
+        <th>Câu hỏi</th>
+        <th style="white-space:nowrap">Chi tiết</th>
+    </tr>
+    @for (i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+        var clr = "beige";
+        if (i % 2 == 0)
+        { clr = "aliceblue"; }
+        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr" title="Xem chi tiết">
+            <td>@(i + 1)</td>
+            <td>
+                @Model[i].Question
+            </td>
+            <td>
+                <a class="parent">Chi tiết</a>
+            </td>
+        </tr>
+        if (!string.IsNullOrWhiteSpace(Model[i].NDGopY))
+        {
+            var arr = Model[i].NDGopY.Split('_');
+            <tr class="child" style="display: none;" data-level="2">
+                <td colspan="4" style="padding-left:5%;">
+                    <div style=" overflow-y:scroll; height:200px !important">
+                        <table class="table table-striped" style="width: 90%; ">
+                            <tr>
+                                <th>Nội dung</th>
+                            </tr>
+                            @foreach (var it in arr)
+	                        {
+		                        <tr>
+                                    <td>@it</td>
+                                </tr>
+	                        }
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+</table>
+@section scripts{
+<script>
+    $(document).ready(function () {
+        function getChildren($row) {
+            var children = [], level = $row.attr('data-level');
+            while ($row.next().attr('data-level') > level) {
+                children.push($row.next());
+                $row = $row.next();
+            }
+            return children;
+        }
+        $('.parent').on('click', function () {
+            var children = getChildren($(this));
+            $.each(children, function () {
+                $(this).toggle();
+            })
+        });
+    })
+</script>
+}

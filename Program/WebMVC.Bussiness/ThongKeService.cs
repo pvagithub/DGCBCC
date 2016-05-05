@@ -681,7 +681,24 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+        public static List<ThongKe> ThongKeNoiDungGopYPhanMem(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeNoiDungGopYPhanMem @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
         #endregion
 
     }

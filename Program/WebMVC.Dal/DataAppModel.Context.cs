@@ -67,10 +67,10 @@ namespace WebMVC.Dal
         public virtual DbSet<TK_TongHop_Tuan> TK_TongHop_Tuan { get; set; }
         public virtual DbSet<Tuan_BaoCao> Tuan_BaoCao { get; set; }
         public virtual DbSet<UsersInRole> UsersInRoles { get; set; }
-        public virtual DbSet<GopY> Gopies { get; set; }
         public virtual DbSet<GopYCauHoi> GopYCauHois { get; set; }
         public virtual DbSet<GopYQuestion> GopYQuestions { get; set; }
         public virtual DbSet<GopYAnswer> GopYAnswers { get; set; }
+        public virtual DbSet<GopY> Gopies { get; set; }
     
         public virtual int GenTuanThongKeTheoNam(Nullable<int> year)
         {
@@ -901,6 +901,62 @@ namespace WebMVC.Dal
                 new ObjectParameter("Sort", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_DonVi_ByTime_All", tuNgayParameter, denNgayParameter, nameParameter, sortParameter);
+        }
+    
+        public virtual int ThongKeToanTP_BanBieu_ByDonViMonthYear(string maDonVi, Nullable<int> month, Nullable<int> year)
+        {
+            var maDonViParameter = maDonVi != null ?
+                new ObjectParameter("MaDonVi", maDonVi) :
+                new ObjectParameter("MaDonVi", typeof(string));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThongKeToanTP_BanBieu_ByDonViMonthYear", maDonViParameter, monthParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<ThongKeToanTP_BanBieu_ByMonthYear_Result> ThongKeToanTP_BanBieu_ByMonthYear(Nullable<int> month, Nullable<int> year)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("Month", month) :
+                new ObjectParameter("Month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeToanTP_BanBieu_ByMonthYear_Result>("ThongKeToanTP_BanBieu_ByMonthYear", monthParameter, yearParameter);
+        }
+    
+        public virtual ObjectResult<ThongKeToanTP_BanBieu_ThreeMonth_Result> ThongKeToanTP_BanBieu_ThreeMonth(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeToanTP_BanBieu_ThreeMonth_Result>("ThongKeToanTP_BanBieu_ThreeMonth", tuNgayParameter, denNgayParameter);
+        }
+    
+        public virtual ObjectResult<ThongKeNoiDungGopYPhanMem_Result> ThongKeNoiDungGopYPhanMem(Nullable<System.DateTime> tuNgay, Nullable<System.DateTime> denNgay)
+        {
+            var tuNgayParameter = tuNgay.HasValue ?
+                new ObjectParameter("TuNgay", tuNgay) :
+                new ObjectParameter("TuNgay", typeof(System.DateTime));
+    
+            var denNgayParameter = denNgay.HasValue ?
+                new ObjectParameter("DenNgay", denNgay) :
+                new ObjectParameter("DenNgay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeNoiDungGopYPhanMem_Result>("ThongKeNoiDungGopYPhanMem", tuNgayParameter, denNgayParameter);
         }
     }
 }

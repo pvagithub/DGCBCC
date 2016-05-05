@@ -23,7 +23,10 @@ namespace WebMVC.Entities
         public string SCKhongHaiLong { get; set; }
         public string SCBinhThuong { get; set; }
         public int Soluot { get; set; }
+        public int IDCau { get; set; }
         public string MonthYear { get; set; }
         public string SoBienNhan { get; set; }
+        public string Question { get; set; }
+        public string NDGopY { get; set; }
     }
 }

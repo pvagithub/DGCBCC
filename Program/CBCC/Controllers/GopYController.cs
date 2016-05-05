@@ -80,7 +80,6 @@ namespace CBCC.Controllers
                     var GopY = new WebMVC.Entities.GopY()
                    {
                        IDCau = i + 1,
-                       SBN=sbn,
                        MaTL =lsAnswers[i].name.ToLower().Contains("khac")?idKhac.value:lsAnswers[i].name.Remove(0,1),
                        NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  "" :lsAnswers[i].value
                    };
