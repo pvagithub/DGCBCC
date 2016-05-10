@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using WebMVC.Dal;
 using WebMVC.Dal.Extensions;
 using WebMVC.Entities;
@@ -15,6 +18,7 @@ namespace WebMVC.Bussiness
         {
             using (var context = new DataModelEntities())
             {
+                var arrMaDonVi = DonViID.Split('_');
                 context.ReadUncommited();
 
                 var hoSo = context.HoSoes.Find(idHoSo);
@@ -22,7 +26,8 @@ namespace WebMVC.Bussiness
                 {
                     _Danhgia.DonViID = hoSo.DonViID;
                     _Danhgia.HoSoID = hoSo.ID.ToString();
-                    _Danhgia.MaDonVi = hoSo.MaDonVi;
+                    _Danhgia.MaDonVi = arrMaDonVi[0];
+                    _Danhgia.MaLienThong = arrMaDonVi[1];
                     _Danhgia.SoBienNhan = soBN;
                     _Danhgia.TenDonVi = hoSo.TenDonVi;
                     _Danhgia.LinhVucID = hoSo.LinhVucID;
@@ -38,7 +43,8 @@ namespace WebMVC.Bussiness
                     _Danhgia.HoSoID = null;
                     _Danhgia.SoBienNhan = soBN;
                     _Danhgia.DonViID = null;
-                    _Danhgia.MaDonVi = DonViID;
+                    _Danhgia.MaDonVi = arrMaDonVi[0];
+                    _Danhgia.MaLienThong = arrMaDonVi[1];
                     _Danhgia.TenDonVi = null;
                     _Danhgia.LinhVucID = null;
                     _Danhgia.TenLinhVuc = null;
@@ -132,5 +138,17 @@ namespace WebMVC.Bussiness
             }
         }
         #endregion
+
+        public static string ThongTinHoSo(string maDonvi, string soBienNhan)
+        {
+            string json = string.Empty;
+            using (WebClient wc = new WebClient())
+            {
+                wc.Encoding = Encoding.UTF8;
+                wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+                json = wc.DownloadString("https://dichvucong.hochiminhcity.gov.vn/icloudgate/version4/restapi/onegate/" + maDonvi.Trim() + "/searchrecord?recordNo=" + soBienNhan);
+            }
+            return json; 
+        }
     }
 }

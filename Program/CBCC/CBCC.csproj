@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Helper\LocationHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HoSoDetails.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\GopY\GopYHTViewModel.cs" />
     <Compile Include="Models\KQDanhGiaModel.cs" />

@@ -28,6 +28,7 @@ namespace WebMVC.Entities
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<bool> LoaiDonVi { get; set; }
         public Nullable<bool> Active { get; set; }
+        public string MaLienThong { get; set; }
     
         public virtual ICollection<LinhVucDonVi> LinhVucDonVis { get; set; }
     }

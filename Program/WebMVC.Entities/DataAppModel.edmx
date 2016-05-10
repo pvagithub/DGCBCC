@@ -32,6 +32,7 @@
           <Property Name="NgayDanhGia" Type="datetime" />
           <Property Name="DanhGiaTrucTiep" Type="bit" />
           <Property Name="MaDonVi" Type="nvarchar" MaxLength="10" />
+          <Property Name="MaLienThong" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
@@ -46,6 +47,7 @@
           <Property Name="DisplayOrder" Type="int" />
           <Property Name="LoaiDonVi" Type="bit" />
           <Property Name="Active" Type="bit" />
+          <Property Name="MaLienThong" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="GopY">
           <Key>
@@ -1392,6 +1394,7 @@
           <Property Name="DanhGiaTrucTiep" Type="Boolean" />
           <NavigationProperty Name="KetQuaDanhGias" Relationship="DataModel.FK_KetQuaDanhGia_DanhGia" FromRole="DanhGia" ToRole="KetQuaDanhGia" />
           <Property Name="MaDonVi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaLienThong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
@@ -1407,6 +1410,7 @@
           <Property Name="LoaiDonVi" Type="Boolean" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="LinhVucDonVis" Relationship="DataModel.FK_LinhVucDonVi_DonVi" FromRole="DonVi" ToRole="LinhVucDonVi" />
+          <Property Name="MaLienThong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HoSo">
           <Key>
@@ -2208,6 +2212,7 @@
           <EntitySetMapping Name="DanhGias">
             <EntityTypeMapping TypeName="DataModel.DanhGia">
               <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="MaLienThong" ColumnName="MaLienThong" />
                 <ScalarProperty Name="MaDonVi" ColumnName="MaDonVi" />
                 <ScalarProperty Name="DanhGiaTrucTiep" ColumnName="DanhGiaTrucTiep" />
                 <ScalarProperty Name="NgayDanhGia" ColumnName="NgayDanhGia" />
@@ -2227,6 +2232,7 @@
           <EntitySetMapping Name="DonVis">
             <EntityTypeMapping TypeName="DataModel.DonVi">
               <MappingFragment StoreEntitySet="DonVi">
+                <ScalarProperty Name="MaLienThong" ColumnName="MaLienThong" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="LoaiDonVi" ColumnName="LoaiDonVi" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
