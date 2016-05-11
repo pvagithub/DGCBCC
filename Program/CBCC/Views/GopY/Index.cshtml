@@ -132,7 +132,7 @@
                     contentType: 'application/json; charset=utf-8',
                     data: formData,
                     success: function (data, textStatus, xhr) {
-                        window.location.href = "DanhGia";
+                        window.location.href = '@Url.Action("Index","DanhGia")';
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(textStatus);
