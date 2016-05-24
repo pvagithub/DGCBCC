@@ -699,7 +699,126 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+
+        public static List<ThongKe> ThongKeToanTP_3Thang_BieuDoCot(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeToanTP_3Thang_BieuDoCot @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+        public static List<ThongKe> ThongKeNoiDungGopYCauHoi(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeNoiDungGopYCauHoi @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).ToList();
+
+                return result;
+            }
+        }
+        public static ThongKe ThongKeTyLeGopYPhanMem(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeTyLeGopYPhanMem @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).FirstOrDefault();
+
+                return result;
+            }
+        }
+        public static ThongKe ThongKeNoiDungGopYPhanMemResult(string tuNgay, string denNgay)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeNoiDungGopYPhanMemResult @TuNgay,@DenNgay",
+                    tuNgayParameter, denNgayParameter).FirstOrDefault();
+
+                return result;
+            }
+        }
+       
         #endregion
 
+        /// <summary>
+        /// Bản biểu thống kê theo tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian  của từng đơn vị
+        /// </summary>
+        public static List<ThongKe> ThongKe_TheoDonVi_ByDonVi_ByTime(string tuNgay, string denNgay, string userName)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var userNameParameter = new SqlParameter("userName", userName);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKe_DonVi_ByDonVi_ByTime @TuNgay,@DenNgay,@userName",
+                    tuNgayParameter, denNgayParameter, userNameParameter).ToList();
+
+                return result;
+            }
+        }
+        /// <summary>
+        /// Biểu đồ thống kê tỷ lệ hài lòng, không hài lòng, bình thường theo thời gian của từng đơn vị
+        /// </summary>
+        public static ThongKe ThongKe_TheoDonVi_ByTime(string tuNgay, string denNgay, string username)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("tuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("denNgay", denNgayDate) : new SqlParameter("denNgay", typeof(DateTime));
+                var usernameParameter = new SqlParameter("userName", username);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKe_DonVi_ByTime @TuNgay,@DenNgay,@userName",
+                    tuNgayParameter, denNgayParameter, usernameParameter).FirstOrDefault();
+
+                return result;
+            }
+        }
+        
     }
 }

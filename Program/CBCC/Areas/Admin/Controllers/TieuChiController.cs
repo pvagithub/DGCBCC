@@ -13,7 +13,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class TieuChiController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {

@@ -12,7 +12,7 @@ namespace CBCC.Areas.Admin.Controllers
         {
             ViewBag.GopYCauHoi = DanhGiaService.SelectAllGopYCauHoi();
         }
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         //
         // GET: /Admin/CaiDat/
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)

@@ -25,6 +25,7 @@ namespace CBCC.Controllers
         public JsonResult HoSoGetBySoBienNhan_DanhGia(string soBienNhan, string maDonVi)
         {
             var arrMaDonVi = maDonVi.Split('_');
+            DateTime startDate = new DateTime(2016, 4, 1);  // ngày cho phép đánh giá 
             HoSo hoSo = null;
             //if (null != Session["CAPTCHA"])
             //{
@@ -38,8 +39,9 @@ namespace CBCC.Controllers
             //    {
             bool daDuocDanhGia = true;
 
-            hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia);
+            hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia, arrMaDonVi);
             bool isExist = hoSo != null ? true : false;
+            bool allowDanhGia = true; // kiem tra lon hon startDate thi cho phep danh gia
             if (!isExist)
             {
                 var dsHoSo = DanhGiaService.ThongTinHoSo(arrMaDonVi[1], soBienNhan);
@@ -58,6 +60,7 @@ namespace CBCC.Controllers
                         NgayHenTra = !string.IsNullOrWhiteSpace(hs.appointment) ? ConvertToNallableDate("/Date(" + hs.appointment + "+0000)/") : new Nullable<DateTime>()
                     };
                     isExist = true;
+                    allowDanhGia = hoSo.NgayNhan >= startDate;
                     HoSoService.HoSoCreate(hoSo);
                 }
                 else
@@ -87,11 +90,12 @@ namespace CBCC.Controllers
                     };
                     //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
                     isExist = true;
+                    allowDanhGia = hoSo.NgayNhan >= startDate;
                     HoSoService.HoSoCreate(hoSo);
                 }
                 //string matinhtrang = clientvoice.VoiceSearch(datas);
             }
-            return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia }, JsonRequestBehavior.AllowGet);
+            return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia, allow = allowDanhGia }, JsonRequestBehavior.AllowGet);
             //    }
             //}
             //return Json(new { IsExist = false, isCaptchaValid = false, HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);

@@ -1,0 +1,156 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê Góp Ý Câu Hỏi";
+    List<ThongKe> lst = new List<ThongKe>();
+    List<ThongKe> lstResult = new List<ThongKe>();
+    if( ViewBag.Result!=null){
+        lstResult =  ViewBag.Result as List<ThongKe>;
+    }
+}
+
+<h3>Thống kê thành phố</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+
+@using (Html.BeginForm("Index", "ThongKeNoiDungGopYCauHoi"))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-2">
+            <input id="tuNgay" name="tuNgay" type="text" value="@ViewBag.TuNgay" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+        <div class="col-md-2"><p class="text-right">Ngày kết thúc:</p></div>
+        <div class="col-md-2"><input id="denNgay" name="denNgay" type="text" value="@ViewBag.DenNgay" placeholder="Chọn ngày kết thúc" class="form-control"></div>
+        <div class="col-md-1"><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Xem</button></div>
+    </div>
+}
+<br />
+<table class="table table-hover table-striped">
+    <tr>
+        <th style="width:50px">STT</th>
+        <th style="width:5%">Số Biên Nhận</th>
+        <th style="width:30%">Đơn Vị</th>
+        <th style="width:40%">Nội Dung Góp Y</th>
+        <th style="white-space:nowrap">Chi tiết</th>
+    </tr>
+
+    @for (int i = 0; i < lstResult.Count(); i++)
+    {
+        lst = new List<ThongKe>();
+        var item = lstResult[i];
+        if (!string.IsNullOrWhiteSpace(item.NDGopY))
+                {
+                    var xml = System.Xml.Linq.XDocument.Parse(item.NDGopY);
+                    var rows = from node in xml.Descendants("row")
+                            select new ThongKe
+                            {
+                                NoiDungGopY = node.Attribute("NoiDungGopY").Value
+                            };
+                    lst.AddRange(rows);
+                }
+        var clr = "beige";
+        if (i % 2 == 0)
+        { clr = "aliceblue"; }
+        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr" title="Xem chi tiết">
+            <td>@(i + 1)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoBienNhan)
+            </td>
+            <td style="text-align:left ">
+                @Html.DisplayFor(modelItem => item.TenDonVi)
+            </td>
+            <td>
+                @foreach (var it in lst)
+                {
+                    <span>- @it.NoiDungGopY</span>
+                    <br />
+                }
+            </td>
+            <td>
+                <a class="parent">Chi tiết</a>
+            </td>
+        </tr>
+        
+        if (!string.IsNullOrWhiteSpace(item.ChiTiet))
+        {
+            lst = new List<ThongKe>();
+            var xml = System.Xml.Linq.XDocument.Parse(item.ChiTiet);
+            var rows = from node in xml.Descendants("row")
+                    select new ThongKe
+                    {
+                        TenTieuChi = node.Attribute("TenTieuChi").Value,
+                        NoiDungGopY = node.Attribute("NoiDungGopY").Value
+                    };
+            lst.AddRange(rows);
+            <tr class="child" style="display: none;" data-level="2">
+                <td colspan="4" style="padding-left:5%;">
+                    <div style=" overflow-y:scroll; height:200px !important">
+                        <table class="table table-striped" style="width: 90%; ">
+                            <tr>
+                                <th width="60%">Tên tiêu chí</th>
+                                <th>Nội dung góp ý</th>
+                            </tr>
+                            @for (int j = 0; j < lst.Count(); j++)
+                            {
+                                <tr>
+                                    <td>
+                                        @lst[j].TenTieuChi
+                                    </td>
+                                    <td>@lst[j].NoiDungGopY</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+</table>
+@section scripts{
+    <script src="~/Scripts/highcharts.js"></script>
+    <script>
+        $('#tuNgay').datepicker({
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+        $('#denNgay').datepicker(
+        {
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+        $(document).ready(function () {
+            function getChildren($row) {
+                var children = [], level = $row.attr('data-level');
+                while ($row.next().attr('data-level') > level) {
+                    children.push($row.next());
+                    $row = $row.next();
+                }
+                return children;
+            }
+
+            $('.parent').on('click', function () {
+                var children = getChildren($(this));
+                $.each(children, function () {
+                    $(this).toggle();
+                })
+            });
+        })
+    </script>
+}

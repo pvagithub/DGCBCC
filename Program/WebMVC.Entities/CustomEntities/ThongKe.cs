@@ -28,5 +28,15 @@ namespace WebMVC.Entities
         public string SoBienNhan { get; set; }
         public string Question { get; set; }
         public string NDGopY { get; set; }
+        public string NoiDungGopY { get; set; }
+        public string TenTieuChi { get; set; }
+        public string ChiTiet { get; set; }
+        public string ChapNhanDuoc { get; set; }
+        public string KhoSuDung { get; set; }
+        public string Khac { get; set; }
+        public int rowChapNhan { get; set; }
+        public int rowKhoSuDung { get; set; }
+        public int rowKhac { get; set; }
+        public int Total { get; set; }
     }
 }

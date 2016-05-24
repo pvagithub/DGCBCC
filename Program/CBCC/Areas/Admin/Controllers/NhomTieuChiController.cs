@@ -7,7 +7,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class NhomTieuChiController : Controller
     {
-         [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+         [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         //
         // GET: /Admin/NhomTieuChi/
         public ActionResult Index()

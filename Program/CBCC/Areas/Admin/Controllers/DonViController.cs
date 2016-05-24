@@ -9,7 +9,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class DonViController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             try

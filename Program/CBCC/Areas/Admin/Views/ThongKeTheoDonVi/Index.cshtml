@@ -1,0 +1,172 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống kê theo đơn vị";
+    int i;
+}
+
+<h3>Thống kê theo đơn vị</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+@using (Html.BeginForm("Index", "ThongKeTheoDonVi"))
+{
+    <div class="row">
+        @*<div class="col-md-3">
+            <span class="form-group input-group-btn">
+                <select class="bs-select form-control" id="cbDonVi" name="cbDonVi">
+                        @{
+                            var listParent = ((List<DonVi>)ViewBag.DonVi).Where(x => x.ParentDonViID == null).ToList();
+                            foreach (var item in listParent)
+                            {
+                                <optgroup label="@item.TenDonVi">
+                                    @{
+                                        var listEntity = ((List<DonVi>)ViewBag.DonVi).Where(x=>x.ParentDonViID == item.DonViID).ToList();
+                                        foreach (var it in listEntity)
+                                        {
+                                            if (ViewBag.MaDonVi !=null && ViewBag.MaDonVi.ToString() == it.MaDonVi.ToString()) 
+                                            { 
+                                                <option value="@it.MaDonVi" selected>@it.TenDonVi</option>
+                                            }
+                                            else{
+                                                <option value="@it.MaDonVi" >@it.TenDonVi</option>
+                                            }
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                        }
+</select>
+            </span>
+
+        </div>*@
+        <div class="col-md-2">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-2">
+            <input id="tuNgay" name="tuNgay" type="text" value="@ViewBag.TuNgay" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+        <div class="col-md-2"><p class="text-right">Ngày kết thúc:</p></div>
+        <div class="col-md-2"><input id="denNgay" name="denNgay" type="text" value="@ViewBag.DenNgay" placeholder="Chọn ngày kết thúc" class="form-control"></div>
+        <div class="col-md-1"><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Xem</button></div>
+    </div>
+}
+<br />
+<div class="row">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Biểu đồ</a></li>
+        <li class=""><a href="#tab2" data-toggle="tab">Bản biểu</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="tab1">
+            <div id="container"></div>
+        </div>
+        <div class="tab-pane fade" id="tab2">
+            <table class="table table-hover">
+                <tr>
+                    <th>STT</th>
+                    <th>Tháng/Năm</th>
+                    <th>Hài lòng</th>
+                    <th>Bình thường</th>
+                    <th>Không hài lòng</th>
+                </tr>
+                @if (ViewBag.BanBieu != null)
+                {
+                    var banbieu = (List<ThongKe>)ViewBag.BanBieu;
+                    for (i = 0; i < banbieu.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                @banbieu[i].TenDonVi
+                            </td>
+                            <td>
+                                @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
+                            </td>
+                            <td>
+                                @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
+                            </td>
+                            <td>
+                                @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+      
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/highcharts.js"></script>
+    <script>
+    $('#tuNgay').datepicker({
+        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+    });
+    $('#denNgay').datepicker(
+    {
+        dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+    });
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            //tooltip: {
+            //    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+            //},
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        format: '<b>{point.name}</b>: {point.percentage:.2f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: '',
+                colorByPoint: true,
+                data: [{
+                    name: 'Hài Lòng: @ViewBag.HaiLong% (@ViewBag.SCHaiLong)',
+                    y: @ViewBag.HaiLong,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Bình Thường: @ViewBag.BinhThuong% (@ViewBag.SCBinhThuong)',
+                    y: @ViewBag.BinhThuong
+                }, {
+                    name: 'Không Hài Lòng: @ViewBag.KhongHaiLong% (@ViewBag.SCKhongHaiLong)',
+                    y: @ViewBag.KhongHaiLong
+                }]
+            }]
+        });
+    });
+</script>
+}

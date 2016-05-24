@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 using WebMVC.Entities;
+using System.Linq;
+
 namespace CBCC.Areas.Admin.Controllers
 {
-    public class ThongKeDonViController : Controller
+    public class ThongKeTheoDonViController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "User")]
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.DonVi = DanhMucService.DonViGetAllList();
+            ViewBag.DonVi = DanhMucService.DonViGetAllList().Where(x => x.Active == true).ToList();           
             ViewBag.MaDonVi = (ViewBag.DonVi as List<DonVi>) != null ? (ViewBag.DonVi as List<DonVi>)[0].MaDonVi : string.Empty;
+           
         }
         public ActionResult Index()
         {
             ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
             ThongKe thongke;
-            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, ViewBag.MaDonVi);
+            string username = HttpContext.User.Identity.Name;
+            thongke = ThongKeService.ThongKe_TheoDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, username);
+          
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
@@ -37,17 +42,18 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
 
             // ban bieu
-            ViewBag.BanBieu = ThongKeService.ThongKeToanTP_DonVi_ByDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, ViewBag.MaDonVi);
+            ViewBag.BanBieu = ThongKeService.ThongKe_TheoDonVi_ByDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, username);
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string cbDonVi, string tuNgay, string denNgay)
+        public ActionResult Index(string username, string tuNgay, string denNgay)
         {
             tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
             denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
             #region thong ke toan tinh
             ThongKe thongke;
-            thongke = ThongKeService.ThongKeToanTP_DonVi_ByTime(tuNgay, denNgay, cbDonVi);
+            string suser = HttpContext.User.Identity.Name;
+            thongke = ThongKeService.ThongKe_TheoDonVi_ByTime(tuNgay, denNgay, suser);
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
@@ -60,7 +66,7 @@ namespace CBCC.Areas.Admin.Controllers
             }
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
-            ViewBag.MaDonVi = cbDonVi;
+           // ViewBag.MaDonVi = cbDonVi;
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
@@ -68,9 +74,9 @@ namespace CBCC.Areas.Admin.Controllers
             ViewBag.SCHaiLong = thongke.SCHaiLong;
             ViewBag.SCKhongHaiLong = thongke.SCKhongHaiLong;
             // ban bieu
-            ViewBag.BanBieu = ThongKeService.ThongKeToanTP_DonVi_ByDonVi_ByTime(tuNgay, denNgay, cbDonVi);
+            ViewBag.BanBieu = ThongKeService.ThongKe_TheoDonVi_ByDonVi_ByTime(tuNgay, denNgay, suser);
             #endregion
             return View();
         }
     }
-}
+	}

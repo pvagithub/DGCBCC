@@ -18,5 +18,6 @@ namespace WebMVC.Entities
         public int IDCau { get; set; }
         public string MaTL { get; set; }
         public string NoiDungTL { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
     }
 }

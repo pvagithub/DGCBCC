@@ -12,7 +12,7 @@ namespace CBCC.Areas.Admin.Controllers
         {
             ViewBag.GopYPhanMem = GopYService.GetGopY();
         }
-        //[MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         // GET: Admin/SoftwareFeedback
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {

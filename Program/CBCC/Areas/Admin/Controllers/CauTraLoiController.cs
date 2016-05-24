@@ -11,7 +11,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class CauTraLoiController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             var lstCauTraLoi = DanhMucService.CauTraLoiGetAll_ForBO();

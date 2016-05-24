@@ -11,22 +11,24 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class ThongKeThreeMonthController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         public ActionResult Index()
         {
-            ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-3).Month, 1)).ToString("dd/MM/yyyy");
+            ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-2).Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
 
             ViewBag.ThreeMonth = ThongKeService.ThongKeToanTP_BanBieu_ThreeMonth(ViewBag.TuNgay, ViewBag.DenNgay);
+            ViewBag.BieuDo = ThongKeService.ThongKeToanTP_3Thang_BieuDoCot(ViewBag.TuNgay, ViewBag.DenNgay);
             return View();
         }
         [HttpPost]
         public ActionResult Index(string id)
         {
-            ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-3).Month, 1)).ToString("dd/MM/yyyy");
+            ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.AddMonths(-2).Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
 
             ViewBag.ThreeMonth = ThongKeService.ThongKeToanTP_BanBieu_ThreeMonth(ViewBag.TuNgay, ViewBag.DenNgay);
+            ViewBag.BieuDo = ThongKeService.ThongKeToanTP_3Thang_BieuDoCot(ViewBag.TuNgay, ViewBag.DenNgay);
             return View();
         }
         public ActionResult GetDonViMonthYear(int month, int year)

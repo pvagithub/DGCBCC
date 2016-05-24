@@ -28,17 +28,19 @@ namespace WebMVC.Bussiness
             }
         }
 
-        public static HoSo HoSoGetBySoBienNhan_DanhGia(string soBienNhan, out bool daDuocDanhGia)
+        public static HoSo HoSoGetBySoBienNhan_DanhGia(string soBienNhan, out bool daDuocDanhGia, string[] maDonVi)
         {
+            string oldMaDonVi = maDonVi[0];
+            string newMaDonVi = maDonVi[1];
             using (var context = new DataModelEntities())
             {
                 context.ReadUncommited();
 
-                var hoso = context.HoSoes.Where(x => x.SoBienNhan == soBienNhan).FirstOrDefault();
+                var hoso = context.HoSoes.Where(x => x.SoBienNhan == soBienNhan && (x.MaDonVi.Trim() == oldMaDonVi || x.MaDonVi.Trim() == newMaDonVi)).FirstOrDefault();
 
                 if (hoso != null)
                 {
-                    daDuocDanhGia = hoso.DaDanhGia.HasValue ? hoso.DaDanhGia.Value : false;
+                    daDuocDanhGia = hoso.DaDanhGia ?? false;
                 }
                 else
                 {

@@ -129,6 +129,15 @@
         .input-lg {
             padding: 10px 7px;
         }
+
+        .titlesbn1 {
+            background-color: #c5e0b4;
+            padding: 10px;
+            color: #000 !important;
+            text-align: center;
+            min-height: 80px;
+            padding-top: 2%;
+        }
     </style>
 }
 <form id="frmDanhGia">
@@ -170,13 +179,17 @@
                         </select>
                     </span>
                 </div>
-
             </div><p></p>
+            <style>
+                .warrper_input_sbn1 {
+                    text-align: center;
+                }
+            </style>
             <div class="warrper_input_sbn">
                 <div class="input-group">
-                    <span class="form-group input-group-btn">
-                        <input id="soBienNhan" class="form-control" value="@ViewBag.sobiennhan" name="soBienNhan" type="text" placeholder="Nhập số biên nhận" autocomplete="off" style="width:75%">
-                        <button id="danhgia" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click vào đây đê tiến hành đánh giá!">Đánh giá!</button>
+                    <input type="text" id="soBienNhan" class="form-control" value="@ViewBag.sobiennhan" name="soBienNhan" placeholder="Nhập số biên nhận" autocomplete="off">
+                    <span class="input-group-btn">
+                        <button id="danhgia" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Click vào đây để tiến hành đánh giá!">Đánh giá!</button>
                     </span>
                 </div>
 
@@ -185,11 +198,12 @@
             </div>
 
             <div class="comment">
-                (Nhập số biên nhận để thực hiện việc đánh giá)
+                (Nhập số biên nhận để thực hiện việc đánh giá)<br />
+                Xin vui lòng sử dụng số biên nhận của hồ sơ nộp từ ngày 01/04/2016
             </div>
-            <div class="center">
+            @*<div class="center">
                 <strong>Xin vui lòng sử dụng số biên nhận của hồ sơ nộp từ ngày 01/04/2016</strong>
-            </div>
+            </div>*@
             <div class="warrper_input_sbn hide">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
@@ -203,8 +217,8 @@
                 <div class="loicamon">
                     <div class="pull-left"></div>
                     <div class="pull-right">
-                        Để nâng cao chất lượng phục vụ của cơ quan hành chính nhà nước tại TP. Hồ Chí Minh, UBND Thành phố đã chỉ đạo Sở Thông tin và Truyền thông phối hợp với Sở Nội vụ và Viện Nghiên cứu Phát triển triển khai Hệ thống Đánh giá sự hài lòng của người dân và tổ chức về sự phục vụ của cơ quan hành chính nhà nước. 
-                        <br/><p></p>Kính mong Quý Ông/Bà dành thời gian để đánh giá về dịch vụ hành chính công mà Quý Ông/Bà đã hoặc đang thực hiện tại Thành phố. Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. Hồ Chí Minh ngày càng hoàn thiện hơn
+                        Để nâng cao chất lượng phục vụ của cơ quan hành chính nhà nước tại TP. Hồ Chí Minh, UBND Thành phố đã chỉ đạo Sở Thông tin và Truyền thông phối hợp với Sở Nội vụ và Viện Nghiên cứu Phát triển triển khai Hệ thống Đánh giá sự hài lòng của người dân và tổ chức về sự phục vụ của cơ quan hành chính nhà nước.
+                        <br /><p></p>Kính mong Quý Ông/Bà dành thời gian để đánh giá về dịch vụ hành chính công mà Quý Ông/Bà đã hoặc đang thực hiện tại Thành phố. Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. Hồ Chí Minh ngày càng hoàn thiện hơn
                     </div>
                 </div>
 
@@ -316,7 +330,7 @@
 
             // If sai
             if ($('#soBienNhan').val().length < 5) {
-                var htmlString = "<em>Số biên nhận/mã số không hợp lệ!</em>";
+                var htmlString = "<em>Số biên nhận không hợp lệ!</em>";
                 $("#msg_notify").html(htmlString);
                 //bootbox.alert("Số biên nhận không hợp lệ", function () {
                 //})
@@ -326,9 +340,13 @@
 
                 $.getJSON('/DanhGia/HoSoGetBySoBienNhan_DanhGia?soBienNhan=' + $('#soBienNhan').val() + '&maDonVi=' + $('#cbDonVi').val(), function (data) {
 
-                    // Neu hoso không tồn tại
-                    if (data.IsExist == false) {
-                        var htmlString = "<em>Số biên nhận/mã số đánh giá chưa đúng!</em>";
+                    // ngày nhận nhỏ hơn 01/04/2016 => thông báo
+                    if (data.allow == false) {
+                        var htmlString = "<em>Hệ thống chỉ đánh giá hồ sơ có ngày nhận từ ngày 01/04/2016!</em>";
+                        $("#msg_notify").html(htmlString);
+                    }
+                    else if (data.IsExist == false) {
+                        var htmlString = "<em>Số biên nhận chưa đúng!</em>";
                         $("#msg_notify").html(htmlString);
                         //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
                         //})
@@ -336,7 +354,7 @@
                         // Neu hoso  tồn tại
                     else {
                         if (data.DaDuocDanhGia == true) {
-                            var htmlString = "<em>Số biên nhận/mã số đã được đánh giá!</em>";
+                            var htmlString = "<em>Số biên nhận đã được đánh giá!</em>";
                             $("#msg_notify").html(htmlString);
                             //bootbox.alert("Hồ sơ đã được đánh giá", function () {
 
@@ -359,8 +377,6 @@
                                 $('#idHoSo').val(data.HoSo.ID);
 
                                 //Ẩn màn hình nhập số biên nhận
-
-
                                 bootbox.dialog({
                                     title: "Thông tin hồ sơ",
                                     message:
@@ -416,12 +432,9 @@
                                 }
                              );
                             }
-
-
                         }
                     }
                 })
-
             }
         });
         function JSONDate(dateStr) {

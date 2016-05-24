@@ -57,6 +57,7 @@
           <Property Name="IDCau" Type="int" Nullable="false" />
           <Property Name="MaTL" Type="varchar" MaxLength="50" />
           <Property Name="NoiDungTL" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="GopYAnswer">
           <Key>
@@ -2090,6 +2091,7 @@
           <Property Name="IDCau" Type="Int32" Nullable="false" />
           <Property Name="MaTL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NoiDungTL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2845,6 +2847,7 @@
           <EntitySetMapping Name="Gopies">
             <EntityTypeMapping TypeName="DataModel.GopY">
               <MappingFragment StoreEntitySet="GopY">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="NoiDungTL" ColumnName="NoiDungTL" />
                 <ScalarProperty Name="MaTL" ColumnName="MaTL" />
                 <ScalarProperty Name="IDCau" ColumnName="IDCau" />

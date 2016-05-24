@@ -81,7 +81,8 @@ namespace CBCC.Controllers
                    {
                        IDCau = i + 1,
                        MaTL =lsAnswers[i].name.ToLower().Contains("khac")?idKhac.value:lsAnswers[i].name.Remove(0,1),
-                       NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  "" :lsAnswers[i].value
+                       NoiDungTL = NameOfKey.ContainsKey(lsAnswers[i].value) ?  "" :lsAnswers[i].value,
+                       CreatedDate = DateTime.Now
                    };
                     count += GopYService.SaveGopY(GopY);
 

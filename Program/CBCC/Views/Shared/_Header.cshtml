@@ -1,126 +1,27 @@
 ﻿@using Microsoft.AspNet.Identity
+<div style="background:url(/Images/IconWeb/bg_top.png);height:100px;width:100%;">
+    <div class="divlogo">
+        <img id="logo" src="~/Images/IconWeb/cbcc.png" />
+    </div>
+    <div id="word" class="visible-md" style="font-size:1vw;">
+        <span style="color:white; font-family: Arial; font-weight: bold;">HỆ THỐNG ĐÁNH GIÁ SỰ HÀI LÒNG CỦA NGƯỜI DÂN VÀ TỔ CHỨC <br />VỀ SỰ PHỤC VỤ CỦA CƠ QUAN HÀNH CHÍNH NHÀ NƯỚC</span>
+    </div>
+</div>
+<div class="bulkhead"></div>
 <style>
-    .dropdown-menu {
-        left: unset;
-        right: 0 !important;
+    .divlogo {
+        margin-left: 10%;
+        width: 40%;
+        height: 100%;
+    }
+
+    #logo {
+        height: 100%;
+        width: 100%;
+    }
+
+    #word {
+        margin-top: -3%;
+        padding-left: 21%;
     }
 </style>
-<header class="masthead">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-11 col-xs-10 logo"> 
-                <span style="color: white; font-family: Arial; font-weight: bold; font-size: 15px;">HỆ THỐNG ĐÁNH GIÁ SỰ HÀI LÒNG CỦA NGƯỜI DÂN VÀ TỔ CHỨC VỀ SỰ PHỤC VỤ CỦA CƠ QUAN HÀNH CHÍNH NHÀ NƯỚC</span>
-                @*<h1 class="slogan_page">
-                       Đánh giá sự hài lòng thủ tục hành chính
-                    </h1>*@
-            </div>
-            @*<div class="col-sm-1 col-xs-2" style="margin-top:7%;">
-                <ul class="nav nav-pills col-md-1">
-                    <li role="presentation">
-                        <a class="dropdown-toggle menu-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" >
-                            <img src="~/Content/img/menu.png" />
-                        </a>
-                        <ul class="dropdown-menu orian-menu">
-                            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                            <li>
-                                <a href="@Url.Action("Index", "DanhGia")">Đánh giá</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index", "ThongKe")">Thống kê</a>
-                            </li>
-
-                            <li>
-                                <a href="@Url.Action("Index", "HuongDan")">Hướng dẫn</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Login", "Account")" title="Đăng nhập">Đăng nhập</a>
-                            </li>
-                            @if (Request.IsAuthenticated && User.IsInRole("Admin") == true)
-                            {
-                                <li><a href="@Url.Action("Index", "Admin")">Quản trị</a></li>
-                            }
-                            @if (Request.IsAuthenticated)
-                            {
-                                <li><a href="@Url.Action("LogOff","Account")">Đăng xuất</a></li>
-                            }
-                        </ul>
-                    </li>
-                </ul>
-            </div>*@
-            @*<div class="col-sm-4">
-                </div>*@
-        </div>
-    </div>
-</header>
-<div class="bulkhead"></div>
-<!-- Fixed navbar -->
-@*<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
-    <div class="container">*@
-@*<div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li><a class="menu_item" href="~/"><i class="fa fa-home fa" title="Trang chủ"></i> Trang chủ</a></li>
-            <li><a class="menu_item" href="~/danhgia"><i class="fa fa-edit fa"></i> Đánh giá </a></li>
-            <li><a class="menu_item" href="~/Thongke"><i class="fa fa-bar-chart-o fa"></i> Thống kê  </a></li>*@
-
-@*<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bar-chart-o fa"></i> Kết quả đánh giá <b class="caret"></b></a>
-
-            <ul class="dropdown-menu">
-
-                <li>
-                    <a class="menu_item" href="~/Thongke/ThongKeTheoLinhVuc">
-                        <i class="fa fa-bars fa"></i>  Theo lĩnh vực
-                    </a>
-                </li>
-                <li>
-
-                    <a class="menu_item" href="~/Thongke/ThongKeTheoDonVi"><i class="fa fa-bars fa"></i>Theo đơn vị</a>
-                </li>
-            </ul>
-
-        <a href="~/Thongke"><i class="fa fa-bar-chart-o fa"></i> Thống kê  </a>
-    </li>*@
-
-@*<li><a class="menu_item" href="~/huongdan"><i class="fa fa-info-circle fa"></i> Hướng dẫn</a></li>
-
-        @if (Request.IsAuthenticated && User.IsInRole("Admin") == true)
-        {
-            <li><a class="menu_item" href="~/Admin"><i class="fa fa-cog fa"></i>Quản trị</a></li>
-
-        }
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-
-        <li class="dropdown">
-
-            @if (Request.IsAuthenticated)
-            {
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-user"></i>
-                    @User.Identity.GetUserName()
-                </a>
-                <ul class="dropdown-menu">
-
-                    <li><a href="~/Account/LogOff">Log off</a></li>
-                </ul>
-            }
-            else
-            {
-                <a href="~/Account/Login" title="Đăng nhập"><i class="glyphicon glyphicon-user"></i></a>
-
-            }
-        </li>
-    </ul>*@
-
-@*</div>*@<!--/.nav-collapse -->
-@*</div>*@<!--/.container -->
-<!--/.navbar -->
-<!-- Begin page content -->

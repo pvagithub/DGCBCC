@@ -11,7 +11,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class ThongKeThanhPhoController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
         public ActionResult Index()
         {
             ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yyyy");

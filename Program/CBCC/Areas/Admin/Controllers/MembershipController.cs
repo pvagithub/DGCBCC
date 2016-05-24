@@ -12,7 +12,7 @@ namespace CBCC.Areas.Admin.Controllers
 {
     public class MembershipController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage,User")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             var dsRole = new List<UsersInRole>();
