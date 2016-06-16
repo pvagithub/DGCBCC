@@ -21,7 +21,6 @@
         </div>
         <div class="modal-body">
             <form class="form-horizontal">
-
                 <div class="form-group">
                     <label class="control-label col-xs-4 float_left text-right clsOdd">Tên user</label>
                     <div class="col-xs-8">
@@ -34,7 +33,7 @@
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-xs-4 float_left text-right clsEven">Mật khẩu</label>
-                    <div class="col-xs-8 heightrow" >
+                    <div class="col-xs-8 heightrow">
                         <input type="password" class="form-control required" id="Password" name="Password" placeholder="Mật khẩu..." />
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
@@ -42,7 +41,7 @@
                 <br />
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    <label class="control-label col-xs-4 float_left text-right clsOdd" >Xác nhận mật khẩu</label>
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Xác nhận mật khẩu</label>
                     <div class="col-xs-8">
                         <input type="password" class="form-control required" id="txtConfirmPassword" name="txtConfirmPassword" placeholder="Xác nhận mật khẩu..." />
                         <span id="adminForm_ConfirmPassword_validator"></span>
@@ -60,8 +59,8 @@
                 <br />
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    <label class="control-label col-xs-4 float_left text-right clsOdd" >Comment</label>
-                    <div class="col-xs-8" >
+                    <label class="control-label col-xs-4 float_left text-right clsOdd">Comment</label>
+                    <div class="col-xs-8">
                         <input type="text" class="form-control required" id="Comment" name="Comment" placeholder="Comment..." />
                         @Html.ValidationMessageFor(m => m.Comment)
                     </div>
@@ -75,6 +74,48 @@
                             @foreach (var item in Model.ListDanhSachRole)
                             {
                                 <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Đơn vị</label>
+                    <div class="col-xs-8 lstMullti heightrow">
+                        <select class="bs-select form-control" name="MaDonVi">
+                            <option value="">--- Chọn đơn vị ---</option>
+                            @{
+                            var donvi = ViewBag.lsDonVi as List<DonVi>;
+                            var lsDVParent = donvi.Where(p => p.ParentDonViID == null).ToList();
+                            foreach (var item in lsDVParent)
+                            {
+                                <optgroup label="@item.TenDonVi">
+                                    @{
+                                var lsDVChild = donvi.Where(p => p.ParentDonViID == item.DonViID).ToList();
+                                foreach (var it in lsDVChild)
+                                {
+                                    <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()">@it.TenDonVi</option>
+                                }
+                                    }
+                                </optgroup>
+                            }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4 float_left text-right clsEven">Cấp người dùng</label>
+                    <div class="col-xs-8 lstMullti heightrow">
+                        <select class="bs-select form-control" name="CapNguoiDung">
+                            @{
+                            var nguoidung = ViewBag.NguoiDung as System.Data.DataTable;
+                            foreach (System.Data.DataRow r in nguoidung.Rows)
+                            {
+                                <option value="@r[0]">@r[1]</option>
+                            }
                             }
                         </select>
                     </div>
@@ -108,7 +149,7 @@
             if ($("#adminForm_Username_validator").text().length > 0) {
                 return false;
             }
-            
+
         });
         $("#txtConfirmPassword").blur(function () {
             if ($("#Password").val() == $("#txtConfirmPassword").val()) {

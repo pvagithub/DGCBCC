@@ -104,5 +104,7 @@ namespace CBCC.Controllers
 
             return count == lsAnswers.Count;
         }
+
+        public ActionResult Thongbao() { return View(); }
     }
 }

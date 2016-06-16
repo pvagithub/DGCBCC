@@ -1,0 +1,167 @@
+﻿@using WebMVC.Entities;
+@model List<DonVi>
+@{
+    ViewBag.Title = "Đánh giá công chức tiếp nhận và giải quyết hồ sơ";
+}
+@section styles{
+    <style type="text/css">
+        * html div#fl813691 {
+            position: absolute;
+            overflow: hidden;
+            top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop +(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight));
+        }
+
+        #fl813691 {
+            font: 12px Arial, Helvetica, sans-serif;
+            color: #666;
+            position: fixed;
+            _position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 150px;
+            z-index: 9999;
+            padding-right: 5px;
+        }
+
+        #eb951855 {
+            width: 70%;
+        }
+
+        #cob263512 {
+            height: 150px;
+            padding-left: 7px;
+        }
+
+        #coh963846 {
+            color: #690;
+            display: block;
+            height: 30px;
+            font-size: 11px;
+            width: 100%;
+            background: #d9534f none repeat scroll 0 0;
+            line-height: 30px;
+            text-align: center;
+            padding-right: 5px;
+        }
+
+            #coh963846 a {
+                color: #690;
+                text-decoration: none;
+            }
+
+        #coc67178 {
+            float: right;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+            height: 15px;
+        }
+
+            #coc67178 li {
+                display: inline;
+            }
+
+                #coc67178 li a {
+                    background-image: url('../../Images/IconWeb/cuocsongmuonmau.info_button.gif');
+                    background-repeat: no-repeat;
+                    width: 30px;
+                    height: 0;
+                    padding-top: 15px;
+                    overflow: hidden;
+                    float: left;
+                }
+
+                    #coc67178 li a.close {
+                        background-position: 0 0;
+                    }
+
+                        #coc67178 li a.close:hover {
+                            background-position: 0 -15px;
+                        }
+
+                    #coc67178 li a.min {
+                        background-position: -30px 0;
+                    }
+
+                        #coc67178 li a.min:hover {
+                            background-position: -30px -15px;
+                        }
+
+                    #coc67178 li a.max {
+                        background-position: -60px 0;
+                    }
+
+                        #coc67178 li a.max:hover {
+                            background-position: -60px -15px;
+                        }
+
+        #co453569 {
+            display: block;
+            margin: 0;
+            padding: 0;
+            height: 181px;
+            border-width: 1px;
+            text-align: center;
+        }
+
+        #coh963846 span {
+            color: white;
+            font-size: 14px;
+        }
+
+        #co453569 textarea {
+            font-size: 15px;
+            max-width: 90%;
+            max-height: 78%;
+            height: 78%;
+            width: 90%;
+        }
+
+        #btnSendMessage {
+            font-size: 14px;
+        }
+
+        .changeHeight {
+            min-height: 52px;
+        }
+
+        .input-lg {
+            padding: 10px 7px;
+        }
+
+        .titlesbn1 {
+            background-color: #c5e0b4;
+            padding: 10px;
+            color: #000 !important;
+            text-align: center;
+            padding-top: 2%;
+        }
+    </style>
+}
+<form id="frmDanhGia">
+    <input type="hidden" id="idHoSo" />
+    <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
+        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
+            <div class="text-left titlesbn1" style="text-align:left">
+                <strong class="text_bold">
+                    Xin trân trọng cảm ơn ý kiến đóng góp của Quý Ông/Bà đối với công tác cung ứng dịch vụ hành chính công của các cơ quan, đơn vị trên địa bàn thành phố.<br />
+                    Chúng tôi sẽ nghiêm túc tiếp thu ý kiến và chỉ đạo các đơn vị thực hiện các giải pháp nâng cao chất lượng phục vụ tổ chức, công dân.<br />
+                    Rất mong nhận được ý kiến đánh giá tốt của Quý Ông/Bà trong thời gian sắp tới
+                </strong>
+                <br />
+                <div style="padding-top:15px" class="col-xs-12 col-sm-12 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group">
+                    <label class="col-xs-3 col-lg-6"></label>
+                    <input id="btnGui" type="button" onclick="goHome()" class="btn btn-success col-xs-5 col-sm-2 col-lg-2" value="Về trang chủ" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+        <script>
+            function goHome() {
+                window.location.href = '@Url.Action("Index","DanhGia")';
+            }
+        </script>
+    }

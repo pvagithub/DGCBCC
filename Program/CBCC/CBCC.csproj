@@ -1310,6 +1310,7 @@
     </None>
     <None Include="Service References\SearchService\SearchService.wsdl" />
     <Content Include="Views\GopY\Index.cshtml" />
+    <Content Include="Views\GopY\Thongbao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebMVC.Bussiness\WebMVC.Bussiness.csproj">

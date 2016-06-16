@@ -39,6 +39,8 @@ namespace WebMVC.Entities
         public Nullable<int> FailedPasswordAnswerAttemptCount { get; set; }
         public Nullable<System.DateTime> FailedPasswordAnswerAttemptWindowsStart { get; set; }
         public string Comment { get; set; }
+        public string MaDonVi { get; set; }
+        public string CapNguoiDung { get; set; }
     
         public virtual ICollection<UsersInRole> UsersInRoles { get; set; }
     }

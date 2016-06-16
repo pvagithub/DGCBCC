@@ -12,9 +12,9 @@ namespace CBCC.Areas.Admin.Controllers
         [MyMembershipProvider.AccessDeniedAuthorize(Roles = "User")]
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.DonVi = DanhMucService.DonViGetAllList().Where(x => x.Active == true).ToList();           
+            ViewBag.DonVi = DanhMucService.DonViGetAllList().Where(x => x.Active == true).ToList();
             ViewBag.MaDonVi = (ViewBag.DonVi as List<DonVi>) != null ? (ViewBag.DonVi as List<DonVi>)[0].MaDonVi : string.Empty;
-           
+
         }
         public ActionResult Index()
         {
@@ -23,7 +23,7 @@ namespace CBCC.Areas.Admin.Controllers
             ThongKe thongke;
             string username = HttpContext.User.Identity.Name;
             thongke = ThongKeService.ThongKe_TheoDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, username);
-          
+
             if (thongke == null || thongke.HaiLong == null)
             {
                 thongke = new ThongKe();
@@ -66,7 +66,7 @@ namespace CBCC.Areas.Admin.Controllers
             }
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
-           // ViewBag.MaDonVi = cbDonVi;
+            // ViewBag.MaDonVi = cbDonVi;
             ViewBag.HaiLong = thongke.HaiLong;
             ViewBag.KhongHaiLong = thongke.KhongHaiLong;
             ViewBag.BinhThuong = thongke.BinhThuong;
@@ -79,4 +79,4 @@ namespace CBCC.Areas.Admin.Controllers
             return View();
         }
     }
-	}
+}

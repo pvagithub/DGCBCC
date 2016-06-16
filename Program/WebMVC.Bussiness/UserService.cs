@@ -89,7 +89,15 @@ namespace WebMVC.Bussiness
                 return context.Memberships.Where(x => x.UserId == id).FirstOrDefault();
             }
         }
+        public static Membership MembershipGetByUserName(string userName)
+        {
+            using (var context = new DataModelEntities())
+            {
+                context.ReadUncommited();
 
+                return context.Memberships.Where(x => x.Username == userName).FirstOrDefault();
+            }
+        }
         public static List<Membership> MembershipGetAllList()
         {
             using (var context = new DataModelEntities())
@@ -148,6 +156,8 @@ namespace WebMVC.Bussiness
                     item.Password = memberShip.Password;
                 item.Email = memberShip.Email;
                 item.Comment = memberShip.Comment;
+                item.MaDonVi = memberShip.MaDonVi;
+                item.CapNguoiDung = memberShip.CapNguoiDung;
                 context.SaveChanges();
             }
         }

@@ -26,8 +26,10 @@
 
         <th>Comment</th>
         <th>
+            @if (ViewBag.LenCDV < 5) { 
             <a href='/Admin/Membership/Create'
                class="pull-right btn btn-info btn-add">Thêm mới</a>
+            }
         </th>
     </tr>
 
@@ -71,7 +73,10 @@
         </tr>
     }
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 <!-- modal -->
 <div class="modal fade"
      id="myModal"

@@ -87,53 +87,54 @@
 
 @section scripts{
     <script type="text/javascript">
-        $(function () {
-            $("#1txtKhac").keypress(function () {
-                $('input:checkbox[id^="1"]:checked').each(function () {
-                    $(this).removeAttr("checked");
-                });
-                $('input:checkbox[id^="1"]').prop('disabled', true);
+    $(function () {
+        $("#1txtKhac").keypress(function () {
+            $('input:checkbox[id^="1"]:checked').each(function () {
+                $(this).removeAttr("checked");
             });
-            $("#1txtKhac").blur(function () {
-                if (!$(this).val()) {
-                    $('input:checkbox[id^="1"]').prop('disabled', false);
-                }
+            $('input:checkbox[id^="1"]').prop('disabled', true);
+        });
+        $("#1txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="1"]').prop('disabled', false);
+            }
+        });
+        $("#2txtKhac").keypress(function () {
+            $('input:checkbox[id^="2"]:checked').each(function () {
+                $(this).removeAttr("checked");
             });
-            $("#2txtKhac").keypress(function () {
-                $('input:checkbox[id^="2"]:checked').each(function () {
-                    $(this).removeAttr("checked");
-                });
-                $('input:checkbox[id^="2"]').prop('disabled', true);
+            $('input:checkbox[id^="2"]').prop('disabled', true);
+        });
+        $("#2txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="2"]').prop('disabled', false);
+            }
+        });
+        $("#3txtKhac").keypress(function () {
+            $('input:checkbox[id^="3"]:checked').each(function () {
+                $(this).removeAttr("checked");
             });
-            $("#2txtKhac").blur(function () {
-                if (!$(this).val()) {
-                    $('input:checkbox[id^="2"]').prop('disabled', false);
-                }
-            });
-            $("#3txtKhac").keypress(function () {
-                $('input:checkbox[id^="3"]:checked').each(function () {
-                    $(this).removeAttr("checked");
-                });
-                $('input:checkbox[id^="3"]').prop('disabled', true);
-            });
-            $("#3txtKhac").blur(function () {
-                if (!$(this).val()) {
-                    $('input:checkbox[id^="3"]').prop('disabled', false);
-                }
-            });
-            $("#btnGui").click(function (ev) {
-                ev.preventDefault();
-                var formData = JSON.stringify(jQuery('#GopYForm').serializeArray()); // store json string
-                //var formData = JSON.parse(JSON.stringify(jQuery('#frm').serializeArray())) // store json object
-                var _url = '@Url.Action("SaveGopY", "GopY")';
-                var data = JSON.stringify(formData);
-                $.ajax({
-                    url: _url,
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    data: formData,
-                    success: function (data, textStatus, xhr) {
-                        window.location.href = '@Url.Action("Index","DanhGia")';
+            $('input:checkbox[id^="3"]').prop('disabled', true);
+        });
+        $("#3txtKhac").blur(function () {
+            if (!$(this).val()) {
+                $('input:checkbox[id^="3"]').prop('disabled', false);
+            }
+        });
+        $("#btnGui").click(function (ev) {
+            ev.preventDefault();
+            var formData = JSON.stringify(jQuery('#GopYForm').serializeArray()); // store json string
+            //var formData = JSON.parse(JSON.stringify(jQuery('#frm').serializeArray())) // store json object
+            var _url = '@Url.Action("SaveGopY", "GopY")';
+            var data = JSON.stringify(formData);
+            $.ajax({
+                url: _url,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: formData,
+                success: function (data, textStatus, xhr) {
+                    //window.location.href = '@Url.Action("Index","DanhGia")';
+                        window.location.href = '@Url.Action("Thongbao","GopY")';
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(textStatus);
