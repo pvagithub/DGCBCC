@@ -248,8 +248,6 @@ namespace CBCC.Areas.Admin.Controllers
             userRole.Password = member.Password;
             userRole.Email = member.Email;
             userRole.Comment = member.Comment;
-            userRole.MaDonVi = item.MaDonVi;
-            userRole.CapNguoiDung = item.CapNguoiDung;
             userRole.ListRoleId = lstID;
 
             return View(userRole);
@@ -266,10 +264,8 @@ namespace CBCC.Areas.Admin.Controllers
                 item.Password = TextUtility.GetMd5Hash(membership.Password.Trim());
                 item.Email = membership.Email;
                 item.Comment = membership.Comment;
-                item.MaDonVi = membership.MaDonVi;
-                item.CapNguoiDung = membership.CapNguoiDung;
                 UserService.MembershipUpdate(item, membership.Password.Trim());
-
+               
                 return RedirectToAction("Index");
             }
             else
@@ -328,7 +324,13 @@ namespace CBCC.Areas.Admin.Controllers
                 row[1] = "Người dùng";
                 dt.Rows.Add(row);
             }
-
+            if (len > 6)
+            {
+                var row = dt.NewRow();
+                row[0] = "010101";
+                row[1] = "Người dùng";
+                dt.Rows.Add(row);
+            }
             return dt;
         }
     }

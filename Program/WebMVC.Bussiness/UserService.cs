@@ -156,8 +156,6 @@ namespace WebMVC.Bussiness
                     item.Password = memberShip.Password;
                 item.Email = memberShip.Email;
                 item.Comment = memberShip.Comment;
-                item.MaDonVi = memberShip.MaDonVi;
-                item.CapNguoiDung = memberShip.CapNguoiDung;
                 context.SaveChanges();
             }
         }

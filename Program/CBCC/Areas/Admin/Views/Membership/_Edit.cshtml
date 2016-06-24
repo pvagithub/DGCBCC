@@ -84,25 +84,50 @@
                 </div>
                 <br />
                 <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-xs-4 float_left text-right clsEven">Role</label>
-                    <div class="col-xs-8 lstMullti heightrow">
-                        <select class="" id="ListRoleId_Create" name="ListRoleId" multiple="multiple">
-                            @foreach (var item in Model.ListDanhSachRole)
-                            {
-                                if (Model.ListRoleId.Contains(int.Parse(item.Value)))
+                @if (User.IsInRole("Admin") || User.IsInRole("Manage"))
+                {
+                    <div class="form-group">
+                        <label class="control-label col-xs-4 float_left text-right clsEven">Role</label>
+                        <div class="col-xs-8 lstMullti heightrow">
+                            <select class="" id="ListRoleId_Create" name="ListRoleId" multiple="multiple">
+                                @foreach (var item in Model.ListDanhSachRole)
                                 {
-                                    <option value="@item.Value" selected>@item.Text</option>
+                                    if (Model.ListRoleId.Contains(int.Parse(item.Value)))
+                                    {
+                                        <option value="@item.Value" selected>@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
                                 }
-                                else
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            }
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <br />
+                    <br />
+                }
+                else
+                {
+                    <div class="form-group hide">
+                        <label class="control-label col-xs-4 float_left text-right clsEven">Role</label>
+                        <div class="col-xs-8 lstMullti heightrow">
+                            <select class="" id="ListRoleId_Create" name="ListRoleId" multiple="multiple">
+                                @foreach (var item in Model.ListDanhSachRole)
+                                {
+                                    if (Model.ListRoleId.Contains(int.Parse(item.Value)))
+                                    {
+                                        <option value="@item.Value" selected>@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                }
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-xs-4 float_left text-right clsEven">Đơn vị</label>
@@ -110,27 +135,27 @@
                         <select class="bs-select form-control" name="MaDonVi">
                             <option value="">--- Chọn đơn vị ---</option>
                             @{
-                            var donvi = ViewBag.lsDonVi as List<DonVi>;
-                            var lsDVParent = donvi.Where(p => p.ParentDonViID == null).ToList();
-                            foreach (var item in lsDVParent)
-                            {
-                                <optgroup label="@item.TenDonVi">
-                                    @{
-                                var lsDVChild = donvi.Where(p => p.ParentDonViID == item.DonViID).ToList();
-                                foreach (var it in lsDVChild)
-                                {
-                                    if (Model.MaDonVi == it.MaDonVi.ToString() + "_" + it.MaLienThong.ToString())
-                                    {
-                                        <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()" selected>@it.TenDonVi</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()">@it.TenDonVi</option>
-                                    }
-                                }
-                                    }
-                                </optgroup>
-                            }
+                var donvi = ViewBag.lsDonVi as List<DonVi>;
+                var lsDVParent = donvi.Where(p => p.ParentDonViID == null).ToList();
+                foreach (var item in lsDVParent)
+                {
+                    <optgroup label="@item.TenDonVi">
+                        @{
+                    var lsDVChild = donvi.Where(p => p.ParentDonViID == item.DonViID).ToList();
+                    foreach (var it in lsDVChild)
+                    {
+                        if (Model.MaDonVi == it.MaDonVi.ToString() + "_" + it.MaLienThong.ToString())
+                        {
+                            <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()" selected>@it.TenDonVi</option>
+                        }
+                        else
+                        {
+                            <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()">@it.TenDonVi</option>
+                        }
+                    }
+                        }
+                    </optgroup>
+                }
                             }
                         </select>
                     </div>
@@ -142,18 +167,18 @@
                     <div class="col-xs-8 lstMullti heightrow">
                         <select class="bs-select form-control" name="CapNguoiDung">
                             @{
-                            var nguoidung = ViewBag.NguoiDung as System.Data.DataTable;
-                            foreach (System.Data.DataRow r in nguoidung.Rows)
-                            {
-                                if (r[0].ToString().Trim() == Model.CapNguoiDung.Trim())
-                                {
-                                    <option value="@r[0]" selected>@r[1]</option>
-                                }
-                                else
-                                {
-                                    <option value="@r[0]">@r[1]</option>
-                                }
-                            }
+                var nguoidung = ViewBag.NguoiDung as System.Data.DataTable;
+                foreach (System.Data.DataRow r in nguoidung.Rows)
+                {
+                    if (r[0].ToString().Trim() == Model.CapNguoiDung.Trim())
+                    {
+                        <option value="@r[0]" selected>@r[1]</option>
+                    }
+                    else
+                    {
+                        <option value="@r[0]">@r[1]</option>
+                    }
+                }
                             }
                         </select>
                     </div>
