@@ -24,8 +24,8 @@ namespace CBCC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(string tuNgay, string denNgay)
         {
-            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
-            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
+            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy") : tuNgay;
+            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyyy") : denNgay;
             ViewBag.Result = ThongKeService.ThongKeNoiDungGopYPhanMemResult(ViewBag.TuNgay, ViewBag.DenNgay);
             ViewBag.Result2 = ThongKeService.ThongKeNoiDungGopYPhanMem(ViewBag.TuNgay, ViewBag.DenNgay);
             return View();

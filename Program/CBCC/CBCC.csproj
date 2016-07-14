@@ -208,6 +208,7 @@
     <Compile Include="Areas\Admin\Controllers\GopYQuestionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeGopYPhanMemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SoLuotDanhGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeNoiDungGopYCauHoiController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SoftwareFeedbackController.cs" />
@@ -809,6 +810,9 @@
     <Content Include="Areas\Admin\Views\ThongKeTyLePhanMem\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeGopYPhanMem\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeTheoDonVi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SoLuotDanhGia\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SoLuotDanhGia\ThongKeSoLuotDanhGiaDonVi.cshtml" />
+    <Content Include="Areas\Admin\Views\SoLuotDanhGia\KetQuaDanhGiaHosoByDanhGiaID.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />

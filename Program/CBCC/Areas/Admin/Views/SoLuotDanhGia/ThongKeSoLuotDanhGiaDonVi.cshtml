@@ -1,0 +1,93 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê Số Lượt Đánh Giá";
+    List<ThongKe> lst = new List<ThongKe>();
+    List<ThongKe> lstResult = new List<ThongKe>();
+    if (ViewBag.Result != null)
+    {
+        lstResult = ViewBag.Result as List<ThongKe>;
+    }
+}
+
+<h3>Thống kê số lượt đánh giá</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+<button id="btnComback2" class="btn btn-primary" style="margin-bottom:5px"><i class="glyphicon glyphicon-fast-backward"></i>  Quay lại</button>
+<table class="table table-hover table-striped">
+    <tr>
+        <th style="width:5%">STT</th>
+        <th style="width:15%">Số biên nhận</th>
+        <th style="width:27%">Hài lòng</th>
+        <th style="width:27%">Bình thường</th>
+        <th style="width:26%">Không hài lòng</th>
+    </tr>
+
+    @for (int i = 0; i < lstResult.Count(); i++)
+    {
+        lst = new List<ThongKe>();
+        var item = lstResult[i];
+        var clr = "beige";
+        if (i % 2 == 0)
+        { clr = "aliceblue"; }
+        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr">
+            <td>@(i + 1)</td>
+            <td style="text-align:left ">
+                <a target="_blank" title="Kết quả đánh giá" href="@Url.Action("KetQuaDanhGiaHosoByDanhGiaID", "SoLuotDanhGia", new { danhGiaID = item.DanhGiaID })">@item.SoBienNhan</a>
+            </td>
+            <td>
+                @item.HaiLong% (@item.SCHaiLong)
+            </td>
+            <td>
+                @item.BinhThuong% (@item.SCBinhThuong)
+            </td>
+            <td>
+                @item.KhongHaiLong% (@item.SCKhongHaiLong)
+            </td>
+        </tr>
+    }
+    @if (lstResult.Count() > 0)
+    {
+        <tr style="cursor: pointer; background-color: #2196f3">
+            <td colspan="2">Tổng trung bình</td>
+            <td style="text-align:left ">
+                @Math.Round(lstResult.Average(x => x.HaiLong), 2)%
+            </td>
+            <td style="text-align:left ">
+                @Math.Round(lstResult.Average(x => x.BinhThuong), 2)%
+            </td>
+            <td style="text-align:left ">
+                @Math.Round(lstResult.Average(x => x.KhongHaiLong), 2)%
+            </td>
+        </tr>
+    }
+</table>
+<button id="btnComback" class="btn btn-primary"><i class="glyphicon glyphicon-fast-backward"></i>  Quay lại</button>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#btnComback").click(function () {
+                window.location.href = '@Url.Action("Index", "SoLuotDanhGia")?tuNgay=@ViewBag.TuNgay&denNgay=@ViewBag.DenNgay'
+            });
+            $("#btnComback2").click(function () {
+                window.location.href = '@Url.Action("Index", "SoLuotDanhGia")?tuNgay=@ViewBag.TuNgay&denNgay=@ViewBag.DenNgay'
+            });
+        });
+    </script>
+}

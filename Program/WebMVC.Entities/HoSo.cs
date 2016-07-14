@@ -35,4 +35,11 @@ namespace WebMVC.Entities
         public Nullable<long> DanhGiaID { get; set; }
         public string MaDonVi { get; set; }
     }
+    public partial class ThongTinHoSo
+    {
+        public string SoBienNhan { get; set; }
+        public string NguoiNop { get; set; }
+        public System.DateTime NgayNhan { get; set; }
+        public System.DateTime NgayHenTra { get; set; }
+    }
 }

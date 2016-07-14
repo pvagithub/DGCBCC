@@ -1,0 +1,91 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Kết quả đánh giá";
+    List<KetQuaDanhGiaHoSo> lst = new List<KetQuaDanhGiaHoSo>();
+    List<KetQuaDanhGiaHoSo> lstResult = new List<KetQuaDanhGiaHoSo>();
+    if (ViewBag.Result != null)
+    {
+        lstResult = ViewBag.Result as List<KetQuaDanhGiaHoSo>;
+    }
+}
+
+<h3>Kết quả đánh giá</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+
+@if (ViewBag.HoSo != null)
+{
+    var hs = ViewBag.HoSo as ThongTinHoSo;
+    <table class="table table-hover table-striped">
+        <tr style="background-color:aliceblue !important">
+            <td>Hồ sơ: @hs.SoBienNhan</td>
+            <td>Người nộp: @hs.NguoiNop</td>
+            <td>Ngày nhận: @hs.NgayNhan.ToString("dd/MM/yyyy")</td>
+            <td>Ngày hẹn trả: @hs.NgayHenTra.ToString("dd/MM/yyyy")</td>
+        </tr>
+    </table>
+}
+<br />
+<table class="table table-hover table-striped">
+    @for (int i = 0; i < lstResult.Count(); i++)
+    {
+        lst = new List<KetQuaDanhGiaHoSo>();
+        var item = lstResult[i];
+        if (!string.IsNullOrWhiteSpace(item.Chitiet))
+        {
+            var xml = System.Xml.Linq.XDocument.Parse(item.Chitiet);
+            var rows = from node in xml.Descendants("row")
+                       select new KetQuaDanhGiaHoSo
+                       {
+                           CauTraLoiID = int.Parse(node.Attribute("CauTraLoiID").Value),
+                           TenCauTraLoi = node.Attribute("TenCauTraLoi").Value
+                       };
+            lst.AddRange(rows);
+        }
+        <tr>
+            <td>
+                @(i + 1). @item.TenTieuChi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table">
+                    <tr>
+                        @foreach (var it in lst)
+                        {
+                            if (it.CauTraLoiID == item.CauTraLoiID)
+                            {
+                                <td style="border-top: 0px solid #fff !important">
+                                    <input type="checkbox" checked disabled /> @it.TenCauTraLoi
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="border-top: 0px solid #fff !important">
+                                    <input type="checkbox" disabled /> @it.TenCauTraLoi
+                                </td>
+                            }
+                        }
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    }
+</table>

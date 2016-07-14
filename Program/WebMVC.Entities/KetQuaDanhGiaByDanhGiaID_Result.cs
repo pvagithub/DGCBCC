@@ -14,6 +14,15 @@ namespace WebMVC.Entities
     public partial class KetQuaDanhGiaByDanhGiaID_Result
     {
         public string TenTieuChi { get; set; }
+        public long CauTraLoiID { get; set; }
         public string TenCauTraLoi { get; set; }
+        public string Chitiet { get; set; }
+    }
+    public partial class KetQuaDanhGiaHoSo
+    {
+        public string TenTieuChi { get; set; }
+        public int CauTraLoiID { get; set; }
+        public string TenCauTraLoi { get; set; }
+        public string Chitiet { get; set; }
     }
 }

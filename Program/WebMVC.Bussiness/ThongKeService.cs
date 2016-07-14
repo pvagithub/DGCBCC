@@ -772,7 +772,7 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
-       
+
         #endregion
 
         /// <summary>
@@ -819,6 +819,63 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
-        
+        public static List<ThongKe> ThongKeSoLuotDanhGia(string tuNgay, string denNgay, string username)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("TuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("DenNgay", denNgayDate) : new SqlParameter("DenNgay", typeof(DateTime));
+                var usernameParameter = new SqlParameter("UserName", username);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeSoLuotDanhGia @TuNgay,@DenNgay,@UserName",
+                    tuNgayParameter, denNgayParameter, usernameParameter).ToList();
+
+                return result;
+            }
+        }
+        public static List<ThongKe> ThongKeSoLuotDanhGia_By_DonVi(string tuNgay, string denNgay, string madonvi, string malienthong, string username)
+        {
+            using (var context = new DataModelEntities())
+            {
+                DateTime tuNgayDate = DateTime.ParseExact(tuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime denNgayDate = DateTime.ParseExact(denNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var tuNgayParameter = tuNgay != null ?
+                          new SqlParameter("TuNgay", tuNgayDate) : new SqlParameter("TuNgay", typeof(DateTime));
+                var denNgayParameter = denNgay != null ?
+                     new SqlParameter("DenNgay", denNgayDate) : new SqlParameter("DenNgay", typeof(DateTime));
+                var madonviParameter = new SqlParameter("MaDonVi", madonvi);
+                var malienthongParameter = new SqlParameter("MaLienThong", malienthong);
+                var usernameParameter = new SqlParameter("UserName", username);
+
+                var result = context.Database.SqlQuery<ThongKe>("ThongKeSoLuotDanhGia_By_DonVi @TuNgay,@DenNgay,@MaDonVi,@MaLienThong,@UserName",
+                    tuNgayParameter, denNgayParameter, madonviParameter, malienthongParameter, usernameParameter).ToList();
+
+                return result;
+            }
+        }
+        public static List<KetQuaDanhGiaHoSo> KetQuaDanhGiaHosoByDanhGiaID(string DanhGiaID)
+        {
+            using (var context = new DataModelEntities())
+            {
+                var danhgia = new SqlParameter("DanhGiaID", DanhGiaID);
+                var result = context.Database.SqlQuery<KetQuaDanhGiaHoSo>("KetQuaDanhGiaHosoByDanhGiaID @DanhGiaID", danhgia).ToList();
+                return result;
+            }
+        }
+        public static ThongTinHoSo KetQuaDanhGiaThongTinHoSoByDanhGiaID(string DanhGiaID, string hoso)
+        {
+            using (var context = new DataModelEntities())
+            {
+                var danhgia = new SqlParameter("DanhGiaID", DanhGiaID);
+                var result = context.Database.SqlQuery<ThongTinHoSo>("KetQuaDanhGiaThongTinHoSoByDanhGiaID @DanhGiaID", danhgia).FirstOrDefault();
+                return result;
+            }
+        }
     }
 }

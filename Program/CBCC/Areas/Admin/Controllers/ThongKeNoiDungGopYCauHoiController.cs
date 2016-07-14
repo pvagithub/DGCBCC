@@ -1,7 +1,5 @@
-﻿using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 using WebMVC.Entities;
@@ -28,8 +26,8 @@ namespace CBCC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(string tuNgay, string denNgay)
         {
-            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
-            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
+            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy") : tuNgay;
+            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyyy") : denNgay;
             List<ThongKe> thongke;
             thongke = ThongKeService.ThongKeNoiDungGopYCauHoi(tuNgay, denNgay);
             ViewBag.Result = thongke;

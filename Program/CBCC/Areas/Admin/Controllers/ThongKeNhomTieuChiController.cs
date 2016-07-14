@@ -29,8 +29,8 @@ namespace CBCC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(string tuNgay, string denNgay)
         {
-            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
-            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
+            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy") : tuNgay;
+            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyyy") : denNgay;
             #region thong ke toan tinh
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
@@ -47,8 +47,8 @@ namespace CBCC.Areas.Admin.Controllers
         public JsonResult GetReports(string tuNgay, string denNgay, int? page, int? limit, string sortBy, string direction, string searchString = null)
         {
             int total;
-            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyy") : tuNgay;
-            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyy") : denNgay;
+            tuNgay = string.IsNullOrWhiteSpace(tuNgay) ? DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy") : tuNgay;
+            denNgay = string.IsNullOrWhiteSpace(denNgay) ? DateTime.Now.ToString("dd/MM/yyyy") : denNgay;
             var records = GetReports(tuNgay,denNgay, page, limit, sortBy, direction, searchString, out total);
             return Json(new { records, total }, JsonRequestBehavior.AllowGet);
         }

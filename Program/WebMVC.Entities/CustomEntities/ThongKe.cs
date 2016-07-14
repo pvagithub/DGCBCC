@@ -14,6 +14,7 @@ namespace WebMVC.Entities
     { 
         public int? DonViID { get; set; }
         public string MaDonVi { get; set; }
+        public string MaLienThong { get; set; }
         public string TenDonVi { get; set; }
         public string KetQuaDanhGia { get; set; }
         public double HaiLong { get; set; }
@@ -24,6 +25,7 @@ namespace WebMVC.Entities
         public string SCBinhThuong { get; set; }
         public int Soluot { get; set; }
         public int IDCau { get; set; }
+        public long DanhGiaID { get; set; }
         public string MonthYear { get; set; }
         public string SoBienNhan { get; set; }
         public string Question { get; set; }
