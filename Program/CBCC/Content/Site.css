@@ -736,18 +736,20 @@ h2.titlecate {
 }
 /* Custom page CSS
 -------------------------------------------------- */
-.logo {
+.logo{
     background: url('../Images/IconWeb/cbcc.png') no-repeat;
-    height: 110px;
+    min-height: 100%;
     padding-top: 66px;
     padding-left: 125px;
+    width:100%;
 }
 
 header {
     /*background: white none repeat scroll 0 0;*/
     background: url('../Images/IconWeb/bg_top.png') repeat-x scroll 0 0 transparent;
     color: #000000;
-    height: 110px;
+    width:100%;
+    min-height:76px;
 }
 
     header h1, header h2, header h3 a, header a, header a:hover {
@@ -1578,3 +1580,18 @@ div.row-answer {
     height: 80px;
     padding-top: 2%;
 }
+@media only screen and (max-width: 750px) {
+
+    .divlogo{
+            width: 100%;
+            height: auto;
+            background-size: 100% auto !important;
+    }
+    .warrper_input_sbn {
+        width: 100%;
+        height: auto;
+        background-size: 100% auto !important;
+    }
+    
+}
+

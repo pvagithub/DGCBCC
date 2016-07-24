@@ -27,14 +27,16 @@
         {
             @Html.Partial("_Header")
         }
-        <div class="container-fluid body-content">
+        @*<div class="container-fluid body-content">
             <div class="wrap-content">
                 <div class="row">
                     @RenderBody()
                 </div>
             </div>
+        </div>*@
+        <div class="row">
+            @RenderBody()
         </div>
-
         @Html.Partial("_Footer")
     </div>
 

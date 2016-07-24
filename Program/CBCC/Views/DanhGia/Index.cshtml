@@ -130,6 +130,24 @@
             padding: 10px 7px;
         }
 
+
+        .showword {
+            background-color: #F5F5F5;
+            margin: auto;
+            width: 90%;
+        }
+
+        .div_show {
+            width: 95%;
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+
+        .warrper_input_sbn {
+            max-width: 90%;
+            margin: auto;
+        }
+
         .titlesbn1 {
             background-color: #c5e0b4;
             padding: 10px;
@@ -137,14 +155,23 @@
             text-align: center;
             min-height: 80px;
             padding-top: 2%;
+            width: 90%;
+            margin: auto;
+        }
+
+        #frmDanhGia {
+            width: 95%;
+            margin: auto;
+            padding-top: 2%;
+            background-color: #E8E8E8;
         }
     </style>
 }
 <form id="frmDanhGia">
     <input type="hidden" id="idHoSo" />
-    <div class="col-md-12 col-sm-12 col-xs-12 " id="input_SoBienNhan_content">
-        <div class="col-sm-10 col-lg-8  col-lg-offset-2 col-md-offset-1 form-group" id="inputdanhgia">
-            <div class="text-left titlesbn">
+    <div class="form-group" id="input_SoBienNhan_content">
+        <div class="form-group" id="inputdanhgia">
+            <div class="text-left titlesbn1">
                 <strong class="text_bold">ĐÁNH GIÁ CHẤT LƯỢNG DỊCH VỤ HÀNH CHÍNH CÔNG.</strong><br /> Vui lòng nhập <span style="font-weight:bold">Số biên nhận hồ sơ</span> để thực hiện đánh giá.
             </div>
             <h1></h1>
@@ -162,7 +189,7 @@
                                     var lsDVChild = Model.Where(p => p.ParentDonViID == item.DonViID).ToList();
                                     foreach (var it in lsDVChild)
                                     {
-                                        if (ViewBag.madonvi == it.MaDonVi.ToString())
+                                        if (ViewBag.madonvi == it.MaDonVi.ToString() || ViewBag.madonvi==it.MaLienThong.ToString())
                                         {
                                             <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()" selected>@it.TenDonVi</option>
                                         }
@@ -201,9 +228,7 @@
                 (Nhập số biên nhận để thực hiện việc đánh giá)<br />
                 Xin vui lòng sử dụng số biên nhận của hồ sơ nộp từ ngày 01/04/2016
             </div>
-            @*<div class="center">
-                <strong>Xin vui lòng sử dụng số biên nhận của hồ sơ nộp từ ngày 01/04/2016</strong>
-            </div>*@
+
             <div class="warrper_input_sbn hide">
                 <div class="input-group">
                     <span class="form-group input-group-btn">
@@ -213,18 +238,28 @@
                     </span>
                 </div>
             </div>
-            <div class="text-left footersbn">
-                <div class="loicamon">
-                    <div class="pull-left"></div>
-                    <div class="pull-right">
-                        Để nâng cao chất lượng phục vụ của cơ quan hành chính nhà nước tại TP. Hồ Chí Minh, UBND Thành phố đã chỉ đạo Sở Thông tin và Truyền thông phối hợp với Sở Nội vụ và Viện Nghiên cứu Phát triển triển khai Hệ thống Đánh giá sự hài lòng của người dân và tổ chức về sự phục vụ của cơ quan hành chính nhà nước.
-                        <br /><p></p>Kính mong Quý Ông/Bà dành thời gian để đánh giá về dịch vụ hành chính công mà Quý Ông/Bà đã hoặc đang thực hiện tại Thành phố. Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. Hồ Chí Minh ngày càng hoàn thiện hơn
+            @*<div class="text-left footersbn">
+                    <div class="loicamon">
+                        <div class="pull-left"></div>
+                        <div class="pull-right">
+                            Để nâng cao chất lượng phục vụ của cơ quan hành chính nhà nước tại TP. Hồ Chí Minh, UBND Thành phố đã chỉ đạo Sở Thông tin và Truyền thông phối hợp với Sở Nội vụ và Viện Nghiên cứu Phát triển triển khai Hệ thống Đánh giá sự hài lòng của người dân và tổ chức về sự phục vụ của cơ quan hành chính nhà nước.
+                            <br /><p></p>Kính mong Quý Ông/Bà dành thời gian để đánh giá về dịch vụ hành chính công mà Quý Ông/Bà đã hoặc đang thực hiện tại Thành phố. Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. Hồ Chí Minh ngày càng hoàn thiện hơn
+                        </div>
                     </div>
-                </div>
 
+                    <div class="clearfix"></div>
+                    <div class="gachngang"></div>
+                    <div style="font-weight:bold;text-align: right;">Xin chân thành cảm ơn.</div>
+                </div>*@
+            <div class="showword">
+                <div class="div_show" style="text-align:justify">
+                    Để nâng cao chất lượng phục vụ của cơ quan hành chính nhà nước tại TP. Hồ Chí Minh, UBND Thành phố đã chỉ đạo Sở Thông tin và Truyền thông phối hợp với Sở Nội vụ và Viện Nghiên cứu Phát triển triển khai Hệ thống Đánh giá sự hài lòng của người dân và tổ chức về sự phục vụ của cơ quan hành chính nhà nước.
+                    <br /><p></p>Kính mong Quý Ông/Bà dành thời gian để đánh giá về dịch vụ hành chính công mà Quý Ông/Bà đã hoặc đang thực hiện tại Thành phố. Sự góp ý của Quý Ông/Bà sẽ giúp cho dịch vụ hành chính công tại TP. Hồ Chí Minh ngày càng hoàn thiện hơn
+                </div>
                 <div class="clearfix"></div>
                 <div class="gachngang"></div>
                 <div style="font-weight:bold;text-align: right;">Xin chân thành cảm ơn.</div>
+                <br />
             </div>
 
 
@@ -232,15 +267,15 @@
     </div>
 
     <br />
-    </div>
-</form>
-<div class="wrap-content-quiz">
-    <div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
-        <div class="main">
-            <div ui-view></div>
+    <div class="wrap-content-quiz">
+        <div ng-controller="quizCtrl" id="danhgia_Content" style="display:none">
+            <div class="main">
+                <div ui-view></div>
+            </div>
         </div>
     </div>
-</div>
+</form>
+
 
 <!--Start of Gop Y Script-->
 
@@ -318,12 +353,14 @@
         };
         // show virtual keyboard
         $('#danhgia').click(function () {
+            $(".se-pre-con").fadeIn("slow");
             //return false;
             $("#msg_notify").html("");
             // validate đơn vị
             if ($('#cbDonVi').val() == "") {
                 var htmlString = "<em>Vui lòng chọn đơn vị để thực hiện đánh giá!</em>";
                 $("#msg_notify").html(htmlString);
+                $(".se-pre-con").fadeOut("fast");
                 return false;
             }
             // Validate input số bien nhận
@@ -332,6 +369,7 @@
             if ($('#soBienNhan').val().length < 5) {
                 var htmlString = "<em>Số biên nhận không hợp lệ!</em>";
                 $("#msg_notify").html(htmlString);
+                $(".se-pre-con").fadeOut("fast");
                 //bootbox.alert("Số biên nhận không hợp lệ", function () {
                 //})
             }
@@ -344,10 +382,12 @@
                     if (data.allow == false) {
                         var htmlString = "<em>Hệ thống chỉ đánh giá hồ sơ có ngày nhận từ ngày 01/04/2016!</em>";
                         $("#msg_notify").html(htmlString);
+                        $(".se-pre-con").fadeOut("fast");
                     }
                     else if (data.IsExist == false) {
                         var htmlString = "<em>Số biên nhận chưa đúng!</em>";
                         $("#msg_notify").html(htmlString);
+                        $(".se-pre-con").fadeOut("fast");
                         //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
                         //})
                     }
@@ -356,6 +396,7 @@
                         if (data.DaDuocDanhGia == true) {
                             var htmlString = "<em>Số biên nhận đã được đánh giá!</em>";
                             $("#msg_notify").html(htmlString);
+                            $(".se-pre-con").fadeOut("fast");
                             //bootbox.alert("Hồ sơ đã được đánh giá", function () {
 
                             //})
@@ -372,7 +413,9 @@
                                 });
                                 $('#fl813691').addClass('show').removeClass('hide');
                                 $('.changeHeight').css("height", "auto");
+                                $(".se-pre-con").fadeOut("fast");
                             } else {
+                                $(".se-pre-con").fadeOut("fast");
                                 // an so bien nhan vao #idHoSo
                                 $('#idHoSo').val(data.HoSo.ID);
 

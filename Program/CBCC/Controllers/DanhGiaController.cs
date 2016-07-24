@@ -42,63 +42,77 @@ namespace CBCC.Controllers
             hoSo = HoSoService.HoSoGetBySoBienNhan_DanhGia(soBienNhan, out daDuocDanhGia, arrMaDonVi);
             bool isExist = hoSo != null ? true : false;
             bool allowDanhGia = true; // kiem tra lon hon startDate thi cho phep danh gia
-            if (!isExist)
+            try
             {
-                var dsHoSo = DanhGiaService.ThongTinHoSo(arrMaDonVi[1], soBienNhan);
-                HoSoDetails hs = JsonConvert.DeserializeObject<HoSoDetails>(dsHoSo);
-                if (hs != null && !string.IsNullOrWhiteSpace(hs.recordNo))
-                {  
-                    //code
-                    hoSo = new HoSo()
-                    {
-                        MaDonVi = arrMaDonVi[1],
-                        NguoiNop = hs.fullname,
-                        SoBienNhan = hs.recordNo,
-                        TenToChuc = hs.fullname,
-                        DiaChi = hs.orgAddress,
-                        NgayNhan = !string.IsNullOrWhiteSpace(hs.received) ? ConvertToNallableDate("/Date(" + hs.received + "+0000)/") : new Nullable<DateTime>(),
-                        NgayHenTra = !string.IsNullOrWhiteSpace(hs.appointment) ? ConvertToNallableDate("/Date(" + hs.appointment + "+0000)/") : new Nullable<DateTime>()
-                    };
-                    isExist = true;
-                    allowDanhGia = hoSo.NgayNhan >= startDate;
-                    HoSoService.HoSoCreate(hoSo);
-                }
-                else
+                if (!isExist)
                 {
-                    DataSet dsInfo = new DataSet();
-
-                    // Service lấy thông tin hồ sơ    
-                    WebSearchClient clientweb = new WebSearchClient("websearch");
-
-                    //Service lấy thông tin tình trạng 
-                    VoiceSearchClient clientvoice = new VoiceSearchClient("voicesearch");
-
-                    Dictionary<object, object> datas = new Dictionary<object, object>();
-                    datas["SoBienNhan"] = soBienNhan;
-                    datas["MaDonVi"] = arrMaDonVi[0];
-                    dsInfo = clientweb.WebSearch(datas);
-
-                    hoSo = new HoSo()
+                    var dsHoSo = DanhGiaService.ThongTinHoSo(arrMaDonVi[1], soBienNhan);
+                    HoSoDetails hs = JsonConvert.DeserializeObject<HoSoDetails>(dsHoSo);
+                    if (hs != null && !string.IsNullOrWhiteSpace(hs.recordNo))
                     {
-                        MaDonVi = arrMaDonVi[0],
-                        NguoiNop = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
-                        SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
-                        TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
-                        DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
-                        NgayNhan = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(), "dd/MM/yyyy", null),
-                        NgayHenTra = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(), "dd/MM/yyyy", null)
-                    };
-                    //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
-                    isExist = true;
-                    allowDanhGia = hoSo.NgayNhan >= startDate;
-                    HoSoService.HoSoCreate(hoSo);
+                        //code
+                        hoSo = new HoSo()
+                        {
+                            MaDonVi = arrMaDonVi[1],
+                            NguoiNop = hs.fullname,
+                            SoBienNhan = hs.recordNo,
+                            TenToChuc = hs.fullname,
+                            DiaChi = hs.orgAddress,
+                            NgayNhan = !string.IsNullOrWhiteSpace(hs.received) ? ConvertToNallableDate("/Date(" + hs.received + "+0000)/") : new Nullable<DateTime>(),
+                            NgayHenTra = !string.IsNullOrWhiteSpace(hs.appointment) ? ConvertToNallableDate("/Date(" + hs.appointment + "+0000)/") : new Nullable<DateTime>()
+                        };
+                        isExist = true;
+                        allowDanhGia = hoSo.NgayNhan >= startDate;
+                        HoSoService.HoSoCreate(hoSo);
+                    }
+                    else
+                    {
+                        DataSet dsInfo = new DataSet();
+
+                        // Service lấy thông tin hồ sơ    
+                        WebSearchClient clientweb = new WebSearchClient("websearch");
+
+                        //Service lấy thông tin tình trạng 
+                       // VoiceSearchClient clientvoice = new VoiceSearchClient("voicesearch");
+
+                        Dictionary<object, object> datas = new Dictionary<object, object>();
+                        datas["SoBienNhan"] = soBienNhan;
+                        datas["MaDonVi"] = arrMaDonVi[0];
+                        dsInfo = clientweb.WebSearch(datas);
+
+                        if (dsInfo != null && dsInfo.Tables[0].Rows.Count > 0)
+                        {
+                            hoSo = new HoSo()
+                            {
+                                MaDonVi = arrMaDonVi[0],
+                                NguoiNop = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
+                                SoBienNhan = dsInfo.Tables[0].Rows[0]["SoBienNhan"].ToString(),
+                                TenToChuc = dsInfo.Tables[0].Rows[0]["HoTenNguoiNop"].ToString(),
+                                DiaChi = dsInfo.Tables[0].Rows[0]["DiaChiThuongTru"].ToString(),
+                                NgayNhan = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayNhan"].ToString(), "dd/MM/yyyy", null),
+                                NgayHenTra = System.DateTime.ParseExact(dsInfo.Tables[0].Rows[0]["NgayHenTra"].ToString(), "dd/MM/yyyy", null)
+                            };
+                            //dsInfo.Tables[0].Rows[0]["TenTinhTrang"].ToString();
+                            isExist = true;
+                            allowDanhGia = hoSo.NgayNhan >= startDate;
+                            HoSoService.HoSoCreate(hoSo);
+                        }
+                        else
+                        {
+                            isExist = false;
+                        }
+                        }
+                       
+                    //string matinhtrang = clientvoice.VoiceSearch(datas);
                 }
-                //string matinhtrang = clientvoice.VoiceSearch(datas);
+                return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia, allow = allowDanhGia }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { IsExist = isExist, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia, allow = allowDanhGia }, JsonRequestBehavior.AllowGet);
-            //    }
-            //}
-            //return Json(new { IsExist = false, isCaptchaValid = false, HoSo = hoSo, DaDuocDanhGia = true }, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                return Json(new { IsExist = false, HoSo = hoSo, DaDuocDanhGia = daDuocDanhGia, allow = allowDanhGia }, JsonRequestBehavior.AllowGet);
+            }
+           
+           
         }
 
         [HttpPost]

@@ -47,90 +47,114 @@
                         </li>
                     </ul>
                 </li>
+                @if (Roles.IsUserInRole("Admin") || Roles.IsUserInRole("Manage"))
+                {
+                    <li>
+                        <a href="#"><i class="fa fa-paragraph"></i> Danh mục <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="~/Admin/NhomTieuChi"><i class="fa fa-key fa-list"></i> Nhóm tiêu chí</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/TieuChi"><i class="fa fa-user fa-list"></i>Tiêu chí</a>
+                            </li>
 
-                <li>
-                    <a href="#"><i class="fa fa-paragraph"></i> Danh mục <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="~/Admin/NhomTieuChi"><i class="fa fa-key fa-list"></i> Nhóm tiêu chí</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/TieuChi"><i class="fa fa-user fa-list"></i>Tiêu chí</a>
-                        </li>
+                            <li>
+                                <a href="~/Admin/CauTraLoi"><i class="fa fa-user fa-list"></i>Câu trả lời</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/DonVi"><i class="fa fa-user fa-list"></i>Đơn vị</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/LinhVuc"><i class="fa fa-user fa-list"></i>Lĩnh vực</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/ThuTuc"><i class="fa fa-user fa-list"></i>Thủ tục</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/GopYQuestions"><i class="fa fa-user fa-list"></i>Câu hỏi cho hệ thống</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/GopYAnswers"><i class="fa fa-user fa-list"></i>Câu trả lời cho hệ thống</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="~/Admin/ManageFeedback"><i class="fa fa-question-circle fa-fw"></i> Góp ý câu hỏi </a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/SoftwareFeedback"><i class="fa fa-question-circle fa-fw"></i> Góp ý phần mềm </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeTyLePhanMem")"><i class="fa fa-question-circle fa-fw"></i> Thống kê tỷ lệ phần mềm</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeThanhPho")"><i class="fa fa-question-circle fa-fw"></i> Thống kê thành phố</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeThreeMonth")"><i class="fa fa-question-circle fa-fw"></i> Thống kê 3 tháng</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeDonVi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê đơn vị </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","SoLuotDanhGia")"><i class="fa fa-question-circle fa-fw"></i> Số lượt đánh giá </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeNhomTieuChi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê nhóm tiêu chí </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <li>
-                            <a href="~/Admin/CauTraLoi"><i class="fa fa-user fa-list"></i>Câu trả lời</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/DonVi"><i class="fa fa-user fa-list"></i>Đơn vị</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/LinhVuc"><i class="fa fa-user fa-list"></i>Lĩnh vực</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/ThuTuc"><i class="fa fa-user fa-list"></i>Thủ tục</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/GopYQuestions"><i class="fa fa-user fa-list"></i>Câu hỏi cho hệ thống</a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/GopYAnswers"><i class="fa fa-user fa-list"></i>Câu trả lời cho hệ thống</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="~/Admin/ManageFeedback"><i class="fa fa-question-circle fa-fw"></i> Góp ý câu hỏi </a>
-                        </li>
-                        <li>
-                            <a href="~/Admin/SoftwareFeedback"><i class="fa fa-question-circle fa-fw"></i> Góp ý phần mềm </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeThanhPho")"><i class="fa fa-question-circle fa-fw"></i> Thống kê thành phố</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeThreeMonth")"><i class="fa fa-question-circle fa-fw"></i> Thống kê 3 tháng</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeDonVi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê đơn vị </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeNhomTieuChi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê nhóm tiêu chí </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý phần mềm<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeNoiDungGopYCauHoi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý câu hỏi</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeGopYPhanMem")"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý phần mềm</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ThongKeTyLePhanMem")"><i class="fa fa-question-circle fa-fw"></i> Thống kê tỷ lệ phần mềm</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê số lượt đánh giá<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="@Url.Action("Index","SoLuotDanhGia")"><i class="fa fa-question-circle fa-fw"></i> Số lượt đánh giá </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="~/Admin/CaiDat"><i class="fa fa-cogs"></i> Cài đặt<span class="fa arrow"></span></a>
-                </li>
+                    @*<li>
+                            <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý phần mềm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index", "ThongKeNoiDungGopYCauHoi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý câu hỏi</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "ThongKeGopYPhanMem")"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý phần mềm</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "ThongKeTyLePhanMem")"><i class="fa fa-question-circle fa-fw"></i> Thống kê tỷ lệ phần mềm</a>
+                                </li>
+                            </ul>
+                        </li>*@
+                    <li>
+                        <a href="~/Admin/CaiDat"><i class="fa fa-cogs"></i> Cài đặt<span class="fa arrow"></span></a>
+                    </li>
+                }
+                @if (Roles.IsUserInRole("User"))
+                {
+                    <li>
+                        <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê đơn vị<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeTheoDonVi")"><i class="fa fa-question-circle fa-fw"></i> Tỉ lệ hài lòng</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","SoLuotDanhGia")"><i class="fa fa-question-circle fa-fw"></i> Số lượt đánh giá </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeThreeMonthDonVi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê 3 tháng</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeNhomTieuChiDonVi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê nhóm tiêu chí </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "ThongKeGopYDonVi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
             </ul>
         </div>
     </div>

@@ -1,11 +1,9 @@
 ﻿@using WebMVC.Entities;
 @model List<DonVi>
 @{
-    ViewBag.Title = "Thống Kê Thành Phố";
-    int i;
-    var listNhomTieuChi = (List<ThongKe>)ViewBag.NhomTieuChiTP;
-    var listNhomTieuChi2 = (List<ThongKe>)ViewBag.NhomTieuChi;
-    var DonViID = 0;
+    ViewBag.Title = "Thống Kê Nhóm Tiêu Chí";
+    List<CBCC.Areas.Admin.Models.TKNhomTieuChi> listNhomTieuChi = (List<CBCC.Areas.Admin.Models.TKNhomTieuChi>)ViewBag.NhomTieuChiTP;
+    List<CBCC.Areas.Admin.Models.TKNhomTieuChi> listNhomTieuChi2 = (List<CBCC.Areas.Admin.Models.TKNhomTieuChi>)ViewBag.NhomTieuChi;
 }
 <link href="~/Content/grid-0.4.3.min.css" rel="stylesheet" />
 <script src="~/Scripts/grid-0.4.3.min.js"></script>
@@ -20,34 +18,6 @@
         $('#denNgay').datepicker(
         {
             dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
-        });
-
-        var grid;
-        function Search() {
-            grid.reload({ searchString: $("#search").val() });
-        }
-
-        $(document).ready(function () {
-            grid = $("#grid").grid({
-                dataKey: "ID",
-                uiLibrary: "bootstrap",
-                columns: [
-                    { field: "ID", width: 50, sortable: true },
-                    //{ field: "MaDonVi", title: "Mã Đơn Vị", sortable: true },
-                    { field: "TenTieuChi", title: "Tiêu chí", sortable: true },
-                    { field: "HaiLong", title: "Hài lòng", sortable: true },
-                    { field: "BinhThuong", title: "Bình thường", sortable: true },
-                    { field: "KhongHaiLong", title: "Không hài lòng", sortable: true }
-                ],
-                pager: { enable: true, limit: 15, sizes: [ 5, 10, 15, 20] }
-            });
-            $("#btnSearch").on("click", Search);
-            $("#cbDonVi").on('change', function () {
-                var splitted = $(this).val().split("_");
-
-                var link = '@Url.Action("GetReports", new {tuNgay=ViewBag.TuNgay, denNgay=ViewBag.DenNgay,donviID=-1})';
-                grid.reload({ searchString: splitted[0] });
-            });
         });
     </script>
 }
@@ -99,109 +69,23 @@
             else
             {
 
-                <table class="overflow-y col-lg-12 content_tk  table table-hover   table-bordered">
-
-                    <thead>
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th style="width:35%">Tên tiêu chí</th>
+                        <th style="width:20%">Hài lòng</th>
+                        <th style="width:20%">Bình thường</th>
+                        <th style="width:20%">Không hài lòng</th>
+                    </tr>
+                    @foreach (var item in listNhomTieuChi)
+                    {
                         <tr>
-
-                            <th class="col_cauhoi fix_left">
-                                <div class="text_main_col  col_cauhoi fix_left fix_left_1">Tiêu chí</div>
-                            </th>
-                            @{
-                string[] lsttieuChi = listNhomTieuChi[0].KetQuaDanhGia.Split(';');
-
-                for (i = 1; i < lsttieuChi.Length; i++)
-                {
-
-                    string[] cauhoi = lsttieuChi[i].Split('☺');
-
-                    <th>
-                        <div class="col_cauhoi">
-
-                            <div class="col_tieuchi">
-                                @cauhoi[0]
-                            </div>
-                        </div>
-                    </th>
-
-                }
-
-                            }
+                            <td>@item.TenTieuChi</td>
+                            <td>@item.HaiLong</td>
+                            <td>@item.BinhThuong</td>
+                            <td>@item.KhongHaiLong</td>
                         </tr>
-
-                        <tr>
-
-                            <th class="col_cauhoi fix_left">
-                                <div class="text_main_col col_cauhoi fix_left fix_left_1">ĐV - Câu TL</div>
-                            </th>
-                            @{
-
-                for (i = 1; i < lsttieuChi.Length; i++)
-                {
-
-                    string[] cauhoi = lsttieuChi[i].Split('☺');
-
-                    <th>
-
-                        @for (int y = 1; y < cauhoi.Length; y++)
-                        {
-                            string[] cautraloi = cauhoi[y].Split(new[] { "__" }, StringSplitOptions.None);
-                            for (int z = 0; z < cautraloi.Length; z++)
-                            {
-                                var width = 100 / (cautraloi.Length - 1);
-                                <div class="item_table item_table_header" style="width:@width%">@cautraloi[z].Split('_')[0]</div>
-                            }
-                        }
-                    </th>
-                }}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int e = 0; e < listNhomTieuChi.Count; e++)
-                        {
-
-                            <tr>
-                                <th class="col_cauhoi fix_left">
-                                    <div class="text_main_col">
-                                        <a href="#">
-                                            @listNhomTieuChi[e].TenDonVi
-                                        </a>
-                                    </div>
-                                </th>
-                                @{
-                            var item = listNhomTieuChi[e].KetQuaDanhGia;
-
-                            string[] tieuChi1 = item.Split(';');
-
-                            for (i = 1; i < tieuChi1.Length; i++)
-                            {
-
-                                string[] cauhoi = tieuChi1[i].Split('☺');
-
-                                <td>
-
-                                    @{
-                                string[] cautraloi = cauhoi[1].Split(new[] { "__" }, StringSplitOptions.None);
-
-                                for (int z = 1; z < cautraloi.Length; z++)
-                                {
-                                    var text = cautraloi[z].ToString();
-                                    var index_char = text.Split('_')[0];
-                                    var width = 100 / (cautraloi.Length - 1);
-
-                                    <div class="item_table" style="width:@width%">@text.Replace(index_char + "_", "")</div>
-                                }
-                                    }
-                                </td>
-
-                            }
-                                }
-                            </tr>
-
-                        }
-                    </tbody>
+                    }
                 </table>
-
             }
         </div>
         <div class="tab-pane fade" id="tab2">
@@ -211,144 +95,40 @@
             }
             else
             {
-                <br />
-                <div class="input-group col-md-6 col-xs-12">
-                    <span class="form-group input-group-btn">
-                        <select class="bs-select form-control" id="cbDonVi">
-                            <option value="">--- Chọn đơn vị ---</option>
-                            @{
-                var lsDVParent = Model.Where(p => p.ParentDonViID == null).ToList();
-                foreach (var item in lsDVParent)
-                {
-                    <optgroup label="@item.TenDonVi">
-                        @{
-                    var lsDVChild = Model.Where(p => p.ParentDonViID == item.DonViID).ToList();
-                    foreach (var it in lsDVChild)
-                    {
-                        if (ViewBag.madonvi == it.MaDonVi.ToString())
-                        {
-                            <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()" selected>@it.TenDonVi</option>
-                        }
-                        else
-                        {
-                            <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()">@it.TenDonVi</option>
-                        }
-                    }
-                        }
-                    </optgroup>
-                }
-                            }
-
-                        </select>
-                    </span>
-                </div>
-                <br />
-    <table id="grid" data-source="@Url.Action("GetReports", new {tuNgay=ViewBag.TuNgay,denNgay=ViewBag.DenNgay })"></table>
-
-                @*<table class="overflow-y col-lg-12 content_tk  table table-hover   table-bordered">
-
-                    <thead>
+                <div style="height:auto;overflow:auto">
+                    <table class="table table-hover table-striped" border="1">
                         <tr>
-
-                            <th class="col_cauhoi fix_left">
-                                <div class="text_main_col  col_cauhoi fix_left fix_left_1">Tiêu chí</div>
-                            </th>
-                            @{
-                string[] lsttieuChi = listNhomTieuChi2[0].KetQuaDanhGia.Split(';');
-
-
-                for (i = 1; i < lsttieuChi.Length; i++)
-                {
-
-                    string[] cauhoi = lsttieuChi[i].Split('☺');
-
-                    <th>
-                        <div class="col_cauhoi">
-
-                            <div class="col_tieuchi">
-                                @cauhoi[0]
-                            </div>
-                        </div>
-                    </th>
-
-                }
-
-                            }
-                        </tr>
-
-                        <tr>
-
-                            <th class="col_cauhoi fix_left">
-                                <div class="text_main_col col_cauhoi fix_left fix_left_1">ĐV - Câu TL</div>
-                            </th>
-                            @{
-
-                for (i = 1; i < lsttieuChi.Length; i++)
-                {
-
-                    string[] cauhoi = lsttieuChi[i].Split('☺');
-
-                    <th>
-
-                        @for (int y = 1; y < cauhoi.Length; y++)
-                        {
-                            string[] cautraloi = cauhoi[y].Split(new[] { "__" }, StringSplitOptions.None);
-                            for (int z = 0; z < cautraloi.Length; z++)
+                            <td style="vertical-align: middle;text-align: center;width:150px " rowspan="2">Tên tiêu chí</td>
+                            @for (int i = 0; i < listNhomTieuChi2.Count; i += 12)
                             {
-                                var width = 100 / (cautraloi.Length - 1);
-                                <div class="item_table item_table_header" style="width:@width%">@cautraloi[z].Split('_')[0]</div>
+                                <td style="text-align: center;" colspan="3">@listNhomTieuChi2[i].TenDonVi</td>
                             }
-                        }
-                    </th>
-                }}
                         </tr>
-                    </thead>
-                    <tbody>
-                        @for (int e = 0; e < listNhomTieuChi2.Count; e++)
+                        <tr>
+                            @for (int i = 0; i < listNhomTieuChi2.Count; i += 12)
+                            {
+                                <td style="white-space: nowrap;">Hài lòng</td>
+                                <td style="white-space: nowrap;">Bình thường</td>
+                                <td style="white-space: nowrap;">Không hài lòng</td>
+                            }
+                        </tr>
+                        @for (int i = 0; i < 12; i++)
                         {
-
                             <tr>
-                                <th class="col_cauhoi fix_left">
-                                    <div class="text_main_col">
-                                        <a href="#">
-                                            @listNhomTieuChi2[e].TenDonVi
-                                        </a>
-                                    </div>
-                                </th>
-                                @{
-                            var item = listNhomTieuChi2[e].KetQuaDanhGia;
-
-                            string[] tieuChi1 = item.Split(';');
-
-                            for (i = 1; i < tieuChi1.Length; i++)
-                            {
-
-                                string[] cauhoi = tieuChi1[i].Split('☺');
-
-                                <td>
-
-                                    @{
-                                string[] cautraloi = cauhoi[1].Split(new[] { "__" }, StringSplitOptions.None);
-
-                                for (int z = 1; z < cautraloi.Length; z++)
+                                <td style="white-space: nowrap;">@listNhomTieuChi2[i].TenTieuChi</td>
+                                @for (int j = 0; j < listNhomTieuChi2.Count; j++)
                                 {
-                                    var text = cautraloi[z].ToString();
-                                    var index_char = text.Split('_')[0];
-                                    var width = 100 / (cautraloi.Length - 1);
-
-                                    <div class="item_table" style="width:@width%">@text.Replace(index_char + "_", "")</div>
-                                }
+                                    if (listNhomTieuChi2[i].TenTieuChi == listNhomTieuChi2[j].TenTieuChi)
+                                    {
+                                        <td style="white-space: nowrap;">@listNhomTieuChi2[j].HaiLong</td>
+                                        <td style="white-space: nowrap;">@listNhomTieuChi2[j].BinhThuong</td>
+                                        <td style="white-space: nowrap;">@listNhomTieuChi2[j].KhongHaiLong</td>
                                     }
-                                </td>
-
-                            }
                                 }
                             </tr>
-
                         }
-                    </tbody>
-                </table>*@
-
+                    </table>
+                </div>
             }
         </div>
     </div>

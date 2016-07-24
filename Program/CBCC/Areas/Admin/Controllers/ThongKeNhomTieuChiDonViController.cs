@@ -1,34 +1,25 @@
-﻿using DotNet.Highcharts;
-using DotNet.Highcharts.Enums;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Options;
+﻿using CBCC.Areas.Admin.Models;
+using CBCC.Helper;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
 using WebMVC.Entities;
-using System.Linq;
-using System.Web;
-using CBCC.Helper;
-using CBCC.Areas.Admin.Models;
 namespace CBCC.Areas.Admin.Controllers
 {
-    public class ThongKeNhomTieuChiController : Controller
+    public class ThongKeNhomTieuChiDonViController : Controller
     {
-        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "Admin,Manage")]
+        [MyMembershipProvider.AccessDeniedAuthorize(Roles = "User")]
         public ActionResult Index()
         {
             ViewBag.TuNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).ToString("dd/MM/yyyy");
             ViewBag.DenNgay = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))).ToString("dd/MM/yyyy");
 
-            var list = ThongKeService.ThongKeNhomTieuChiTP_ByTime(ViewBag.TuNgay, ViewBag.DenNgay) as List<ThongKe>;
+            var list = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime_UserName(ViewBag.TuNgay, ViewBag.DenNgay, User.Identity.Name) as List<ThongKe>;
             var records = ConverKTNhomTieuChi(list).ToList();
             ViewBag.NhomTieuChiTP = records;
-
-            list = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, string.Empty) as List<ThongKe>;
-            records = ConverKTNhomTieuChi(list).ToList();
-            ViewBag.NhomTieuChi = records;
+            
             var lsDonVi = DanhMucService.DonViGetAllList().Where(x => x.Active == true).ToList();
             return View(lsDonVi);
         }
@@ -40,13 +31,10 @@ namespace CBCC.Areas.Admin.Controllers
             #region thong ke toan tinh
             ViewBag.TuNgay = tuNgay;
             ViewBag.DenNgay = denNgay;
-            var list = ThongKeService.ThongKeNhomTieuChiTP_ByTime(ViewBag.TuNgay, ViewBag.DenNgay) as List<ThongKe>;
+            var list = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime_UserName(ViewBag.TuNgay, ViewBag.DenNgay, User.Identity.Name) as List<ThongKe>;
             var records = ConverKTNhomTieuChi(list).ToList();
             ViewBag.NhomTieuChiTP = records;
             // ban bieu
-            list = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime(ViewBag.TuNgay, ViewBag.DenNgay, string.Empty) as List<ThongKe>;
-            records = ConverKTNhomTieuChi(list).ToList();
-            ViewBag.NhomTieuChi = records;
             #endregion
             
             var lsDonVi = DanhMucService.DonViGetAllList().Where(x => x.Active == true).ToList();
@@ -144,20 +132,6 @@ namespace CBCC.Areas.Admin.Controllers
                
             }
             return ls;
-        }
-    }
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class NoCacheAttribute : ActionFilterAttribute
-    {
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
-            filterContext.HttpContext.Response.Cache.SetValidUntilExpires(false);   
-            filterContext.HttpContext.Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
-            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            filterContext.HttpContext.Response.Cache.SetNoStore();
-
-            base.OnResultExecuting(filterContext);
         }
     }
 }

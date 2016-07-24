@@ -30,7 +30,7 @@
         var clr = "beige";
         if (i % 2 == 0)
         { clr = "aliceblue"; }
-        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr" title="Xem chi tiết" >
+        <tr class="parent" data-value="@i" style="cursor: pointer; background-color: @clr" title="Xem chi tiết" >
             <td>@(pageNumber + i + 1)</td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenTieuChi)
@@ -45,7 +45,7 @@
         var expand = ((List<GopYCauHoi>)ViewBag.GopYCauHoi).Where(x => x.TieuChiId == item.ID).ToList();
         if (expand != null && expand.Any())
         {
-            <tr class="child" style="display: none;" data-level="2">
+            <tr class="child" style="display: none;" data-value="@i">
                 <td colspan="4" style="padding-left:5%;">
                     <div style=" overflow-y:scroll; height:200px !important">
                         <table class="table table-striped" style="width: 90%; ">
@@ -84,25 +84,3 @@
         <div class="modal-dialog">
         </div>
     </div>
-    <!-- scripts -->
-    @section scripts{
-        <script>
-            $(document).ready(function () {
-                function getChildren($row) {
-                    var children = [], level = $row.attr('data-level');
-                    while ($row.next().attr('data-level') > level) {
-                        children.push($row.next());
-                        $row = $row.next();
-                    }
-                    return children;
-                }
-
-                $('.parent').on('click', function () {
-                    var children = getChildren($(this));
-                    $.each(children, function () {
-                        $(this).toggle();
-                    })
-                });
-            })
-        </script>
-    }

@@ -1,0 +1,173 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê 3 Tháng Gần Nhất";
+    var lst = new List<ThongKe>();
+    if (ViewBag.ThreeMonth != null)
+    {
+        lst = ViewBag.ThreeMonth as List<ThongKe>;
+    }
+    var bieudo = new List<ThongKe>();
+    if (ViewBag.BieuDo != null)
+    {
+        bieudo = ViewBag.BieuDo as List<ThongKe>;
+    }
+    var total = bieudo.Count;
+    string title = string.Empty;
+    string hl = string.Empty;
+    string bt = string.Empty;
+    string khl = string.Empty;
+}
+
+<h3>Thống kê 3 tháng gần nhất</h3>
+<style>
+    /* bootstrap hack:fix content width inside hidden tabs */
+    .tab-content > .tab-pane:not(.active),
+    .pill-content > .pill-pane:not(.active) {
+        display: block;
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .panel {
+        box-shadow: none;
+    }
+    /* bootstrap hack end */
+</style>
+
+<div class="row">
+    <table class="table table-hover">
+        <tr>
+            <th>Tên đơn vị</th>
+            @foreach (var item in lst)
+            {
+                <th>@item.MonthYear</th>
+            }
+        </tr>
+        <tr>
+            @if (lst.Count>0)
+            {
+                <td>@lst[0].TenDonVi</td>
+            }
+            else { 
+                <td></td>
+            }
+            @foreach (var item in lst)
+            {
+                var arr = item.MonthYear.Split('/');
+                <td><a href="@Url.Action("ThongKeToanTP_BanBieu_ByDonViMonthYear", "ThongKeThreeMonthDonVi", new { madonvi = item.MaDonVi, month = arr[0], year = arr[1] })"> @item.Soluot</a></td>
+            }
+        </tr>
+    </table>
+    <br />
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/highcharts.js"></script>
+    <script>
+    var hl, bt, khl;
+    $(function () {
+        @foreach (var it in bieudo)
+            {
+                title += "'" + it.TenDonVi + "'," ;
+                hl += "'" + it.HaiLong + "',";
+                bt += "'" + it.BinhThuong + "',";
+                khl += "'" + it.KhongHaiLong + "',";
+            }
+        $('a[class=changeArr]').click(function () {
+            $('.se-pre-con').fadeIn("fast");
+            var name = "";
+            var sort = "";
+            if ($(this).find('i').hasClass('glyphicon-chevron-down')) {
+                $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                name = $(this).attr("data-value");
+                sort = "DESC";
+            }
+            else {
+                $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                name = $(this).attr("data-value");
+                sort = "ASC";
+            }
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("GetAllDonVi", "ThongKeThanhPho")",
+                data: { tuNgay: $('#tuNgay').val(), denNgay: $('#denNgay').val(), name: name, sort: sort },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        var app = "";
+                        for (var i = 0; i < response.data.length; i++) {
+                            app += "<tr><td>" + (i + 1) + "</td><td>" + response.data[i].TenDonVi + "</td><td>" + response.data[i].HaiLong + "% (" + response.data[i].SCHaiLong + ")</td><td>" + response.data[i].BinhThuong + "% (" + response.data[i].SCBinhThuong + ")</td><td>" + response.data[i].KhongHaiLong + "% (" + response.data[i].SCKhongHaiLong + ")</td></tr>";
+                        }
+                        $('.appendRows').html(app);
+                    }
+                    $('.se-pre-con').fadeOut("fast");
+                }
+            });
+        });
+        // show bar chart
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [
+                    @Html.Raw(title)
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                },
+                max: 100
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.2f} %</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                },
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y +'%';
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Hài lòng',
+                data: [@Html.Raw(hl.Replace("'",""))]
+
+            }, {
+                name: 'Bình thường',
+                data: [@Html.Raw(bt.Replace("'",""))]
+
+                }, {
+                    name: 'Không hài lòng',
+                    data: [@Html.Raw(khl.Replace("'",""))]
+
+                }]
+            });
+        });
+    </script>
+}

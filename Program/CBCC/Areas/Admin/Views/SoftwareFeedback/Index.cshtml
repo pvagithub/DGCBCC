@@ -1,5 +1,4 @@
-﻿@using WebMVC.Entities
-@using WebMVC.Entities;
+﻿@using WebMVC.Entities;
 @using PagedList.Mvc;
 @model PagedList.IPagedList<WebMVC.Entities.ThongKeGopYPhanMem_Result>
 @{
@@ -29,7 +28,7 @@
         var clr = "beige";
         if (i % 2 == 0)
         { clr = "aliceblue"; }
-        <tr class="parent" data-level="0" style="cursor: pointer; background-color: @clr" title="Xem chi tiết">
+        <tr class="parent" data-value="@i" style="cursor: pointer; background-color: @clr" title="Xem chi tiết">
             <td>@(pageNumber + i + 1)</td>
             <td>
                 @Html.DisplayFor(modelItem => item.Question)
@@ -44,7 +43,7 @@
         var expand = WebMVC.Bussiness.ThongKeService.ThongKeGopYPhanMemChiTiet(item.ID); //((List<GopY>)ViewBag.GopYPhanMem).Where(x => x.IDCau == item.ID).ToList();
         if (expand != null && expand.Any())
         {
-            <tr class="child" style="display: none;" data-level="2">
+            <tr class="child" data-value="@i" style="display: none;">
                 <td colspan="4" style="padding-left:5%;">
                     <div style=" overflow-y:scroll; height:200px !important">
                         <table class="table table-striped" style="width: 90%; ">
@@ -85,24 +84,3 @@
         }
     }
 </table>
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            function getChildren($row) {
-                var children = [], level = $row.attr('data-level');
-                while ($row.next().attr('data-level') > level) {
-                    children.push($row.next());
-                    $row = $row.next();
-                }
-                return children;
-            }
-
-            $('.parent').on('click', function () {
-                var children = getChildren($(this));
-                $.each(children, function () {
-                    $(this).toggle();
-                })
-            });
-        })
-    </script>
-}

@@ -1,0 +1,67 @@
+﻿@using WebMVC.Entities;
+@{
+    ViewBag.Title = "Thống Kê Góp Ý Đơn Vị";
+    List<ThongKe> listNhomTieuChi = ViewBag.NhomTieuChiTP as List<ThongKe>;
+}
+<h3>Thống Kê Góp Ý Đơn Vị</h3>
+
+@section scripts{
+
+    <script>
+        $('#tuNgay').datepicker({
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+        $('#denNgay').datepicker(
+        {
+            dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
+        });
+    </script>
+}
+@using (Html.BeginForm("Index", "ThongKeGopYDonVi"))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Ngày bắt đầu:</p>
+        </div>
+        <div class="col-md-2">
+            <input id="tuNgay" name="tuNgay" type="text" value="@ViewBag.TuNgay" placeholder="Chọn ngày bắt đầu" class="form-control">
+        </div>
+        <div class="col-md-2"><p class="text-right">Ngày kết thúc:</p></div>
+        <div class="col-md-2"><input id="denNgay" name="denNgay" type="text" value="@ViewBag.DenNgay" placeholder="Chọn ngày kết thúc" class="form-control"></div>
+        <div class="col-md-1"><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Xem</button></div>
+    </div>
+}
+<br />
+<div class="row">
+    <table class="table table-hover table-striped">
+        <tr>
+            <th style="width:10%">Số biên nhận</th>
+            <th style="width:90%">Nội dung góp ý</th>
+        </tr>
+        @foreach (var item in listNhomTieuChi.GroupBy(x => x.SoBienNhan).Select(grp=>grp.Key).ToList())
+        {
+            <tr>
+                <td>@item</td>
+                <td>
+                    <table>
+                        @foreach (var it in listNhomTieuChi)
+                        {
+                            if (it.SoBienNhan == item)
+                            {
+                                <tr>
+                                    <td>+ Câu @it.IDCau : @it.NoiDungGopY</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </td>
+            </tr>
+        }
+        @if (listNhomTieuChi.Count == 0)
+        {
+            <tr>
+                <td colspan="4">Chưa có dữ liệu</td>
+            </tr>
+        }
+    </table>
+</div>

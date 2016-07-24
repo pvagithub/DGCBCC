@@ -209,6 +209,8 @@
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeGopYPhanMemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SoLuotDanhGiaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeGopYDonViController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeNhomTieuChiDonViController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeNoiDungGopYCauHoiController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SoftwareFeedbackController.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="Areas\Admin\Controllers\ThongKeDonViController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeNoiDungGopYPhanMemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeTheoDonViController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeThreeMonthDonViController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeTyLePhanMemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeThreeMonthController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeThanhPhoController.cs" />
@@ -813,6 +816,10 @@
     <Content Include="Areas\Admin\Views\SoLuotDanhGia\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SoLuotDanhGia\ThongKeSoLuotDanhGiaDonVi.cshtml" />
     <Content Include="Areas\Admin\Views\SoLuotDanhGia\KetQuaDanhGiaHosoByDanhGiaID.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThreeMonthDonVi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeThreeMonthDonVi\ThongKeToanTP_BanBieu_ByDonViMonthYear.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeNhomTieuChiDonVi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeGopYDonVi\Index.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />
