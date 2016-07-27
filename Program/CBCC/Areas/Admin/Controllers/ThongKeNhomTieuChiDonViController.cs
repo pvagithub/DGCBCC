@@ -1,7 +1,10 @@
-﻿using CBCC.Areas.Admin.Models;
+﻿using Aspose.Cells;
+using CBCC.Areas.Admin.Models;
 using CBCC.Helper;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using WebMVC.Bussiness;
@@ -132,6 +135,90 @@ namespace CBCC.Areas.Admin.Controllers
                
             }
             return ls;
+        }
+
+        public ActionResult ExportExcelNTC(string tuNgay, string denNgay)
+        {
+            var list = ThongKeService.ThongKeNhomTieuChiDonVi_ByTime_UserName(tuNgay, denNgay, User.Identity.Name) as List<ThongKe>;
+            var records = ConverKTNhomTieuChi(list).ToList();
+            var dt = CodeHelper.ConvertToDataTable(records);
+            //Create a new Workbook.
+            Workbook workbook = new Workbook();
+
+            //Get the first worksheet.
+            Worksheet sheet = workbook.Worksheets[0];
+
+            // format ten column
+            Cells cells = sheet.Cells;
+            cells[4, 0].PutValue("Tên tiêu chí");
+            cells[4, 1].PutValue("Hài lòng");
+            cells[4, 2].PutValue("Bình thường");
+            cells[4, 3].PutValue("Không hài lòng");
+
+            int row = 5;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                cells[row + i, 0].PutValue(dt.Rows[i]["TenTieuChi"]);
+                cells[row + i, 1].PutValue(dt.Rows[i]["HaiLong"]);
+                cells[row + i, 2].PutValue(dt.Rows[i]["BinhThuong"]);
+                cells[row + i, 3].PutValue(dt.Rows[i]["KhongHaiLong"]);
+            }
+
+            // format title
+            Range range = cells.CreateRange(4, 0, 1, 4);
+            Style style = new Style();
+            style.Pattern = BackgroundType.Solid;
+            style.ForegroundColor = System.Drawing.Color.FromArgb(91, 155, 213);
+            style.Font.Color = Color.Yellow;
+            style.Font.IsBold = true;
+            style.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            range.SetStyle(style);
+
+            // format all cell
+            range = cells.CreateRange(5, 0, dt.Rows.Count, 4);
+            style = new Style();
+            style.HorizontalAlignment = TextAlignmentType.Left;
+            style.VerticalAlignment = TextAlignmentType.Left;
+
+            style.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Thin;
+            style.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Thin;
+            range.SetStyle(style);
+
+            // format title
+            cells[1, 0].PutValue("Thống kê nhóm tiêu chí đơn vị");
+            style = new Style();
+            style.Font.Color = Color.Black;
+            style.HorizontalAlignment = TextAlignmentType.Center;
+            style.VerticalAlignment = TextAlignmentType.Center;
+            style.Font.IsBold = true;
+            style.Font.Size = 20;
+            cells[1, 0].SetStyle(style);
+            cells.Merge(1, 0, 2, 10);
+
+            sheet.AutoFitColumns();
+            MemoryStream dstStream = new MemoryStream();
+            workbook.Save(dstStream, Aspose.Cells.SaveFormat.Xlsx);
+
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.CacheControl = "public";
+            Response.AddHeader("Pragma", "public");
+            Response.AddHeader("Expires", "0");
+            Response.AddHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+            Response.AddHeader("Content-Description", "Excel File Download");
+            Response.AddHeader("Content-Disposition", "attachment; filename=ThongKeNhomTieuChi_DonVi_" + DateTime.Now.ToString("ddMMyyyhhmmss") + ".xlsx");
+
+            Response.BinaryWrite(dstStream.ToArray());
+            Response.Flush();
+            Response.End();
+            return View();
         }
     }
 }

@@ -147,7 +147,6 @@ namespace CBCC.Controllers
             // Get thong tin đánh giá
 
             var lstKQDG = new List<KetQuaDanhGia>();
-
             foreach (var item in lstKetQua)
             {
                 var kq = new KetQuaDanhGia();

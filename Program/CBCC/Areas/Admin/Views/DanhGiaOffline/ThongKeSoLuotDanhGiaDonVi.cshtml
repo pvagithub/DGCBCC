@@ -79,17 +79,9 @@
     }
 </table>
 <button id="btnComback" class="btn btn-primary"><i class="glyphicon glyphicon-fast-backward"></i>  Quay lại</button>
-<button id="btnExport" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
-<input type="hidden" id="hdMadonvi" value="@ViewBag.Madonvi"/>
-<input type="hidden" id="hdMalienthong" value="@ViewBag.Malienthong" />
-<input type="hidden" id="tuNgay" value="@ViewBag.TuNgay" />
-<input type="hidden" id="denNgay" value="@ViewBag.DenNgay" />
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("#btnExport").click(function () {
-                window.open("@Url.Action("ExportExcelBienNhan", "SoLuotDanhGia")?tuNgay=" + $("#tuNgay").val() + "&denNgay=" + $("#denNgay").val() + "&madonvi=" + $("#hdMadonvi").val() + "&malienthong=" + $("#hdMalienthong").val(), "_blank");
-            })
             $("#btnComback").click(function () {
                 window.location.href = '@Url.Action("Index", "SoLuotDanhGia")?tuNgay=@ViewBag.TuNgay&denNgay=@ViewBag.DenNgay'
             });

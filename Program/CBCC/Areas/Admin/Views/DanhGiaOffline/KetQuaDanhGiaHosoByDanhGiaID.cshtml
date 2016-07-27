@@ -37,8 +37,8 @@
         <tr style="background-color:aliceblue !important">
             <td>Hồ sơ: @hs.SoBienNhan</td>
             <td>Người nộp: @hs.NguoiNop</td>
-            <td>Ngày nhận: @(hs.NgayNhan !=null ? hs.NgayNhan.Value.ToString("dd/MM/yyyy"):"")</td>
-            <td>Ngày hẹn trả: @(hs.NgayHenTra != null ? hs.NgayHenTra.Value.ToString("dd/MM/yyyy") : "")</td>
+            <td>Ngày nhận: @hs.NgayNhan.ToString("dd/MM/yyyy")</td>
+            <td>Ngày hẹn trả: @hs.NgayHenTra.ToString("dd/MM/yyyy")</td>
         </tr>
     </table>
 }

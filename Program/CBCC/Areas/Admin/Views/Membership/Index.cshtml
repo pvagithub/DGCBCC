@@ -26,7 +26,7 @@
 
         <th>Comment</th>
         <th>
-            @if (ViewBag.LenCDV < 5) { 
+            @if (ViewBag.LenCDV < 3) { 
             <a href='/Admin/Membership/Create'
                class="pull-right btn btn-info btn-add">Thêm mới</a>
             }
@@ -67,7 +67,9 @@
             <td>
                 <div class="pull-right">
                     <a href='/Admin/Membership/Edit/@item.UserId' class="btn btn-primary btn-update" title="Cập nhật, chỉnh sửa"> <i class="glyphicon glyphicon-pencil"></i></a>
+@if (ViewBag.LenCDV < 3) {
                     <a href='/Admin/Membership/Delete/@item.UserId' class="btn btn-danger btn-delete" title="Xóa"><i class="glyphicon glyphicon-remove"></i></a>
+}
                 </div>
             </td>
         </tr>

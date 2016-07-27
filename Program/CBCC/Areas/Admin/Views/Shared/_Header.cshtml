@@ -35,7 +35,8 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-
+@if (Roles.IsUserInRole("Admin"))
+{
                 <li>
                     <a href="#"><i class="fa fa-users fa-fw"></i> Quản lý người dùng<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -47,7 +48,8 @@
                         </li>
                     </ul>
                 </li>
-                @if (Roles.IsUserInRole("Admin") || Roles.IsUserInRole("Manage"))
+                }
+                @if (Roles.IsUserInRole("Admin"))
                 {
                     <li>
                         <a href="#"><i class="fa fa-paragraph"></i> Danh mục <span class="fa arrow"></span></a>
@@ -77,8 +79,14 @@
                             <li>
                                 <a href="~/Admin/GopYAnswers"><i class="fa fa-user fa-list"></i>Câu trả lời cho hệ thống</a>
                             </li>
+                            <li>
+                                <a href="~/Admin/CaiDat"><i class="fa fa-cogs"></i> Cài đặt<span class="fa arrow"></span></a>
+                            </li>
                         </ul>
                     </li>
+                }
+                @if (Roles.IsUserInRole("Admin")||Roles.IsUserInRole("Manage"))
+                {
                     <li>
                         <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -111,9 +119,12 @@
                             <li>
                                 <a href="@Url.Action("Index", "ThongKeNhomTieuChi")"><i class="fa fa-question-circle fa-fw"></i> Thống kê nhóm tiêu chí </a>
                             </li>
+                            <li>
+                                <a href="@Url.Action("Index", "DanhGiaOffline")"><i class="fa fa-question-circle fa-fw"></i> Đánh giá offline </a>
+                            </li>
                         </ul>
                     </li>
-
+                }
                     @*<li>
                             <a href="#"><i class="fa fa-question-circle fa-fw"></i> Thống kê góp ý phần mềm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -128,10 +139,8 @@
                                 </li>
                             </ul>
                         </li>*@
-                    <li>
-                        <a href="~/Admin/CaiDat"><i class="fa fa-cogs"></i> Cài đặt<span class="fa arrow"></span></a>
-                    </li>
-                }
+                 
+              
                 @if (Roles.IsUserInRole("User"))
                 {
                     <li>

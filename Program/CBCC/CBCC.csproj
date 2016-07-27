@@ -207,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\GopYAnswersController.cs" />
     <Compile Include="Areas\Admin\Controllers\GopYQuestionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhVucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DanhGiaOfflineController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeGopYPhanMemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SoLuotDanhGiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeGopYDonViController.cs" />
@@ -820,6 +821,9 @@
     <Content Include="Areas\Admin\Views\ThongKeThreeMonthDonVi\ThongKeToanTP_BanBieu_ByDonViMonthYear.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeNhomTieuChiDonVi\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKeGopYDonVi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhGiaOffline\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhGiaOffline\KetQuaDanhGiaHosoByDanhGiaID.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhGiaOffline\ThongKeSoLuotDanhGiaDonVi.cshtml" />
     <None Include="Service References\SearchService\search.disco" />
     <None Include="Service References\SearchService\configuration91.svcinfo" />
     <None Include="Service References\SearchService\configuration.svcinfo" />

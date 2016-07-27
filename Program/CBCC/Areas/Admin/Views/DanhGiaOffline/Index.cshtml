@@ -1,0 +1,183 @@
+﻿@using WebMVC.Entities;
+@model List<DonVi>
+@{
+    ViewBag.Title = "Đánh giá offline";
+    List<KetQuaDanhGiaHoSo> lst = new List<KetQuaDanhGiaHoSo>();
+    List<KetQuaDanhGiaHoSo> lstResult = new List<KetQuaDanhGiaHoSo>();
+    if (ViewBag.Result != null)
+    {
+        lstResult = ViewBag.Result as List<KetQuaDanhGiaHoSo>;
+    }
+}
+<style>
+    .table2 tr td {
+        border-top: none !important;
+        vertical-align: middle !important;
+    }
+
+    .table3 tr td {
+        padding: 2px !important;
+    }
+</style>
+<h2>Đánh giá Offline</h2>
+<table class="table table-hover table-striped table2" style="width:40%">
+    <tr style="background-color:#fff">
+        <td>Đơn vị</td>
+        <td>
+            <select class="bs-select form-control" id="cbDonVi">
+                <option value="">--- Chọn đơn vị ---</option>
+                @{
+                    var lsDVParent = Model.Where(p => p.ParentDonViID == null).ToList();
+                    foreach (var item in lsDVParent)
+                    {
+                <optgroup label="@item.TenDonVi">
+                    @{
+                        var lsDVChild = Model.Where(p => p.ParentDonViID == item.DonViID).ToList();
+                        foreach (var it in lsDVChild)
+                        {
+                            <option value="@it.MaDonVi.ToString()_@it.MaLienThong.ToString()">@it.TenDonVi</option>
+                        }
+                    }
+                </optgroup>
+                    }
+                }
+
+            </select>
+        </td>
+    </tr>
+    <tr style="background-color:#fff">
+        <td>Số biên nhận</td>
+        <td><input type="text" id="soBienNhan" class="form-control" name="soBienNhan" placeholder="Nhập số biên nhận" autocomplete="off"></td>
+    </tr>
+    <tr style="background-color:#fff">
+        <td colspan="2">
+            <span id="msg_notify" style="color:red"></span>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <h3>6 câu hỏi bắt buộc</h3>
+</div>
+<table class="table table-hover table-striped">
+    @for (int i = 0; i < 6; i++)
+    {
+        lst = new List<KetQuaDanhGiaHoSo>();
+        var item = lstResult[i];
+        if (!string.IsNullOrWhiteSpace(item.Chitiet))
+        {
+            var xml = System.Xml.Linq.XDocument.Parse(item.Chitiet);
+            var rows = from node in xml.Descendants("row")
+                       select new KetQuaDanhGiaHoSo
+                       {
+                           CauTraLoiID = int.Parse(node.Attribute("CauTraLoiID").Value),
+                           TenCauTraLoi = node.Attribute("TenCauTraLoi").Value
+                       };
+            lst.AddRange(rows);
+        }
+        <tr>
+            <td>
+                @(i + 1). @item.TenTieuChi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table table3">
+                    @foreach (var it in lst)
+                    {
+                        <tr>
+                            <td style="border-top: 0px solid #fff !important">
+                                <input type="radio" name="@(i + 1)" value="@item.ID.ToString()_@it.CauTraLoiID" /> @it.TenCauTraLoi
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    <h3>6 câu hỏi mở rộng</h3>
+</div>
+<table class="table table-hover table-striped">
+    @for (int i = 6; i < lstResult.Count; i++)
+    {
+        lst = new List<KetQuaDanhGiaHoSo>();
+        var item = lstResult[i];
+        if (!string.IsNullOrWhiteSpace(item.Chitiet))
+        {
+            var xml = System.Xml.Linq.XDocument.Parse(item.Chitiet);
+            var rows = from node in xml.Descendants("row")
+                       select new KetQuaDanhGiaHoSo
+                       {
+                           CauTraLoiID = int.Parse(node.Attribute("CauTraLoiID").Value),
+                           TenCauTraLoi = node.Attribute("TenCauTraLoi").Value
+                       };
+            lst.AddRange(rows);
+        }
+        <tr>
+            <td>
+                @(i - 5). @item.TenTieuChi
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table table3">
+                    @foreach (var it in lst)
+                    {
+                        <tr>
+                            <td style="border-top: 0px solid #fff !important">
+                                <input type="radio" name="@(i + 1)" value="@item.ID.ToString()_@it.CauTraLoiID" /> @it.TenCauTraLoi
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <button id="btnSave" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Lưu đánh giá</button>
+</div>
+<br />
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                $(".se-pre-con").fadeIn("slow");
+                var tieuchi = [];
+                if ($('#cbDonVi').val() == "") {
+                    var htmlString = "Vui lòng chọn đơn vị để thực hiện đánh giá!";
+                    $("#msg_notify").html(htmlString);
+                    $("body").scrollTop(0);
+                    $(".se-pre-con").fadeOut("fast");
+                    return false;
+                }
+                if ($("#soBienNhan").val() == "") {
+                    var htmlString = "Vui lòng nhập số biên nhận để thực hiện đánh giá!";
+                    $("#msg_notify").html(htmlString);
+                    $("body").scrollTop(0);
+                    $(".se-pre-con").fadeOut("fast");
+                    return false;
+                }
+                $("input[type=radio]").each(function () {
+                    if ($(this).is(':checked')) {
+                        tieuchi.push($(this).val());
+                    }
+                })
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Action("Index","DanhGiaOffline")',
+                    data: {donViID: $('#cbDonVi').val(), soBienNhan:$("#soBienNhan").val(), arrAnswer: tieuchi},
+                    dataType: 'json',
+                    success: function (response) {
+                        alert(response.msg);
+                    }
+                }).always(function () {
+                    $(".se-pre-con").fadeOut("fast");
+                })
+            })
+        })
+    </script>
+}

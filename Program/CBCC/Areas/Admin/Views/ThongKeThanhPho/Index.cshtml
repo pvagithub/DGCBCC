@@ -23,7 +23,6 @@
         box-shadow: none;
     }
     /* bootstrap hack end */
-   
 </style>
 
 @using (Html.BeginForm("Index", "ThongKeThanhPho"))
@@ -67,24 +66,25 @@
                     var banbieu = (List<ThongKe>)ViewBag.BanBieu;
                     for (i = 0; i < banbieu.Count; i++)
                     {
-                <tr>
-                    <td>@(i + 1)</td>
-                    <td>
-                        @banbieu[i].TenDonVi
-                    </td>
-                    <td>
-                        @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
-                    </td>
-                    <td>
-                        @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
-                    </td>
-                    <td>
-                        @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
-                    </td>
-                </tr>
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                @banbieu[i].TenDonVi
+                            </td>
+                            <td>
+                                @banbieu[i].HaiLong% (@banbieu[i].SCHaiLong)
+                            </td>
+                            <td>
+                                @banbieu[i].BinhThuong% (@banbieu[i].SCBinhThuong)
+                            </td>
+                            <td>
+                                @banbieu[i].KhongHaiLong% (@banbieu[i].SCKhongHaiLong)
+                            </td>
+                        </tr>
                     }
                 }
             </table>
+            <button id="btnBanbieu" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
         </div>
         <div class="tab-pane fade" id="tab3">
             <table class="table table-hover">
@@ -100,24 +100,25 @@
                     var caonhat = (List<ThongKe>)ViewBag.CaoNhat;
                     for (i = 0; i < caonhat.Count; i++)
                     {
-                <tr>
-                    <td>@(i + 1)</td>
-                    <td>
-                        @caonhat[i].TenDonVi
-                    </td>
-                    <td>
-                        @caonhat[i].HaiLong% (@caonhat[i].SCHaiLong)
-                    </td>
-                    <td>
-                        @caonhat[i].BinhThuong% (@caonhat[i].SCBinhThuong)
-                    </td>
-                    <td>
-                        @caonhat[i].KhongHaiLong% (@caonhat[i].SCKhongHaiLong)
-                    </td>
-                </tr>
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                @caonhat[i].TenDonVi
+                            </td>
+                            <td>
+                                @caonhat[i].HaiLong% (@caonhat[i].SCHaiLong)
+                            </td>
+                            <td>
+                                @caonhat[i].BinhThuong% (@caonhat[i].SCBinhThuong)
+                            </td>
+                            <td>
+                                @caonhat[i].KhongHaiLong% (@caonhat[i].SCKhongHaiLong)
+                            </td>
+                        </tr>
                     }
                 }
             </table>
+            <button id="btnTop10Top" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
         </div>
         <div class="tab-pane fade" id="tab4">
             <table class="table table-hover">
@@ -133,35 +134,36 @@
                     var thapnhat = (List<ThongKe>)ViewBag.ThapNhat;
                     for (i = 0; i < thapnhat.Count; i++)
                     {
-                <tr>
+                        <tr>
 
-                    <td>@(i + 1)</td>
-                    <td>
-                        @thapnhat[i].TenDonVi
-                    </td>
-                    <td>
-                        @thapnhat[i].HaiLong% (@thapnhat[i].SCHaiLong)
-                    </td>
-                    <td>
-                        @thapnhat[i].BinhThuong% (@thapnhat[i].SCBinhThuong)
-                    </td>
-                    <td>
-                        @thapnhat[i].KhongHaiLong% (@thapnhat[i].SCKhongHaiLong)
-                    </td>
-                </tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                @thapnhat[i].TenDonVi
+                            </td>
+                            <td>
+                                @thapnhat[i].HaiLong% (@thapnhat[i].SCHaiLong)
+                            </td>
+                            <td>
+                                @thapnhat[i].BinhThuong% (@thapnhat[i].SCBinhThuong)
+                            </td>
+                            <td>
+                                @thapnhat[i].KhongHaiLong% (@thapnhat[i].SCKhongHaiLong)
+                            </td>
+                        </tr>
                     }
                 }
             </table>
+            <button id="btnTop10Bottom" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
         </div>
         <div class="tab-pane fade" id="tab5">
             <table class="table table-hover">
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên đơn vị</th>
-                        <th>Hài lòng  <a data-value="HL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
-                        <th>Bình thường  <a data-value="BT" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
-                        <th>Không hài lòng  <a data-value="KHL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
-                    </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên đơn vị</th>
+                    <th>Hài lòng  <a data-value="HL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                    <th>Bình thường  <a data-value="BT" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                    <th>Không hài lòng  <a data-value="KHL" class="changeArr"><i class="glyphicon glyphicon-chevron-down"></i></a></th>
+                </tr>
                 <tbody class="appendRows">
                     @if (ViewBag.AllDonVi != null)
                     {
@@ -187,6 +189,7 @@
                     }
                 </tbody>
             </table>
+            <button id="btnTatca" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
         </div>
     </div>
 </div>
@@ -201,6 +204,18 @@
             dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
         });
         $(function () {
+            $("#btnBanbieu").click(function () {
+                window.open("@Url.Action("Banbieu", "ThongKeThanhPho")?tuNgay="+$('#tuNgay').val()+"&denNgay="+$('#denNgay').val(),"_blank");
+            })
+            $("#btnTop10Top").click(function () {
+                window.open("@Url.Action("Top10CaoNhat", "ThongKeThanhPho")?tuNgay="+$('#tuNgay').val()+"&denNgay="+$('#denNgay').val(),"_blank");
+            })
+            $("#btnTop10Bottom").click(function () {
+                window.open("@Url.Action("Top10ThapNhat", "ThongKeThanhPho")?tuNgay="+$('#tuNgay').val()+"&denNgay="+$('#denNgay').val(),"_blank");
+            })
+            $("#btnTatca").click(function () {
+                window.open("@Url.Action("TatCaDonVi", "ThongKeThanhPho")?tuNgay="+$('#tuNgay').val()+"&denNgay="+$('#denNgay').val(),"_blank");
+            })
             $('a[class=changeArr]').click(function () {
                 $('.se-pre-con').fadeIn("fast");
                 var name="";
@@ -208,7 +223,7 @@
                 if($(this).find('i').hasClass('glyphicon-chevron-down')){
                     $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                     name = $(this).attr("data-value");
-                        sort ="DESC";
+                    sort ="DESC";
                 }
                 else{
                     $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');

@@ -29,21 +29,21 @@ namespace CBCC.Areas.Admin.Controllers
             if (capnguoidung.Length == 2)
                 roles = UserService.MembershipGetAllList();
             else
-                if (capnguoidung.Length == 4)
-                {
-                    if (!string.IsNullOrWhiteSpace(member.MaDonVi))
-                    {
-                        roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length >= capnguoidung.Length && x.MaDonVi == member.MaDonVi).ToList();
-                    }
-                    else
-                    {
-                        roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length >= capnguoidung.Length).ToList();
-                    }
-                }
-                else
-                {
-                    roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length > 4 && x.Username == User.Identity.Name).ToList();
-                }
+                //if (capnguoidung.Length == 4)
+                //{
+                //    if (!string.IsNullOrWhiteSpace(member.MaDonVi))
+                //    {
+                //        roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length >= capnguoidung.Length && x.MaDonVi == member.MaDonVi).ToList();
+                //    }
+                //    else
+                //    {
+                //        roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length >= capnguoidung.Length).ToList();
+                //    }
+                //}
+                //else
+                //{
+                    roles = UserService.MembershipGetAllList().Where(x => x.CapNguoiDung.Length >= 4 && x.Username == User.Identity.Name).ToList();
+                //}
             if (searchString != null)
             {
                 page = 1;

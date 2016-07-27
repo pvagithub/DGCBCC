@@ -108,8 +108,8 @@
                     }
                 }
             </table>
+            <button id="btnExport" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
         </div>
-      
     </div>
 </div>
 @section scripts{
@@ -123,6 +123,9 @@
         dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
     });
     $(function () {
+        $("#btnExport").click(function () {
+            window.open("@Url.Action("Banbieu", "ThongKeDonVi")?cbDonVi=" + $("#cbDonVi").val() + "&tuNgay=" + $("#tuNgay").val() + "&denNgay=" + $("#denNgay").val(), "_blank");
+        })
         $('#container').highcharts({
             chart: {
                 plotBackgroundColor: null,

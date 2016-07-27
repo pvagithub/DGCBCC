@@ -20,6 +20,7 @@ namespace WebMVC.Entities
     }
     public partial class KetQuaDanhGiaHoSo
     {
+        public int ID { get; set; }
         public string TenTieuChi { get; set; }
         public int CauTraLoiID { get; set; }
         public string TenCauTraLoi { get; set; }

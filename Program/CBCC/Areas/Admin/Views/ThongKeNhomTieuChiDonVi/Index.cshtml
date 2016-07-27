@@ -11,6 +11,11 @@
 @section scripts{
 
     <script>
+        $(document).ready(function () {
+            $("#btnExport").click(function () {
+                window.open("@Url.Action("ExportExcelNTC", "ThongKeNhomTieuChiDonVi")?tuNgay=" + $("#tuNgay").val() + "&denNgay=" + $("#denNgay").val(), "_blank");
+            })
+        })
         $('#tuNgay').datepicker({
             dateFormat: "dd/mm/yy", // Notice the Extra space at the beginning
         });
@@ -78,4 +83,5 @@
             </tr>
         }
     </table>
+    <button id="btnExport" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
 </div>

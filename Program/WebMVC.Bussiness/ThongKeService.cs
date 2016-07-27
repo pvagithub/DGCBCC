@@ -953,5 +953,13 @@ namespace WebMVC.Bussiness
                 return result;
             }
         }
+        public static List<KetQuaDanhGiaHoSo> HienThiTieuChi()
+        {
+            using (var context = new DataModelEntities())
+            {
+                var result = context.Database.SqlQuery<KetQuaDanhGiaHoSo>("HienThiTieuChi").ToList();
+                return result;
+            }
+        }
     }
 }

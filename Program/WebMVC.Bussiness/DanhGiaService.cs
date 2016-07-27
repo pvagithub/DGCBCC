@@ -96,7 +96,49 @@ namespace WebMVC.Bussiness
                 return true;
             }
         }
+        public static bool SaveKetQuaDanhGiaOffline(DanhGia _Danhgia, List<KetQuaDanhGia> _KetQuaDanhGia, long idHoSo, string DonViID, string soBN)
+        {
+            using (var context = new DataModelEntities())
+            {
+                var arrMaDonVi = DonViID.Split('_');
+                context.ReadUncommited();
 
+                _Danhgia.HoSoID = null;
+                _Danhgia.SoBienNhan = soBN;
+                _Danhgia.DonViID = null;
+                _Danhgia.MaDonVi = arrMaDonVi[0];
+                _Danhgia.MaLienThong = arrMaDonVi[1];
+                _Danhgia.TenDonVi = null;
+                _Danhgia.LinhVucID = null;
+                _Danhgia.TenLinhVuc = null;
+                _Danhgia.ThuTucID = null;
+                _Danhgia.TenThuTuc = null;
+                _Danhgia.NgayDanhGia = DateTime.Now;
+                _Danhgia.DanhGiaTrucTiep = false;
+
+                context.DanhGias.Add(_Danhgia);
+                context.SaveChanges();
+                var idDanhGia = _Danhgia.ID;
+                ///Lưu ket quả danh giá co thông ke
+                List<KetQuaDanhGia> lstit = new List<KetQuaDanhGia>();
+                foreach (var item in _KetQuaDanhGia)
+                {
+                    KetQuaDanhGia it = new KetQuaDanhGia();
+                    it.DanhGiaID = idDanhGia;
+                    it.TieuChiID = item.TieuChiID;
+                    it.CauTraLoiID = item.CauTraLoiID;
+                    it.TypeInput = item.TypeInput;
+                    lstit.Add(it);
+                }
+                context.KetQuaDanhGias.AddRange(lstit);
+                context.SaveChanges();
+                //Cập nhật thông tin đánh giá cho Hồ sơ
+
+                HoSo_UpdateThongTinDanhGia(idDanhGia, idHoSo);
+
+                return true;
+            }
+        }
 
         #endregion Kết quả đánh giá
 

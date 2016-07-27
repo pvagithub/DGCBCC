@@ -30,7 +30,9 @@
     }
     /* bootstrap hack end */
 </style>
-
+<input type="hidden" id="hdmonth" value="@ViewBag.Month" />
+<input type="hidden" id="hdyear" value="@ViewBag.Year" />
+<input type="hidden" id="hdmadonvi" value="@ViewBag.Madonvi" />
 <div class="row">
     <table class="table table-hover">
         <tr>
@@ -61,13 +63,16 @@
             <td>@Math.Round(lst.Average(x => x.KhongHaiLong),2)%</td>
         </tr>
     </table>
-
+    <button id="btnExport" class="btn btn-primary"><i class="glyphicon glyphicon-export"></i> Excel</button>
 </div>
 @section scripts{
     <script src="~/Scripts/highcharts.js"></script>
     <script>
 
         $(function () {
+            $("#btnExport").click(function () {
+                window.open("@Url.Action("ExportExcelBienNhan", "ThongKeThreeMonth")?madonvi=" + $("#hdmadonvi").val() + "&month=" + $("#hdmonth").val() + "&year=" + $("#hdyear").val(), "_blank");
+            })
             $('a[class=changeArr]').click(function () {
                 $('.se-pre-con').fadeIn("fast");
                 var name = "";
@@ -101,5 +106,5 @@
             });
 
         });
-    </script>
+</script>
 }

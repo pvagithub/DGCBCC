@@ -39,7 +39,7 @@ namespace WebMVC.Entities
     {
         public string SoBienNhan { get; set; }
         public string NguoiNop { get; set; }
-        public System.DateTime NgayNhan { get; set; }
-        public System.DateTime NgayHenTra { get; set; }
+        public System.DateTime? NgayNhan { get; set; }
+        public System.DateTime? NgayHenTra { get; set; }
     }
 }
