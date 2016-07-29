@@ -166,6 +166,13 @@
                         tieuchi.push($(this).val());
                     }
                 })
+                if (tieuchi.length < 6) {
+                    var htmlString = "Vui lòng đánh giá hết 6 câu hỏi bắt buộc!";
+                    $("#msg_notify").html(htmlString);
+                    $("body").scrollTop(0);
+                    $(".se-pre-con").fadeOut("fast");
+                    return false;
+                }
                 $.ajax({
                     type: 'post',
                     url: '@Url.Action("Index","DanhGiaOffline")',
@@ -173,6 +180,7 @@
                     dataType: 'json',
                     success: function (response) {
                         alert(response.msg);
+                        window.location = '@Url.Action("Index","DanhGiaOffline")';
                     }
                 }).always(function () {
                     $(".se-pre-con").fadeOut("fast");
