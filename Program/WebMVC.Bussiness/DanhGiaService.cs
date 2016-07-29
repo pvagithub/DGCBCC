@@ -61,12 +61,15 @@ namespace WebMVC.Bussiness
                 List<KetQuaDanhGia> lstit = new List<KetQuaDanhGia>();
                 foreach (var item in _KetQuaDanhGia)
                 {
-                    KetQuaDanhGia it = new KetQuaDanhGia();
-                    it.DanhGiaID = idDanhGia;
-                    it.TieuChiID = item.TieuChiID;
-                    it.CauTraLoiID = item.CauTraLoiID;
-                    it.TypeInput = item.TypeInput;
-                    lstit.Add(it);
+                    if (item.CauTraLoiID != null)
+                    {
+                        KetQuaDanhGia it = new KetQuaDanhGia();
+                        it.DanhGiaID = idDanhGia;
+                        it.TieuChiID = item.TieuChiID;
+                        it.CauTraLoiID = item.CauTraLoiID;
+                        it.TypeInput = item.TypeInput;
+                        lstit.Add(it);
+                    }
                 }
                 context.KetQuaDanhGias.AddRange(lstit);
                 context.SaveChanges();
@@ -123,12 +126,15 @@ namespace WebMVC.Bussiness
                 List<KetQuaDanhGia> lstit = new List<KetQuaDanhGia>();
                 foreach (var item in _KetQuaDanhGia)
                 {
-                    KetQuaDanhGia it = new KetQuaDanhGia();
-                    it.DanhGiaID = idDanhGia;
-                    it.TieuChiID = item.TieuChiID;
-                    it.CauTraLoiID = item.CauTraLoiID;
-                    it.TypeInput = item.TypeInput;
-                    lstit.Add(it);
+                    if (item.CauTraLoiID!=null)
+                    {
+                        KetQuaDanhGia it = new KetQuaDanhGia();
+                        it.DanhGiaID = idDanhGia;
+                        it.TieuChiID = item.TieuChiID;
+                        it.CauTraLoiID = item.CauTraLoiID;
+                        it.TypeInput = item.TypeInput;
+                        lstit.Add(it);
+                    }
                 }
                 context.KetQuaDanhGias.AddRange(lstit);
                 context.SaveChanges();
@@ -190,7 +196,7 @@ namespace WebMVC.Bussiness
                 wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
                 json = wc.DownloadString("https://dichvucong.hochiminhcity.gov.vn/icloudgate/version4/restapi/onegate/" + maDonvi.Trim() + "/searchrecord?recordNo=" + soBienNhan);
             }
-            return json; 
+            return json;
         }
     }
 }

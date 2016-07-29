@@ -303,34 +303,34 @@
 
     <script>
 
-        var Member = new function () {
-            this.ReloadCaptcha = function (u, t) {
-                var r = new Date().getTime();
-                $("#captcha").attr("src", "Ajax/Captcha.ashx?rand=" + r + (t !== undefined ? "&t=" + t : ""));
-            }
-        }
+        //var Member = new function () {
+        //    this.ReloadCaptcha = function (u, t) {
+        //        var r = new Date().getTime();
+        //        $("#captcha").attr("src", "Ajax/Captcha.ashx?rand=" + r + (t !== undefined ? "&t=" + t : ""));
+        //    }
+        //}
         $(document).ready(function () {
             //$("#not_exists").hide();
-            initMember();
+            //initMember();
 
             $("form input").keypress(function (e) {
                 if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
                     $('#danhgia').click();
-                    return true;
+                    return false;
                 }
             });
 
         });
 
-        function initMember() {
-            if (Member === undefined) {
-                setTimeout("initMember()", 100); return;
-            }
+        //function initMember() {
+        //    if (Member === undefined) {
+        //        setTimeout("initMember()", 100); return;
+        //    }
 
-            Member.ReloadCaptcha();
-            $("#captcha").click(function () { Member.ReloadCaptcha(); });
-            $("#refresh").click(function () { Member.ReloadCaptcha(); });
-        }
+        //    Member.ReloadCaptcha();
+        //    $("#captcha").click(function () { Member.ReloadCaptcha(); });
+        //    $("#refresh").click(function () { Member.ReloadCaptcha(); });
+        //}
         // save feedback
         $('#btnSendMessage').click(function () {
             var param = { soBienNhan: $('#soBienNhan').val(), cauHoiId: $('#currentPage').val(), noiDungGopY: $('#txtGopY').val(), tieuChiId: $('#txtQuestionId').val() };
@@ -370,6 +370,7 @@
                 var htmlString = "<em>Số biên nhận không hợp lệ!</em>";
                 $("#msg_notify").html(htmlString);
                 $(".se-pre-con").fadeOut("fast");
+                return false;
                 //bootbox.alert("Số biên nhận không hợp lệ", function () {
                 //})
             }
@@ -383,11 +384,13 @@
                         var htmlString = "<em>Hệ thống chỉ đánh giá hồ sơ có ngày nhận từ ngày 01/04/2016!</em>";
                         $("#msg_notify").html(htmlString);
                         $(".se-pre-con").fadeOut("fast");
+                        return false;
                     }
                     else if (data.IsExist == false) {
                         var htmlString = "<em>Số biên nhận chưa đúng!</em>";
                         $("#msg_notify").html(htmlString);
                         $(".se-pre-con").fadeOut("fast");
+                        return false;
                         //bootbox.alert("Hồ sơ chưa kết thúc.", function () {
                         //})
                     }
@@ -397,13 +400,14 @@
                             var htmlString = "<em>Số biên nhận đã được đánh giá!</em>";
                             $("#msg_notify").html(htmlString);
                             $(".se-pre-con").fadeOut("fast");
+                            return false;
                             //bootbox.alert("Hồ sơ đã được đánh giá", function () {
 
                             //})
                         }
                         else {
                             // Lưu thông tin hồ sơ
-                            if (data.isCaptchaValid && null == data.HoSo) {
+                            if (null == data.HoSo) {
                                 $('#idHoSo').val($('#soBienNhan').val());
                                 $('#input_SoBienNhan_content').delay(100).toggle('hide', function () {
                                 });
@@ -414,6 +418,7 @@
                                 $('#fl813691').addClass('show').removeClass('hide');
                                 $('.changeHeight').css("height", "auto");
                                 $(".se-pre-con").fadeOut("fast");
+                                return false;
                             } else {
                                 $(".se-pre-con").fadeOut("fast");
                                 // an so bien nhan vao #idHoSo
